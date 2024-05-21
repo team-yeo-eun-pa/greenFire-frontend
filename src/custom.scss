@@ -1,0 +1,24 @@
+// Import Bootstrap's SCSS files
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// Override the success color
+$theme-colors: (
+        "success": #004B29
+);
+
+// Import the rest of Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+/* side bar --------------------------- */
+.nav-link-custom-title {
+  color: #494949;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+.nav-link-custom {
+  color: #3f3f3f;
+  font-size: 1rem;
+  font-weight: normal;
+}

@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/Container";
 import AdminPageNavBar from "../common/AdminPageNavBar";
 import SignupForm from "../form/SignupForm";
+import ChallengeList from "./challenge/ChallengeList";
 
 function Main() {
     return (
@@ -8,6 +9,7 @@ function Main() {
             <Container className="mt-5 justify-content-md-center">
                 {/*<AdminPageNavBar/>*/}
                 <SignupForm/>
+                {/*<ChallengeList/>*/}
             </Container>
         </>
     );

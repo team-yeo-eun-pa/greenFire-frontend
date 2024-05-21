@@ -6,11 +6,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.css';
-import './NavBar.css';
 
 function NavBar() {
     return (
-        <Navbar expand="lg" className="bg-body-tertiary p-5">
+        <Navbar expand="lg" className="bg-success p-5">
             <Container fluid>
                 <Image src="greenFire_logo-nav.png" width={30} height={30}/>
                 <Navbar.Brand href="#" className="text-white mx-3">GREEN FIRE</Navbar.Brand>
@@ -46,12 +45,13 @@ function NavBar() {
                     </Nav>
                     <Form className="d-flex">
                         <Form.Control
-                            type="search"
+                            type=""
                             placeholder="Search"
-                            className="me-2"
+                            className="me-2 bg-light"
                             aria-label="Search"
+                            src="logo192.png"
                         />
-                        <Button variant="outline-success">Search</Button>
+                        <Button variant="outline-light">Search</Button>
                     </Form>
                     <NavDropdown title="name" id="navbarScrollingDropdown"
                     className="mx-4">
