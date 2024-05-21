@@ -1,13 +1,13 @@
 import Header from "../common/Header";
 import {Outlet} from "react-router-dom";
 import Footer from "../common/Footer";
-import NavScrollExample from "../common/NavScrollExample";
+import NavBar from "../common/NavBar";
 
 function Layout() {
     return(
         <>
             <Header/>
-            <NavScrollExample/>
+            <NavBar/>
             <main className="main">
                 <Outlet/>
             </main>
