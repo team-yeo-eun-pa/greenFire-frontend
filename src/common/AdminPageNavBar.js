@@ -1,6 +1,7 @@
 import {Col, Row} from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import TableEx from "../items/TableEx";
+import ListGroutEx from "../items/ListGroutEx";
 
 function AdminPageNavBar() {
     return(
@@ -39,6 +40,7 @@ function AdminPageNavBar() {
                 <Col xs lg="9" className="mt-5">
                     <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">메뉴 타이틀</div>
                     {/* */}
+                    <ListGroutEx/>
 
                     {/* 게시판 */}
                     <TableEx/>

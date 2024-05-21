@@ -7,8 +7,8 @@ function Main() {
     return (
         <>
             <Container className="mt-5 justify-content-md-center">
-                {/*<AdminPageNavBar/>*/}
-                <SignupForm/>
+                <AdminPageNavBar/>
+                {/*<SignupForm/>*/}
                 {/*<ChallengeList/>*/}
             </Container>
         </>

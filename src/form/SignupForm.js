@@ -35,10 +35,10 @@ function SignupForm() {
                                 <Col sm="4">
                                     <Form.Control type="text" placeholder="아이디를 입력해 주세요." />
                                 </Col>
-                                <Form.Label column sm="1">
+                                <Form.Label column sm="auto" style={{ width: '20px', textAlign: 'center', paddingLeft: 0, paddingRight: 0 }}>
                                     @
                                 </Form.Label>
-                                <Col sm="5">
+                                <Col sm="auto" style={{ flexGrow: 1 }}>
                                     <Form.Select aria-label="Default select example">
                                         <option>Open this select menu</option>
                                         <option value="1">One</option>

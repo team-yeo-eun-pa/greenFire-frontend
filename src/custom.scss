@@ -5,20 +5,51 @@
 
 // Override the success color
 $theme-colors: (
-        "success": #004B29
+        "success": #004B29,
+        "info": #6A8921
 );
 
 // Import the rest of Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
 /* side bar --------------------------- */
-.nav-link-custom-title {
-  color: #494949;
-  font-size: 1.15rem;
-  font-weight: bold;
-}
 .nav-link-custom {
+  text-decoration: none;
   color: #3f3f3f;
   font-size: 1rem;
   font-weight: normal;
+
+  &:hover {
+    color: #042c00;
+    background-color: #e9ecef;
+  }
+}
+
+.nav-link-custom-title {
+  font-weight: bold;
+  color: #494949;
+  font-size: 1.15rem;
+  font-weight: bold;
+
+  &:hover {
+    color: #009F57;
+  }
+
+  &.active {
+    color: #009F57; // 클릭(활성화) 시 텍스트 색상 테스트 필요
+    background-color: #a1a1a1; // 클릭(활성화) 시 배경 색상 테스트 필요
+  }
+}
+
+
+// 특정 상태에서의 링크 스타일
+.flex-column.rounded.mt-5.p-4 {
+  background-color: #F0F3EE;
+
+  .nav-link-custom {
+    &:hover {
+      color: #ffffff;
+      background-color: #009F57;
+    }
+  }
 }
