@@ -1,0 +1,15 @@
+.main {
+    width: 100%;
+}
+
+/* side bar --------------------------- */
+.nav-link-custom-title {
+    color: black;
+    font-size: 1.15rem;
+    font-weight: bolder;
+}
+.nav-link-custom {
+    color: #3f3f3f;
+    font-size: 1rem;
+    font-weight: normal;
+}
