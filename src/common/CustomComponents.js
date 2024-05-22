@@ -1,8 +1,18 @@
-import {Modal, Tab, Tabs} from "react-bootstrap";
-import React, {useState} from "react";
+import {Dropdown, Modal, Tab, Tabs} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import {useNavigate} from "react-router-dom";
+import {LuEraser} from "react-icons/lu";
+import {FaTrashAlt} from "react-icons/fa";
+import {Checkbox, Divider, Switch} from "antd";
+// text editor
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
+
+const CheckboxGroup = Checkbox.Group;
+const plainOptions = ['Apple', 'Pear', 'Orange'];
+const defaultCheckedList = ['Apple', 'Orange'];
 
 function CustomComponents() {
 
@@ -23,6 +33,28 @@ function CustomComponents() {
     const navigate = useNavigate();
     const onClickHandler = () => navigate(-1);
 
+    // for check box
+    const [checkedList, setCheckedList] = useState(defaultCheckedList);
+    const checkAll = plainOptions.length === checkedList.length;
+    const indeterminate = checkedList.length > 0 && checkedList.length < plainOptions.length;
+    const onChangeCheck = (list) => {
+        setCheckedList(list);
+    };
+    const onCheckAllChange = (e) => {
+        setCheckedList(e.target.checked ? plainOptions : []);
+    };
+
+    const onChangeToggle = (checked) => {
+        console.log(`switch to ${checked}`);
+    };
+
+    // for text editor
+    const [value, setValue] = useState('');
+
+    useEffect(() => {
+        // 에디터 초기화
+        setValue(''); // 초기값 설정
+    }, []);
 
     return (
         <>
@@ -117,6 +149,50 @@ function CustomComponents() {
                 <h1 className="pt-5 border-2 border-bottom">이전 페이지로 이동 버튼</h1>
                 <span onClick={onClickHandler} style={{cursor: 'pointer'}}>
                     〈 이전으로</span>{' '}
+
+                <h1 className="pt-5 border-2 border-bottom">수정/삭제 버튼</h1>
+                <button style={{background: "none", border: "none"}}>
+                    <LuEraser/>
+                </button>
+                <button style={{background: "none", border: "none"}}>
+                    <FaTrashAlt/>
+                </button>
+
+                <h1 className="pt-5 border-2 border-bottom">옵션 선택 버튼</h1>
+                <Dropdown>
+                    <Dropdown.Toggle className="custom-dropdown-toggle" variant="info" >
+                        정렬
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item eventKey="1">추천순</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">최신순</Dropdown.Item>
+                        <Dropdown.Item eventKey="3">낮은가격순</Dropdown.Item>
+                        <Dropdown.Item eventKey="4">높은가격순</Dropdown.Item>
+                        <Dropdown.Item eventKey="5">판매량순</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+
+                <h1 className="pt-5 border-2 border-bottom">antd 옵션 선택 버튼<h3>npm install antd</h3></h1>
+                <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
+                    Check all
+                </Checkbox>
+                <Divider/>
+                <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChangeCheck}/>
+
+                <br/><br/><br/><br/>
+
+                <p>토글</p>
+                <hr/>
+                <Switch defaultChecked onChange={onChangeToggle}/>
+
+                <h1 className="pt-5 border-2 border-bottom">텍스트 입력<h3>npm install react-quill</h3></h1>
+                <div style={{minWidth: "300px", minHeight: "250px"}}>
+                    <ReactQuill
+                        theme="snow" // 테마 설정
+                        value={value} // 텍스트 에디터의 값
+                        onChange={setValue} // 값이 변경될 때 호출되는 콜백 함수
+                    />
+                </div>
             </Container>
         </>
     );

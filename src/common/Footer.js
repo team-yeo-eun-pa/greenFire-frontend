@@ -13,7 +13,7 @@ function Footer() {
                     <Col md="4" className="border-end border-1 border-dark text-start pt-3 px-5">
                         <div>
                             <div className="fs-4 fw-medium">
-                                <Image src="greenFire_logo-nav.png"
+                                <Image src="/greenFire_logo-nav.png"
                                        className="p-2 mb-1" width={45} height={45}/>
                                 고객 센터
                             </div>
