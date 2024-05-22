@@ -6,7 +6,8 @@
 // Override the success color
 $theme-colors: (
         "success": #004B29,
-        "info": #6A8921
+        "info": #6A8921,
+        "secondary" : #b4b6b0
 );
 
 // Import the rest of Bootstrap
@@ -53,3 +54,63 @@ $theme-colors: (
     }
   }
 }
+
+/* tab ------------------------------- */
+  .nav-tabs .nav-link {
+    color: #000;
+    background-color: #E8EAE4;
+    border: 1px solid #dee2e6;
+    margin-bottom: -1px;
+    border-radius: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-right: 0.3rem;
+
+    &:hover {
+      color: #386641;
+      background-color: #ffffff;
+      border-color: #dee2e6 #dee2e6 #fff;
+    }
+
+    &.active {
+      color: #ffffff;
+      background-color: #386641;
+      border-color: #dee2e6 #dee2e6 #fff;
+    }
+  }
+
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; // 뷰포트 높이의 100%
+
+  .modal-content {
+    margin: auto;
+  }
+}
+
+//.custom-modal {
+//  .modal-header,
+//  .modal-title,
+//  .modal-body,
+//  .modal-footer {
+//    text-align: center;
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//  }
+//
+//  .modal-title {
+//    width: 100%; /* 제목이 중앙에 위치하도록 너비를 100%로 설정 */
+//  }
+//
+//  .modal-body {
+//    text-align: center;
+//  }
+//
+//  .modal-footer {
+//    display: flex;
+//    justify-content: center;
+//  }
+//}

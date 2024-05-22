@@ -1,10 +1,12 @@
-import {Col, Row} from "react-bootstrap";
+import {Col, Row, Tab, Tabs} from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import TableEx from "../items/TableEx";
 import ListGroutEx from "../items/ListGroutEx";
+import {useState} from "react";
 
 function AdminPageNavBar() {
-    return(
+    const [key, setKey] = useState('home');
+    return (
         <>
             <Row>
                 <Col xs lg="3">
