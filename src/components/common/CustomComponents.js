@@ -1,14 +1,16 @@
-import {Dropdown, Modal, Tab, Tabs} from "react-bootstrap";
+import {Badge, Col, Dropdown, Form, Modal, Row, Tab, Tabs} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import {useNavigate} from "react-router-dom";
 import {LuEraser} from "react-icons/lu";
 import {FaTrashAlt} from "react-icons/fa";
-import {Checkbox, Divider, Switch} from "antd";
+import {Checkbox, Divider, Switch, Tag} from "antd";
 // text editor
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
+import CardGroup from "react-bootstrap/CardGroup";
+import Card from "react-bootstrap/Card";
 
 const CheckboxGroup = Checkbox.Group;
 const plainOptions = ['Apple', 'Pear', 'Orange'];
@@ -150,6 +152,12 @@ function CustomComponents() {
                 <span onClick={onClickHandler} style={{cursor: 'pointer'}}>
                     〈 이전으로</span>{' '}
 
+                <h1 className="pt-5 border-2 border-bottom">기본 버튼</h1>
+                <Button variant="success">작성하기</Button>
+                <Button variant="outline-secondary">취소</Button>
+                <br/><br/>
+                <Button variant="success" style={{cursor: 'pointer'}} className="w-25">기다란버튼</Button>
+
                 <h1 className="pt-5 border-2 border-bottom">수정/삭제 버튼</h1>
                 <button style={{background: "none", border: "none"}}>
                     <LuEraser/>
@@ -160,7 +168,7 @@ function CustomComponents() {
 
                 <h1 className="pt-5 border-2 border-bottom">옵션 선택 버튼</h1>
                 <Dropdown>
-                    <Dropdown.Toggle className="custom-dropdown-toggle" variant="info" >
+                    <Dropdown.Toggle className="custom-dropdown-toggle" variant="info">
                         정렬
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -193,9 +201,34 @@ function CustomComponents() {
                         onChange={setValue} // 값이 변경될 때 호출되는 콜백 함수
                     />
                 </div>
+
+                <h1 className="pt-5 border-2 border-bottom">카드<h3>부트스트랩이고 우측하단 태그는 npm install antd / 다른 색상도 많아요! ->
+                    https://ant.design/components/tag</h3></h1>
+                <Card style={{width: '18rem', cursor: 'pointer'}}>
+                    <Card.Img variant="top" src="/p1.png"/>
+                    <Card.Body>
+                        <Card.Title>제목
+                        </Card.Title>
+                        <Card.Text className="mb-0">
+                            상품 간단 소개
+                        </Card.Text>
+                        <Card.Text className="fs-6 fw-lighter" style={{letterSpacing: '0.1em'}}>
+                            24.05.01 - 25.12.31
+                        </Card.Text>
+                        <Tag
+                            color="green"
+                            style={{
+                                fontSize: '16px', // 폰트 크기 조정
+                                padding: '5px 10px', // 패딩 조정
+                                float: 'right' // 우측 정렬
+                            }}
+                        >모집 중</Tag>
+                    </Card.Body>
+                </Card>
+
             </Container>
         </>
-    );
+);
 }
 
 export default CustomComponents;

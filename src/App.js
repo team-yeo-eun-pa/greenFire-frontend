@@ -2,7 +2,6 @@ import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import Main from "./pages/Main";
 import Layout from "./layouts/common/Layout";
 import './style.css';
-import Signup from "./pages/member/Signup";
 import CustomComponents from "./components/common/CustomComponents";
 import UserPageLayout from "./layouts/UserPageLayout";
 import MyPageMain from "./pages/member/MyPageMain";
@@ -11,6 +10,8 @@ import AdminPageLayout from "./layouts/AdminPageLayout";
 import AdminMain from "./pages/admin/AdminMain";
 import SellerPageLayout from "./layouts/SellerPageLayout";
 import MyStoreMain from "./pages/seller/MyStoreMain";
+import ChallengeMain from "./pages/challenge/ChallengeMain";
+import ProductMain from "./pages/product/ProductMain";
 
 function App() {
     return (
@@ -20,6 +21,12 @@ function App() {
                     <Route path="/" element={<Layout/>}>
                         <Route path="/" element={<Main/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
+                        <Route path="/challenge" element={<ChallengeMain/>}>
+
+                        </Route>
+                        <Route path="/product" element={<ProductMain/>}>
+
+                        </Route>
                         <Route path="/member">
                             <Route path="mypage" element={<UserPageLayout/>}>
                                 <Route index element={<Navigate to="/member/mypage/main" replace/>}/>
