@@ -1,4 +1,4 @@
-import AdminPageNavBar from "../common/AdminPageNavBar";
+import AdminPageNavBar from "../components/common/AdminPageNavBar";
 import {Col, Row} from "react-bootstrap";
 import React from "react";
 import {Outlet} from "react-router-dom";

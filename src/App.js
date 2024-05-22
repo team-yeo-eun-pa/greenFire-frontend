@@ -3,7 +3,7 @@ import Main from "./pages/Main";
 import Layout from "./layouts/common/Layout";
 import './style.css';
 import Signup from "./pages/member/Signup";
-import CustomComponents from "./common/CustomComponents";
+import CustomComponents from "./components/common/CustomComponents";
 import UserPageLayout from "./layouts/UserPageLayout";
 import MyPageMain from "./pages/member/MyPageMain";
 import Error from "./pages/error/Error";

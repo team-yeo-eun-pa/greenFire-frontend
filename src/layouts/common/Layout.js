@@ -1,7 +1,7 @@
-import Header from "../../common/Header";
+import Header from "../../components/common/Header";
 import {Outlet} from "react-router-dom";
-import Footer from "../../common/Footer";
-import NavBar from "../../common/NavBar";
+import Footer from "../../components/common/Footer";
+import NavBar from "../../components/common/NavBar";
 import Container from "react-bootstrap/Container";
 
 function Layout() {

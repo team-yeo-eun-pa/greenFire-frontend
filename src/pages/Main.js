@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container";
-import SignupForm from "../form/SignupForm";
+import SignupForm from "../components/form/SignupForm";
 import ChallengeList from "./challenge/ChallengeList";
 
 function Main() {

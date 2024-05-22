@@ -1,5 +1,5 @@
 import {Outlet} from "react-router-dom";
-import UserPageNavBar from "../common/UserPageNavBar";
+import UserPageNavBar from "../components/common/UserPageNavBar";
 import {Col, Row} from "react-bootstrap";
 import React from "react";
 

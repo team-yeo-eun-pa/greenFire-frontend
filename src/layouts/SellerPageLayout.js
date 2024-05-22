@@ -1,7 +1,7 @@
 import {Outlet} from "react-router-dom";
 import {Col, Row} from "react-bootstrap";
 import React from "react";
-import SellerPageNavBar from "../common/SellerPageNavBar";
+import SellerPageNavBar from "../components/common/SellerPageNavBar";
 
 function UserPageLayout() {
     return (
