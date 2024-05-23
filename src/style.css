@@ -5,3 +5,15 @@
 .navbar .nav-item .dropdown-toggle {
     color: white;
 }
+
+/* Cart */
+.cart-list-wrapper {
+    /* 수직 배치 해야 함 */
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+}
+
+.cart-checkbox {
+    display: block;
+}

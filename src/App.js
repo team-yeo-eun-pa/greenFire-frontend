@@ -12,6 +12,7 @@ import SellerPageLayout from "./layouts/SellerPageLayout";
 import MyStoreMain from "./pages/seller/MyStoreMain";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
+import Cart from "./pages/product/Cart";
 
 function App() {
     return (
@@ -24,9 +25,15 @@ function App() {
                         <Route path="/challenge" element={<ChallengeMain/>}>
 
                         </Route>
+
                         <Route path="/product" element={<ProductMain/>}>
 
                         </Route>
+
+                        <Route path="/cart" element={<Cart/>}>
+
+                        </Route>
+
                         <Route path="/member">
                             <Route path="mypage" element={<UserPageLayout/>}>
                                 <Route index element={<Navigate to="/member/mypage/main" replace/>}/>
