@@ -14,7 +14,7 @@ function NavBar() {
         <Navbar expand="lg" className="bg-success p-5">
             <Container fluid>
                 <Image src="/greenFire_logo-nav.png" width={30} height={30}/>
-                <Navbar.Brand href="#" className="text-white mx-3">GREEN FIRE</Navbar.Brand>
+                <Navbar.Brand href="/" className="text-white mx-3">GREEN FIRE</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" style={{ backgroundColor: "#ffffff"}} />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav

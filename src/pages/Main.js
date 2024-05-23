@@ -6,6 +6,7 @@ function Main() {
     return (
         <>
             <Container className="mt-5 justify-content-md-center">
+                <h1>main</h1>
                 {/*<SignupForm/>*/}
                 {/*<ChallengeList/>*/}
             </Container>
