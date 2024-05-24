@@ -5,3 +5,40 @@
 .navbar .nav-item .dropdown-toggle {
     color: white;
 }
+
+/* store */
+
+
+.store-banner-wrapper {
+    position: relative;
+    width: 63vw;
+    margin-bottom: 20px;
+}
+
+.banner-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.product-list-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.product-list-top-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrange-wrapper {
+    margin-right: 4.3vw;
+}
+
+/* items / ProductItem */
+.card-btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
