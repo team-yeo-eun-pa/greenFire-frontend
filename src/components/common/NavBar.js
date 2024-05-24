@@ -24,7 +24,7 @@ function NavBar() {
                     >
                         <Nav.Link href="#action1" className="text-white">초록불 소개</Nav.Link>
                         <NavDropdown title="반딧불이 스토어" id="navbarScrollingDropdown" className="custom-dropdown">
-                            <NavDropdown.Item href="">
+                            <NavDropdown.Item href="/product">
                                 전체보기
                             </NavDropdown.Item>
                             <NavDropdown.Divider/>
