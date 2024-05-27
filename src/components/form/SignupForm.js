@@ -4,14 +4,26 @@ import {Col, InputGroup, Row, Dropdown, DropdownButton} from "react-bootstrap";
 import {Checkbox} from "antd";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
 
 function SignupForm() {
-    const onChange = (checked) => {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [form, setForm] = useState({});
+
+    const onChangeTerms = (checked) => {
         console.log(`checked = ${checked}`);
     };
 
-    const navigate = useNavigate();
-    const onClickHandler = () => navigate(-1);
+    const onChangeHandler = e => {
+        setForm({
+            ...form,
+            [e.target.name] : e.target.value
+        });
+    }
+
+    const onClickBackHandler = () => navigate(-1);
 
     return (
         <Form>
@@ -136,7 +148,7 @@ function SignupForm() {
                             </Col>
                         </Form.Group>
 
-                        <Checkbox onChange={onChange} className="p-4 d-flex align-items-center justify-content-center"
+                        <Checkbox onChange={onChangeTerms} className="p-4 d-flex align-items-center justify-content-center"
                         >아래 내용에 모두 동의합니다. (필수)</Checkbox>
 
                         <div className="mb-5 d-flex align-items-center justify-content-center ">
@@ -170,7 +182,7 @@ function SignupForm() {
                         </div>
 
                         <div className="fs-4 fw-semibold border-top border-2 border-dark-subtle p-2"/>
-                        <div onClick={onClickHandler} style={{cursor: 'pointer'}} className="mb-5">
+                        <div onClick={onClickBackHandler} style={{cursor: 'pointer'}} className="mb-5">
                         〈 이전으로</div>{' '}
 
                         <div className="px-0 d-flex align-items-center justify-content-center">
