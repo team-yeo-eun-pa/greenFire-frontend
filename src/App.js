@@ -13,6 +13,7 @@ import MyStoreMain from "./pages/seller/MyStoreMain";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
 import SignupForm from "./components/form/SignupForm";
+import Wishlist from "./pages/product/Wishlist";
 
 function App() {
     return (
@@ -26,6 +27,9 @@ function App() {
 
                         </Route>
                         <Route path="/product" element={<ProductMain/>}>
+
+                        </Route>
+                        <Route path="/wish" element={<Wishlist/>}>
 
                         </Route>
                         <Route path="/member">

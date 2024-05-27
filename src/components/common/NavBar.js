@@ -78,7 +78,7 @@ function NavBar() {
                     >
                         <Nav.Link href="#action1" className="text-white">초록불 소개</Nav.Link>
                         <NavDropdown title="반딧불이 스토어" id="navbarScrollingDropdown" className="custom-dropdown">
-                            <NavDropdown.Item href="">
+                            <NavDropdown.Item href="/product">
                                 전체보기
                             </NavDropdown.Item>
                             <NavDropdown.Divider/>
@@ -113,15 +113,17 @@ function NavBar() {
                     </Form>
 
                     {/*아이콘 테스트*/}
-                    <button style={{background: "none", color: "white", border: "none", marginLeft: "5px"}}>
+                    <button className="iconbtn" style={{color: "white", marginLeft: "5px"}}>
                         <FaShoppingCart/>
                     </button>
 
-                    <button style={{background: "none", color: "white", border: "none"}}>
-                        <FaHeart/>
+                    <button className="iconbtn" style={{color: "white"}}>
+                        <Nav.Link href="/wish">
+                            <FaHeart/>
+                        </Nav.Link>
                     </button>
 
-                    <button style={{background: "none", color: "white", border: "none"}}>
+                    <button className="iconbtn" style={{color: "white"}}>
                         <FaBell/>
                     </button>
 
