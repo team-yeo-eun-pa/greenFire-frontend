@@ -59,15 +59,17 @@ function NavBar() {
                     </Form>
 
                     {/*아이콘 테스트*/}
-                    <button style={{background: "none", color: "white", border: "none", marginLeft: "5px"}}>
+                    <button className="iconbtn" style={{color: "white", marginLeft: "5px"}}>
                         <FaShoppingCart/>
                     </button>
 
-                    <button style={{background: "none", color: "white", border: "none"}}>
-                        <FaHeart/>
+                    <button className="iconbtn" style={{color: "white"}}>
+                        <Nav.Link href="/wish">
+                            <FaHeart/>
+                        </Nav.Link>
                     </button>
 
-                    <button style={{background: "none", color: "white", border: "none"}}>
+                    <button className="iconbtn" style={{color: "white"}}>
                         <FaBell/>
                     </button>
 
