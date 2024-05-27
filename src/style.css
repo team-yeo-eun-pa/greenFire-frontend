@@ -6,10 +6,23 @@
     color: white;
 }
 
+
+
 /* button */
 .iconbtn {
     background: none;
     border: none;
+}
+
+.submit-btn {
+    width: 60px;
+    height: 25px;
+    background-color: #004B29;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 10px;
+    align-content: center;
 }
 
 /* store */

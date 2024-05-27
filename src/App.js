@@ -13,6 +13,8 @@ import MyStoreMain from "./pages/seller/MyStoreMain";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
 import Wishlist from "./pages/product/Wishlist";
+import ProductRegist from "./pages/seller/ProductRegist";
+import ProductManagement from "./pages/seller/ProductManagement";
 
 function App() {
     return (
@@ -41,6 +43,8 @@ function App() {
                             <Route path="mystore" element={<SellerPageLayout/>}>
                                 <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
                                 <Route path="main" element={<MyStoreMain/>}/>
+                                <Route path="product" element={<ProductManagement/>}/>
+                                <Route path="regist" element={<ProductRegist/>}/>
                             </Route>
                         </Route>
                         <Route path="/admin">
