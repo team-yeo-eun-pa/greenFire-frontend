@@ -24,7 +24,7 @@ function NavBar() {
                 </Badge>
                 <Badge
                     bg="light" text="dark" className=""
-                    onClick={ () => navigate(`member/signup`)}
+                    onClick={ () => navigate(`members/signup`)}
                 >
                     회원가입
                 </Badge>
