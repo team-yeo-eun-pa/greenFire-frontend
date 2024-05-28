@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 
 const Delta = Quill.import('delta');
 
-function ProductRegist() {
+function ProductEdit() {
 
     // const [range, setRange] = useState();
     const [lastChange, setLastChange] = useState();
@@ -93,4 +93,4 @@ function ProductRegist() {
     )
 }
 
-export default ProductRegist;
+export default ProductEdit;

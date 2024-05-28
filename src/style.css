@@ -106,7 +106,6 @@
 
 /* WishToCartModal */
 .wish-cart-modal {
-    position: relative;
     align-content: center;
 }
 
@@ -142,8 +141,9 @@
 
 .submit-btn-wrapper {
     display: flex;
+    width: 100%;
     justify-content: flex-end;
-    margin-top: 8px;
+    margin-top: 50px;
 }
 
 /* text editor */
