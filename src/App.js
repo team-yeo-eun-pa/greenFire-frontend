@@ -18,6 +18,7 @@ import Wishlist from "./pages/product/Wishlist";
 import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
+import ProductEdit from "./pages/seller/ProductEdit";
 
 function App() {
     return (
@@ -49,6 +50,7 @@ function App() {
                                 <Route path="main" element={<MyStoreMain/>}/>
                                 <Route path="product" element={<ProductManagement/>}/>
                                 <Route path="regist" element={<ProductRegist/>}/>
+                                <Route path="edit" element={<ProductEdit/>}/>
                             </Route>
                         </Route>
                         <Route path="/admin">
