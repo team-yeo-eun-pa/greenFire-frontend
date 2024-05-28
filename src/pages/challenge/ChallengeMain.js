@@ -58,6 +58,12 @@ function ChallengeMain() {
                         <ChallengeItem/>
                     </Col>
                     <Col>
+
+
+
+
+
+
                         <ChallengeItem/>
                     </Col>
                 </Row>
