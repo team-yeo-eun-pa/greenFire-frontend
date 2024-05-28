@@ -1,8 +1,9 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react';
-import { Quill } from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { formats, modules } from './TextEditorModules';
 
-const TextEditor = ({ readOnly, defaultValue, onTextChange, onSelectionChange }, ref) => {
+const TextEditor = ({ defaultValue, onTextChange, onSelectionChange }, ref) => {
     const containerRef = useRef(null);
     const defaultValueRef = useRef(defaultValue);
     const onTextChangeRef = useRef(onTextChange);
@@ -14,16 +15,14 @@ const TextEditor = ({ readOnly, defaultValue, onTextChange, onSelectionChange },
     });
 
     useEffect(() => {
-        ref.current?.enable(!readOnly);
-    }, [ref, readOnly]);
-
-    useEffect(() => {
         const container = containerRef.current;
         const editorContainer = container.appendChild(
             container.ownerDocument.createElement('div')
         );
         const quill = new Quill(editorContainer, {
             theme: 'snow',
+            modules,
+            formats
         });
 
         ref.current = quill;
@@ -46,7 +45,7 @@ const TextEditor = ({ readOnly, defaultValue, onTextChange, onSelectionChange },
         };
     }, [ref]);
 
-    return <div ref={containerRef}></div>;
+    return <div className="text-editor-div" ref={containerRef}></div>;
 };
 
 export default React.forwardRef(TextEditor);

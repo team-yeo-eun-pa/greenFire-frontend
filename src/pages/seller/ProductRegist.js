@@ -9,7 +9,7 @@ const Delta = Quill.import('delta');
 
 function ProductRegist() {
 
-    const [range, setRange] = useState();
+    // const [range, setRange] = useState();
     const [lastChange, setLastChange] = useState();
 
     const quillRef = useRef();
@@ -23,6 +23,10 @@ function ProductRegist() {
         { id: 1, name: '옵션명1', price: 12000, stock: 5 },
         { id: 2, name: '옵션명2', price: 9000, stock: 3 },
         { id: 3, name: '옵션명3', price: 16000, stock: 2 },
+        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
+        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
+        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
+        { id: 3, name: '마지막', price: 16000, stock: 2 },
     ];
 
     return (
@@ -65,13 +69,13 @@ function ProductRegist() {
                 ref={quillRef}
                 defaultValue={new Delta()
                     .insert('상품 상세설명')
-                    .insert('\n', {header: 1})
+                    // .insert('\n', {header: 1})
                     // .insert('Some ')
                     // .insert('initial', {bold: true})
                     // .insert(' ')
                     // .insert('content', {underline: true})
                     .insert('\n')}
-                onSelectionChange={setRange}
+                // onSelectionChange={setRange}
                 onTextChange={setLastChange}
             />
 
