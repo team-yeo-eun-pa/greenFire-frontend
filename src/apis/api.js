@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getAccessTokenHeader} from "../utils/TokenUtils";
+import {getAccessTokenHeader, getRefreshTokenHeader, saveToken} from "../utils/TokenUtils";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -60,11 +60,11 @@ authRequest.interceptors.response.use(
     });
 
 // refresh token 전달하여 토큰 재발급 요청하는 api
-// export async function postRefreshToken() {
-//
-//     return await request(
-//         'POST',
-//         '/api/v1/refresh-token',
-//         { 'Refresh-Token' : getRefreshTokenHeader() }
-//     );
-// }
+export async function postRefreshToken() {
+
+    return await request(
+        'POST',
+        '/api/v1/refresh-token',
+        { 'Refresh-Token' : getRefreshTokenHeader() }
+    );
+}
