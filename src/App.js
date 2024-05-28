@@ -14,6 +14,7 @@ import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
 import SignupForm from "./components/form/SignupForm";
 import Wishlist from "./pages/product/Wishlist";
+import CsMain from "./pages/cs/CsMain";
 
 function App() {
     return (
@@ -23,9 +24,11 @@ function App() {
                     <Route path="/" element={<Layout/>}>
                         <Route path="/" element={<Main/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
-                        <Route path="/challenge" element={<ChallengeMain/>}>
+                        <Route path="/challenge" element={<ChallengeMain/>}/>
 
-                        </Route>
+                        <Route path="/cs" element={<CsMain/>}/>
+
+
                         <Route path="/product" element={<ProductMain/>}>
 
                         </Route>
