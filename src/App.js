@@ -31,7 +31,12 @@ function App() {
                         </Route>
                         <Route path="/wish" element={<Wishlist/>}>
 
+
                         </Route>
+
+
+
+
                         <Route path="/member">
                             <Route path="signup" element={<SignupForm/>}/>
                             <Route path="mypage" element={<UserPageLayout/>}>
