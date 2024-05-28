@@ -12,6 +12,7 @@ import SellerPageLayout from "./layouts/SellerPageLayout";
 import MyStoreMain from "./pages/seller/MyStoreMain";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
+import AdminNotice from "./pages/admin/AdminNotice";
 
 function App() {
     return (
@@ -40,6 +41,7 @@ function App() {
                             </Route>
                         </Route>
                         <Route path="/admin">
+                            <Route path="adminNotice" element={<AdminNotice/>} />
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
