@@ -34,21 +34,6 @@ function WishItem(props) {
                 </button>
             </div>
 
-            {/*{*/}
-            {/*    modalOpen &&*/}
-            {/*    <div className="wish-modal-container" ref={modalOut} onClick={e => {*/}
-            {/*        if (e.target === modalOut.current) {*/}
-            {/*            setModalOpen(false);*/}
-            {/*        }*/}
-            {/*    }}>*/}
-
-            {/*        <div>*/}
-            {/*            <WishToCartModal setModalOpen/>*/}
-            {/*        </div>*/}
-
-            {/*    </div>*/}
-            {/*}*/}
-
         </div>
     )
 }

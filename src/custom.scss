@@ -13,6 +13,14 @@ $theme-colors: (
 // Import the rest of Bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+}
+
 /* side bar --------------------------- */
 .nav-link-custom {
   text-decoration: none;
@@ -27,7 +35,7 @@ $theme-colors: (
 }
 
 .nav-link-custom-title {
-  font-weight: bold;
+  font-weight: 600;
   color: #494949;
   font-size: 1.15rem;
   font-weight: bold;

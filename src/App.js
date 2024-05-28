@@ -16,6 +16,8 @@ import ProductMain from "./pages/product/ProductMain";
 import SignupForm from "./components/form/SignupForm";
 import Wishlist from "./pages/product/Wishlist";
 import Signup from "./pages/member/Signup";
+import ProductRegist from "./pages/seller/ProductRegist";
+import ProductManagement from "./pages/seller/ProductManagement";
 
 function App() {
     return (
@@ -45,6 +47,8 @@ function App() {
                             <Route path="mystore" element={<SellerPageLayout/>}>
                                 <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
                                 <Route path="main" element={<MyStoreMain/>}/>
+                                <Route path="product" element={<ProductManagement/>}/>
+                                <Route path="regist" element={<ProductRegist/>}/>
                             </Route>
                         </Route>
                         <Route path="/admin">

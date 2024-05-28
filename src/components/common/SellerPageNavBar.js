@@ -34,7 +34,7 @@ function SellerPageNavBar() {
                 </div>
 
                 <Nav.Link className="nav-link-custom-title mt-5">상품 관리</Nav.Link>
-                <Nav.Link eventKey="" className="nav-link-custom">스토어 상품 관리</Nav.Link>
+                <Nav.Link href="/seller/mystore/product" eventKey="" className="nav-link-custom">스토어 상품 관리</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">재고 관리</Nav.Link>
                 <br/>
                 <Nav.Link className="nav-link-custom-title">주문 관리</Nav.Link>
