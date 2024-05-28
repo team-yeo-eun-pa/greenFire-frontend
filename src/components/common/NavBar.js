@@ -8,14 +8,68 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import { FaShoppingCart, FaHeart, FaBell, FaSearch } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import {Badge} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 
 function NavBar() {
+
+    const navigate = useNavigate();
+
+    function BeforeLogin() {
+        return (
+            <div>
+                <Badge bg="light" text="dark"
+                    className="mx-2">
+                    로그인
+                </Badge>
+                <Badge
+                    bg="light" text="dark" className=""
+                    onClick={ () => navigate(`members/signup`)}
+                >
+                    회원가입
+                </Badge>
+            </div>
+        )
+    }
+
+    function AfterLogin() {
+        return (
+            <div>
+                <div
+                    className="profile-pic"
+                    style={{
+                        background: "none",
+                        color: "white",
+                        border: "none",
+                        marginBottom: "5px",
+                        marginLeft: "15px",
+                        width: "30px",
+                        fontSize: "28px"
+                    }}>
+                    <CgProfile/>
+                </div>
+
+                <NavDropdown title="name" id="navbarScrollingDropdown"
+                             className="mx-4">
+                    <NavDropdown.Item href="#action2">식품</NavDropdown.Item>
+                    <NavDropdown.Item href="#action3">
+                        Another action
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider/>
+                    <NavDropdown.Item href="#action5">
+                        Something else here
+                    </NavDropdown.Item>
+                </NavDropdown>
+            </div>
+        )
+    }
+
     return (
         <Navbar expand="lg" className="bg-success p-5">
             <Container fluid>
                 <Image src="/greenFire_logo-nav.png" width={30} height={30}/>
                 <Navbar.Brand href="/" className="text-white mx-3">GREEN FIRE</Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarScroll" style={{ backgroundColor: "#ffffff"}} />
+                <Navbar.Toggle aria-controls="navbarScroll" style={{backgroundColor: "#ffffff"}}/>
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
                         className="me-auto my-2 my-lg-0"
@@ -24,7 +78,7 @@ function NavBar() {
                     >
                         <Nav.Link href="#action1" className="text-white">초록불 소개</Nav.Link>
                         <NavDropdown title="반딧불이 스토어" id="navbarScrollingDropdown" className="custom-dropdown">
-                            <NavDropdown.Item href="">
+                            <NavDropdown.Item href="/product">
                                 전체보기
                             </NavDropdown.Item>
                             <NavDropdown.Divider/>
@@ -59,43 +113,22 @@ function NavBar() {
                     </Form>
 
                     {/*아이콘 테스트*/}
-                    <button style={{background: "none", color: "white", border: "none", marginLeft: "5px"}}>
+                    <button className="iconbtn" style={{color: "white", marginLeft: "5px"}}>
                         <FaShoppingCart/>
                     </button>
 
-                    <button style={{background: "none", color: "white", border: "none"}}>
-                        <FaHeart/>
+                    <button className="iconbtn" style={{color: "white"}}>
+                        <Nav.Link href="/wish">
+                            <FaHeart/>
+                        </Nav.Link>
                     </button>
 
-                    <button style={{background: "none", color: "white", border: "none"}}>
+                    <button className="iconbtn" style={{color: "white"}}>
                         <FaBell/>
                     </button>
 
-                    <div
-                        className="profile-pic"
-                        style={{
-                            background: "none",
-                            color: "white",
-                            border: "none",
-                            marginBottom: "5px",
-                            marginLeft: "15px",
-                            width: "30px",
-                            fontSize: "28px"
-                        }}>
-                        <CgProfile/>
-                    </div>
+                    { false ? <AfterLogin/> : <BeforeLogin/> }
 
-                    <NavDropdown title="name" id="navbarScrollingDropdown"
-                                 className="mx-4">
-                        <NavDropdown.Item href="#action2">식품</NavDropdown.Item>
-                        <NavDropdown.Item href="#action3">
-                            Another action
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider/>
-                        <NavDropdown.Item href="#action5">
-                            Something else here
-                        </NavDropdown.Item>
-                    </NavDropdown>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
