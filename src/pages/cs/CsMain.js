@@ -2,6 +2,8 @@ import UserPageNavBar from "../../components/common/UserPageNavBar";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Col, Row, Table} from "react-bootstrap";
 import CsList from "./CsList";
+import Button from "react-bootstrap/Button";
+import React from "react";
 
 
 function CsMain({cs}) {
@@ -40,10 +42,16 @@ function CsMain({cs}) {
                     <CsList cs={cs}/>
                     </>
 
+                    <Button variant="success">문의 등록</Button>
+                    <Button
+                        variant="outline-secondary"
+                        path="/"
+                    >
+                        메인으로</Button>
+
                 </Col>
 
             </Row>
-
         </>
     );
 }
