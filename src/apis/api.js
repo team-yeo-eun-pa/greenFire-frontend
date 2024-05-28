@@ -64,7 +64,7 @@ export async function postRefreshToken() {
 
     return await request(
         'POST',
-        '/api/v1/refresh-token',
+        '/refresh-token',
         { 'Refresh-Token' : getRefreshTokenHeader() }
     );
 }
