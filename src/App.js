@@ -1,6 +1,7 @@
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import Main from "./pages/Main";
 import Layout from "./layouts/common/Layout";
+import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
 import CustomComponents from "./components/common/CustomComponents";
 import UserPageLayout from "./layouts/UserPageLayout";
@@ -14,6 +15,7 @@ import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
 import SignupForm from "./components/form/SignupForm";
 import Wishlist from "./pages/product/Wishlist";
+import Signup from "./pages/member/Signup";
 
 function App() {
     return (
@@ -32,8 +34,8 @@ function App() {
                         <Route path="/wish" element={<Wishlist/>}>
 
                         </Route>
-                        <Route path="/member">
-                            <Route path="signup" element={<SignupForm/>}/>
+                        <Route path="/members">
+                            <Route path="signup" element={<Signup/>}/>
                             <Route path="mypage" element={<UserPageLayout/>}>
                                 <Route index element={<Navigate to="/member/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
