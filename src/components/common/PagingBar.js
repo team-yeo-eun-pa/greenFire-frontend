@@ -3,6 +3,7 @@ import Pagination from 'react-bootstrap/Pagination';
 // import './PagingBar.css'
 
 function PagingBar() {
+
     return (
         <div className="pagination-container">
             <Pagination>
