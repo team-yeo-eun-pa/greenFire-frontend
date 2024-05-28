@@ -12,6 +12,7 @@ import SellerPageLayout from "./layouts/SellerPageLayout";
 import MyStoreMain from "./pages/seller/MyStoreMain";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
+import SignupForm from "./components/form/SignupForm";
 import Wishlist from "./pages/product/Wishlist";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
 
                         </Route>
                         <Route path="/member">
+                            <Route path="signup" element={<SignupForm/>}/>
                             <Route path="mypage" element={<UserPageLayout/>}>
                                 <Route index element={<Navigate to="/member/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
