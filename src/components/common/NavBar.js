@@ -10,26 +10,41 @@ import { FaShoppingCart, FaHeart, FaBell, FaSearch } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import {Badge} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
+import {useState} from "react";
+import LoginModal from "../items/LoginModal";
 
 function NavBar() {
 
     const navigate = useNavigate();
 
+    const [showLoginModal, setShowLoginModal] = useState(false);
+
+    const handleLoginModalClose = () => setShowLoginModal(false);
+    const handleLoginModalShow = () => setShowLoginModal(true);
+
     function BeforeLogin() {
         return (
             <div>
-                <Badge bg="light" text="dark"
-                    className="mx-2">
+                <Badge
+                    bg="light"
+                    text="dark"
+                    className="mx-2"
+                    onClick={handleLoginModalShow}
+                    style={{cursor: 'pointer'}}
+                >
                     로그인
                 </Badge>
                 <Badge
-                    bg="light" text="dark" className=""
-                    onClick={ () => navigate(`members/signup`)}
+                    bg="light"
+                    text="dark"
+                    className=""
+                    onClick={() => navigate('members/signup')}
+                    style={{cursor: 'pointer'}}
                 >
                     회원가입
                 </Badge>
             </div>
-        )
+        );
     }
 
     function AfterLogin() {
@@ -131,6 +146,7 @@ function NavBar() {
 
                 </Navbar.Collapse>
             </Container>
+            <LoginModal show={showLoginModal} handleClose={handleLoginModalClose} />
         </Navbar>
     );
 }
