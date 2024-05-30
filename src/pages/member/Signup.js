@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {reset} from "../../modules/MemberModules";
+import {ToastContainer} from "react-toastify";
 
 function Signup() {
 
@@ -12,13 +13,14 @@ function Signup() {
 
     useEffect(() => {
         if (success === true) {
-            navigate(`member/login`);
+            navigate(`/`);
             dispatch(reset());
         }
     }, [success]);
 
     return (
         <>
+            <ToastContainer hideProgressBar={true} position="top-center"/>
             <SignupForm/>
         </>
     );
