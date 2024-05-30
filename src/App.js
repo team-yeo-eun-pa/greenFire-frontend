@@ -13,12 +13,12 @@ import SellerPageLayout from "./layouts/SellerPageLayout";
 import MyStoreMain from "./pages/seller/MyStoreMain";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
-import SignupForm from "./components/form/SignupForm";
 import Wishlist from "./pages/product/Wishlist";
 import InquiryMain from "./pages/Inquiry/InquiryMain";
 import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
+import LoginModal from "./components/items/LoginModal";
 
 function App() {
     return (
@@ -42,6 +42,7 @@ function App() {
                         </Route>
                         <Route path="/members">
                             <Route path="signup" element={<Signup/>}/>
+                            <Route path="login" element={<LoginModal/>}/>
                             <Route path="mypage" element={<UserPageLayout/>}>
                                 <Route index element={<Navigate to="/member/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
