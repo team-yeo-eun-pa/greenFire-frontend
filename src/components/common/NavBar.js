@@ -131,6 +131,7 @@ function NavBar() {
                             <NavDropdown.Item href="#action5">생필품</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="초록불 챌린지" id="navbarScrollingDropdown" className="custom-dropdown">
+                            <NavDropdown.Item href="">챌린지 소개</NavDropdown.Item>
                             <NavDropdown.Item href="">챌린지 참여</NavDropdown.Item>
                             <NavDropdown.Item href="">챌린지 인증</NavDropdown.Item>
                             <NavDropdown.Divider/>
@@ -138,7 +139,7 @@ function NavBar() {
                         </NavDropdown>
                         <NavDropdown title="커뮤니티" id="navbarScrollingDropdown" className="custom-dropdown">
                             <NavDropdown.Item href="">공지사항</NavDropdown.Item>
-                            <NavDropdown.Item href="">문의센터</NavDropdown.Item>
+                            <NavDropdown.Item href="/cs">문의센터</NavDropdown.Item>
                             <NavDropdown.Item href="">신고센터</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>

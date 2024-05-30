@@ -14,6 +14,7 @@ import MyStoreMain from "./pages/seller/MyStoreMain";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
 import Wishlist from "./pages/product/Wishlist";
+import InquiryMain from "./pages/Inquiry/InquiryMain";
 import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
@@ -27,13 +28,16 @@ function App() {
                     <Route path="/" element={<Layout/>}>
                         <Route path="/" element={<Main/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
-                        <Route path="/challenge" element={<ChallengeMain/>}>
+                        <Route path="/challenge" element={<ChallengeMain/>}/>
 
-                        </Route>
+                        <Route path="/cs" element={<InquiryMain/>}/>
+
+
                         <Route path="/product" element={<ProductMain/>}>
 
                         </Route>
                         <Route path="/wish" element={<Wishlist/>}>
+
 
                         </Route>
                         <Route path="/members">
