@@ -1,6 +1,6 @@
 
 /*초기값*/
-import {createAction, handleActions} from "redux-actions";
+import {createActions, handleActions} from "redux-actions";
 
 const initialState = {};
 
@@ -12,7 +12,7 @@ const SUCCESS = `inquiry/SUCCESS`;
 
 
 /*액션함수*/
-export const {inquiry : {getInquiry, success}} = createAction({
+export const {inquiry : {getInquiry, success}} = createActions({
 
     [GET_INQUIRY] : result => ({inquiry : result.data}),
     [SUCCESS] : () => ({success : true})
