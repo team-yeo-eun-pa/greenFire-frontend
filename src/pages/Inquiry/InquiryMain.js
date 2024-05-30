@@ -60,11 +60,8 @@ function InquiryMain() {
                         }
                         </>
 
-                    <></>
-                    <></>
-                    <></>
+                                       <Button variant="success">문의 등록</Button>
 
-                    <Button variant="success">문의 등록</Button>
                     <Button
                         variant="outline-secondary"
                         path="/"
