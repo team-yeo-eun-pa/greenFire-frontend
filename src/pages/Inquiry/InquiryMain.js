@@ -1,12 +1,24 @@
 import UserPageNavBar from "../../components/common/UserPageNavBar";
+import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import {Col, Row, Table} from "react-bootstrap";
-import CsList from "./CsList";
+import {Col, Row} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import {callInquiryListAPI} from "../../apis/Challenge/InquiryAPI";
+import PagingBar from "../../components/common/PagingBar";
+import InquiryList from "../../components/common/challenge/list/InquiryList";
 import Button from "react-bootstrap/Button";
-import React from "react";
+import inquiryReducer from "../../modules/InquiryModules";
 
 
-function CsMain({cs}) {
+function InquiryMain() {
+
+    const dispatch = useDispatch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const {inquiry} = useSelector(state => state.inquiryReducer);
+
+    useEffect(() => {
+        dispatch(callInquiryListAPI({currentPage}));
+    }, [currentPage]);
 
     return(
         <>
@@ -39,8 +51,18 @@ function CsMain({cs}) {
 
 
                     <>
-                    <CsList cs={cs}/>
-                    </>
+                        {
+                            inquiry &&
+                            <>
+                            <InquiryList data={inquiry.data}/>
+                                <PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>
+                            </>
+                        }
+                        </>
+
+                    <></>
+                    <></>
+                    <></>
 
                     <Button variant="success">문의 등록</Button>
                     <Button
@@ -56,4 +78,4 @@ function CsMain({cs}) {
     );
 }
 
-export default CsMain;
+export default InquiryMain;

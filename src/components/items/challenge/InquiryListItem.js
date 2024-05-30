@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 
-function CsListItem({cs : {csCode, csWriteDate, memberCode, csStatus}}) {
+function InquiryListItem({inquiry : {inquiryCode, inquiryWriteDate, memberCode, csStatus}}) {
 
 
     const navigate = useNavigate();
@@ -8,7 +8,8 @@ function CsListItem({cs : {csCode, csWriteDate, memberCode, csStatus}}) {
     return (
 
         <div
-         onclick={()=> navigate('/cs/detail')}>
+         onclick={()=> navigate(`/inquiry/${inquiryCode}`)}>
+
             <h5>{memberCode}</h5>
             <h5>{csStatus}</h5>
 
@@ -18,4 +19,4 @@ function CsListItem({cs : {csCode, csWriteDate, memberCode, csStatus}}) {
     );
 }
 
-export default CsListItem;
+export default InquiryListItem;

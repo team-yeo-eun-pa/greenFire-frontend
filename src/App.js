@@ -14,7 +14,7 @@ import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
 import SignupForm from "./components/form/SignupForm";
 import Wishlist from "./pages/product/Wishlist";
-import CsMain from "./pages/cs/CsMain";
+import InquiryMain from "./pages/Inquiry/InquiryMain";
 
 function App() {
     return (
@@ -26,7 +26,7 @@ function App() {
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
-                        <Route path="/cs" element={<CsMain/>}/>
+                        <Route path="/cs" element={<InquiryMain/>}/>
 
 
                         <Route path="/product" element={<ProductMain/>}>
