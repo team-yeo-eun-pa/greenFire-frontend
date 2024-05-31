@@ -31,7 +31,7 @@ function App() {
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
-                        <Route path="/cs" element={<InquiryMain/>}/>
+                        <Route path="/inquiry" element={<InquiryMain/>}/>
 
 
                         <Route path="/product" element={<ProductMain/>}>

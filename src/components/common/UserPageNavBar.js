@@ -17,7 +17,7 @@ function UserPageNavBar() {
                         style={{width: "130px", height: "130px"}} // Increased size
                     />
                     <br/>
-                    <div className="fw-bold">여운파</div>
+                    <div className="fw-bold">여은파</div>
                     <div className="text-muted">YEP1234@gmail.com</div>
                     <button className="btn btn-secondary btn-sm mt-2">내 프로필</button>
                 </div>

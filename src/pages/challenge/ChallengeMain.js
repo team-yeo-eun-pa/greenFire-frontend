@@ -1,9 +1,9 @@
-import StoreBanner from "../../components/items/common/StoreBanner";
-import ArrangeDrop from "../../components/items/common/ArrangeDrop";
+import StoreBanner from "../../components/items/StoreBanner";
+import ArrangeDrop from "../../components/items/ArrangeDrop";
 import {Col, Row} from "react-bootstrap";
-import ProductItem from "../../components/items/common/ProductItem";
+import ProductItem from "../../components/items/ProductItem";
 import PagingBar from "../../components/common/PagingBar";
-import ChallengeItem from "../../components/items/common/ChallengeItem";
+import ChallengeItem from "../../components/items/ChallengeItem";
 
 function ChallengeMain() {
     return (
