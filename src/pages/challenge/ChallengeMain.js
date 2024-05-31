@@ -3,7 +3,7 @@ import ArrangeDrop from "../../components/items/ArrangeDrop";
 import {Col, Row} from "react-bootstrap";
 import ProductItem from "../../components/items/ProductItem";
 import PagingBar from "../../components/common/PagingBar";
-import ChallengeItem from "../../components/items/ChallengeItem";
+import ChallengeItem from "../../components/items/challenge/ChallengeItem";
 
 function ChallengeMain() {
     return (
