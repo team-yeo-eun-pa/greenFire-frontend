@@ -22,6 +22,7 @@ import LoginModal from "./components/items/LoginModal";
 import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
 import ProtectedRoute from "./components/route/ProtectedRoute";
+import AdminNotices from "./pages/admin/AdminNotices";
 
 function App() {
     return (
