@@ -6,7 +6,7 @@ import {thunk} from 'redux-thunk';
 
 const store = legacy_createStore(
     rootReducer,
-    composeWithDevTools(applyMiddleware(thunk, logger))
+    composeWithDevTools(applyMiddleware(thunk))
 );
 
 export default store;

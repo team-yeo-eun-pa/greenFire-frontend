@@ -33,11 +33,14 @@ function App() {
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
+
+                        <Route path="/cs" element={<InquiryMain/>}/>
                         <Route path="inquiry" >
                             <Route index element={<InquiryMain/>}/>
                             <Route path="regist" element={<InquiryRegist/>}/>
                             <Route path="regist/update" element={<InquiryUpdate/>}/>
                         </Route>
+
 
 
 
@@ -67,6 +70,7 @@ function App() {
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
+                                <Route path="notices" element={<AdminNotices/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
                             </Route>
                         </Route>
