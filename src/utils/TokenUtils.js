@@ -29,6 +29,10 @@ export const isAdmin = () => {
     return isLogin() && getDecodeAccessToken().memberRole === 'ROLE_ADMIN'
 }
 
+export const isSeller = () => {
+    return isLogin() && getDecodeAccessToken().memberRole === 'ROLE_SELLER'
+}
+
 export const getMemberId = () => {
     return getDecodeAccessToken().memberId;
 }
