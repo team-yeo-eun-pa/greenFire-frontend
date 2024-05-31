@@ -1,7 +1,7 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import WishItem from "../../components/items/common/WishItem";
+import WishItem from "../../components/items/WishItem";
 import {useRef, useState} from "react";
-import WishToCartModal from "../../components/items/common/WishToCartModal";
+import WishToCartModal from "../../components/items/WishToCartModal";
 
 function Wishlist() {
 

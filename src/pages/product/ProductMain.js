@@ -1,8 +1,8 @@
 import {Col, Dropdown, Row} from "react-bootstrap";
-import ArrangeDrop from "../../components/items/common/ArrangeDrop";
-import ProductItem from "../../components/items/common/ProductItem";
+import ArrangeDrop from "../../components/items/ArrangeDrop";
+import ProductItem from "../../components/items/ProductItem";
 import PagingBar from "../../components/common/PagingBar";
-import StoreBanner from "../../components/items/common/StoreBanner";
+import StoreBanner from "../../components/items/StoreBanner";
 
 
 function ProductMain() {
