@@ -3,11 +3,12 @@ import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Col, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {callInquiryListAPI} from "../../apis/Challenge/InquiryAPI";
+import {callInquiryListAPI} from "../../apis/InquiryAPI";
 import PagingBar from "../../components/common/PagingBar";
-import InquiryList from "../../components/common/challenge/list/InquiryList";
+import InquiryList from "../../components/list/InquiryList";
 import Button from "react-bootstrap/Button";
 import inquiryReducer from "../../modules/InquiryModules";
+import {useNavigate} from "react-router-dom";
 
 
 function InquiryMain() {
@@ -15,6 +16,11 @@ function InquiryMain() {
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
     const {inquiry} = useSelector(state => state.inquiryReducer);
+    const navigate = useNavigate();
+
+    const onClickInquiryRegisterHandler = () => {
+        navigate("/inquiry/regist");
+    }
 
     useEffect(() => {
         dispatch(callInquiryListAPI({currentPage}));
@@ -60,12 +66,16 @@ function InquiryMain() {
                         }
                         </>
 
-                                       <Button variant="success">문의 등록</Button>
+
+                                       <Button
+                                           variant="success"
+                                           onClick={onClickInquiryRegisterHandler}
+                                       >문의 등록</Button>{''}
 
                     <Button
-                        variant="outline-secondary"
+                        variant="outline-success"
                         path="/"
-                    >
+                    >{''}
                         메인으로</Button>
 
                 </Col>
