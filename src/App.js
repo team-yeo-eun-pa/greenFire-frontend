@@ -19,6 +19,7 @@ import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import LoginModal from "./components/items/LoginModal";
+import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 
 function App() {
     return (
@@ -30,7 +31,11 @@ function App() {
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
-                        <Route path="/inquiry" element={<InquiryMain/>}/>
+                        <Route path="inquiry" >
+                            <Route index element={<InquiryMain/>}/>
+                            <Route path="regist" element={<InquiryRegist/>}/>
+                        </Route>
+
 
 
                         <Route path="/product" element={<ProductMain/>}>
