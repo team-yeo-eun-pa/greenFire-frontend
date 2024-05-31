@@ -1,25 +1,39 @@
 import Nav from "react-bootstrap/Nav";
 import {useState} from "react";
 import Image from 'react-bootstrap/Image';
+import {NavLink} from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
 
-function UserPageNavBar() {
+function UserPageNavBar({ profileInfo }) {
+
     const [key, setKey] = useState('home');
+    console.log(profileInfo.memberEmail)
     return (
         <>
             <Nav defaultActiveKey="/home" className="flex-column rounded mt-5 p-4"
                  style={{backgroundColor: "#F0F3EE"}}>
                 {/* User Info */}
                 <div className="text-center mb-3">
-                    <Image
-                        src="holder.js/171x180"
-                        roundedCircle
-                        className="mx-auto d-block mb-3"
-                        style={{width: "130px", height: "130px"}} // Increased size
-                    />
+                    {profileInfo.profilePicture ? (
+                        <Image
+                            src={profileInfo.profilePicture}
+                            roundedCircle
+                            className="mx-auto d-block mb-3"
+                            style={{width: "130px", height: "130px"}}
+                        />
+                    ) : (
+                        <CgProfile style={{width: "130px", height: "130px"}} />
+                    )}
                     <br/>
-                    <div className="fw-bold">여운파</div>
-                    <div className="text-muted">YEP1234@gmail.com</div>
-                    <button className="btn btn-secondary btn-sm mt-2">내 프로필</button>
+                    <div className="fw-bold fs-6">
+                        {profileInfo.memberName}
+                    </div>
+                    <div className="text-muted">
+                        {profileInfo.memberEmail}
+                    </div>
+                    <NavLink to="/members/mypage/profile">
+                        <button className="btn btn-secondary btn-sm mt-2">내 프로필</button>
+                    </NavLink>
                 </div>
                 <hr/>
 
