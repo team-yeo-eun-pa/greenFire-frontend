@@ -19,6 +19,7 @@ import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import LoginModal from "./components/items/LoginModal";
+import ProtectedRoute from "./components/route/ProtectedRoute";
 
 function App() {
     return (
@@ -41,8 +42,8 @@ function App() {
 
                         </Route>
                         <Route path="/members">
-                            <Route path="signup" element={<Signup/>}/>
-                            <Route path="login" element={<LoginModal/>}/>
+                            <Route path="signup" element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
+                            <Route path="login" element={<ProtectedRoute loginCheck={false}><LoginModal/></ProtectedRoute>}/>
                             <Route path="mypage" element={<UserPageLayout/>}>
                                 <Route index element={<Navigate to="/member/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
