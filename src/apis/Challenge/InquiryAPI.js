@@ -1,5 +1,6 @@
 import async from "async";
 import {request} from "../api";
+import {getInquiry} from "../../modules/InquiryModules";
 
 export const callInquiryListAPI = ({currentPage = 1}) => {
     return async (dispatch, getState) => {
