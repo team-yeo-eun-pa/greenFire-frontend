@@ -9,5 +9,5 @@ export const callInquiryListAPI = ({currentPage = 1}) => {
             dispatch(getInquiry(result));
         }
 
-    } //왜엄떠
+    }
 }
