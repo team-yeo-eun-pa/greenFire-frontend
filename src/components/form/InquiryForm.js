@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import {Col, InputGroup, Row} from "react-bootstrap";
 import React, {useState} from "react";
 import {callSignupAPI} from "../../apis/MemberAPICalls";
+import {callUpdateInquiryAPI} from "../../apis/InquiryAPI";
 
 function InquiryForm () {
 
@@ -10,7 +11,7 @@ function InquiryForm () {
 
     const [form, setForm] = useState( {
         memberId:'',
-        memberEmai:'',
+        memberEmail:'',
         inquiryTitle:'',
         inquiryDetail:''
     });
@@ -23,7 +24,7 @@ function InquiryForm () {
     };
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        dispatch(callSignupAPI({signupRequest: form}));
+        dispatch(callUpdateInquiryAPI({inquiryUpdateRequest: form}));
     };
 
 

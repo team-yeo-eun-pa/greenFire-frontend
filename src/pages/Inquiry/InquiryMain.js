@@ -19,7 +19,7 @@ function InquiryMain() {
     const navigate = useNavigate();
 
     const onClickInquiryRegisterHandler = () => {
-        dispatch(navigate("/inquiry/regist"))
+        navigate("/inquiry/regist");
     }
 
     useEffect(() => {
@@ -73,7 +73,7 @@ function InquiryMain() {
                                        >문의 등록</Button>{''}
 
                     <Button
-                        variant="success"
+                        variant="outline-success"
                         path="/"
                     >{''}
                         메인으로</Button>

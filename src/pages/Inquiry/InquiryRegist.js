@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {callMemberInquiryRegistAPI} from "../../apis/InquiryAPI";
+import {callMemberInquiryRegistAPI, callUpdateInquiryAPI} from "../../apis/InquiryAPI";
 import InquiryForm from "../../components/form/InquiryForm";
 import {Col, Row} from "react-bootstrap";
 import UserPageNavBar from "../../components/common/UserPageNavBar";
@@ -21,10 +21,10 @@ function InquiryRegist() {
     useEffect(() => {
         if (success === true) navigate('/inquiry');
     }, [success])
-    const onClickInquiryRegistHandler = () => {
+    const onClickInquiryUpdateHandler = () => {
         const formData = new FormData();
-        formData.append('productRequest', new Blob([JSON.stringify(form)], {type: 'application/json'}));
-        dispatch(callMemberInquiryRegistAPI({inquiryRegistRequest: formData}));
+        formData.append('inquiryUpdateRequest', new Blob([JSON.stringify(form)], {type: 'application/json'}));
+        dispatch(callUpdateInquiryAPI({inquiryUpdateRequest: formData}));
     }
 
 
@@ -40,15 +40,15 @@ function InquiryRegist() {
 
 
                 <div>
-                    {/*문의 입력값*/}
-                    <button
-                        variant="success"
-                        onClick={onClickInquiryRegistHandler}>{''}
-                        문의 등록
-                    </button>
 
                     <button
                         variant="success"
+                        onClick={onClickInquiryUpdateHandler}>{''}
+                        등록하기
+                    </button>
+
+                    <button
+                        variant="outline-success"
                         onClick={() => navigate(-1)}>{''}
                         뒤로가기
                     </button>
