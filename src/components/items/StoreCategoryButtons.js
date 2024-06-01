@@ -1,9 +1,5 @@
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import {RiMedalLine} from "react-icons/ri";
-import Button from "react-bootstrap/Button";
-import {GiGreenhouse} from "react-icons/gi";
-import {PiStorefrontLight} from "react-icons/pi";
 import Container from "react-bootstrap/Container";
 import React from "react";
 import Image from "react-bootstrap/Image";
