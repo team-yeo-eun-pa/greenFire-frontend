@@ -22,6 +22,9 @@ import LoginModal from "./components/items/LoginModal";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminNotices from "./pages/admin/AdminNotices";
 import AdminMemberView from "./pages/admin/AdminMemberView";
+import InquiryRegist from "./pages/Inquiry/InquiryRegist";
+import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
+import ProtectedRoute from "./components/route/ProtectedRoute";
 
 function App() {
     return (
@@ -33,7 +36,15 @@ function App() {
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
+
                         <Route path="/cs" element={<InquiryMain/>}/>
+                        <Route path="inquiry" >
+                            <Route index element={<InquiryMain/>}/>
+                            <Route path="regist" element={<InquiryRegist/>}/>
+                            <Route path="regist/update" element={<InquiryUpdate/>}/>
+                        </Route>
+
+
 
 
                         <Route path="/product" element={<ProductMain/>}>

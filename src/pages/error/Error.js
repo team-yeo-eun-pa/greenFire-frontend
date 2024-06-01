@@ -2,8 +2,17 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Button from "react-bootstrap/Button";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 function Error() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const onClickHandler=() => {
+        dispatch(() => navigate("/"));
+    }
+
     return (
         <error>
             <Container>
@@ -23,7 +32,9 @@ function Error() {
                             <div>
                                 <span>다시 시도해보시겠어요?<br/></span>
                             </div>
-                            <Button variant="success" type="submit" className="w-45 mt-3">
+                            <Button variant="success" type="submit" className="w-45 mt-3"
+                                onClick={onClickHandler}
+                            >
                                 메인으로
                             </Button>
                         </div>

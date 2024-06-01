@@ -1,4 +1,4 @@
-import InquiryListItem from "../../../items/challenge/InquiryListItem";
+import InquiryListItem from "../items/inquiry/InquiryListItem";
 import data from "bootstrap/js/src/dom/data";
 
 function InquiryList({inquiry}) {
