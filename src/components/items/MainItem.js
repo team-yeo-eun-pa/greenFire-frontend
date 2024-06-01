@@ -8,8 +8,12 @@ import {RiMedalLine} from "react-icons/ri";
 import {GiGreenhouse} from "react-icons/gi";
 import {PiStorefrontLight} from "react-icons/pi";
 import StoreCategoryButtons from "./StoreCategoryButtons";
+import {useNavigate} from "react-router-dom";
 
 function MainItem() {
+
+    const navigate = useNavigate();
+
     return (
         <>
             <Container style={{marginBottom: "100px"}}>
@@ -83,7 +87,10 @@ function MainItem() {
                             <Card.Text>
                                 친환경 제품을 판매하는<br/> 초록불의 스토어입니다.
                             </Card.Text>
-                            <Button variant="outline-success">스토어 바로가기</Button>
+                            <Button
+                                variant="outline-success"
+                                onClick={() => navigate('/challenge')}
+                            >스토어 바로가기</Button>
                         </Card.Body>
                     </Col>
                     <Col>
@@ -96,7 +103,10 @@ function MainItem() {
                             <Card.Text>
                                 친환경 제품을 판매하는<br/> 초록불의 스토어입니다.
                             </Card.Text>
-                            <Button variant="outline-success">스토어 바로가기</Button>
+                            <Button
+                                variant="outline-success"
+                                onClick={() => navigate('/product')}
+                            >스토어 바로가기</Button>
                         </Card.Body>
                     </Col>
                     <Col>
@@ -109,7 +119,10 @@ function MainItem() {
                             <Card.Text>
                                 친환경 제품을 판매하는<br/> 초록불의 스토어입니다.
                             </Card.Text>
-                            <Button variant="outline-success">스토어 바로가기</Button>
+                            <Button
+                                variant="outline-success"
+                                onClick={() => navigate('/members/mypage')}
+                            >스토어 바로가기</Button>
                         </Card.Body>
                     </Col>
 
