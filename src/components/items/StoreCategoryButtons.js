@@ -8,7 +8,7 @@ function StoreCategoryButtons() {
     return(
         <>
             <Container className="mt-5">
-                <Row style={{marginTop: '5px', marginBottom: '10px'}}>
+                <Row style={{marginTop: '100px', marginBottom: '100px'}}>
                     <Col>
                         <Card.Title
                             className="d-flex justify-content-center py-0 m-3"
