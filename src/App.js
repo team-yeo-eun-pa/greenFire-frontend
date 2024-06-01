@@ -29,8 +29,8 @@ function App() {
         <>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
-                        <Route path="/" element={<Main/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
