@@ -1,5 +1,5 @@
 
-import {authRequest, request} from "./api";
+import {authRequest} from "./api";
 import {getNotices} from "../modules/NoticeModules";
 
 export const AdminNoticeAPICalls = ({currentPage = 1}) => {

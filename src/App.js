@@ -19,6 +19,9 @@ import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import LoginModal from "./components/items/LoginModal";
+import ProtectedRoute from "./components/route/ProtectedRoute";
+import AdminNotices from "./pages/admin/AdminNotices";
+import AdminMemberView from "./pages/admin/AdminMemberView";
 
 function App() {
     return (
@@ -60,6 +63,7 @@ function App() {
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
                                 <Route path="notices" element={<AdminNotices/>}/>
+                                <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
                             </Route>
                         </Route>
