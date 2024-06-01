@@ -2,7 +2,7 @@ import AdminPageNavBar from "../components/common/AdminPageNavBar";
 import {Col, Row} from "react-bootstrap";
 import React from "react";
 import {Outlet} from "react-router-dom";
-import ListGroutEx from "../components/items/common/ListGroutEx";
+import ListGroutEx from "../components/items/ListGroutEx.js";
 
 function AdminPageLayout() {
     return (

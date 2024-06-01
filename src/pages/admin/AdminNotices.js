@@ -8,7 +8,7 @@ import {AdminNoticeAPICalls} from "../../apis/AdminNoticeAPICalls";
 function AdminNotices() {
     const dispatch = useDispatch();
     const {notices} = useSelector(state => state.noticeReducer);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage] = useState(1);
 
     useEffect(() => {
         console.log(notices)
@@ -16,6 +16,7 @@ function AdminNotices() {
     }, [currentPage]);
 
     return (
+        notices &&
         <Row>
             <Col xs lg="9" className="mt-5">
                 <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">공지사항</div>
