@@ -93,7 +93,8 @@ function NavBar() {
                 <Col>
                 <NavDropdown title="여은파님" id="navbarScrollingDropdown"
                              className="mx-0 col-9 ">
-                    <NavDropdown.Item href="#action3">
+                    <NavDropdown.Item
+                        onClick={ () => navigate(`/members/mypage`)}>
                         마이페이지
                     </NavDropdown.Item>
                     <NavDropdown.Divider/>
