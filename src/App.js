@@ -25,14 +25,15 @@ import AdminMemberView from "./pages/admin/AdminMemberView";
 import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
 import ProtectedRoute from "./components/route/ProtectedRoute";
+import AdminNotices from "./pages/admin/AdminNotices";
 
 function App() {
     return (
         <>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
-                        <Route path="/" element={<Main/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
