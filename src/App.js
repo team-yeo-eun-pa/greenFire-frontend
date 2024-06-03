@@ -15,33 +15,55 @@ import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
 import SignupForm from "./components/form/SignupForm";
 import Wishlist from "./pages/product/Wishlist";
+import InquiryMain from "./pages/Inquiry/InquiryMain";
 import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import ProductEdit from "./pages/seller/ProductEdit";
+import LoginModal from "./components/items/LoginModal";
+import ProtectedRoute from "./components/route/ProtectedRoute";
+import MemberProfile from "./pages/member/MemberProfile";
+import AdminNotices from "./pages/admin/AdminNotices";
+import AdminMemberView from "./pages/admin/AdminMemberView";
+import InquiryRegist from "./pages/Inquiry/InquiryRegist";
+import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
+import ProtectedRoute from "./components/route/ProtectedRoute";
+import AdminNotices from "./pages/admin/AdminNotices";
 
 function App() {
     return (
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Layout/>}>
-                        <Route path="/" element={<Main/>}/>
+                    <Route path="/" element={<Main/>}/>
+                        <Route path="/" element={<Layout/>}>
                         <Route path="/ex" element={<CustomComponents/>}/>
-                        <Route path="/challenge" element={<ChallengeMain/>}>
+                        <Route path="/challenge" element={<ChallengeMain/>}/>
 
+                        <Route path="/cs" element={<InquiryMain/>}/>
+                        <Route path="inquiry" >
+                            <Route index element={<InquiryMain/>}/>
+                            <Route path="regist" element={<InquiryRegist/>}/>
+                            <Route path="regist/update" element={<InquiryUpdate/>}/>
                         </Route>
+
+
+
+
                         <Route path="/product" element={<ProductMain/>}>
 
                         </Route>
                         <Route path="/wish" element={<Wishlist/>}>
 
+
                         </Route>
                         <Route path="/members">
-                            <Route path="signup" element={<Signup/>}/>
-                            <Route path="mypage" element={<UserPageLayout/>}>
-                                <Route index element={<Navigate to="/member/mypage/main" replace/>}/>
+                            <Route path="signup" element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
+                            <Route path="login" element={<ProtectedRoute loginCheck={false}><LoginModal/></ProtectedRoute>}/>
+                            <Route path="mypage" element={<ProtectedRoute loginCheck={true}> <UserPageLayout/> </ProtectedRoute>}>
+                                <Route index element={<Navigate to="/members/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
+                                <Route path="profile" element={<MemberProfile/>}/>
                             </Route>
                         </Route>
                         <Route path="/seller">
@@ -56,6 +78,8 @@ function App() {
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
+                                <Route path="notices" element={<AdminNotices/>}/>
+                                <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
                             </Route>
                         </Route>

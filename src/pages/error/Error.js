@@ -2,12 +2,21 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Button from "react-bootstrap/Button";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 function Error() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const onClickHandler=() => {
+        dispatch(() => navigate("/"));
+    }
+
     return (
         <error>
-            <Container>
-                <Row className="justify-content-center">
+            <Container className="d-flex vh-100 align-items-start" style={{paddingTop: 200}}>
+                <Row className="justify-content-center w-100">
                     <Col xs={12} className="text-center">
                         <div>
                             <strong>
@@ -23,7 +32,9 @@ function Error() {
                             <div>
                                 <span>다시 시도해보시겠어요?<br/></span>
                             </div>
-                            <Button variant="success" type="submit" className="w-45 mt-3">
+                            <Button variant="success" type="submit" className="w-45 mt-3"
+                                onClick={onClickHandler}
+                            >
                                 메인으로
                             </Button>
                         </div>

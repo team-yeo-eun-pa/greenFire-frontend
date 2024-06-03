@@ -1,15 +1,14 @@
 import Container from "react-bootstrap/Container";
-import SignupForm from "../components/form/SignupForm";
-import ChallengeList from "./challenge/ChallengeList";
+import MainItem from "../components/items/MainItem";
+import NavBar from "../components/common/NavBar";
+import Footer from "../components/common/Footer";
 
 function Main() {
     return (
         <>
-            <Container className="mt-5 justify-content-md-center">
-                <h1>main</h1>
-                {/*<SignupForm/>*/}
-                {/*<ChallengeList/>*/}
-            </Container>
+            <NavBar/>
+                <MainItem/>
+            <Footer/>
         </>
     );
 }

@@ -8,35 +8,76 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import { FaShoppingCart, FaHeart, FaBell, FaSearch } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
-import {Badge} from "react-bootstrap";
+import {Badge, Row, Col} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import LoginModal from "../items/LoginModal";
+import {useDispatch, useSelector} from "react-redux";
+import {reset} from "../../modules/MemberModules";
+import {isLogin} from "../../utils/TokenUtils";
+import {callLogoutAPI} from "../../apis/MemberAPICalls";
 
 function NavBar() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const {success} = useSelector(state => state.memberReducer);
+
+    useEffect(() => {
+        if(success === true) {
+            navigate('/');
+            dispatch(reset());
+            handleLoginModalClose();
+        }
+    }, [success]);
+
+    const handleLoginModalClose = () => setShowLoginModal(false);
+    const handleLoginModalShow = () => {
+        setShowLoginModal(true);
+        navigate('/members/login');
+    }
 
     function BeforeLogin() {
         return (
             <div>
-                <Badge bg="light" text="dark"
-                    className="mx-2">
+                <Badge
+                    bg="light"
+                    text="dark"
+                    className="mx-2"
+                    onClick={handleLoginModalShow}
+                    style={{cursor: 'pointer'}}
+                >
                     로그인
                 </Badge>
                 <Badge
-                    bg="light" text="dark" className=""
-                    onClick={ () => navigate(`members/signup`)}
+                    bg="light"
+                    text="dark"
+                    className=""
+                    onClick={() => navigate('members/signup')}
+                    style={{cursor: 'pointer'}}
                 >
                     회원가입
                 </Badge>
             </div>
-        )
+        );
     }
 
     function AfterLogin() {
+
+        const { success } = useSelector(state => state.memberReducer);
+
+        useEffect(() => {
+            if(success === true) {
+                navigate('/');
+                dispatch(reset());
+            }
+        }, [success]);
+
         return (
-            <div>
-                <div
-                    className="profile-pic"
+            <Row className="d-flex align-items-center justify-content-end">
+                <Col
+                    className="profile-pic col-3 mx-2"
                     style={{
                         background: "none",
                         color: "white",
@@ -47,20 +88,23 @@ function NavBar() {
                         fontSize: "28px"
                     }}>
                     <CgProfile/>
-                </div>
+                </Col>
 
-                <NavDropdown title="name" id="navbarScrollingDropdown"
-                             className="mx-4">
-                    <NavDropdown.Item href="#action2">식품</NavDropdown.Item>
-                    <NavDropdown.Item href="#action3">
-                        Another action
+                <Col>
+                <NavDropdown title="여은파님" id="navbarScrollingDropdown"
+                             className="mx-0 col-9 ">
+                    <NavDropdown.Item
+                        onClick={ () => navigate(`/members/mypage`)}>
+                        마이페이지
                     </NavDropdown.Item>
                     <NavDropdown.Divider/>
-                    <NavDropdown.Item href="#action5">
-                        Something else here
+                    <NavDropdown.Item
+                        onClick={ () => dispatch(callLogoutAPI())}>
+                        로그아웃
                     </NavDropdown.Item>
                 </NavDropdown>
-            </div>
+                </Col>
+            </Row>
         )
     }
 
@@ -88,6 +132,7 @@ function NavBar() {
                             <NavDropdown.Item href="#action5">생필품</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="초록불 챌린지" id="navbarScrollingDropdown" className="custom-dropdown">
+                            <NavDropdown.Item href="/challenge">챌린지 소개</NavDropdown.Item>
                             <NavDropdown.Item href="">챌린지 참여</NavDropdown.Item>
                             <NavDropdown.Item href="">챌린지 인증</NavDropdown.Item>
                             <NavDropdown.Divider/>
@@ -95,7 +140,7 @@ function NavBar() {
                         </NavDropdown>
                         <NavDropdown title="커뮤니티" id="navbarScrollingDropdown" className="custom-dropdown">
                             <NavDropdown.Item href="">공지사항</NavDropdown.Item>
-                            <NavDropdown.Item href="">문의센터</NavDropdown.Item>
+                            <NavDropdown.Item href="/inquiry">문의센터</NavDropdown.Item>
                             <NavDropdown.Item href="">신고센터</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
@@ -123,14 +168,15 @@ function NavBar() {
                         </Nav.Link>
                     </button>
 
-                    <button className="iconbtn" style={{color: "white"}}>
+                    <button className="iconbtn" style={{color: "white", marginRight: "1rem"}}>
                         <FaBell/>
                     </button>
 
-                    { false ? <AfterLogin/> : <BeforeLogin/> }
+                    { isLogin() ? <AfterLogin/> : <BeforeLogin/> }
 
                 </Navbar.Collapse>
             </Container>
+            <LoginModal show={showLoginModal} handleClose={handleLoginModalClose} />
         </Navbar>
     );
 }

@@ -1,8 +1,11 @@
 import {combineReducers} from "redux";
+import inquiryReducer from "./InquiryModules";
 import memberReducer from "./MemberModules";
+import noticeReducer from "./NoticeModules";
+import AdminMemberReducer from "./AdminMemberModules";
 
 const rootReducer = combineReducers({
-    memberReducer
+    inquiryReducer, memberReducer, noticeReducer, AdminMemberReducer
 });
 
 export default rootReducer;

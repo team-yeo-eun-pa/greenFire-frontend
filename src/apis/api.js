@@ -26,11 +26,11 @@ authRequest.interceptors.request.use((config) => {
 });
 
 authRequest.interceptors.response.use(
-    /* 첫 번째 인자로 사용 되는 콜백 함수는 정상 수행 시 동작이므로 별도의 동작 없이 진행하도록 한다. */
+    // 첫 번째 인자로 사용 되는 콜백 함수는 정상 수행 시 동작이므로 별도의 동작 없이 진행하도록 한다.
     (response) => {
         return response;
     },
-    /* 두 번째 인자로 사용 되는 콜백 함수는 오류 발생 시 동작이므로 로직을 작성한다. */
+    // 두 번째 인자로 사용 되는 콜백 함수는 오류 발생 시 동작이므로 로직을 작성한다.
     async (error) => {
 
         console.log("error :", error);
