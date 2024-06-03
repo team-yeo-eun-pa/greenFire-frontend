@@ -24,3 +24,13 @@ export const callAdminCategoryRegistAPI = ({ registRequest }) => {
         }
     }
 };
+
+export const callAdminCategoryDeleteAPI = ({ deleteRequest }) => {
+    return async (dispatch, getState) => {
+        const result = await authRequest.delete(`/admin/categories`, deleteRequest);
+
+        if(result.status === 201) {
+            dispatch(success());
+        }
+    }
+}
