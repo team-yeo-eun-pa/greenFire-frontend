@@ -27,8 +27,6 @@ import AdminNotices from "./pages/admin/AdminNotices";
 import AdminMemberView from "./pages/admin/AdminMemberView";
 import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
-import ProtectedRoute from "./components/route/ProtectedRoute";
-import AdminNotices from "./pages/admin/AdminNotices";
 
 function App() {
     return (
