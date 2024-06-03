@@ -15,6 +15,7 @@ function ProductMain() {
 
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
+    // const currentPage = useSelector(state => state.productReducer.currentPage);
     const {products} = useSelector(state => state.productReducer);
 
 
@@ -31,7 +32,7 @@ function ProductMain() {
 
             <div className="product-list-top-wrapper">
                 <div className="amount-num-wrapper">
-                    <p>총 {} 개</p>
+                    <p>총 {products && products.data ? products.data.length : 0} 개</p>
                 </div>
                 <div className="arrange-wrapper">
                     <ArrangeDrop/>
@@ -42,11 +43,10 @@ function ProductMain() {
                 products &&
                 <>
                     <div className="product-list-wrapper" style={{marginTop: '15px'}}>
-                        <Row style={{marginTop: '5px', marginBottom: '10px'}}>
+                        <Row>
                             {products.data.map(product => (
-                                // <Col key={product.id}>
-                                <Col>
-                                    <ProductItem key={product.id} product={product}/>
+                                <Col key={product.id} style={{marginTop: '5px', marginBottom: '10px'}}>
+                                    <ProductItem product={product}/>
                                 </Col>
                             ))}
                         </Row>

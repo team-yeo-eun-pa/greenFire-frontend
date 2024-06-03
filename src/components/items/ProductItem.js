@@ -9,17 +9,17 @@ import { FaCartPlus } from "react-icons/fa6";
 function ProductItem(props) {
 
     return(
-        <>
+        <div>
             <Card style={{width: '14rem', cursor: 'pointer'}}>
                 <Card.Img variant="top" src="/p1.png"/>
                 <Card.Body>
                     <Card.Title>{props.product.productName}
                     </Card.Title>
                     <Card.Text className="mb-0">
-                        {props.product.storeCode}
+                        {props.product.storeName}
                     </Card.Text>
                     <Card.Text className="fs-6 fw-lighter" style={{letterSpacing: '0.1em'}}>
-                        {props.product.storeCode}
+                        {props.product.storeName}
                     </Card.Text>
 
                     <div className="card-btn-wrapper">
@@ -34,7 +34,7 @@ function ProductItem(props) {
                 </Card.Body>
             </Card>
 
-        </>
+        </div>
 
     );
 }
