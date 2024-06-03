@@ -3,19 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col, Button, Form, ListGroup, Dropdown } from 'react-bootstrap';
 import { AdminCategoryAPICalls, callAdminCategoryRegistAPI, callAdminCategoryDeleteAPI } from "../../apis/AdminCategoryAPICalls";
 import { useNavigate } from "react-router-dom";
-import {deleteCategory} from "../../modules/AdminCategoryModules";
 
 const AdminCategory = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { adminCategory, success, loading, error } = useSelector(state => state.category);
+    let { adminCategory, success, loading, error } = useSelector(state => state.category);
     const [categoryTitle, setCategoryTitle] = useState('');
     const [selectedParentCategory, setSelectedParentCategory] = useState(null);
-    const [selectedCategoryToDelete, setSelectedCategoryToDelete] = useState(null);
+    const [selectedChildCategory, setSelectedChildCategory] = useState(null);
+
 
     useEffect(() => {
         dispatch(AdminCategoryAPICalls());
-    }, [dispatch]);
+    }, [dispatch, success]);
 
     useEffect(() => {
         if (success) {
@@ -24,41 +24,52 @@ const AdminCategory = () => {
     }, [success, navigate]);
 
     const handleSaveCategory = () => {
-        const newCategory = {
-            categoryTitle: categoryTitle,
-            parentCategory: selectedParentCategory ? selectedParentCategory.categoryCode : null,
-            type: 'application/json'
-        };
+        let newCategory = {};
+         if (selectedParentCategory) {
+            newCategory = {
+                categoryTitle: categoryTitle,
+                refCategoryCode: selectedParentCategory.categoryCode, // 하위 카테고리의 상위 카테고리 코드를 부모 카테고리로 설정
+                type: 'application/json'
+            };
+        }
+
         dispatch(callAdminCategoryRegistAPI({ registRequest: newCategory }));
         setCategoryTitle('');
         setSelectedParentCategory(null);
+        setSelectedChildCategory(null);
     };
 
+
+
     const handleParentCategorySelect = (parentCategory) => {
+
         setSelectedParentCategory(parentCategory === '선택안함' ? null : parentCategory);
     };
 
     const handleChildCategorySelect = (childCategory) => {
-        console.log("Selected child category:", childCategory);
-        setSelectedParentCategory(childCategory.refCategoryCode ? adminCategory.find(category => category.categoryCode === childCategory.refCategoryCode) : null);
+        setSelectedChildCategory(childCategory);
+        setSelectedParentCategory(adminCategory.find(category => category.categoryCode === childCategory.refCategoryCode));
     };
 
 
+
     const handleDeleteCategory = () => {
-        if (!selectedParentCategory) {
+        if (!selectedParentCategory && !selectedChildCategory) {
             alert('삭제할 카테고리를 선택해주세요.');
             return;
         }
 
-        if (window.confirm(`${selectedParentCategory.categoryTitle} 카테고리를 삭제하시겠습니까?`)) {
-            dispatch(callAdminCategoryDeleteAPI(selectedParentCategory));
+        const categoryToDelete = selectedChildCategory || selectedParentCategory;
+
+        if (window.confirm(`${categoryToDelete.categoryTitle} 카테고리를 삭제하시겠습니까?`)) {
+            dispatch(callAdminCategoryDeleteAPI({categoryCode: categoryToDelete.categoryCode})); // categoryCode를 전달
             setSelectedParentCategory(null);
+            setSelectedChildCategory(null);
         }
     };
 
-    // const handleCategoryClick = (category) => {
-    //     setSelectedCategoryToDelete(category);
-    // };
+
+
 
     const parentCategories = adminCategory.filter(category => category.refCategoryCode === null);
     const childCategories = adminCategory.filter(category => category.refCategoryCode !== null);

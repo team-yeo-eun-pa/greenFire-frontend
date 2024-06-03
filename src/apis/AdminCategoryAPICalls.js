@@ -16,6 +16,7 @@ export const AdminCategoryAPICalls = () => {
 export const callAdminCategoryRegistAPI = ({ registRequest }) => {
 
     return async (dispatch, getState) => {
+        console.log(registRequest);
         const result = await authRequest.post(`/admin/categories`, registRequest);
         console.log('callAdminCategoryRegistAPI result : ',result);
 
@@ -25,11 +26,11 @@ export const callAdminCategoryRegistAPI = ({ registRequest }) => {
     }
 };
 
-export const callAdminCategoryDeleteAPI = ({ deleteRequest }) => {
+export const callAdminCategoryDeleteAPI = ({ categoryCode }) => {
     return async (dispatch, getState) => {
-        const result = await authRequest.delete(`/admin/categories`, deleteRequest);
+        const result = await authRequest.delete(`/admin/categories/${categoryCode}`);
 
-        if(result.status === 201) {
+        if(result.status === 204) {
             dispatch(success());
         }
     }
