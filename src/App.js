@@ -19,13 +19,13 @@ import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import LoginModal from "./components/items/LoginModal";
-import ProtectedRoute from "./components/route/ProtectedRoute";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminNotices from "./pages/admin/AdminNotices";
 import AdminMemberView from "./pages/admin/AdminMemberView";
 import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
 import ProtectedRoute from "./components/route/ProtectedRoute";
+import AdminCategory from "./pages/admin/AdminCategory";
 import AdminNotices from "./pages/admin/AdminNotices";
 
 function App() {
@@ -78,6 +78,7 @@ function App() {
                                 <Route path="notices" element={<AdminNotices/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
+                                <Route path="category" element={<AdminCategory/>}/>
                             </Route>
                         </Route>
                     </Route> {/* Layout end*/}
