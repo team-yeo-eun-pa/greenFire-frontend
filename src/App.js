@@ -19,23 +19,24 @@ import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import LoginModal from "./components/items/LoginModal";
+import MemberProfile from "./pages/member/MemberProfile";
 import AdminNotices from "./pages/admin/AdminNotices";
 import AdminMemberView from "./pages/admin/AdminMemberView";
 import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
+import AdminNotices from "./pages/admin/AdminNotices";
 
 function App() {
     return (
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Layout/>}>
-                        <Route path="/" element={<Main/>}/>
+                    <Route path="/" element={<Main/>}/>
+                        <Route path="/" element={<Layout/>}>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
-
 
                         <Route path="/cs" element={<InquiryMain/>}/>
                         <Route path="inquiry" >
@@ -57,9 +58,10 @@ function App() {
                         <Route path="/members">
                             <Route path="signup" element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
                             <Route path="login" element={<ProtectedRoute loginCheck={false}><LoginModal/></ProtectedRoute>}/>
-                            <Route path="mypage" element={<UserPageLayout/>}>
-                                <Route index element={<Navigate to="/member/mypage/main" replace/>}/>
+                            <Route path="mypage" element={<ProtectedRoute loginCheck={true}> <UserPageLayout/> </ProtectedRoute>}>
+                                <Route index element={<Navigate to="/members/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
+                                <Route path="profile" element={<MemberProfile/>}/>
                             </Route>
                         </Route>
                         <Route path="/seller">
