@@ -1,9 +1,9 @@
-// import {Col, Row, Tab, Tabs} from "react-bootstrap";
+import {Col, Row, Tab, Tabs} from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import Image from 'react-bootstrap/Image';
-// import TableEx from "../items/TableEx";
-// import ListGroutEx from "../items/ListGroutEx";
+import TableEx from "../items/TableEx";
+import ListGroutEx from "../items/ListGroutEx";
 import {useState} from "react";
 
 function SellerPageNavBar() {
