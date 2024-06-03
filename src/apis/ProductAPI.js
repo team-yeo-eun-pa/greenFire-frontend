@@ -10,7 +10,7 @@ export const callProductListAPI = ({currentPage = 1}) => {
     return async (dispatch, getState) => {
         const result = await request(
             'GET',
-            `product?page=${currentPage}`
+            `/product?page=${currentPage}`
             );
         console.log('callProductListAPI result : ',result);
         if (result && result.status === 200) {
