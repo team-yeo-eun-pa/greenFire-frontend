@@ -23,10 +23,10 @@ function ProductItem() {
                     </Card.Text>
 
                     <div className="card-btn-wrapper">
-                        <button style={{background: "none", border: "none"}}>
+                        <button className="iconbtn">
                             <FaRegHeart/>
                         </button>
-                        <button style={{background: "none", border: "none"}}>
+                        <button className="iconbtn">
                             <FaCartPlus/>
                         </button>
                     </div>
