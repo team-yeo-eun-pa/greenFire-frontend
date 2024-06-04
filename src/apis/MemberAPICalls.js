@@ -49,7 +49,7 @@ export const callLogoutAPI = () => {
     return async (dispatch, getState) => {
 
         const result = await authRequest.post(`/members/logout`);
-        console.log('callLogoutAPI result : ', result)
+        console.log('callLogoutAPI result : ', result);
 
         if (result.status === 200) {
             removeToken();
@@ -63,7 +63,7 @@ export const callProfileAPI = () => {
     return async (dispatch, getState) => {
 
         const result = await authRequest.get(`/members/mypage/${getMemberId()}`);
-        console.log('callProfileAPI result : ', result)
+        console.log('callProfileAPI result : ', result);
 
         if (result.status === 200) {
             dispatch(getProfile(result));
