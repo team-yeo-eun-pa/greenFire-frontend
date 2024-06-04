@@ -19,7 +19,7 @@ function ProductItem(props) {
                         {props.product.storeName}
                     </Card.Text>
                     <Card.Text className="fs-6 fw-lighter" style={{letterSpacing: '0.1em'}}>
-                        {props.product.storeName}
+                        {props.product.price}
                     </Card.Text>
 
                     <div className="card-btn-wrapper">
