@@ -26,6 +26,7 @@ import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
+import AdminReport from "./pages/admin/AdminReport";
 
 function App() {
     return (
@@ -78,6 +79,7 @@ function App() {
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
                                 <Route path="category" element={<AdminCategory/>}/>
+                                <Route path="reports" element={<AdminReport/>}/>
                             </Route>
                         </Route>
                     </Route> {/* Layout end*/}
