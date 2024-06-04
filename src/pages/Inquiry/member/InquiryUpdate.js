@@ -1,23 +1,23 @@
 import {Col, Row} from "react-bootstrap";
-import UserPageNavBar from "../../components/common/UserPageNavBar";
+import UserPageNavBar from "../../../components/common/UserPageNavBar";
 import ListGroup from "react-bootstrap/ListGroup";
-import InquiryList from "../../components/list/InquiryList";
-import PagingBar from "../../components/common/PagingBar";
+import InquiryList from "../../../components/list/InquiryList";
+import PagingBar from "../../../components/common/PagingBar";
 import Button from "react-bootstrap/Button";
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
-function InquiryUpdate() {
+function InquiryUpdate({inquiry}) {
 
 
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
-    const {inquiry} = useSelector(state => state.inquiryReducer);
+    const {getInquiry} = useSelector(state => state.inquiryReducer);
     const navigate = useNavigate();
 
     const onClickInquiryRegisterHandler = () => {
-        dispatch(navigate("/inquiry/regist"))
+        dispatch(navigate("/inquiry"))
     }
 
     return (

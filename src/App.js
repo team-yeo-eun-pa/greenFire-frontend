@@ -19,8 +19,8 @@ import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import LoginModal from "./components/items/LoginModal";
-import InquiryRegist from "./pages/Inquiry/InquiryRegist";
-import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
+import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
+import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 
 function App() {
