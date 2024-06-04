@@ -1,33 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col, Button, Form, ListGroup, Dropdown } from 'react-bootstrap';
-import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
-import {addCategory} from "../../modules/AdminCategoryModules";
+import { AdminCategoryAPICalls, callAdminCategoryRegistAPI, callAdminCategoryDeleteAPI } from "../../apis/AdminCategoryAPICalls";
+import { useNavigate } from "react-router-dom";
 
 const AdminCategory = () => {
     const dispatch = useDispatch();
-    const { adminCategory, success, loading, error } = useSelector(state => state.category); // 상태 경로 확인
+    const navigate = useNavigate();
+    let { adminCategory, success, loading, error } = useSelector(state => state.category);
     const [categoryTitle, setCategoryTitle] = useState('');
-    const [parentCategory, setParentCategory] = useState('');
+    const [selectedParentCategory, setSelectedParentCategory] = useState(null);
+    const [selectedChildCategory, setSelectedChildCategory] = useState(null);
+
 
     useEffect(() => {
         dispatch(AdminCategoryAPICalls());
-    }, [dispatch]);
+    }, [dispatch, success]);
+
+    useEffect(() => {
+        if (success) {
+            navigate('/admin/dashboard/category');
+        }
+    }, [success, navigate]);
 
     const handleSaveCategory = () => {
-        const newCategory = {
-            categoryTitle: categoryTitle,
-            parentCategory: parentCategory
-        };
-        dispatch(addCategory(newCategory)); // 수정된 부분
-        setCategoryTitle(''); // 입력 필드 초기화
-        setParentCategory(''); // 드롭다운 초기화
+        let newCategory = {};
+         if (selectedParentCategory) {
+            newCategory = {
+                categoryTitle: categoryTitle,
+                refCategoryCode: selectedParentCategory.categoryCode, // 하위 카테고리의 상위 카테고리 코드를 부모 카테고리로 설정
+                type: 'application/json'
+            };
+        }
+
+        dispatch(callAdminCategoryRegistAPI({ registRequest: newCategory }));
+        setCategoryTitle('');
+        setSelectedParentCategory(null);
+        setSelectedChildCategory(null);
     };
+
+
+
+    const handleParentCategorySelect = (parentCategory) => {
+
+        setSelectedParentCategory(parentCategory === '선택안함' ? null : parentCategory);
+    };
+
+    const handleChildCategorySelect = (childCategory) => {
+        setSelectedChildCategory(childCategory);
+        setSelectedParentCategory(adminCategory.find(category => category.categoryCode === childCategory.refCategoryCode));
+    };
+
 
 
     const handleDeleteCategory = () => {
-        // 카테고리 삭제 로직
+        if (!selectedParentCategory && !selectedChildCategory) {
+            alert('삭제할 카테고리를 선택해주세요.');
+            return;
+        }
+
+        const categoryToDelete = selectedChildCategory || selectedParentCategory;
+
+        if (window.confirm(`${categoryToDelete.categoryTitle} 카테고리를 삭제하시겠습니까?`)) {
+            dispatch(callAdminCategoryDeleteAPI({categoryCode: categoryToDelete.categoryCode})); // categoryCode를 전달
+            setSelectedParentCategory(null);
+            setSelectedChildCategory(null);
+        }
     };
+
+
+
 
     const parentCategories = adminCategory.filter(category => category.refCategoryCode === null);
     const childCategories = adminCategory.filter(category => category.refCategoryCode !== null);
@@ -36,7 +78,7 @@ const AdminCategory = () => {
         <Container>
             <Row>
                 <Col xs lg="9" className="mt-5">
-                    <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">회원관리</div>
+                    <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">카테고리 관리</div>
                 </Col>
                 <Col>
                     <Button variant="success" onClick={handleSaveCategory}>+ 카테고리 추가</Button>
@@ -58,7 +100,7 @@ const AdminCategory = () => {
                                         {childCategories
                                             .filter(child => child.refCategoryCode === parent.categoryCode)
                                             .map((sub, subIndex) => (
-                                                <ListGroup.Item key={subIndex}>• {sub.categoryTitle}</ListGroup.Item>
+                                                <ListGroup.Item key={subIndex} onClick={() => handleChildCategorySelect(sub)}>{sub.categoryTitle}</ListGroup.Item>
                                             ))}
                                     </ListGroup>
                                 </ListGroup.Item>
@@ -66,6 +108,7 @@ const AdminCategory = () => {
                         </ListGroup>
                     )}
                 </Col>
+
                 <Col md={8}>
                     <Form>
                         <Form.Group controlId="formCategoryTitle">
@@ -80,14 +123,14 @@ const AdminCategory = () => {
                             <Form.Label>상위 카테고리</Form.Label>
                             <Dropdown>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                    {parentCategory || "선택안함"}
+                                    {selectedParentCategory ? selectedParentCategory.categoryTitle : "선택안함"}
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => setParentCategory('')}>선택안함</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => handleParentCategorySelect('선택안함')}>선택안함</Dropdown.Item>
                                     {parentCategories.map((category, index) => (
                                         <Dropdown.Item
                                             key={index}
-                                            onClick={() => setParentCategory(category.categoryTitle)}>
+                                            onClick={() => handleParentCategorySelect(category)}>
                                             {category.categoryTitle}
                                         </Dropdown.Item>
                                     ))}

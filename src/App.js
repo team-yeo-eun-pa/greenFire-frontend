@@ -26,7 +26,6 @@ import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
-import AdminNotices from "./pages/admin/AdminNotices";
 
 function App() {
     return (
