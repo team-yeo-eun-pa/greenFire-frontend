@@ -2,7 +2,7 @@ import React from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 // import './PagingBar.css'
 
-function PagingBar() {
+function PagingBar({pageInfo, setCurrentPage}) {
 
     return (
         <div className="pagination-container">
