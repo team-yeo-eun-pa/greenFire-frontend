@@ -31,7 +31,7 @@ function InquiryForm () {
     return (
 
         <Row className="mt-5 justify-content-md-center">
-            <Col className="col-8">
+            <Col className="col-12">
                 <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">문의 등록하기</div>
                 <Form className="p-5" onSubmit={onSubmitHandler}>
 
@@ -48,7 +48,9 @@ function InquiryForm () {
                                 value={form.memberId}
                                 onChange={onChangeHandler}
                             />
+
                         </Col>
+
                     </Form.Group>
 
                     <Form.Group as={Row} className="mb-3" controlId="formEmail">
@@ -85,21 +87,20 @@ function InquiryForm () {
                         </Col>
                     </Form.Group>
 
-                    <Form.Group as={Row} className="mb-3" controlId="formInquiryDetail">
-                        <Form.Label column sm="2">
-                            문의 내용
-                        </Form.Label>
-                        <Col sm="10">
-                            <InputGroup className="mb-3">
+                    <Form.Group as={Row} className="mb-6" controlId="formInquiryDetail">
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Label>문의 내용</Form.Label>
+                            <Col>
                                 <Form.Control
-                                    type="email"
+                                    as="textarea"
+                                    rows={5}
                                     placeholder="문의 내용을 입력해 주세요."
                                     name="inquiryDetail"
                                     value={form.inquiryDetail}
-                                    onChange={onChangeHandler}
-                                />
-                            </InputGroup>
-                        </Col>
+                                    onChange={onChangeHandler}/>
+                            </Col>
+                        </Form.Group>
+
                     </Form.Group>
 
 
