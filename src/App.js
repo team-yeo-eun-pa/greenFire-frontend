@@ -65,6 +65,7 @@ function App() {
                                 <Route path="profile" element={<MemberProfile/>}/>
                             </Route>
                         </Route>
+
                             <Route path="/seller">
                                 <Route path="mystore" element={<SellerPageLayout/>}>
                                     <Route index element={<Navigate to="/seller/mystore/main" replace/>} />
@@ -74,6 +75,7 @@ function App() {
                                     <Route path="product" element={<ProductManagement/>} />
                                     <Route path="regist" element={<ProductRegist/>} />
                                 </Route>
+
                             </Route>
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
@@ -85,6 +87,17 @@ function App() {
                                 <Route path="reports" element={<AdminReport/>}/>
                             </Route>
                         </Route>
+
+                        <Route path="/order">
+                            <Route index element={<OrderPage/>}/>
+                        </Route>
+
+                        <Route path="/payment">
+                            <Route index element={<CheckoutPage/>} />
+                            <Route path="fail" element={<FailPage/>} />
+                            <Route path="success" element={<SuccessPage/>} />
+                        </Route>
+
                     </Route> {/* Layout end*/}
                     <Route path="*" element={<Error/>}/>
                 </Routes>
