@@ -29,19 +29,22 @@ export const callMemberInquiryRegistAPI = ({inquiryRegistRequest}) => {
             toast.warning("문의 등록에 실패했습니다.")
         }
     }
+
 }
-
-
 
 export const callUpdateInquiryAPI = ({inquiryUpdateRequest}) => {
 
     return async (dispatch, getState) => {
-        const result = await authRequest.post(`/inquiry/regist/update?page=1`, inquiryUpdateRequest );
+        const result = await authRequest.post(`/inquiry/update?page=1`, inquiryUpdateRequest);
 
-        if(result.status === 200) {
-            dispatch(success());
+        if (result?.status === 200) {
+            dispatch(getInquiry(result));
         } else {
             toast.warning("문의 업데이트에 실패했습니다.")
         }
     }
 }
+
+
+
+
