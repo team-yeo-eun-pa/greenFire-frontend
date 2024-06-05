@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getAccessTokenHeader, getRefreshTokenHeader, saveToken} from "../utils/TokenUtils";
+import {getAccessTokenHeader, getRefreshTokenHeader, removeToken, saveToken} from "../utils/TokenUtils";
 
 const SERVER_IP = `${process.env.REACT_APP_RESTAPI_SERVER_IP}`;
 const SERVER_PORT = `${process.env.REACT_APP_RESTAPI_SERVER_PORT}`;
@@ -7,12 +7,17 @@ const DEFAULT_URL = `http://${SERVER_IP}:${SERVER_PORT}`;
 
 // 인증이 필요 없는 (토큰을 전달하지 않아도 되는) 기능 호출 시 사용하는 함수
 export const request = async (method, url, headers, data) => {
-    return await axios({
-        method,
-        url: `${DEFAULT_URL}${url}`,
-        headers,
-        data
-    }).catch(error => console.log(error));
+    try {
+        return await axios({
+            method,
+            url: `${DEFAULT_URL}${url}`,
+            headers,
+            data
+        });
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
 }
 
 // 인증이 필요한 (토큰을 전달해야 하는) 기능 호출 시 사용하는 함수
@@ -35,9 +40,13 @@ authRequest.interceptors.response.use(
 
         console.log("error :", error);
 
+        if (!error.response) {
+            return Promise.reject(error);
+        }
+
         const {
             config,
-            response: {status}
+            response: { status }
         } = error;
 
         if (status === 401) {
@@ -47,12 +56,16 @@ authRequest.interceptors.response.use(
 
             console.log("response : ", response);
 
-            if (response.status === 200) {
+            if (response && response.status === 200) {
                 // 토큰 재발급에 성공했을 때
                 saveToken(response.headers);
                 // 실패했던 요청을 다시 요청
                 originRequest.headers['Access-Token'] = getAccessTokenHeader();
                 return axios(originRequest);
+            } else {
+                // Refresh token failed, logout user
+                removeToken();
+                window.location.href = "/";
             }
         }
 
@@ -61,10 +74,14 @@ authRequest.interceptors.response.use(
 
 // refresh token 전달하여 토큰 재발급 요청하는 api
 export async function postRefreshToken() {
-
-    return await request(
-        'POST',
-        '/refresh-token',
-        { 'Refresh-Token' : getRefreshTokenHeader() }
-    );
+    try {
+        return await request(
+            'POST',
+            '/refresh-token',
+            { 'Refresh-Token': getRefreshTokenHeader() }
+        );
+    } catch (error) {
+        console.error('Error refreshing token:', error);
+        return null;
+    }
 }
