@@ -22,6 +22,10 @@ function InquiryMain() {
         navigate("/inquiry/regist");
     }
 
+
+    ///
+
+
     useEffect(() => {
         dispatch(callInquiryListAPI({currentPage}));
     }, [currentPage]);
