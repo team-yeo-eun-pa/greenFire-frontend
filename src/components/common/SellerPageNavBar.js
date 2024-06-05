@@ -1,38 +1,42 @@
-import {Col, Row, Tab, Tabs} from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
-import Button from "react-bootstrap/Button";
 import Image from 'react-bootstrap/Image';
-import TableEx from "../items/TableEx";
-import ListGroutEx from "../items/ListGroutEx";
 import {useState} from "react";
+import {CgProfile} from "react-icons/cg";
+import {NavLink} from "react-router-dom";
 
-function SellerPageNavBar() {
+function SellerPageNavBar({ profileInfo }) {
     const [key, setKey] = useState('home');
     return (
         <>
 
             <Nav defaultActiveKey="/home" className="flex-column rounded mt-5 p-4"
                  style={{backgroundColor: "#F0F3EE"}}>
-
-                <div className="d-flex flex-column align-items-center">
-                    <div className="m-4">
-                        <Image src="https://resource.miricanvas.com/image/argo/argo_huk.svg"
-                               className="p-2 mb-1 justify-content-center" width={100} height={100}
-                               roundedCircle/>
+                {/* User Info */}
+                <div className="text-center mb-3">
+                    {profileInfo.profilePicture ? (
+                        <Image
+                            src={profileInfo.profilePicture}
+                            roundedCircle
+                            className="mx-auto d-block mb-3"
+                            style={{width: "130px", height: "130px"}}
+                        />
+                    ) : (
+                        <CgProfile style={{width: "130px", height: "130px"}} />
+                    )}
+                    <br/>
+                    <div className="fw-bold fs-6">
+                        {profileInfo.memberName}
                     </div>
-                    <div className="m-1 text-center">
-                        <strong>
-                            배지가든
-                        </strong>
+                    <div className="text-muted">
+                        {profileInfo.memberEmail}
                     </div>
-                    <div className="text-center">
-                        <span>YEP1234@gmail.com<br/></span>
-                    </div>
-                    <Button variant="secondary" type="submit" className="w-115 m-3">
-                        스토어 프로필
-                    </Button>
+                    <NavLink to="/members/mypage/profile">
+                        <button className="btn btn-secondary btn-sm mt-2">내 프로필</button>
+                    </NavLink>
                 </div>
+                <hr/>
 
+                {/* Navigation Links */}
                 <Nav.Link className="nav-link-custom-title mt-5">상품 관리</Nav.Link>
                 <Nav.Link href="/seller/mystore/product" eventKey="" className="nav-link-custom">스토어 상품 관리</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">재고 관리</Nav.Link>
