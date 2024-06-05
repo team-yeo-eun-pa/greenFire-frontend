@@ -28,7 +28,6 @@ import AdminMemberView from "./pages/admin/AdminMemberView";
 import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
 import StoreProfile from "./components/items/StoreProfile";
-import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 
 function App() {
