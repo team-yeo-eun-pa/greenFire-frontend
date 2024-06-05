@@ -19,9 +19,15 @@ import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import LoginModal from "./components/items/LoginModal";
+import ProtectedRoute from "./components/route/ProtectedRoute";
+import AdminNotices from "./pages/admin/AdminNotices";
+import AdminMemberView from "./pages/admin/AdminMemberView";
 import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import InquiryUpdate from "./pages/Inquiry/InquiryUpdate";
-import ProtectedRoute from "./components/route/ProtectedRoute";
+import {CheckoutPage} from "./pages/payment/CheckoutPage";
+import {FailPage} from "./pages/payment/FailPage";
+import {SuccessPage} from "./pages/payment/SuccessPage";
+import OrderPage from "./pages/order/OrderPage";
 
 function App() {
     return (
@@ -63,6 +69,7 @@ function App() {
                             <Route path="mystore" element={<SellerPageLayout/>}>
                                 <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
                                 <Route path="main" element={<MyStoreMain/>}/>
+                                <Route path="checkoutpage" element={<CheckoutPage/>}/>
                                 <Route path="product" element={<ProductManagement/>}/>
                                 <Route path="regist" element={<ProductRegist/>}/>
                             </Route>
@@ -71,9 +78,21 @@ function App() {
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
                                 <Route path="notices" element={<AdminNotices/>}/>
+                                <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
                             </Route>
                         </Route>
+
+                        <Route path="/order">
+                            <Route index element={<OrderPage/>}/>
+                        </Route>
+
+                        <Route path="/payment">
+                            <Route index element={<CheckoutPage/>} />
+                            <Route path="fail" element={<FailPage/>} />
+                            <Route path="success" element={<SuccessPage/>} />
+                        </Route>
+
                     </Route> {/* Layout end*/}
                     <Route path="*" element={<Error/>}/>
                 </Routes>

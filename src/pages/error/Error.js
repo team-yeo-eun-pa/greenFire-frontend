@@ -14,7 +14,7 @@ function Error() {
     }
 
     return (
-        <error>
+        <Error>
             <Container>
                 <Row className="justify-content-center">
                     <Col xs={12} className="text-center">
@@ -41,7 +41,7 @@ function Error() {
                     </Col>
                 </Row>
             </Container>
-        </error>
+        </Error>
     );
 }
 
