@@ -1,6 +1,6 @@
 import Nav from "react-bootstrap/Nav";
 import React, {useState} from "react";
-import {NavLink} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 function AdminPageNavBar() {
     const [key, setKey] = useState('home');
@@ -29,7 +29,7 @@ function AdminPageNavBar() {
                 <Nav.Link eventKey="" className="nav-link-custom">매장 정보 관리</Nav.Link>
                 <br/>
                 <Nav.Link className="nav-link-custom-title">커뮤니티 관리</Nav.Link>
-                <Nav.Link eventKey="/admin/dashboard/notices" className="nav-link-custom">공지사항</Nav.Link>
+                <Nav.Link as={Link} to="/admin/dashboard/notices" className="nav-link-custom">공지사항</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">문의센터</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">신고센터</Nav.Link>
             </Nav>

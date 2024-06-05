@@ -1,20 +1,22 @@
 import { createActions, handleActions } from 'redux-actions';
 
 const initialState = {
-    adminReports: [],  // 초기 상태 설정
+    adminReports: [],
+    reportDetails: [],
     success: false
 };
 
 // 액션 타입
 const GET_ADMIN_REPORTS = 'reports/GET_ADMIN_REPORTS';
-// const GET_ADMIN_REPORT = 'reports/GET_ADMIN_REPORT';
 const SUCCESS = 'reports/SUCCESS';
-const MODIFY_STATUS = 'reports/MODIFY_STATUS'
+const MODIFY_STATUS = 'reports/MODIFY_STATUS';
+const GET_ADMIN_REPORT_DETAIL = 'reports/GET_ADMIN_REPORT_DETAIL';
 
 // 액션 함수
-export const { reports: { getAdminReports, success } } = createActions({
+export const { reports: { getAdminReports, getAdminReportDetail, success } } = createActions({
     [GET_ADMIN_REPORTS]: (result) => ({ reports: result.data }),
-    [MODIFY_STATUS] : (result) => ({reports: result.data}),
+    [MODIFY_STATUS]: (result) => ({ reports: result.data }),
+    [GET_ADMIN_REPORT_DETAIL]: (result) => ({ reportDetails: result }),
     [SUCCESS]: () => ({ success: true })
 });
 
@@ -24,14 +26,18 @@ const AdminReportReducer = handleActions({
         ...state,
         reports: payload.reports.data
     }),
-    [MODIFY_STATUS] : (state, {payload}) => ({
+    [MODIFY_STATUS]: (state, { payload }) => ({
         ...state,
         reports: payload.reports.data
     }),
     [SUCCESS]: (state, { payload }) => ({
         ...state,
         success: payload.success
-    })
+    }),
+    [GET_ADMIN_REPORT_DETAIL]: (state, { payload }) => ({
+        ...state,
+        reportDetails: payload.reportDetails
+    }),
 }, initialState);
 
 export default AdminReportReducer;
