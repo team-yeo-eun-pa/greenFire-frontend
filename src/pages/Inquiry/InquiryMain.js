@@ -23,6 +23,8 @@ function InquiryMain() {
     }
 
 
+    ///
+
 
     useEffect(() => {
         dispatch(callInquiryListAPI({currentPage}));
