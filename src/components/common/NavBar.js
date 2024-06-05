@@ -14,7 +14,7 @@ import {useEffect, useState} from "react";
 import LoginModal from "../items/LoginModal";
 import {useDispatch, useSelector} from "react-redux";
 import {reset} from "../../modules/MemberModules";
-import {isLogin} from "../../utils/TokenUtils";
+import {isAdmin, isLogin, isSeller} from "../../utils/TokenUtils";
 import {callLogoutAPI} from "../../apis/MemberAPICalls";
 
 function NavBar() {
@@ -33,12 +33,10 @@ function NavBar() {
     }, [success]);
 
     const handleLoginModalClose = () => setShowLoginModal(false);
-    const handleLoginModalShow = () => {
-        setShowLoginModal(true);
-        navigate('/members/login');
-    }
+    const handleLoginModalShow = () => setShowLoginModal(true);
 
     function BeforeLogin() {
+
         return (
             <div>
                 <Badge
@@ -93,13 +91,28 @@ function NavBar() {
                 <Col>
                 <NavDropdown title="여은파님" id="navbarScrollingDropdown"
                              className="mx-0 col-9 ">
+                    {isAdmin() &&
+                        <NavDropdown.Item
+                            onClick={() => navigate(`/admin/dashboard/main`)}>
+                            관리자페이지
+                        </NavDropdown.Item>
+                    }
+                    {isSeller() &&
+                        <NavDropdown.Item
+                            onClick={() => navigate(`/seller/mystore/main`)}>
+                            마이스토어
+                        </NavDropdown.Item>
+                    }
+                    {(!isAdmin() && !isSeller()) &&
+                        <NavDropdown.Item
+                            onClick={() => navigate(`/members/mypage`)}>
+                            마이페이지
+                        </NavDropdown.Item>
+                    }
+                    <NavDropdown.Divider />
                     <NavDropdown.Item
-                        onClick={ () => navigate(`/members/mypage`)}>
-                        마이페이지
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider/>
-                    <NavDropdown.Item
-                        onClick={ () => dispatch(callLogoutAPI())}>
+                        type="button"
+                        onClick={() => dispatch(callLogoutAPI())}>
                         로그아웃
                     </NavDropdown.Item>
                 </NavDropdown>
