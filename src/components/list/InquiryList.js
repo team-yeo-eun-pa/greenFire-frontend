@@ -5,7 +5,7 @@ function InquiryList({inquiry}) {
 
     return (
         <div>
-            { data && data.map(inquiry => <InquiryListItem key={inquiry.inquiryCode} inquiry={inquiry}/>)}
+            { inquiry && inquiry.map(inquiry => <InquiryListItem key={inquiry.inquiryCode} inquiry={inquiry}/>)}
         </div>
     );
 }

@@ -9,7 +9,7 @@ function InquiryItem ({inquiry}) {
     //문의 등록 버튼
 
     const onClickInquiryRegistHandeler = () => {
-        navigate(`/member/inquiry/regist`);
+        navigate(`/inquiry/regist`);
     }
 
     //뒤로가기 버튼
