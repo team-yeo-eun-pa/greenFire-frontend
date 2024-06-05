@@ -19,15 +19,18 @@ import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import LoginModal from "./components/items/LoginModal";
-import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
-import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminNotices from "./pages/admin/AdminNotices";
 import AdminMemberView from "./pages/admin/AdminMemberView";
+import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import StoreProfile from "./components/items/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminReport from "./pages/admin/AdminReport";
+import OrderPage from "./pages/order/OrderPage";
+import {CheckoutPage} from "./pages/payment/CheckoutPage";
+import {FailPage} from "./pages/payment/FailPage";
+import {SuccessPage} from "./pages/payment/SuccessPage";
 
 function App() {
     return (
@@ -35,18 +38,9 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Main/>}/>
-                        <Route path="/" element={<Layout/>}>
+                    <Route path="/" element={<Layout/>}>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
-
-                        <Route path="/cs" element={<InquiryMain/>}/>
-                        <Route path="inquiry" >
-                            <Route index element={<InquiryMain/>}/>
-                            <Route path="regist" element={<InquiryRegist/>}/>
-                            <Route path="regist/update" element={<InquiryUpdate/>}/>
-                        </Route>
-
-
 
 
                         <Route path="/product" element={<ProductMain/>}>
@@ -57,26 +51,38 @@ function App() {
 
                         </Route>
                         <Route path="/members">
-                            <Route path="signup" element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
-                            <Route path="login" element={<ProtectedRoute loginCheck={false}><LoginModal/></ProtectedRoute>}/>
-                            <Route path="mypage" element={<ProtectedRoute loginCheck={true}> <UserPageLayout/> </ProtectedRoute>}>
+                            <Route path="signup"
+                                   element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
+                            <Route path="login"
+                                   element={<ProtectedRoute loginCheck={false}><LoginModal/></ProtectedRoute>}/>
+                            <Route path="mypage"
+                                   element={<ProtectedRoute loginCheck={true}> <UserPageLayout/> </ProtectedRoute>}>
                                 <Route index element={<Navigate to="/members/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
                                 <Route path="profile" element={<MemberProfile/>}/>
+
+
+                                <Route path="inquiry" index element={<InquiryMain/>}/>
+                                <Route path="regist" element={<InquiryRegist/>}/>
+
+
+
+                                {/*<Route path="regist/update" element={<InquiryUpdate/>}/>*/}
+
                             </Route>
                         </Route>
 
-                            <Route path="/seller">
-                                <Route path="mystore" element={<SellerPageLayout/>}>
-                                    <Route index element={<Navigate to="/seller/mystore/main" replace/>} />
-                                    {/*<Route path="main" element={<MyStoreMain/>} />*/}
-                                    <Route path="main" element={<MyStoreList/>} />
-                                    <Route path=":storeCode" element={<StoreProfile/>} />
-                                    <Route path="product" element={<ProductManagement/>} />
-                                    <Route path="regist" element={<ProductRegist/>} />
-                                </Route>
-
+                        <Route path="/seller">
+                            <Route path="mystore" element={<SellerPageLayout/>}>
+                                <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
+                                {/*<Route path="main" element={<MyStoreMain/>} />*/}
+                                <Route path="main" element={<MyStoreList/>}/>
+                                <Route path=":storeCode" element={<StoreProfile/>}/>
+                                <Route path="product" element={<ProductManagement/>}/>
+                                <Route path="regist" element={<ProductRegist/>}/>
                             </Route>
+
+                        </Route>
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
@@ -93,9 +99,9 @@ function App() {
                         </Route>
 
                         <Route path="/payment">
-                            <Route index element={<CheckoutPage/>} />
-                            <Route path="fail" element={<FailPage/>} />
-                            <Route path="success" element={<SuccessPage/>} />
+                            <Route index element={<CheckoutPage/>}/>
+                            <Route path="fail" element={<FailPage/>}/>
+                            <Route path="success" element={<SuccessPage/>}/>
                         </Route>
 
                     </Route> {/* Layout end*/}

@@ -50,7 +50,7 @@ function UserPageNavBar({ profileInfo }) {
                 <br/>
                 <Nav.Link className="nav-link-custom-title">설정 및 기타내역</Nav.Link>
                 <Nav.Link eventKey="notifications" className="nav-link-custom">알림 설정</Nav.Link>
-                <Nav.Link eventKey="inquiries" className="nav-link-custom">1:1 문의 내역</Nav.Link>
+                <Nav.Link eventKey="inquiries" className="nav-link-custom"  >1:1 문의 내역</Nav.Link>
                 <Nav.Link eventKey="storeInquiries" className="nav-link-custom">스토어 문의 내역</Nav.Link>
             </Nav>
         </>

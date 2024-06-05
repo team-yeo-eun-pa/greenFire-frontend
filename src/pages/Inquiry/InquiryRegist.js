@@ -1,10 +1,10 @@
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {callMemberInquiryRegistAPI, callUpdateInquiryAPI} from "../../../apis/InquiryAPI";
-import InquiryForm from "../../../components/form/InquiryForm";
+import {callMemberInquiryRegistAPI, callUpdateInquiryAPI} from "../../apis/InquiryAPI";
+import InquiryForm from "../../components/form/InquiryForm";
 import {Col, Row} from "react-bootstrap";
-import UserPageNavBar from "../../../components/common/UserPageNavBar";
+import UserPageNavBar from "../../components/common/UserPageNavBar";
 import Button from "react-bootstrap/Button";
 
 function InquiryRegist() {
