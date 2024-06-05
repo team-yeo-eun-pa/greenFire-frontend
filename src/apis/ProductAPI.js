@@ -18,3 +18,5 @@ export const callProductListAPI = ({currentPage = 1}) => {
         }
     }
 };
+
+export const callSellerProductRegistAPI = ({})

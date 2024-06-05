@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import ListGroup from "react-bootstrap/ListGroup";
 import WishItem from "../../components/items/WishItem";
-import MystoreProductItem from "./MystoreProductItem";
+import MystoreProductItem from "../../components/items/inquiry/MystoreProductItem";
 import PagingBar from "../../components/common/PagingBar";
 
 function ProductManagement() {

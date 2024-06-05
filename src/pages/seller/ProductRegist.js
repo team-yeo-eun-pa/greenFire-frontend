@@ -1,23 +1,58 @@
 import ReactQuill, {Quill} from 'react-quill';
 import TextEditor from "../../components/items/TextEditor";
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Form} from "react-bootstrap";
 import ProductOptionForm from "../../components/form/ProductOptionForm";
 import Button from "react-bootstrap/Button";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import ProductForm from "../../components/form/ProductForm";
+import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
+import {callSellerProductRegistAPI} from "../../apis/ProductAPI";
 
 const Delta = Quill.import('delta');
 
 function ProductRegist() {
 
-    // const [range, setRange] = useState();
-    const [lastChange, setLastChange] = useState();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
+    // db 수정 후 상품 설명 추가 필요
+    const [productForm, setProductForm] = useState({
+        productName : '',
+        sellableStatus: '',
+        categoryCode: '',
+    });
+
+    const [optionForm, setOptionForm] = useState({
+        optionName: '',
+        optionPrice: '',
+        optionStock: ''
+    });
+
+    const imageInput = useRef();
+    const { saveSuccess } = useSelector(state => state.productReducer);
+
+    useEffect(() => {
+        if (saveSuccess === true) navigate('/seller/mystore/product');
+    }, [saveSuccess]);
+
+    /* 텍스트 에디터 */
+    const [lastChange, setLastChange] = useState();
     const quillRef = useRef();
+
+    /* 카테고리 불러오기 */
+
+    useEffect(() => {
+        dispatch(AdminCategoryAPICalls());
+    }, []);
 
     const productCategory = [
         { id: 1, name: '카테고리1' },
         { id: 2, name: '카테고리2' },
     ];
+
+    // const {productCategory} = useSelector(state => state.);
 
     const productOption = [
         { id: 1, name: '옵션명1', price: 12000, stock: 5 },
@@ -29,40 +64,20 @@ function ProductRegist() {
         { id: 3, name: '마지막', price: 16000, stock: 2 },
     ];
 
+    // const submitProductRegistHandler = () => {
+    //     const formData = new FormData();
+    //     // formData.append('productImg', imageInput.current.files[0]);
+    //     formData.append('productRequest', new Blob([JSON.stringify(form)], { type : 'application/json'}));
+    //     dispatch(callSellerProductRegistAPI({ registRequest : formData }));
+    // }
+
+
     return (
         <div className="product-regist-page">
 
-            <Form className="product-regist-forms">
-                <Form.Group className="product-info-form" controlId="productName">
-                    <Form.Label>상품명</Form.Label>
-                    <Form.Control type="text"/>
-                </Form.Group>
-
-                <Form.Group className="product-info-form" controlId="productStatus">
-                    <Form.Label>판매 상태</Form.Label>
-                    <Form.Select>
-                        <option value="true">판매중</option>
-                        <option value="false">구매불가</option>
-                    </Form.Select>
-                </Form.Group>
-
-                <Form.Group className="product-info-form" controlId="productCategory">
-                    <Form.Label>카테고리</Form.Label>
-                    <Form.Select>
-                        {productCategory.map(category => (
-                            <option key={category.id} value={category.id}>
-                                {category.name}
-                            </option>
-                        ))
-                        }
-                    </Form.Select>
-                </Form.Group>
-
-                <Form.Group controlId="productThumbnail">
-                    <Form.Label>대표 사진</Form.Label>
-                    <Form.Control type="file"/>
-                </Form.Group>
-            </Form>
+            <div>
+                <ProductForm category={productCategory}/>
+            </div>
 
             <div>
                 <label style={{marginBottom: "8px"}}>옵션</label>
