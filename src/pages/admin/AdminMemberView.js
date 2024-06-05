@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row, Table } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { AdminMemberAPICalls } from '../../apis/AdminMemberAPICalls';
+import TableEx from '../../components/items/TableEx';
 
 const AdminMemberView = React.memo(() => {
     const dispatch = useDispatch();
     const adminMembers = useSelector(state => state.AdminMemberReducer.adminMembers || []);
-    const currentPage = 1;
+    const [currentPage] = useState(1);
 
     useEffect(() => {
         dispatch(AdminMemberAPICalls({ currentPage }));
@@ -16,40 +17,27 @@ const AdminMemberView = React.memo(() => {
         return <div>잘못된 데이터 형식입니다.</div>;
     }
 
+    const headers = [
+        '번호', '아이디', '이름', '닉네임', '이메일', '전화번호', '상태', '가입일', '탈퇴일'
+    ];
+
+    const rows = adminMembers.map((adminMember, index) => [
+        index + 1,
+        adminMember.memberId,
+        adminMember.memberName,
+        adminMember.memberNickname,
+        adminMember.memberEmail,
+        adminMember.memberPhone,
+        adminMember.memberStatus,
+        adminMember.registDate,
+        adminMember.quitDate,
+    ]);
+
     return (
         <Row>
             <Col xs lg="9" className="mt-5">
                 <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">회원관리</div>
-                <Table hover className="table px-5 mt-4">
-                    <thead className="border-2 border-bottom border-top border-secondary-subtle border-start-0 border-end-0">
-                    <tr>
-                        <th>번호</th>
-                        <th>아이디</th>
-                        <th>이름</th>
-                        <th>닉네임</th>
-                        <th>이메일</th>
-                        <th>전화번호</th>
-                        <th>상태</th>
-                        <th>가입일</th>
-                        <th>탈퇴일</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {adminMembers.map((adminMember, index) => (
-                        <tr key={adminMember.memberCode}>
-                            <td>{index + 1}</td>
-                            <td>{adminMember.memberId}</td>
-                            <td>{adminMember.memberName}</td>
-                            <td>{adminMember.memberNickname}</td>
-                            <td>{adminMember.memberEmail}</td>
-                            <td>{adminMember.memberPhone}</td>
-                            <td>{adminMember.memberStatus}</td>
-                            <td>{adminMember.registDate}</td>
-                            <td>{adminMember.quitDate}</td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </Table>
+                <TableEx headers={headers} rows={rows} />
             </Col>
         </Row>
     );

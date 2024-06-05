@@ -1,5 +1,5 @@
 import {authRequest} from "./api";
-import {getAdminReports, success} from "../modules/AdminReportModules";
+import {getAdminReports, success, getAdminReportDetail} from "../modules/AdminReportModules";
 
 export const AdminReportAPICalls = ({currentPage = 1}) => {
     return async (dispatch, getState) => {
@@ -13,16 +13,18 @@ export const AdminReportAPICalls = ({currentPage = 1}) => {
     }
 }
 
-// export const AdminReportDetailAPICalls = () => {
-//     return async (dispatch, getState)  => {
-//         const result = await authRequest.get(`/admin/suspend/`);
-//         console.log(`AdminReportDetailAPICalls result : ` , result);
-//
-//         if(result.status === 200) {
-//             dispatch(getAdminReport(result));
-//         }
-//     }
-// }
+export const AdminReportDetailAPICalls = ({ memberId }) => {
+    return async (dispatch, getState) => {
+        const result = await authRequest.get(`/admin/suspend/${memberId}`);
+        console.log(`AdminReportDetailAPICalls result : ` , result);
+
+        if (result.status === 200) {
+            dispatch(getAdminReportDetail(result.data));
+        }
+    }
+}
+
+
 
 export const AdminReportSuspendEndAPICalls = ({memberCode}) => {
     return async (dispatch, getState) => {
