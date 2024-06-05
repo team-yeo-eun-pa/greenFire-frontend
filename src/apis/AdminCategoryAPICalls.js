@@ -4,7 +4,7 @@ import {getAdminCategory, success} from "../modules/AdminCategoryModules";
 
 export const AdminCategoryAPICalls = () => {
     return async (dispatch, getState) => {
-        const result = await authRequest.get(`/admin/categories`);
+        const result = await authRequest.get(`/categories`);
         console.log('AdminCategoryAPICalls result : ', result);
 
         if(result.status === 200) {

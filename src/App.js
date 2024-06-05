@@ -28,6 +28,7 @@ import StoreProfile from "./components/items/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminReport from "./pages/admin/AdminReport";
+import ReportPage from "./pages/admin/ReportPage";
 
 function App() {
     return (
@@ -63,6 +64,7 @@ function App() {
                                 <Route index element={<Navigate to="/members/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
                                 <Route path="profile" element={<MemberProfile/>}/>
+                                <Route path="report" element={<ReportPage/>}/>
                             </Route>
                         </Route>
                             <Route path="/seller">
@@ -81,7 +83,7 @@ function App() {
                                 <Route path="notices" element={<AdminNotices/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
-                                <Route path="category" element={<AdminCategory/>}/>
+                                <Route path="category"  element={<ProtectedRoute authCheck={true}><AdminCategory/></ProtectedRoute>}/>
                                 <Route path="reports" element={<AdminReport/>}/>
                             </Route>
                         </Route>
