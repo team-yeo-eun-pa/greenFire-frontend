@@ -5,6 +5,7 @@ import {callMemberInquiryRegistAPI, callUpdateInquiryAPI} from "../../apis/Inqui
 import InquiryForm from "../../components/form/InquiryForm";
 import {Col, Row} from "react-bootstrap";
 import UserPageNavBar from "../../components/common/UserPageNavBar";
+import Button from "react-bootstrap/Button";
 
 function InquiryRegist() {
     const navigate = useNavigate();
@@ -16,11 +17,11 @@ function InquiryRegist() {
         inquiryDetail: ''
     });
 
-    const {success} = useSelector(state => state.inquiryReducer);
+    const {getInquiry} = useSelector(state => state.inquiryReducer);
 
     useEffect(() => {
-        if (success === true) navigate('/inquiry');
-    }, [success])
+        if (getInquiry === true) navigate('/inquiry');
+    }, [getInquiry])
     const onClickInquiryUpdateHandler = () => {
         const formData = new FormData();
         formData.append('inquiryUpdateRequest', new Blob([JSON.stringify(form)], {type: 'application/json'}));
@@ -32,29 +33,33 @@ function InquiryRegist() {
         <>
             <Row>
 
-                  <Col xs={3}>  <UserPageNavBar/> </Col>
+                <Col xs={3}> <UserPageNavBar/> </Col>
 
 
-              <Col>
-                 <Col xs={9}>   <InquiryForm inquiry={form} setForm={setForm} modifyMode={true}/> </Col>
+                <Col>
+                    <Col xs={9}> <InquiryForm inquiry={form} setForm={setForm} modifyMode={true}/> </Col>
 
 
-                <div>
 
-                    <button
-                        variant="success"
-                        onClick={onClickInquiryUpdateHandler}>{''}
-                        등록하기
-                    </button>
 
-                    <button
-                        variant="outline-success"
-                        onClick={() => navigate(-1)}>{''}
-                        뒤로가기
-                    </button>
+                            <div className="inquiry-regist-btn">
+                                <Button
+                                    variant="success"
+                                    onClick={onClickInquiryUpdateHandler}
+                                >{''}
+                                    등록하기
+                                </Button>
 
-                </div>
-              </Col>
+                            <Button
+                                variant="outline-success"
+                                onClick={() => navigate(-1)}
+                            >{''}
+                                뒤로가기
+                            </Button>
+
+                        </div>
+
+                </Col>
 
 
             </Row>
@@ -63,7 +68,5 @@ function InquiryRegist() {
 }
 
 
-
-
-  export default InquiryRegist;
+export default InquiryRegist;
 

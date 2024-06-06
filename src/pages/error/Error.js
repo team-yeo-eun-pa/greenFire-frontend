@@ -14,7 +14,8 @@ function Error() {
     }
 
     return (
-        <error>
+
+        <Error>
             <Container className="d-flex vh-100 align-items-start" style={{paddingTop: 200}}>
                 <Row className="justify-content-center w-100">
                     <Col xs={12} className="text-center">
@@ -41,7 +42,7 @@ function Error() {
                     </Col>
                 </Row>
             </Container>
-        </error>
+        </Error>
     );
 }
 
