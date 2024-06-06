@@ -32,6 +32,8 @@ import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
 import ReportPage from "./pages/admin/ReportPage";
+import MemberNotices from "./pages/admin/MemberNotices";
+import MemberNotice from "./pages/admin/MemberNotice";
 
 function App() {
     return (
@@ -40,6 +42,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
+                        <Route path="/notice" element={<MemberNotices/>}/>
+                        <Route path="/notice/detail" element={<MemberNotice/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
