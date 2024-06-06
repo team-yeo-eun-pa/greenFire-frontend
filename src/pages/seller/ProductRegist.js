@@ -44,15 +44,15 @@ function ProductRegist() {
     /* 카테고리 불러오기 */
 
     useEffect(() => {
-        dispatch(AdminCategoryAPICalls());
+        dispatch(AdminCategoryAPICalls);
     }, []);
 
-    const productCategory = [
-        { id: 1, name: '카테고리1' },
-        { id: 2, name: '카테고리2' },
-    ];
+//리듀서
+    const {productCategory} = useSelector(state => state.category);
 
-    // const {productCategory} = useSelector(state => state.);
+    useEffect(() => {
+        dispatch(AdminCategoryAPICalls);
+    }, []);
 
     const productOption = [
         { id: 1, name: '옵션명1', price: 12000, stock: 5 },

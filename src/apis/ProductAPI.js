@@ -1,9 +1,10 @@
 import {useEffect} from "react";
 import axios from "axios";
-import {request} from "./api";
+import {authRequest, request} from "./api";
 import {getNotices} from "../modules/NoticeModules";
 import async from "async";
 import {getProducts} from "../modules/ProductModules";
+import {getAdminCategory, success} from "../modules/AdminCategoryModules";
 
 export const callProductListAPI = ({currentPage = 1}) => {
 
@@ -19,4 +20,42 @@ export const callProductListAPI = ({currentPage = 1}) => {
     }
 };
 
-export const callSellerProductRegistAPI = ({})
+export const callProductCategoryListAPI = () => {
+
+    return async (dispatch, getState) => {
+        const result = await request(
+            'GET',
+            `/category`
+        );
+        console.log('callProductCategoryListAPI result : ',result);
+        if (result && result.status === 200) {
+            dispatch(getAdminCategory(result));
+        }
+    }
+};
+
+export const callProductOptionListAPI = () => {
+
+    return async (dispatch, getState) => {
+        const result = await request(
+            'GET',
+            `/product/${productCode}`
+        );
+        console.log('callProductOptionListAPI result : ',result);
+        if (result && result.status === 200) {
+            dispatch(get(result));
+        }
+    }
+};
+
+export const callSellerProductRegistAPI = ({ registRequest }) => {
+    return async (dispatch, getState) => {
+        console.log(registRequest);
+        const result = await authRequest.post(`/seller/mystore/regist`, registRequest);
+        console.log('callSellerProductRegistAPI result : ',result);
+
+        if(result.status === 201) {
+            dispatch(success());
+        }
+    }
+}

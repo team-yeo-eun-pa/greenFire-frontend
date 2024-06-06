@@ -35,6 +35,7 @@ import {SuccessPage} from "./pages/payment/SuccessPage";
 import ReportPage from "./pages/admin/ReportPage";
 import MemberNotices from "./pages/admin/MemberNotices";
 import MemberNotice from "./pages/admin/MemberNotice";
+import ProtectedRoute from "./components/route/ProtectedRoute";
 
 function App() {
     return (
