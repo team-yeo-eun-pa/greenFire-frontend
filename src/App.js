@@ -68,9 +68,10 @@ function App() {
                                 <Route path="report" element={<ReportPage/>}/>
 
 
-                                <Route path="inquiry" index element={<InquiryMain/>}/>
-                                <Route path="regist" element={<InquiryRegist/>}/>
-
+                                <Route path="inquiry" >
+                                    <Route index element={<InquiryMain/>}/>
+                                    <Route path="regist" element={<InquiryRegist/>}/>
+                                </Route>
 
 
                                 {/*<Route path="regist/update" element={<InquiryUpdate/>}/>*/}
