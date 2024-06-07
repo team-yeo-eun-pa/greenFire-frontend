@@ -15,6 +15,9 @@ import ProductOptionAddForm from "../../components/form/ProductOptionAddForm";
 
 const Delta = Quill.import('delta');
 
+
+// 값 제대로 넘겨줘야함 sellablestatus 다시 넣어주고 카테고리 선택되면 setcategory 해줄 수 있는 함수 작성
+
 function ProductRegist() {
 
     const dispatch = useDispatch();
@@ -55,12 +58,15 @@ function ProductRegist() {
         setOptions(options.filter((_, i) => i !== index));
     };
 
+    const status = ["Y", "N"]
+
     const submitProductRegistHandler = () => {
         const formData = new FormData();
         // formData.append('productImg', imageInput.current.files[0]);
+        console.log('productForm', productForm);
         formData.append('productCreateRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
         formData.append('options', new Blob([JSON.stringify(options)], { type : 'application/json'}));
-        dispatch(callSellerProductRegistAPI({ registRequest : formData }));
+        dispatch(callSellerProductRegistAPI({ productCreateRequest : formData }));
     }
 
     console.log('options', options);
@@ -69,7 +75,7 @@ function ProductRegist() {
         <div className="product-regist-page">
 
             <div>
-                <ProductForm category={adminCategory}/>
+                <ProductForm status={status} category={adminCategory}/>
             </div>
 
             <div>

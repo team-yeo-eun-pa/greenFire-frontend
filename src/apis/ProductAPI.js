@@ -49,10 +49,10 @@ export const callProductOptionListAPI = ({productCode}) => {
     }
 };
 
-export const callSellerProductRegistAPI = ({ registRequest }) => {
+export const callSellerProductRegistAPI = ({ productCreateRequest }) => {
     return async (dispatch, getState) => {
-        console.log(registRequest);
-        const result = await authRequest.post(`/seller/mystore/regist`, registRequest);
+        console.log(productCreateRequest);
+        const result = await authRequest.post(`/seller/mystore/regist`, productCreateRequest);
         console.log('callSellerProductRegistAPI result : ',result);
 
         if(result.status === 201) {
