@@ -8,7 +8,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import ProductForm from "../../components/form/ProductForm";
 import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
-import {callSellerProductRegistAPI} from "../../apis/ProductAPI";
+import {callProductOptionListAPI, callSellerProductRegistAPI} from "../../apis/ProductAPI";
+import {success} from "../../modules/AdminCategoryModules";
 
 const Delta = Quill.import('delta');
 
@@ -33,36 +34,36 @@ function ProductRegist() {
     const imageInput = useRef();
     const { saveSuccess } = useSelector(state => state.productReducer);
 
-    useEffect(() => {
-        if (saveSuccess === true) navigate('/seller/mystore/product');
-    }, [saveSuccess]);
-
     /* 텍스트 에디터 */
     const [lastChange, setLastChange] = useState();
     const quillRef = useRef();
 
+    useEffect(() => {
+        if (saveSuccess === true) navigate('/seller/mystore/product');
+    }, [saveSuccess]);
+
+
+
     /* 카테고리 불러오기 */
 
-    useEffect(() => {
-        dispatch(AdminCategoryAPICalls);
-    }, []);
-
-//리듀서
-    const {productCategory} = useSelector(state => state.category);
+    let { adminCategory, success, loading, error } = useSelector(state => state.category);
 
     useEffect(() => {
         dispatch(AdminCategoryAPICalls);
-    }, []);
+    }, [dispatch, success]);
 
-    const productOption = [
-        { id: 1, name: '옵션명1', price: 12000, stock: 5 },
-        { id: 2, name: '옵션명2', price: 9000, stock: 3 },
-        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
-        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
-        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
-        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
-        { id: 3, name: '마지막', price: 16000, stock: 2 },
-    ];
+
+    /* 옵션 불러오기 */
+
+    const { productOption } = useSelector(state => state.option);
+
+    useEffect(() => {
+        dispatch(callProductOptionListAPI({productCode}));
+    }, [productCode]);
+
+
+
+
 
     // const submitProductRegistHandler = () => {
     //     const formData = new FormData();
@@ -76,7 +77,7 @@ function ProductRegist() {
         <div className="product-regist-page">
 
             <div>
-                <ProductForm category={productCategory}/>
+                <ProductForm category={adminCategory}/>
             </div>
 
             <div>
