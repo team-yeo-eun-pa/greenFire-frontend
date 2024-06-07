@@ -74,10 +74,10 @@ function InquiryForm ({form, setForm}) {
                         <Col sm="10">
                             <InputGroup className="mb-3">
                                 <Form.Control
-                                    type="email"
+                                    type="textarea"
                                     placeholder="문의 제목을 입력해 주세요."
                                     name="inquiryTitle"
-                                    value={form}
+                                    value={form.inquiryTitle}
                                     onChange={onChangeHandler}
                                 />
                             </InputGroup>
@@ -93,7 +93,7 @@ function InquiryForm ({form, setForm}) {
                                     rows={5}
                                     placeholder="문의 내용을 입력해 주세요."
                                     name="inquiryDetail"
-                                    value={form}
+                                    value={form.inquiryDetail}
                                     onChange={onChangeHandler}/>
                             </Col>
                         </Form.Group>

@@ -11,8 +11,9 @@ function InquiryRegist() {
     const dispatch = useDispatch();
 
     const [form, setForm] = useState( {
-        inquiryTitle:'',
-        inquiryDetail:''
+
+        inquiryDetail:'',
+        inquiryTitle:''
     });
 
 
@@ -39,7 +40,7 @@ function InquiryRegist() {
 
 
                 <Col>
-                    <Col xs={9}> <InquiryForm inquiry={form} setForm={setForm} modifyMode={true}/> </Col>
+                    <Col xs={9}> <InquiryForm form={form} setForm={setForm} modifyMode={true}/> </Col>
 
 
 
