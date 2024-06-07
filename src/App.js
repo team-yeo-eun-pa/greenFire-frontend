@@ -32,6 +32,9 @@ import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
 import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
+import ReportPage from "./pages/admin/ReportPage";
+import MemberNotices from "./pages/admin/MemberNotices";
+import MemberNotice from "./pages/admin/MemberNotice";
 
 function App() {
     return (
@@ -40,6 +43,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
+                        <Route path="/notice" element={<MemberNotices/>}/>
+                        <Route path="/notice/detail" element={<MemberNotice/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
@@ -61,6 +66,7 @@ function App() {
                                 <Route index element={<Navigate to="/members/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
                                 <Route path="profile" element={<MemberProfile/>}/>
+                                <Route path="report" element={<ReportPage/>}/>
 
 
                                 <Route path="inquiry" >
@@ -92,7 +98,7 @@ function App() {
                                 <Route path="notices" element={<AdminNotices/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
-                                <Route path="category" element={<AdminCategory/>}/>
+                                <Route path="category"  element={<ProtectedRoute authCheck={true}><AdminCategory/></ProtectedRoute>}/>
                                 <Route path="reports" element={<AdminReport/>}/>
                             </Route>
                         </Route>

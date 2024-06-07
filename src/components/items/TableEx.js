@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 
-function TableEx({ headers, rows }) {
+function TableEx({ headers, rows, onRowClick }) {
     return (
         <Table hover className="table px-5 mt-4">
             <thead className="border-2 border-bottom border-top border-secondary-subtle border-start-0 border-end-0">
@@ -13,7 +13,7 @@ function TableEx({ headers, rows }) {
             </thead>
             <tbody>
             {rows.map((row, index) => (
-                <tr key={index}>
+                <tr key={index} onClick={() => onRowClick && onRowClick(index)}>
                     {row.map((cell, cellIndex) => (
                         <td key={cellIndex}>{cell}</td>
                     ))}
