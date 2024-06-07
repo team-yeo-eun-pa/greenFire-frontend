@@ -33,7 +33,7 @@ function InquiryRegist() {
         <>
             <Row>
 
-                <Col xs={3}> <UserPageNavBar/> </Col>
+                {/*<Col xs={3}> <UserPageNavBar/> </Col>*/}
 
 
                 <Col>

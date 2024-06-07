@@ -62,9 +62,10 @@ function App() {
                                 <Route path="profile" element={<MemberProfile/>}/>
 
 
-                                <Route path="inquiry" index element={<InquiryMain/>}/>
-                                <Route path="regist" element={<InquiryRegist/>}/>
-
+                                <Route path="inquiry" >
+                                    <Route index element={<InquiryMain/>}/>
+                                    <Route path="regist" element={<InquiryRegist/>}/>
+                                </Route>
 
 
                                 {/*<Route path="regist/update" element={<InquiryUpdate/>}/>*/}
