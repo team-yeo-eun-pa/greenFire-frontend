@@ -10,6 +10,7 @@ import ProductForm from "../../components/form/ProductForm";
 import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
 import {callProductOptionListAPI, callSellerProductRegistAPI} from "../../apis/ProductAPI";
 import {success} from "../../modules/AdminCategoryModules";
+import ProductOptionRegistForm from "../../components/form/ProductOptionRegistForm";
 
 const Delta = Quill.import('delta');
 
@@ -24,6 +25,11 @@ function ProductRegist() {
         sellableStatus: '',
         categoryCode: '',
     });
+
+    const [options, setOptions] = useState([]);
+
+
+
 
     const [optionForm, setOptionForm] = useState({
         optionName: '',
@@ -53,24 +59,25 @@ function ProductRegist() {
     }, [dispatch, success]);
 
 
-    /* 옵션 불러오기 */
+    const addOption = (option) => {
+        setOptions([...options, option])
+    };
 
-    const { productOption } = useSelector(state => state.option);
-
-    useEffect(() => {
-        dispatch(callProductOptionListAPI({productCode}));
-    }, [productCode]);
-
-
+    const removeOption = (index) => {
+        setOptions(options.filter((_, i) => i !== index));
+    };
 
 
 
-    // const submitProductRegistHandler = () => {
-    //     const formData = new FormData();
-    //     // formData.append('productImg', imageInput.current.files[0]);
-    //     formData.append('productRequest', new Blob([JSON.stringify(form)], { type : 'application/json'}));
-    //     dispatch(callSellerProductRegistAPI({ registRequest : formData }));
-    // }
+
+
+    const submitProductRegistHandler = () => {
+        const formData = new FormData();
+        // formData.append('productImg', imageInput.current.files[0]);
+        formData.append('productRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
+        formData.append('options', new Blob([JSON.stringify(options)], { type : 'application/json'}));
+        dispatch(callSellerProductRegistAPI({ registRequest : formData }));
+    }
 
 
     return (
@@ -82,7 +89,7 @@ function ProductRegist() {
 
             <div>
                 <label style={{marginBottom: "8px"}}>옵션</label>
-                <ProductOptionForm optionInfo={productOption}/>
+                <ProductOptionRegistForm options={options} appOption={addOption} removeOption={removeOption}/>
             </div>
 
 
@@ -102,7 +109,7 @@ function ProductRegist() {
             />
 
             <div className="submit-btn-wrapper">
-                <button className="submit-btn">상품 등록</button>
+                <button className="submit-btn" onClick={submitProductRegistHandler}>상품 등록</button>
             </div>
 
         </div>
