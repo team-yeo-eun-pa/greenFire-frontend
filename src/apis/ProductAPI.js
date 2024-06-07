@@ -5,6 +5,7 @@ import {getNotices} from "../modules/NoticeModules";
 import async from "async";
 import {getProducts} from "../modules/ProductModules";
 import {getAdminCategory, success} from "../modules/AdminCategoryModules";
+import {getOptions} from "../modules/ProductOptionModules";
 
 export const callProductListAPI = ({currentPage = 1}) => {
 
@@ -34,7 +35,7 @@ export const callProductCategoryListAPI = () => {
     }
 };
 
-export const callProductOptionListAPI = () => {
+export const callProductOptionListAPI = ({productCode}) => {
 
     return async (dispatch, getState) => {
         const result = await request(
@@ -43,7 +44,7 @@ export const callProductOptionListAPI = () => {
         );
         console.log('callProductOptionListAPI result : ',result);
         if (result && result.status === 200) {
-            dispatch(get(result));
+            dispatch(getOptions(result));
         }
     }
 };
