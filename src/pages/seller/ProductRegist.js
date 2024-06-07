@@ -10,7 +10,8 @@ import ProductForm from "../../components/form/ProductForm";
 import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
 import {callProductOptionListAPI, callSellerProductRegistAPI} from "../../apis/ProductAPI";
 import {success} from "../../modules/AdminCategoryModules";
-import ProductOptionRegistForm from "../../components/form/ProductOptionRegistForm";
+import ProductOptionAddForm from "../../components/form/ProductOptionAddForm";
+
 
 const Delta = Quill.import('delta');
 
@@ -18,6 +19,8 @@ function ProductRegist() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    let { adminCategory, success, loading, error } = useSelector(state => state.category);
+    const { saveSuccess } = useSelector(state => state.productReducer);
 
     // db 수정 후 상품 설명 추가 필요
     const [productForm, setProductForm] = useState({
@@ -27,19 +30,7 @@ function ProductRegist() {
     });
 
     const [options, setOptions] = useState([]);
-
-
-
-
-    const [optionForm, setOptionForm] = useState({
-        optionName: '',
-        optionPrice: '',
-        optionStock: ''
-    });
-
     const imageInput = useRef();
-    const { saveSuccess } = useSelector(state => state.productReducer);
-
     /* 텍스트 에디터 */
     const [lastChange, setLastChange] = useState();
     const quillRef = useRef();
@@ -49,36 +40,30 @@ function ProductRegist() {
     }, [saveSuccess]);
 
 
-
     /* 카테고리 불러오기 */
 
-    let { adminCategory, success, loading, error } = useSelector(state => state.category);
-
     useEffect(() => {
-        dispatch(AdminCategoryAPICalls);
-    }, [dispatch, success]);
+        dispatch(AdminCategoryAPICalls());
+    }, [dispatch]);
 
 
-    const addOption = (option) => {
-        setOptions([...options, option])
-    };
+    // const addOption = (option) => {
+    //     setOptions([...options, option])
+    // };
 
     const removeOption = (index) => {
         setOptions(options.filter((_, i) => i !== index));
     };
 
-
-
-
-
     const submitProductRegistHandler = () => {
         const formData = new FormData();
         // formData.append('productImg', imageInput.current.files[0]);
-        formData.append('productRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
+        formData.append('productCreateRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
         formData.append('options', new Blob([JSON.stringify(options)], { type : 'application/json'}));
         dispatch(callSellerProductRegistAPI({ registRequest : formData }));
     }
 
+    console.log('options', options);
 
     return (
         <div className="product-regist-page">
@@ -89,7 +74,7 @@ function ProductRegist() {
 
             <div>
                 <label style={{marginBottom: "8px"}}>옵션</label>
-                <ProductOptionRegistForm options={options} appOption={addOption} removeOption={removeOption}/>
+                <ProductOptionAddForm options={options} setOptions={setOptions} removeOption={removeOption}/>
             </div>
 
 

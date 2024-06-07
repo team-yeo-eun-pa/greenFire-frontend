@@ -5,6 +5,7 @@ import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
 
 function ProductForm(props) {
 
+    console.log('props', props)
 
     return (
         <div>
@@ -25,9 +26,9 @@ function ProductForm(props) {
                 <Form.Group className="product-info-form" controlId="productCategory">
                     <Form.Label>카테고리</Form.Label>
                     <Form.Select>
-                        {props.category.map(category => (
-                            <option key={category.id} value={category.id}>
-                                {category.name}
+                        {props.category.map(ct => (
+                            <option key={ct.categoryCode} value={ct.categoryCode}>
+                                {ct.categoryTitle}
                             </option>
                         ))
                         }

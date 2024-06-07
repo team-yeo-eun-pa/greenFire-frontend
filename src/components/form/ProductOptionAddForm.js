@@ -3,21 +3,21 @@ import React, {useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-function ProductOptionRegistForm(props) {
+function ProductOptionAddForm(props) {
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [mode, setMode] = useState(null);
 
     const [optionName, setOptionName] = useState("");
-    const [optionPrice, setOptionPrice] = useState();
-    const [optionStock, setOptionStock] = useState();
+    const [optionPrice, setOptionPrice] = useState("");
+    const [optionStock, setOptionStock] = useState("");
 
     const handleClickRegist = () => {
         setMode("regist");
         setSelectedOption(null);
         setOptionName("");
-        setOptionPrice();
-        setOptionStock();
+        setOptionPrice("");
+        setOptionStock("");
     };
 
     const handleClickDelete = () => {
@@ -40,14 +40,20 @@ function ProductOptionRegistForm(props) {
 
     const handleSubmit = () => {
         if (mode === "regist") {
-            props.appOption({
+            props.setOptions([...props.options, {
                 optionName: optionName,
                 optionPrice: optionPrice,
                 optionStock: optionStock
-            });
+            }]);
         }
+        setOptionName("");
+        setOptionPrice("");
+        setOptionStock("");
+        setMode(null);
+        setSelectedOption(null);
     }
 
+    console.log('props.options', props.options)
 
     return (
         <div className="product-option-form">
@@ -63,9 +69,9 @@ function ProductOptionRegistForm(props) {
 
                 <div className="product-option-list">
                     {props.options.map((opt, index) => (
-                        <ListGroup.item key={index} onclick={()=>handleChangeOptionList(opt)}>
-                            {opt.name}
-                        </ListGroup.item>
+                        <ListGroup key={index} onClick={()=>handleChangeOptionList(opt)}>
+                            {opt.optionName}
+                        </ListGroup>
                     ))}
                 </div>
 
@@ -109,4 +115,4 @@ function ProductOptionRegistForm(props) {
         </div>
     )
 }
-export default ProductOptionRegistForm;
+export default ProductOptionAddForm;
