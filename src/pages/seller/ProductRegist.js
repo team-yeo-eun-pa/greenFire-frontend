@@ -43,13 +43,13 @@ function ProductRegist() {
     }, [saveSuccess]);
 
 
-    /* 카테고리 불러오기 */
 
     useEffect(() => {
         dispatch(AdminCategoryAPICalls());
     }, [dispatch]);
 
 
+    //addoption
     // const addOption = (option) => {
     //     setOptions([...options, option])
     // };
@@ -58,7 +58,7 @@ function ProductRegist() {
         setOptions(options.filter((_, i) => i !== index));
     };
 
-    const status = ["Y", "N"]
+    const sellableStatus = ["Y", "N"]
 
     const submitProductRegistHandler = () => {
         const formData = new FormData();
@@ -75,7 +75,7 @@ function ProductRegist() {
         <div className="product-regist-page">
 
             <div>
-                <ProductForm status={status} category={adminCategory}/>
+                <ProductForm sellableStatus={sellableStatus} category={adminCategory}/>
             </div>
 
             <div>
@@ -89,13 +89,7 @@ function ProductRegist() {
                 ref={quillRef}
                 defaultValue={new Delta()
                     .insert('상품 상세설명')
-                    // .insert('\n', {header: 1})
-                    // .insert('Some ')
-                    // .insert('initial', {bold: true})
-                    // .insert(' ')
-                    // .insert('content', {underline: true})
                     .insert('\n')}
-                // onSelectionChange={setRange}
                 onTextChange={setLastChange}
             />
 
