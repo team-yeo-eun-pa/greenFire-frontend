@@ -376,33 +376,6 @@
     vertical-align: middle;
 }
 
-/* styles.css */
-
-/* 테이블 헤더와 본문을 가운데 정렬 */
-.table.text-center th,
-.table.text-center td {
-    text-align: center;
-    vertical-align: middle;
-}
-
-/* styles.css */
-
-/* 테이블 헤더와 본문을 가운데 정렬 */
-.table.text-center th,
-.table.text-center td {
-    text-align: center;
-    vertical-align: middle;
-}
-
-/* styles.css */
-
-/* 테이블 헤더와 본문을 가운데 정렬 */
-.table.text-center th,
-.table.text-center td {
-    text-align: center;
-    vertical-align: middle;
-}
-
 /* 테이블의 양옆 패딩 설정 */
 .table.px-5 {
     padding-left: 2rem;
@@ -424,6 +397,83 @@
 .table-responsive {
     margin-top: 0.5rem; /* 상단 마진을 줄여서 위로 올림 */
 }
+
+/* 버튼을 오른쪽 아래에 배치 */
+.button-container {
+    text-align: right;
+    margin-top: 1rem;
+}
+
+/* styles.css */
+
+/* 컨테이너 스타일 */
+.create-notice-container {
+    max-width: 900px; /* 최대 너비 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 2rem; /* 패딩 설정 */
+    background-color: #fff; /* 배경색 흰색 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    border-radius: 8px; /* 둥근 모서리 */
+}
+
+/* 제목 스타일 */
+.create-notice-title {
+    font-size: 1.5rem; /* 폰트 크기 */
+    font-weight: bold; /* 폰트 굵기 */
+    margin: 0; /* 마진 제거 */
+}
+
+/* 버튼 컨테이너 스타일 */
+.create-notice-container .btn {
+    float: right; /* 오른쪽 정렬 */
+}
+
+/* 폼 그룹 스타일 */
+.create-notice-container .form-group {
+    margin-bottom: 1rem; /* 하단 마진 */
+}
+
+/* 폼 라벨 스타일 */
+.create-notice-container .form-label {
+    font-weight: 600; /* 폰트 굵기 */
+    margin-bottom: 0.5rem; /* 하단 마진 */
+}
+
+/* 폼 컨트롤 스타일 */
+.create-notice-container .form-control {
+    border-radius: 5px; /* 둥근 모서리 */
+    padding: 0.75rem; /* 패딩 */
+    font-size: 1rem; /* 폰트 크기 */
+}
+
+/* 버튼 정렬 */
+.create-notice-container .d-flex {
+    display: flex;
+    justify-content: space-between; /* 양쪽 끝으로 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin-bottom: 1rem; /* 하단 마진 */
+}
+
+/* 텍스트 에디터 스타일 */
+.create-notice-container .text-editor-container {
+    width: calc(100% - 30px); /* 제목 폼과 맞추기 위해 폭 조절 */
+    margin-bottom: 1rem; /* 하단 마진 */
+}
+
+.create-notice-container .ql-editor {
+    min-height: 200px; /* 최소 높이 설정 */
+    max-height: calc(100vh - 300px); /* 최대 높이 설정 (카드를 벗어나지 않도록) */
+    overflow-y: auto; /* 세로 스크롤바 추가 */
+}
+
+/* 텍스트 에디터의 input 폼 */
+.create-notice-container .text-editor-container input {
+    width: 100%; /* 텍스트 에디터의 input 폼의 가로 너비를 100%로 설정 */
+}
+
+
+
+
 
 
 

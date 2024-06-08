@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import TextEditor from '../../components/items/TextEditor';
-import { AdminNoticeCreateAPICalls } from '../../apis/AdminNoticeAPICalls'; // Ensure this is the correct import
+import { AdminNoticeCreateAPICalls } from '../../apis/AdminNoticeAPICalls';
 import { useDispatch } from 'react-redux';
+import '../../style.css'; // 스타일 시트 임포트
 
 const AdminCreateNotice = () => {
     const dispatch = useDispatch();
@@ -48,18 +49,18 @@ const AdminCreateNotice = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(form);
-        // Dispatch the action to create the notice, assuming createNotice is an action
-        dispatch(AdminNoticeCreateAPICalls({noticeCreateRequest : form})); // Make sure this matches your action creator
+        // Dispatch the action to create the notice
+        dispatch(AdminNoticeCreateAPICalls({ noticeCreateRequest: form }));
     };
 
     return (
-        <Container className="mt-5">
-            <h2>공지사항 작성</h2>
-            <Button variant="primary" onClick={handleSubmit}>
-                작성 완료
-            </Button>
+        <Container fluid className="create-notice-container mt-4 px-4"> {/* 수정된 클래스명 */}
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h2 className="create-notice-title">공지사항 작성</h2>
+                <Button variant="success" onClick={handleSubmit}>작성 완료</Button>
+            </div>
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formTitle">
+                <Form.Group controlId="formTitle" className="mb-4">
                     <Form.Label>제목</Form.Label>
                     <Form.Control
                         type="text"
