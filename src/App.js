@@ -102,7 +102,7 @@ function App() {
                                 <Route path="notice-create" element={<AdminCreateNotice/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
-                                <Route path="category"  element={<ProtectedRoute authCheck={true}><AdminCategory/></ProtectedRoute>}/>
+                                <Route path="category" element={<AdminCategory/>}/>
                                 <Route path="reports" element={<AdminReport/>}/>
                             </Route>
                         </Route>

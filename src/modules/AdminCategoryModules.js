@@ -13,6 +13,8 @@ const GET_ADMIN_CATEGORY = 'category/GET_ADMIN_CATEGORY';
 const SUCCESS = 'category/SUCCESS';
 const ADD_CATEGORY = 'category/ADD_CATEGORY';
 const DELETE_CATEGORY = 'category/DELETE_CATEGORY'
+const MODIFY_CATEGORY = 'category/MODIFY_CATEGORY';
+
 
 
 // 액션 생성자
@@ -41,6 +43,10 @@ const AdminCategoryReducer = handleActions({
     [DELETE_CATEGORY]: (state, { payload }) => ({
         ...state,
         adminCategory: state.adminCategory.filter(category => category !== payload)
+    }),
+    [MODIFY_CATEGORY] : (state, {payload}) => ({
+        ...state,
+        adminCategory : payload.category.data
     })
 }, initialState);
 
