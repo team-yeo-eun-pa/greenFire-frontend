@@ -14,8 +14,8 @@ const GET_ADMIN_REPORT_DETAIL = 'reports/GET_ADMIN_REPORT_DETAIL';
 
 // 액션 함수
 export const { reports: { getAdminReports, getAdminReportDetail, success } } = createActions({
-    [GET_ADMIN_REPORTS]: (result) => ({ reports: result.data }),
-    [MODIFY_STATUS]: (result) => ({ reports: result.data }),
+    [GET_ADMIN_REPORTS]: (result) => ({ adminReports : result }), // 수정
+    [MODIFY_STATUS]: (result) => ({ reports: result?.data || {} }), // 수정
     [GET_ADMIN_REPORT_DETAIL]: (result) => ({ reportDetails: result }),
     [SUCCESS]: () => ({ success: true })
 });
@@ -24,11 +24,11 @@ export const { reports: { getAdminReports, getAdminReportDetail, success } } = c
 const AdminReportReducer = handleActions({
     [GET_ADMIN_REPORTS]: (state, { payload }) => ({
         ...state,
-        reports: payload.reports.data
+        adminReports: payload.adminReports.data
     }),
     [MODIFY_STATUS]: (state, { payload }) => ({
         ...state,
-        reports: payload.reports.data
+        reports: payload.reports
     }),
     [SUCCESS]: (state, { payload }) => ({
         ...state,
