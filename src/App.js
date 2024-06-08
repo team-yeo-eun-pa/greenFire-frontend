@@ -20,7 +20,6 @@ import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import LoginModal from "./components/items/LoginModal";
 import MemberProfile from "./pages/member/MemberProfile";
-import AdminNotices from "./pages/admin/AdminNotices";
 import AdminMemberView from "./pages/admin/AdminMemberView";
 import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
 import StoreProfile from "./components/items/StoreProfile";
@@ -33,9 +32,8 @@ import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
 import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
 import ReportPage from "./pages/admin/ReportPage";
-import MemberNotices from "./pages/admin/MemberNotices";
-import MemberNotice from "./pages/admin/MemberNotice";
-import AdminNotice from "./pages/admin/AdminNotice";
+import MemberNotices from "./pages/admin/Notices";
+import Notice from "./pages/admin/Notice";
 import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
 
 function App() {
@@ -46,7 +44,7 @@ function App() {
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
                         <Route path="/notice" element={<MemberNotices/>}/>
-                        <Route path="/notice/detail" element={<MemberNotice/>}/>
+                        <Route path="/notice/detail" element={<Notice/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
@@ -97,8 +95,6 @@ function App() {
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
-                                <Route path="notices" element={<AdminNotices/>}/>
-                                <Route path="notice" element={<AdminNotice/>}/>
                                 <Route path="notice-create" element={<AdminCreateNotice/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
