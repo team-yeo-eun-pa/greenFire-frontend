@@ -1,43 +1,39 @@
-import UserPageNavBar from "../../components/common/UserPageNavBar";
+import UserPageNavBar from "../../../components/common/UserPageNavBar";
 import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Col, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {callInquiryListAPI} from "../../apis/InquiryAPI";
-import PagingBar from "../../components/common/PagingBar";
-import InquiryList from "../../components/list/InquiryList";
+import {callInquiryListAPI} from "../../../apis/InquiryAPI";
+import PagingBar from "../../../components/common/PagingBar";
+import InquiryList from "../../../components/list/InquiryList";
 import Button from "react-bootstrap/Button";
-import inquiryReducer from "../../modules/InquiryModules";
 import {useNavigate} from "react-router-dom";
 
 
 function InquiryMain() {
 
     const dispatch = useDispatch();
-    const [currentPage, setCurrentPage] = useState(1);
+    // const [currentPage, setCurrentPage] = useState(1);
     const {inquiry} = useSelector(state => state.inquiryReducer);
     const navigate = useNavigate();
 
     const onClickInquiryRegisterHandler = () => {
-        navigate("/members/mypage/main/inquiry/regist");
+        navigate("/members/mypage/inquiry/regist");
     }
 
 
-    ///
+
 
 
     useEffect(() => {
-        dispatch(callInquiryListAPI({currentPage}));
-    }, [currentPage]);
+        dispatch(callInquiryListAPI);
+    }, );
 
     return (
         <>
             <Row>
 
 
-                {/*<Col xs={3} >
-                <UserPageNavBar/>
-                </Col>*/}
 
                 <Col xs={9}>
                     {['xl'].map((breakpoint) => (
@@ -61,12 +57,12 @@ function InquiryMain() {
 
                     <>
 
-                        inquiry &&
+                    { inquiry &&
                         <>
                             <InquiryList data={inquiry.data}/>
-                            <PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>
+                            {/*<PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>*/}
                         </>
-
+                    }
                     </>
 
 
