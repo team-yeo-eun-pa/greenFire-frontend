@@ -25,3 +25,21 @@ export const AdminNoticeAPICalls = ({noticeCode}) => {
     }
 }
 
+export const AdminNoticeCreateAPICalls = ({ noticeCreateRequest }) => {
+    return async (dispatch, getState) => {
+        console.log("noticeCreateRequest api: ", noticeCreateRequest);
+
+        const result = await authRequest.post(`/admin/notice-create`, noticeCreateRequest, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+
+        if (result.status === 200) {
+            dispatch(getNotice(result));
+        }
+    }
+}
+
+
+

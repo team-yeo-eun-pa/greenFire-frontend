@@ -7,9 +7,9 @@ const ReportPage = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const { memberCode } = location.state || {}; // 전달된 memberCode를 가져옵니다.
+    const { memberCode } = location.state || {}; // 전달된 memberCode
     const [form, setForm] = useState({
-        memberCode: memberCode || 4, // 전달된 memberCode가 없으면 기본값 4를 사용합니다.
+        memberCode: memberCode || 4, // 전달된 memberCode가 없으면 기본값 4를 사용
         reportReason : ""
     });
     const [screenshots, setScreenshots] = useState([]);
@@ -37,7 +37,7 @@ const ReportPage = () => {
         await dispatch(ReportAPICalls({ reportRequest: formData }));
 
         alert('신고가 접수되었습니다.');
-        navigate(-1); // 이전 페이지로 돌아갑니다.
+        navigate(-1); // 이전 페이지로
     };
 
     return (

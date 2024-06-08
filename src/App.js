@@ -34,6 +34,8 @@ import {SuccessPage} from "./pages/payment/SuccessPage";
 import ReportPage from "./pages/admin/ReportPage";
 import MemberNotices from "./pages/admin/MemberNotices";
 import MemberNotice from "./pages/admin/MemberNotice";
+import AdminNotice from "./pages/admin/AdminNotice";
+import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
 
 function App() {
     return (
@@ -93,6 +95,8 @@ function App() {
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
                                 <Route path="notices" element={<AdminNotices/>}/>
+                                <Route path="notice" element={<AdminNotice/>}/>
+                                <Route path="notice-create" element={<AdminCreateNotice/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
                                 <Route path="category"  element={<ProtectedRoute authCheck={true}><AdminCategory/></ProtectedRoute>}/>
