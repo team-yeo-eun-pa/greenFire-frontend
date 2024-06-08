@@ -7,7 +7,7 @@ export const AdminReportAPICalls = ({ currentPage = 1, role }) => {
         console.log('AdminReportAPICalls result : ', result);
 
         if (result.status === 200) {
-            dispatch(getAdminReports(result.data));
+            dispatch(getAdminReports(result));
         }
     };
 };

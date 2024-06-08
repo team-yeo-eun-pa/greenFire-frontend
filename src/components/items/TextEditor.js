@@ -39,6 +39,9 @@ const TextEditor = React.forwardRef(({ defaultValue, onTextChange, onSelectionCh
             onSelectionChangeRef.current?.(...args);
         });
 
+        // 에디터 컨테이너의 높이를 조절합니다.
+        container.style.height = '400px'; // 여기에 원하는 높이를 설정하세요.
+
         return () => {
             ref.current = null;
             container.innerHTML = '';
