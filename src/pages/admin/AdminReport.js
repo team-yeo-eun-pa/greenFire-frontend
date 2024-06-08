@@ -5,7 +5,7 @@ import { AdminReportAPICalls, AdminReportSuspendEndAPICalls, AdminReportDetailAP
 import Button from "react-bootstrap/Button";
 import { success } from "../../modules/AdminReportModules";
 import { useNavigate } from "react-router-dom";
-import '../../style.css'; //
+import '../../style.css';
 
 const AdminReports = React.memo(() => {
     const dispatch = useDispatch();
