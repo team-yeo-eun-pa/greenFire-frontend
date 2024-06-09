@@ -38,11 +38,18 @@ import MemberNotice from "./pages/admin/MemberNotice";
 import ApplySeller from "./pages/member/ApplySeller";
 import ApplyDetail from "./pages/member/ApplyDetail";
 import ApplyRegist from "./pages/member/ApplyRegist";
+import {ToastContainer} from "react-toastify";
 
 function App() {
     return (
         <>
             <BrowserRouter>
+                <ToastContainer hideProgressBar={true}
+                                position="top-center"
+                                autoClose={3000} // 3초 후 자동 닫힘
+                                closeOnClick
+                                pauseOnHover
+                                draggable/>
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
