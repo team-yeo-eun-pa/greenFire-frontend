@@ -35,15 +35,26 @@ import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
 import ReportPage from "./pages/admin/ReportPage";
 import MemberNotices from "./pages/admin/MemberNotices";
 import MemberNotice from "./pages/admin/MemberNotice";
+import ApplySeller from "./pages/member/ApplySeller";
+import ApplyDetail from "./pages/member/ApplyDetail";
+import ApplyRegist from "./pages/member/ApplyRegist";
+import {ToastContainer} from "react-toastify";
 import OrderList from "./pages/order/OrderList";
 import OrderDetails from "./pages/order/OrderDetails";
 import AdminNotice from "./pages/admin/AdminNotice";
 import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
 
+
 function App() {
     return (
         <>
             <BrowserRouter>
+                <ToastContainer hideProgressBar={true}
+                                position="top-center"
+                                autoClose={3000} // 3초 후 자동 닫힘
+                                closeOnClick
+                                pauseOnHover
+                                draggable/>
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
@@ -74,6 +85,11 @@ function App() {
                                 <Route path="orders/:orderCode" element={<OrderDetails/>}/>
                                 <Route path="report" element={<ReportPage/>}/>
 
+                                <Route path="apply">
+                                    <Route index element={<ApplySeller/>}/>
+                                    <Route path="regist" element={<ApplyRegist/>}/>
+                                    <Route path="detail/:sellerCode" element={<ApplyDetail/>}/>
+                                </Route>
 
                                 <Route path="inquiry" >
                                     <Route index element={<InquiryMain/>}/>

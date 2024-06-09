@@ -6,6 +6,7 @@ import AdminMemberReducer from "./AdminMemberModules";
 import AdminCategoryReducer from "./AdminCategoryModules";
 import AdminReportReducer from "./AdminReportModules";
 import ReportReducer from "./ReportModules";
+import applyReducer from "./ApplyModules";
 import orderReducer from "./OrderModules";
 
 const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     category: AdminCategoryReducer,
     orderReducer,
     AdminReportReducer,
-    ReportReducer
+    ReportReducer,
+    applyReducer
 });
 
 export default rootReducer;
