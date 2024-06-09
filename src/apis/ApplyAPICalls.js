@@ -57,14 +57,21 @@ export const callApplyUpdateAPI = ({ sellerCode, applyRequest }) => {
     }
 }
 
-export const callApplyCancelAPI = ({ sellerCode, cancelRequest }) => {
-
+export const callApplyCancelAPI = ({ sellerCode, applyRequest }) => {
     return async (dispatch, getState) => {
-        const result = await authRequest.put(`/members/mypage/apply/cancel/${sellerCode}`, cancelRequest);
-        console.log('callApplyCancelAPI result : ',result);
+        try {
+            const result = await authRequest.post(`/members/mypage/apply/modify/${sellerCode}/cancel`, applyRequest);
+            console.log('callApplyCancelAPI result:', result);
 
-        if(result.status === 201) {
-            dispatch(success());
+            if (result?.status === 204) {
+                dispatch(success());
+                toast.success("신청이 성공적으로 취소되었습니다.");
+            } else {
+                toast.warning("신청 취소에 실패했습니다. 다시 시도해주세요.");
+            }
+        } catch (error) {
+            console.error('Error calling apply cancel API:', error);
+            toast.error("신청 취소 중 오류가 발생했습니다.");
         }
     }
-};
+}

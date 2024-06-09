@@ -10,7 +10,7 @@ import {
     callApplyDetailAPI,
     callApplyUpdateAPI
 } from "../../apis/ApplyAPICalls";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 const ApplyDetail = () => {
     const dispatch = useDispatch();
@@ -44,8 +44,17 @@ const ApplyDetail = () => {
 
     const handleCancel = () => {
         const formData = new FormData();
-        formData.append('cancelRequest', new Blob([JSON.stringify(form)], { type: 'application/json' }));
-        dispatch(callApplyCancelAPI({ sellerCode, cancelRequest: formData }));
+        formData.append('applyRequest', new Blob([JSON.stringify({ ...form, applyStatus: 'CANCEL' })], { type: 'application/json' }));
+
+        dispatch(callApplyCancelAPI({ sellerCode, applyRequest: formData }))
+            .then(() => {
+                toast.success("신청이 취소되었습니다.");
+                navigate(`/members/mypage/apply`);
+            })
+            .catch(error => {
+                console.error('Error canceling apply info:', error);
+                toast.error("신청 취소 중 오류가 발생했습니다. 다시 시도해주세요.");
+            });
     };
 
     const handleSave = () => {
