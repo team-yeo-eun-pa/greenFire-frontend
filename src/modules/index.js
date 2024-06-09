@@ -6,9 +6,11 @@ import AdminMemberReducer from "./AdminMemberModules";
 import AdminCategoryReducer from "./AdminCategoryModules";
 import AdminReportReducer from "./AdminReportModules";
 import ReportReducer from "./ReportModules";
+import applyReducer from "./ApplyModules";
 
 const rootReducer = combineReducers({
-    inquiryReducer, memberReducer, noticeReducer, AdminMemberReducer, category :AdminCategoryReducer, AdminReportReducer,ReportReducer
+    inquiryReducer, memberReducer, noticeReducer, AdminMemberReducer,
+    category :AdminCategoryReducer, AdminReportReducer, ReportReducer, applyReducer
 });
 
 export default rootReducer;

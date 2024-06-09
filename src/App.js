@@ -35,6 +35,9 @@ import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
 import ReportPage from "./pages/admin/ReportPage";
 import MemberNotices from "./pages/admin/MemberNotices";
 import MemberNotice from "./pages/admin/MemberNotice";
+import ApplySeller from "./pages/member/ApplySeller";
+import ApplyDetail from "./pages/member/ApplyDetail";
+import ApplyRegist from "./pages/member/ApplyRegist";
 
 function App() {
     return (
@@ -68,6 +71,11 @@ function App() {
                                 <Route path="profile" element={<MemberProfile/>}/>
                                 <Route path="report" element={<ReportPage/>}/>
 
+                                <Route path="apply">
+                                    <Route index element={<ApplySeller/>}/>
+                                    <Route path="regist" element={<ApplyRegist/>}/>
+                                    <Route path="detail/:sellerCode" element={<ApplyDetail/>}/>
+                                </Route>
 
                                 <Route path="inquiry" >
                                     <Route index element={<InquiryMain/>}/>
