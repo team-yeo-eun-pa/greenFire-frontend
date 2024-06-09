@@ -29,7 +29,6 @@ function ApplyRegist() {
     const onClickBackHandler = () => navigate(-1);
 
     const onClickApplyRegistHandler = () => {
-        console.log("onClickApplyRegistHandler 까지 왔당")
         const formData = new FormData();
         formData.append('businessImg', imageInput.current.files[0]);
         formData.append('applyCreateRequest', new Blob([JSON.stringify(form)], { type : 'application/json'}));
