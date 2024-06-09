@@ -9,7 +9,14 @@ import ReportReducer from "./ReportModules";
 import orderReducer from "./OrderModules";
 
 const rootReducer = combineReducers({
-    inquiryReducer, memberReducer, noticeReducer, AdminMemberReducer, category :AdminCategoryReducer, orderReducer, AdminReportReducer,ReportReducer
+    inquiryReducer,
+    memberReducer,
+    noticeReducer,
+    AdminMemberReducer,
+    category: AdminCategoryReducer,
+    orderReducer,
+    AdminReportReducer,
+    ReportReducer
 });
 
 export default rootReducer;

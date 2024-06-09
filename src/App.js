@@ -34,7 +34,8 @@ import {SuccessPage} from "./pages/payment/SuccessPage";
 import ReportPage from "./pages/admin/ReportPage";
 import MemberNotices from "./pages/admin/MemberNotices";
 import MemberNotice from "./pages/admin/MemberNotice";
-import OrderList from "./pages/member/OrderList";
+import OrderList from "./pages/order/OrderList";
+import OrderDetails from "./pages/order/OrderDetails";
 
 function App() {
     return (
@@ -67,6 +68,7 @@ function App() {
                                 <Route path="main" element={<MyPageMain/>}/>
                                 <Route path="profile" element={<MemberProfile/>}/>
                                 <Route path="orders" element={<OrderList/>}/>
+                                <Route path="orders/:orderCode" element={<OrderDetails/>}/>
                                 <Route path="report" element={<ReportPage/>}/>
 
 
