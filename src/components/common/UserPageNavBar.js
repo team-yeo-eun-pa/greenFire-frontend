@@ -43,7 +43,7 @@ function UserPageNavBar({ profileInfo }) {
                 <Nav.Link eventKey="myCertifications" className="nav-link-custom">나의 인증</Nav.Link>
                 <br/>
                 <Nav.Link className="nav-link-custom-title">반딧불이 스토어</Nav.Link>
-                <Nav.Link eventKey="orders" className="nav-link-custom">주문∙배송</Nav.Link>
+                <NavLink eventKey="orders" className="nav-link-custom" to="/members/mypage/orders">주문∙배송</NavLink>
                 <Nav.Link eventKey="coupons" className="nav-link-custom">쿠폰</Nav.Link>
                 <Nav.Link eventKey="wishlist" className="nav-link-custom">찜한 상품</Nav.Link>
                 <Nav.Link eventKey="reviews" className="nav-link-custom">내가 쓴 리뷰</Nav.Link>

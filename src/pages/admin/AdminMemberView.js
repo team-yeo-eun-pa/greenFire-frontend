@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Container } from 'react-bootstrap';
 import { AdminMemberAPICalls } from '../../apis/AdminMemberAPICalls';
 import TableEx from '../../components/items/TableEx';
+import '../../style.css'; // CSS 파일 임포트
 
 const AdminMemberView = React.memo(() => {
     const dispatch = useDispatch();
@@ -34,12 +35,18 @@ const AdminMemberView = React.memo(() => {
     ]);
 
     return (
-        <Row>
-            <Col xs lg="9" className="mt-5">
-                <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">회원관리</div>
-                <TableEx headers={headers} rows={rows} />
-            </Col>
-        </Row>
+        <Container fluid className="px-4">
+            <Row className="mt-2"> {/* 'mt-4'에서 'mt-2'로 수정 */}
+                <Col className="px-0">
+                    <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle pb-2">
+                        회원관리
+                    </div>
+                    <div className="table-responsive mt-2"> {/* 'mt-3'에서 'mt-2'로 수정 */}
+                        <TableEx headers={headers} rows={rows} />
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     );
 });
 

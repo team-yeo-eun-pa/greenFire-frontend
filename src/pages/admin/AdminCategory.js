@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col, Button, Form, ListGroup, Dropdown } from 'react-bootstrap';
-import { AdminCategoryAPICalls, callAdminCategoryRegistAPI, callAdminCategoryDeleteAPI } from "../../apis/AdminCategoryAPICalls";
+import { AdminCategoryAPICalls, callAdminCategoryRegistAPI, callAdminCategoryDeleteAPI, callAdminCategoryModifyAPI } from "../../apis/AdminCategoryAPICalls";
 import { useNavigate } from "react-router-dom";
+import '../../style.css';
+
 
 const AdminCategory = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    let { adminCategory, success, loading, error } = useSelector(state => state.category);
+    const { adminCategory, success, loading, error } = useSelector(state => state.category);
     const [categoryTitle, setCategoryTitle] = useState('');
     const [selectedParentCategory, setSelectedParentCategory] = useState(null);
     const [selectedChildCategory, setSelectedChildCategory] = useState(null);
-
+    const [editingCategory, setEditingCategory] = useState(null);
+    const [draggedCategory, setDraggedCategory] = useState(null);
 
     useEffect(() => {
         dispatch(AdminCategoryAPICalls());
     }, [dispatch, success]);
+
+    // 추가된 코드: 데이터를 다시 로드하는 함수
+    const reloadCategories = () => {
+        dispatch(AdminCategoryAPICalls());
+    };
 
     useEffect(() => {
         if (success) {
@@ -25,10 +33,16 @@ const AdminCategory = () => {
 
     const handleSaveCategory = () => {
         let newCategory = {};
-         if (selectedParentCategory) {
+        if (selectedParentCategory) {
             newCategory = {
                 categoryTitle: categoryTitle,
-                refCategoryCode: selectedParentCategory.categoryCode, // 하위 카테고리의 상위 카테고리 코드를 부모 카테고리로 설정
+                refCategoryCode: selectedParentCategory.categoryCode,
+                type: 'application/json'
+            };
+        } else {
+            newCategory = {
+                categoryTitle: categoryTitle,
+                refCategoryCode: null,
                 type: 'application/json'
             };
         }
@@ -37,12 +51,21 @@ const AdminCategory = () => {
         setCategoryTitle('');
         setSelectedParentCategory(null);
         setSelectedChildCategory(null);
+
+        // 카테고리 저장 후 데이터 다시 로드
+        reloadCategories();
     };
 
+    const handleDeleteCategory = (category) => {
+        if (window.confirm(`${category.categoryTitle} 카테고리를 삭제하시겠습니까?`)) {
+            dispatch(callAdminCategoryDeleteAPI({ categoryCode: category.categoryCode }));
 
+            // 카테고리 삭제 후 데이터 다시 로드
+            reloadCategories();
+        }
+    };
 
     const handleParentCategorySelect = (parentCategory) => {
-
         setSelectedParentCategory(parentCategory === '선택안함' ? null : parentCategory);
     };
 
@@ -51,25 +74,49 @@ const AdminCategory = () => {
         setSelectedParentCategory(adminCategory.find(category => category.categoryCode === childCategory.refCategoryCode));
     };
 
-
-
-    const handleDeleteCategory = () => {
-        if (!selectedParentCategory && !selectedChildCategory) {
-            alert('삭제할 카테고리를 선택해주세요.');
-            return;
-        }
-
-        const categoryToDelete = selectedChildCategory || selectedParentCategory;
-
-        if (window.confirm(`${categoryToDelete.categoryTitle} 카테고리를 삭제하시겠습니까?`)) {
-            dispatch(callAdminCategoryDeleteAPI({categoryCode: categoryToDelete.categoryCode})); // categoryCode를 전달
-            setSelectedParentCategory(null);
-            setSelectedChildCategory(null);
-        }
+    const handleEditCategory = (category) => {
+        setEditingCategory(category);
+        setCategoryTitle(category.categoryTitle);
+        setSelectedParentCategory(category.refCategoryCode ? adminCategory.find(cat => cat.categoryCode === category.refCategoryCode) : null);
     };
 
+    const handleEditChange = (e) => {
+        setCategoryTitle(e.target.value);
+    };
 
+    const handleEditSubmit = () => {
+        const modifiedCategory = {
+            categoryTitle: categoryTitle,
+            refCategoryCode: selectedParentCategory ? selectedParentCategory.categoryCode : null,
+            type: 'application/json'
+        };
+        dispatch(callAdminCategoryModifyAPI({ categoryCode: editingCategory.categoryCode, modifyRequest: modifiedCategory }));
+        setEditingCategory(null);
+        setCategoryTitle('');
+        setSelectedParentCategory(null);
 
+        // 수정 후 데이터 다시 로드
+        reloadCategories();
+    };
+
+    const handleDragStart = (category) => {
+        setDraggedCategory(category);
+    };
+
+    const handleDrop = (targetCategory) => {
+        if (draggedCategory && targetCategory.categoryCode !== draggedCategory.categoryCode) {
+            const modifiedCategory = {
+                categoryTitle: draggedCategory.categoryTitle,
+                refCategoryCode: targetCategory.categoryCode,
+                type: 'application/json'
+            };
+            dispatch(callAdminCategoryModifyAPI({ categoryCode: draggedCategory.categoryCode, modifyRequest: modifiedCategory }));
+            setDraggedCategory(null);
+
+            // 드래그 후 데이터 다시 로드
+            reloadCategories();
+        }
+    };
 
     const parentCategories = adminCategory.filter(category => category.refCategoryCode === null);
     const childCategories = adminCategory.filter(category => category.refCategoryCode !== null);
@@ -77,15 +124,11 @@ const AdminCategory = () => {
     return (
         <Container>
             <Row>
-                <Col xs lg="9" className="mt-5">
-                    <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">카테고리 관리</div>
-                </Col>
-                <Col>
-                    <Button variant="success" onClick={handleSaveCategory}>+ 카테고리 추가</Button>
-                    <Button variant="danger" onClick={handleDeleteCategory}>- 카테고리 삭제</Button>
+                <Col className="mt-5">
+                    <Col xs lg="9" style={{ fontSize: '24px', fontWeight: 'bold', borderBottom: '2px solid #343a40', padding: '10px' }}>카테고리 관리</Col>
                 </Col>
             </Row>
-            <Row>
+            <Row className="mt-4">
                 <Col md={4}>
                     {loading ? (
                         <div>Loading...</div>
@@ -94,13 +137,59 @@ const AdminCategory = () => {
                     ) : (
                         <ListGroup>
                             {parentCategories.map((parent, index) => (
-                                <ListGroup.Item key={index}>
-                                    <strong>{parent.categoryTitle}</strong>
-                                    <ListGroup>
+                                <ListGroup.Item
+                                    key={index}
+                                    onDoubleClick={() => handleEditCategory(parent)}
+                                >
+                                    <Row>
+                                        <Col>
+                                            {editingCategory && editingCategory.categoryCode === parent.categoryCode ? (
+                                                <Form.Control
+                                                    type="text"
+                                                    value={categoryTitle}
+                                                    onChange={handleEditChange}
+                                                    onBlur={handleEditSubmit}
+                                                    autoFocus
+                                                />
+                                            ) : (
+                                                <strong>{parent.categoryTitle}</strong>
+                                            )}
+                                        </Col>
+                                        <Col xs="auto">
+                                            <Button variant="danger" size="sm" onClick={() => handleDeleteCategory(parent)}>삭제</Button>
+                                        </Col>
+                                    </Row>
+                                    <ListGroup className="mt-2">
                                         {childCategories
                                             .filter(child => child.refCategoryCode === parent.categoryCode)
                                             .map((sub, subIndex) => (
-                                                <ListGroup.Item key={subIndex} onClick={() => handleChildCategorySelect(sub)}>{sub.categoryTitle}</ListGroup.Item>
+                                                <ListGroup.Item
+                                                    key={subIndex}
+                                                    onDoubleClick={() => handleEditCategory(sub)}
+                                                    draggable
+                                                    onDragStart={() => handleDragStart(sub)}
+                                                    onDragOver={(e) => e.preventDefault()}
+                                                    onDrop={() => handleDrop(parent)}
+                                                >
+                                                    <Row>
+                                                        <Col>
+                                                            {editingCategory && editingCategory.categoryCode === sub.categoryCode ? (
+                                                                <Form.Control
+                                                                    type="text"
+                                                                    value={categoryTitle}
+                                                                    onChange={handleEditChange}
+                                                                    onBlur={handleEditSubmit}
+                                                                    autoFocus
+                                                                />
+                                                            ) : (
+                                                                sub.categoryTitle
+                                                            )}
+                                                        </Col>
+                                                        <Col xs="auto">
+                                                            <Button variant="danger" size="sm" onClick={() => handleDeleteCategory(sub)}>x</Button>
+                                                        </Col>
+                                                    </Row>
+                                                </ListGroup.Item>
                                             ))}
                                     </ListGroup>
                                 </ListGroup.Item>
@@ -108,18 +197,18 @@ const AdminCategory = () => {
                         </ListGroup>
                     )}
                 </Col>
-
                 <Col md={8}>
                     <Form>
                         <Form.Group controlId="formCategoryTitle">
                             <Form.Label>카테고리 명</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="카테고리 명 입력"
+                                placeholder="카테고리 명"
                                 value={categoryTitle}
-                                onChange={(e) => setCategoryTitle(e.target.value)} />
+                                onChange={(e) => setCategoryTitle(e.target.value)}
+                            />
                         </Form.Group>
-                        <Form.Group controlId="formParentCategory">
+                        <Form.Group controlId="formParentCategory" className="mt-3">
                             <Form.Label>상위 카테고리</Form.Label>
                             <Dropdown>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -130,14 +219,15 @@ const AdminCategory = () => {
                                     {parentCategories.map((category, index) => (
                                         <Dropdown.Item
                                             key={index}
-                                            onClick={() => handleParentCategorySelect(category)}>
+                                            onClick={() => handleParentCategorySelect(category)}
+                                        >
                                             {category.categoryTitle}
                                         </Dropdown.Item>
                                     ))}
                                 </Dropdown.Menu>
                             </Dropdown>
-                            <Button variant="primary" onClick={handleSaveCategory}>저장</Button>
                         </Form.Group>
+                        <Button variant="primary" className="mt-3" onClick={handleSaveCategory}>저장</Button>
                     </Form>
                 </Col>
             </Row>

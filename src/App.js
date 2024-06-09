@@ -27,7 +27,7 @@ import StoreProfile from "./components/items/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminReport from "./pages/admin/AdminReport";
-import OrderPage from "./pages/order/OrderPage";
+import Order from "./pages/order/Order";
 import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
@@ -39,6 +39,11 @@ import ApplySeller from "./pages/member/ApplySeller";
 import ApplyDetail from "./pages/member/ApplyDetail";
 import ApplyRegist from "./pages/member/ApplyRegist";
 import {ToastContainer} from "react-toastify";
+import OrderList from "./pages/order/OrderList";
+import OrderDetails from "./pages/order/OrderDetails";
+import AdminNotice from "./pages/admin/AdminNotice";
+import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
+
 
 function App() {
     return (
@@ -76,6 +81,8 @@ function App() {
                                 <Route index element={<Navigate to="/members/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
                                 <Route path="profile" element={<MemberProfile/>}/>
+                                <Route path="orders" element={<OrderList/>}/>
+                                <Route path="orders/:orderCode" element={<OrderDetails/>}/>
                                 <Route path="report" element={<ReportPage/>}/>
 
                                 <Route path="apply">
@@ -111,15 +118,17 @@ function App() {
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
                                 <Route path="notices" element={<AdminNotices/>}/>
+                                <Route path="notice" element={<AdminNotice/>}/>
+                                <Route path="notice-create" element={<AdminCreateNotice/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
-                                <Route path="category"  element={<ProtectedRoute authCheck={true}><AdminCategory/></ProtectedRoute>}/>
+                                <Route path="category" element={<AdminCategory/>}/>
                                 <Route path="reports" element={<AdminReport/>}/>
                             </Route>
                         </Route>
 
                         <Route path="/order">
-                            <Route index element={<OrderPage/>}/>
+                            <Route index element={<Order/>}/>
                         </Route>
 
                         <Route path="/payment">
