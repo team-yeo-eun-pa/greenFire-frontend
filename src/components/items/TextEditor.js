@@ -3,7 +3,7 @@ import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from './TextEditorModules';
 
-const TextEditor = ({ defaultValue, onTextChange, onSelectionChange }, ref) => {
+const TextEditor = React.forwardRef(({ defaultValue, onTextChange, onSelectionChange, name }, ref) => {
     const containerRef = useRef(null);
     const defaultValueRef = useRef(defaultValue);
     const onTextChangeRef = useRef(onTextChange);
@@ -39,6 +39,9 @@ const TextEditor = ({ defaultValue, onTextChange, onSelectionChange }, ref) => {
             onSelectionChangeRef.current?.(...args);
         });
 
+        // 에디터 컨테이너의 높이를 조절합니다.
+        container.style.height = '400px'; // 여기에 원하는 높이를 설정하세요.
+
         return () => {
             ref.current = null;
             container.innerHTML = '';
@@ -46,6 +49,6 @@ const TextEditor = ({ defaultValue, onTextChange, onSelectionChange }, ref) => {
     }, [ref]);
 
     return <div className="text-editor-div" ref={containerRef}></div>;
-};
+});
 
-export default React.forwardRef(TextEditor);
+export default TextEditor;

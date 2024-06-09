@@ -1,11 +1,11 @@
 import InquiryListItem from "../items/inquiry/InquiryListItem";
 import data from "bootstrap/js/src/dom/data";
 
-function InquiryList({inquiry}) {
+function InquiryList({data}) {
 
     return (
         <div>
-            { inquiry && inquiry.map(inquiry => <InquiryListItem key={inquiry.inquiryCode} inquiry={inquiry}/>)}
+            { data && data.map(inquiry => <InquiryListItem key={inquiry.inquiryCode} inquiry={inquiry}/>)}
         </div>
     );
 }

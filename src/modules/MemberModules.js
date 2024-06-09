@@ -1,7 +1,9 @@
 // 초기값
 import {createActions, handleActions} from "redux-actions";
 
-const initialState = {};
+const initialState = {
+    
+};
 
 // 액션 타입
 const SUCCESS = 'members/SUCCESS';

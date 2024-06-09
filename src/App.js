@@ -14,7 +14,7 @@ import MyStoreList from "./pages/seller/MyStoreList";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
 import Wishlist from "./pages/product/Wishlist";
-import InquiryMain from "./pages/Inquiry/InquiryMain";
+import InquiryMain from "./pages/Inquiry/member/InquiryMain";
 import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
@@ -22,7 +22,7 @@ import LoginModal from "./components/items/LoginModal";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminNotices from "./pages/admin/AdminNotices";
 import AdminMemberView from "./pages/admin/AdminMemberView";
-import InquiryRegist from "./pages/Inquiry/InquiryRegist";
+import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
 import StoreProfile from "./components/items/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
@@ -31,11 +31,14 @@ import Order from "./pages/order/Order";
 import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
+import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
 import ReportPage from "./pages/admin/ReportPage";
 import MemberNotices from "./pages/admin/MemberNotices";
 import MemberNotice from "./pages/admin/MemberNotice";
 import OrderList from "./pages/order/OrderList";
 import OrderDetails from "./pages/order/OrderDetails";
+import AdminNotice from "./pages/admin/AdminNotice";
+import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
 
 function App() {
     return (
@@ -72,9 +75,11 @@ function App() {
                                 <Route path="report" element={<ReportPage/>}/>
 
 
-                                <Route path="inquiry" index element={<InquiryMain/>}/>
-                                <Route path="regist" element={<InquiryRegist/>}/>
-
+                                <Route path="inquiry" >
+                                    <Route index element={<InquiryMain/>}/>
+                                    <Route path="regist" element={<InquiryRegist/>}/>
+                                    <Route path="list" element={<InquiryUpdate/>}/>
+                                </Route>
 
 
                                 {/*<Route path="regist/update" element={<InquiryUpdate/>}/>*/}
@@ -97,9 +102,11 @@ function App() {
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
                                 <Route path="notices" element={<AdminNotices/>}/>
+                                <Route path="notice" element={<AdminNotice/>}/>
+                                <Route path="notice-create" element={<AdminCreateNotice/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="main" element={<AdminMain/>}/>
-                                <Route path="category"  element={<ProtectedRoute authCheck={true}><AdminCategory/></ProtectedRoute>}/>
+                                <Route path="category" element={<AdminCategory/>}/>
                                 <Route path="reports" element={<AdminReport/>}/>
                             </Route>
                         </Route>
