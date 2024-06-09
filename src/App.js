@@ -27,7 +27,7 @@ import StoreProfile from "./components/items/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminReport from "./pages/admin/AdminReport";
-import OrderPage from "./pages/order/OrderPage";
+import Order from "./pages/order/Order";
 import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
@@ -35,6 +35,8 @@ import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
 import ReportPage from "./pages/admin/ReportPage";
 import MemberNotices from "./pages/admin/MemberNotices";
 import MemberNotice from "./pages/admin/MemberNotice";
+import OrderList from "./pages/order/OrderList";
+import OrderDetails from "./pages/order/OrderDetails";
 import AdminNotice from "./pages/admin/AdminNotice";
 import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
 
@@ -68,6 +70,8 @@ function App() {
                                 <Route index element={<Navigate to="/members/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
                                 <Route path="profile" element={<MemberProfile/>}/>
+                                <Route path="orders" element={<OrderList/>}/>
+                                <Route path="orders/:orderCode" element={<OrderDetails/>}/>
                                 <Route path="report" element={<ReportPage/>}/>
 
 
@@ -108,7 +112,7 @@ function App() {
                         </Route>
 
                         <Route path="/order">
-                            <Route index element={<OrderPage/>}/>
+                            <Route index element={<Order/>}/>
                         </Route>
 
                         <Route path="/payment">
