@@ -31,10 +31,10 @@ export const callApplyDetailAPI = ({sellerCode}) => {
     };
 }
 
-export const callApplyRegistAPI = ({applyRequest}) => {
+export const callApplyRegistAPI = ({applyCreateRequest}) => {
 
     return async (dispatch, getState) => {
-        const result = await authRequest.post(`/members/mypage/apply/regist`, applyRequest);
+        const result = await authRequest.post(`/members/mypage/apply/regist`, applyCreateRequest);
         console.log('callApplyRegistAPI result : ', result);
 
         if(result.status === 201) {
@@ -67,3 +67,15 @@ export const callApplyUpdateAPI = ({ sellerCode, applyRequest }) => {
         }
     }
 }
+
+export const callApplyCancelAPI = ({ sellerCode, cancelRequest }) => {
+
+    return async (dispatch, getState) => {
+        const result = await authRequest.put(`/members/mypage/apply/cancel/${sellerCode}`, cancelRequest);
+        console.log('callApplyCancelAPI result : ',result);
+
+        if(result.status === 201) {
+            dispatch(success());
+        }
+    }
+};
