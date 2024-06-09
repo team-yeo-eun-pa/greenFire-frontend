@@ -49,14 +49,21 @@ export const callProductOptionListAPI = ({productCode}) => {
     }
 };
 
-export const callSellerProductRegistAPI = ({ productCreateRequest }) => {
+export const callSellerProductRegistAPI = ({ formData  }) => {
     return async (dispatch, getState) => {
-        console.log(productCreateRequest);
-        const result = await authRequest.post(`/seller/mystore/regist`, productCreateRequest);
-        console.log('callSellerProductRegistAPI result : ',result);
-
-        if(result.status === 201) {
-            dispatch(success());
+        try {
+            const result = await authRequest.post(`/seller/mystore/regist`, formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (result.status === 201) {
+                dispatch(success());
+            } else {
+                console.error('오류:', result.status);
+            }
+        } catch (error) {
+            console.error('상품 등록 오류:', error);
         }
     }
 }

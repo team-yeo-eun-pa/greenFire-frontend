@@ -28,7 +28,7 @@ function ProductRegist() {
     // db 수정 후 상품 설명 추가 필요
     const [productForm, setProductForm] = useState({
         productName : '',
-        sellableStatus: '',
+        sellableStatus: 'Y',
         categoryCode: '',
     });
 
@@ -62,14 +62,18 @@ function ProductRegist() {
 
     const submitProductRegistHandler = () => {
         const formData = new FormData();
-        // formData.append('productImg', imageInput.current.files[0]);
-        console.log('productForm', productForm);
+
+        // if (imageInput.current.files.length > 0) {
+        //     formData.append('productImg', imageInput.current.files[0]);
+        // }
+        //
+        console.log('productForm: ', productForm);
         formData.append('productCreateRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
         formData.append('options', new Blob([JSON.stringify(options)], { type : 'application/json'}));
-        dispatch(callSellerProductRegistAPI({ productCreateRequest : formData }));
+        dispatch(callSellerProductRegistAPI({ formData }));
     }
 
-    console.log('options', options);
+    console.log('options: ', options);
 
     return (
         <div className="product-regist-page">
