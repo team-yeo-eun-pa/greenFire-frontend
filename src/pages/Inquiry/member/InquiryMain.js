@@ -56,15 +56,15 @@ function InquiryMain({data}) {
                     {/* 등록된 문의가 없을 시, "등록된 문의가 없습니다."라는 문구 보여주기*/}
 
 
-                    <>
+                    <div className="inquiryList">
 
                     { data &&
                         <>
                             <InquiryList data={inquiry.data}/>
-                            {/*<PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>*/}
+                            <PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>
                         </>
                     }
-                    </>
+                    </div>
 
 
                     <Button

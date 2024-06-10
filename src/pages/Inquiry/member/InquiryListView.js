@@ -21,11 +21,11 @@ function InquiryListView({data}) {
 
 
 
-    const {getInquiry, inquiry} = useSelector(state => state.inquiryReducer);
+    const {success, inquiry} = useSelector(state => state.inquiryReducer);
 
     useEffect(() => {
-        if (getInquiry === true) navigate(`/inquiry/view`);
-    }, [getInquiry])
+        if (success === true) navigate(`/members/mypage/inquiry/view`);
+    }, [success])
 
     const onClickInquiryRegistHandler = () => {
         dispatch(callInquiryListAPI({currentPage}));
@@ -39,7 +39,7 @@ function InquiryListView({data}) {
             {data &&
                 <InquiryList data={inquiry.data}/>
             }
-            {/*<PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>*/}
+            <PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>
 
 
 
