@@ -1,29 +1,41 @@
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import ListGroup from "react-bootstrap/ListGroup";
-import WishItem from "../../components/items/WishItem";
-import MystoreProductItem from "../../components/items/inquiry/MystoreProductItem";
 import PagingBar from "../../components/common/PagingBar";
+import MystoreProductItem from "../../components/items/MystoreProductItem";
+import {useEffect, useState} from "react";
+import {callProductListAPI, callSellerProductListAPI} from "../../apis/ProductAPI";
+import {useDispatch, useSelector} from "react-redux";
 
 function ProductManagement() {
 
-    const productName = [
-        "상품명긴상품명10자이상상품명",
-        "상품명긴상품명10자이상상품명2",
-        "상품명3"
-    ];
+    const dispatch = useDispatch();
+    const [currentPage, setCurrentPage] = useState(1);
+    const {products} = useSelector(state => state.productReducer);
 
-    const productPrice = [
-        10000,
-        12000,
-        8000
-    ];
+    console.log(products);
 
-    const productImg = [
-        "p1.png",
-        "p2.png",
-        "p3.png"
-    ];
+    useEffect(() => {
+        dispatch(callSellerProductListAPI({currentPage}));
+    }, [currentPage]);
+
+    // const productName = [
+    //     "상품명긴상품명10자이상상품명",
+    //     "상품명긴상품명10자이상상품명2",
+    //     "상품명3"
+    // ];
+    //
+    // const productPrice = [
+    //     10000,
+    //     12000,
+    //     8000
+    // ];
+    //
+    // const productImg = [
+    //     "p1.png",
+    //     "p2.png",
+    //     "p3.png"
+    // ];
 
 
     return (
@@ -35,13 +47,24 @@ function ProductManagement() {
             </button>
 
             <div className="mystore-product-list">
-                {productName.map((productName, index) => (
+                {/*{productName.map((productName, index) => (*/}
+                {/*    <ListGroup key={productName}>*/}
+                {/*        <ListGroup.Item>*/}
+                {/*            <MystoreProductItem*/}
+                {/*                productName={productName}*/}
+                {/*                // productImg={productImg[index]}*/}
+                {/*                price={productPrice[index]}*/}
+                {/*            />*/}
+                {/*        </ListGroup.Item>*/}
+                {/*    </ListGroup>*/}
+                {/*))}*/}
+                {products.data.map((productName, index) => (
                     <ListGroup key={productName}>
                         <ListGroup.Item>
                             <MystoreProductItem
-                                productName={productName}
-                                productImg={productImg[index]}
-                                productPrice={productPrice[index]}
+                                productName={products.productName}
+                                // productImg={productImg[index]}
+                                price={products.price[index]}
                             />
                         </ListGroup.Item>
                     </ListGroup>

@@ -21,19 +21,6 @@ export const callProductListAPI = ({currentPage = 1}) => {
     }
 };
 
-export const callProductCategoryListAPI = () => {
-
-    return async (dispatch, getState) => {
-        const result = await request(
-            'GET',
-            `/category`
-        );
-        console.log('callProductCategoryListAPI result : ',result);
-        if (result && result.status === 200) {
-            dispatch(getAdminCategory(result));
-        }
-    }
-};
 
 export const callProductOptionListAPI = ({productCode}) => {
 
@@ -45,6 +32,20 @@ export const callProductOptionListAPI = ({productCode}) => {
         console.log('callProductOptionListAPI result : ',result);
         if (result && result.status === 200) {
             dispatch(getOptions(result));
+        }
+    }
+};
+
+export const callSellerProductListAPI = ({currentPage = 1}) => {
+
+    return async (dispatch, getState) => {
+        const result = await request(
+            'GET',
+            `/seller/mystore/product?page=${currentPage}`
+        );
+        console.log('callSellerProductListAPI result : ',result);
+        if (result && result.status === 200) {
+            dispatch(getProducts(result));
         }
     }
 };
@@ -66,4 +67,6 @@ export const callSellerProductRegistAPI = ({ formData  }) => {
             console.error('상품 등록 오류:', error);
         }
     }
-}
+};
+
+

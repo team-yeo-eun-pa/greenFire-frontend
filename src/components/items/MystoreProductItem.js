@@ -4,19 +4,22 @@ import Nav from "react-bootstrap/Nav";
 function MystoreProductItem(props) {
 
 
+
+
     return (
         <div className="mystore-product-item">
             <div className="mystore-product-wrapper">
                 <div className="mystore-product-img-wrapper">
-                    <img className="mystore-product-img" src={props.productImg}/>
+                    {/*<img className="mystore-product-img" src={props.product.productImg}/>*/}
+                    <img className="mystore-product-img" src="p1.png"/>
                 </div>
                 <div className="mystore-product-name">
-                    {props.productName}
+                    {props.products.productName}
                 </div>
             </div>
 
             <div className="mystore-product-price">
-                {props.productPrice} 원
+                {props.products.price} 원
             </div>
 
             <div className="mystore-product-btn-wrapper">

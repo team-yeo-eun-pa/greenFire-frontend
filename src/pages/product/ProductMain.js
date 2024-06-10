@@ -15,7 +15,6 @@ function ProductMain() {
 
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
-    // const currentPage = useSelector(state => state.productReducer.currentPage);
     const {products} = useSelector(state => state.productReducer);
 
 
