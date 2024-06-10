@@ -1,9 +1,16 @@
-import {authRequest, request} from "./api";
+import {authRequest} from "./api";
 import {getMemberId} from "../utils/TokenUtils";
-import {getApplies, getApplyDetail} from "../modules/ApplyModules";
-import {success} from "../modules/MemberModules";
+import {
+    getAdminApplies,
+    adminApplyAccept, adminApplyReject,
+    getAdminApplyDetail,
+    getApplies,
+    getApplyDetail,
+    success
+} from "../modules/ApplyModules";
 import {toast} from "react-toastify";
 
+// ------------------------------ member
 export const callAppliesAPI = ({currentPage = 1}) => {
     return async (dispatch, getState) => {
 
@@ -75,3 +82,54 @@ export const callApplyCancelAPI = ({ sellerCode, applyRequest }) => {
         }
     }
 }
+
+// ------------------------------ admin
+export const callAppliesAdminAPI = ({currentPage = 1}) => {
+    return async (dispatch, getState) => {
+        const result = await authRequest.get(`/admin/dashboard/applies?page=${currentPage}`);
+        console.log('callAppliesAdminAPI result : ', result);
+
+        if (result.status === 200) {
+            dispatch(getAdminApplies(result));
+        }
+    }
+};
+
+export const callAdminApplyDetailAPI = (sellerCode) => {
+    return async (dispatch, getState) => {
+        const result = await authRequest.get(`/admin/dashboard/applies/${sellerCode}`);
+        console.log('callGetAdminApplyDetailAPI result:', result);
+
+        if (result?.status === 200) {
+            dispatch(getAdminApplyDetail(result.data));
+        } else {
+            console.error('Failed to fetch admin apply detail');
+        }
+    }
+};
+
+export const callAdminApplyAcceptAPI = ({ sellerCode, applyRequest }) => {
+    return async (dispatch, getState) => {
+        const result = await authRequest.put(`/admin/dashboard/applies/${sellerCode}/accept`, applyRequest);
+        console.log('callAdminApplyAcceptAPI result:', result);
+
+        if (result?.status === 201) {
+            dispatch(adminApplyAccept({ success: true }));
+        } else {
+            console.error('Failed to accept apply');
+        }
+    }
+};
+
+export const callAdminApplyRejectAPI = ({ sellerCode, applyRequest }) => {
+    return async (dispatch, getState) => {
+        const result = await authRequest.post(`/admin/dashboard/applies/${sellerCode}/reject`, applyRequest);
+        console.log('callAdminApplyRejectAPI result:', result);
+
+        if (result?.status === 201) {
+            dispatch(adminApplyReject({ success: true }));
+        } else {
+            console.error('Failed to reject apply');
+        }
+    }
+};
