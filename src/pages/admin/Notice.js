@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Card, Button } from 'react-bootstrap';
 import {useDispatch, useSelector} from "react-redux";
 import {AdminNoticeAPICalls} from "../../apis/AdminNoticeAPICalls";
 import {useLocation, useNavigate} from "react-router-dom";
 
-function AdminNotice() {
+function Notice() {
     const dispatch = useDispatch();
     const { notice } = useSelector(state => state.noticeReducer);
     const location = useLocation();
@@ -29,7 +29,7 @@ function AdminNotice() {
                         <Button variant="success" size="sm" className="mb-2">공지</Button>
                         <span className="ml-2">{notice.noticeTitle}</span>
                     </Card.Text>
-                    <Card.Text className="text-right text-muted">{notice.memberName} | {notice.noticeDate}</Card.Text>
+                    <Card.Text className="text-right text-muted">{notice.noticeWriter} | {notice.noticeDate}</Card.Text>
                     <hr />
                     <div className="my-4">
                         <img src="your-logo-url" alt="Green Fire Logo" style={{ width: '100px' }} />
@@ -45,4 +45,4 @@ function AdminNotice() {
     );
 }
 
-export default AdminNotice;
+export default Notice;

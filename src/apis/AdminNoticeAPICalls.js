@@ -2,9 +2,10 @@
 import {authRequest, request} from "./api";
 import {getNotice, getNotices} from "../modules/NoticeModules";
 
+
 export const AdminNoticesAPICalls = ({currentPage = 1}) => {
     return async (dispatch, getState) => {
-        const result = await authRequest.get(`/admin/notices?page=${currentPage}`);
+        const result = await authRequest.get( `/admin/notices?page=${currentPage}`);
         console.log('AdminNoticesAPICalls result : ', result);
 
         if(result.status === 200) {
