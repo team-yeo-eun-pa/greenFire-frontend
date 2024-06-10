@@ -58,7 +58,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
-                        <Route path="/notice" element={<MemberNotices/>}/>
+                        {/*<Route path="/notice" element={<MemberNotices/>}/>*/}
                         <Route path="/notice/detail" element={<Notice/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
