@@ -1,12 +1,13 @@
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {callMemberInquiryRegistAPI} from "../../../apis/InquiryAPI";
+import {callInquiryListAPI, callMemberInquiryRegistAPI} from "../../../apis/InquiryAPI";
 import InquiryForm from "../../../components/form/InquiryForm";
 import {Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import InquiryMain from "./InquiryMain";
 
-function InquiryRegist() {
+function InquiryRegist({data}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -22,13 +23,15 @@ function InquiryRegist() {
     const {success} = useSelector(state => state.inquiryReducer);
 
     useEffect(() => {
-        if(success === true) navigate('/inquiry/regist')
+        if(success === true) navigate('members/mypage/inquiry/view')
     }, [success]);
 
 
 
-    const onClickInquiryUpdateHandler = () => {
-        dispatch(callMemberInquiryRegistAPI({inquiryRegistRequest:form}));
+
+
+    const onClickInquiryRegistHandler = () => {
+        dispatch( callMemberInquiryRegistAPI({inquiryRegistRequest:form}));
     };
 
 
@@ -48,7 +51,7 @@ function InquiryRegist() {
                             <div className="inquiry-regist-btn">
                                 <Button
                                     variant="success"
-                                    onClick={onClickInquiryUpdateHandler}
+                                    onClick={onClickInquiryRegistHandler}
                                 >{''}
                                     등록하기
                                 </Button>

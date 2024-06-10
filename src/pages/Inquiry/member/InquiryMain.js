@@ -1,4 +1,4 @@
-import UserPageNavBar from "../../../components/common/UserPageNavBar";
+
 import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Col, Row} from "react-bootstrap";
@@ -10,10 +10,11 @@ import Button from "react-bootstrap/Button";
 import {useNavigate} from "react-router-dom";
 
 
-function InquiryMain() {
+
+function InquiryMain({data}) {
 
     const dispatch = useDispatch();
-    // const [currentPage, setCurrentPage] = useState(1);
+     const [currentPage, setCurrentPage] = useState(1);
     const {inquiry} = useSelector(state => state.inquiryReducer);
     const navigate = useNavigate();
 
@@ -26,8 +27,8 @@ function InquiryMain() {
 
 
     useEffect(() => {
-        dispatch(callInquiryListAPI);
-    }, );
+        dispatch(callInquiryListAPI({currentPage}));
+    }, [currentPage]);
 
     return (
         <>
@@ -55,15 +56,15 @@ function InquiryMain() {
                     {/* 등록된 문의가 없을 시, "등록된 문의가 없습니다."라는 문구 보여주기*/}
 
 
-                    <>
+                    <div className="inquiryList">
 
-                    { inquiry &&
+                    { data &&
                         <>
                             <InquiryList data={inquiry.data}/>
-                            {/*<PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>*/}
+                            <PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>
                         </>
                     }
-                    </>
+                    </div>
 
 
                     <Button

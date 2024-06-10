@@ -595,3 +595,9 @@
 .text-center {
     text-align: center;
 }
+
+/*------------*/
+
+.inquiryList {
+    background-color: yellow;
+}

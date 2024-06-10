@@ -30,8 +30,9 @@ import Order from "./pages/order/Order";
 import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
-import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
 import ReportPage from "./pages/admin/ReportPage";
+import Notices from "./pages/admin/Notices";
+import Notice from "./pages/admin/Notice";
 import ApplySeller from "./pages/member/ApplySeller";
 import ApplyDetail from "./pages/member/ApplyDetail";
 import ApplyRegist from "./pages/member/ApplyRegist";
@@ -39,8 +40,10 @@ import {ToastContainer} from "react-toastify";
 import OrderList from "./pages/order/OrderList";
 import OrderDetails from "./pages/order/OrderDetails";
 import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
-import Notices from "./pages/admin/Notices";
-import Notice from "./pages/admin/Notice";
+import InquiryListView from "./pages/Inquiry/member/InquiryListView";
+import ApplyList from "./pages/admin/AdminApplyList";
+import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
+
 
 
 function App() {
@@ -49,14 +52,14 @@ function App() {
             <BrowserRouter>
                 <ToastContainer hideProgressBar={true}
                                 position="top-center"
-                                autoClose={3000} // 3초 후 자동 닫힘
+                                autoClose={3000}
                                 closeOnClick
                                 pauseOnHover
                                 draggable/>
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
-                        <Route path="/notice" element={<Notices/>}/>
+                        {/*<Route path="/notice" element={<MemberNotices/>}/>*/}
                         <Route path="/notice/detail" element={<Notice/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
@@ -92,7 +95,7 @@ function App() {
                                 <Route path="inquiry" >
                                     <Route index element={<InquiryMain/>}/>
                                     <Route path="regist" element={<InquiryRegist/>}/>
-                                    <Route path="list" element={<InquiryUpdate/>}/>
+                                    <Route path="view" element={<InquiryListView/>}/>
                                 </Route>
 
 
@@ -115,12 +118,18 @@ function App() {
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
+
                                 <Route path="notice-create" element={<AdminCreateNotice/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
-                                <Route path="main" element={<AdminMain/>}/>
                                 <Route path="category" element={<AdminCategory/>}/>
                                 <Route path="reports" element={<AdminReport/>}/>
+
+                                <Route path="applies">
+                                    <Route index element={<ApplyList/>}/>
+                                    <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
+                                </Route>
                             </Route>
+
                         </Route>
 
                         <Route path="/order">
