@@ -24,11 +24,11 @@ function InquiryListView({data}) {
     const {getInquiry, inquiry} = useSelector(state => state.inquiryReducer);
 
     useEffect(() => {
-        if (getInquiry === true) navigate('/inquiry/view');
+        if (getInquiry === true) navigate(`/inquiry/view`);
     }, [getInquiry])
 
     const onClickInquiryRegistHandler = () => {
-        dispatch(callInquiryListAPI({currentPage}));
+        dispatch(callInquiryListAPI({getInquiryListRequest}));
     }
 
 
