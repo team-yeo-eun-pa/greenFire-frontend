@@ -7,6 +7,12 @@ import { CgProfile } from "react-icons/cg";
 function UserPageNavBar({ profileInfo }) {
 
     const [key, setKey] = useState('home');
+
+    // 프로필 정보가 존재하는지 확인하고
+    if (!profileInfo) {
+        return null; // 프로필 정보가 없을 경우 렌더링하지 않음 이게 맞나?
+    }
+
     return (
         <>
             <Nav defaultActiveKey="/home" className="flex-column rounded mt-5 p-4"
