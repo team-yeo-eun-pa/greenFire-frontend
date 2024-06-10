@@ -11,6 +11,7 @@ import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
 import {callProductOptionListAPI, callSellerProductRegistAPI} from "../../apis/ProductAPI";
 import {success} from "../../modules/AdminCategoryModules";
 import ProductOptionAddForm from "../../components/form/ProductOptionAddForm";
+import {registSuccess} from "../../modules/ProductModules";
 
 
 const Delta = Quill.import('delta');
@@ -28,8 +29,10 @@ function ProductRegist() {
     // db 수정 후 상품 설명 추가 필요
     const [productForm, setProductForm] = useState({
         productName : '',
-        sellableStatus: 'Y',
+        sellableStatus: '',
         categoryCode: '',
+        productDescription: '',
+        // productImageUrl: ''
     });
 
     const [options, setOptions] = useState([]);
@@ -38,21 +41,16 @@ function ProductRegist() {
     const [lastChange, setLastChange] = useState();
     const quillRef = useRef();
 
+
     useEffect(() => {
         if (saveSuccess === true) navigate('/seller/mystore/product');
     }, [saveSuccess]);
-
 
 
     useEffect(() => {
         dispatch(AdminCategoryAPICalls());
     }, [dispatch]);
 
-
-    //addoption
-    // const addOption = (option) => {
-    //     setOptions([...options, option])
-    // };
 
     const removeOption = (index) => {
         setOptions(options.filter((_, i) => i !== index));
@@ -63,13 +61,14 @@ function ProductRegist() {
     const submitProductRegistHandler = () => {
         const formData = new FormData();
 
-        // if (imageInput.current.files.length > 0) {
-        //     formData.append('productImg', imageInput.current.files[0]);
-        // }
-        //
+        if (imageInput.current.files.length > 0) {
+            formData.append('productImg', imageInput.current.files[0]);
+        }
+
         console.log('productForm: ', productForm);
+        console.log('options: ', options);
         formData.append('productCreateRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
-        formData.append('options', new Blob([JSON.stringify(options)], { type : 'application/json'}));
+        formData.append('productOptionCreateRequest', new Blob([JSON.stringify(options)], { type : 'application/json'}));
         dispatch(callSellerProductRegistAPI({ formData }));
     }
 
@@ -79,7 +78,7 @@ function ProductRegist() {
         <div className="product-regist-page">
 
             <div>
-                <ProductForm sellableStatus={sellableStatus} category={adminCategory}/>
+                <ProductForm sellableStatus={sellableStatus} category={adminCategory} imageInput={imageInput} productForm={productForm} setProductForm={setProductForm}/>
             </div>
 
             <div>

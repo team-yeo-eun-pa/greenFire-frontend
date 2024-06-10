@@ -58,17 +58,20 @@ function ProductManagement() {
                 {/*        </ListGroup.Item>*/}
                 {/*    </ListGroup>*/}
                 {/*))}*/}
-                {products.data.map((productName, index) => (
-                    <ListGroup key={productName}>
-                        <ListGroup.Item>
-                            <MystoreProductItem
-                                productName={products.productName}
-                                // productImg={productImg[index]}
-                                price={products.price[index]}
-                            />
-                        </ListGroup.Item>
-                    </ListGroup>
-                ))}
+
+
+
+                {/*{products.data.map((productName, index) => (*/}
+                {/*    <ListGroup key={productName}>*/}
+                {/*        <ListGroup.Item>*/}
+                {/*            <MystoreProductItem*/}
+                {/*                productName={products.productName}*/}
+                {/*                // productImg={productImg[index]}*/}
+                {/*                price={products.price[index]}*/}
+                {/*            />*/}
+                {/*        </ListGroup.Item>*/}
+                {/*    </ListGroup>*/}
+                {/*))}*/}
             </div>
 
             <PagingBar/>

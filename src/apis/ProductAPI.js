@@ -3,8 +3,8 @@ import axios from "axios";
 import {authRequest, request} from "./api";
 import {getNotices} from "../modules/NoticeModules";
 import async from "async";
-import {getProducts} from "../modules/ProductModules";
-import {getAdminCategory, success} from "../modules/AdminCategoryModules";
+import {getProducts, registSuccess, success} from "../modules/ProductModules";
+import {getAdminCategory} from "../modules/AdminCategoryModules";
 import {getOptions} from "../modules/ProductOptionModules";
 
 export const callProductListAPI = ({currentPage = 1}) => {
