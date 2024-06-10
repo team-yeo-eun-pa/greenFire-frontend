@@ -26,20 +26,33 @@ import StoreProfile from "./components/items/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminReport from "./pages/admin/AdminReport";
-import OrderPage from "./pages/order/OrderPage";
+import Order from "./pages/order/Order";
 import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
 import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
 import ReportPage from "./pages/admin/ReportPage";
-import MemberNotices from "./pages/admin/Notices";
+import Notices from "./pages/admin/Notices";
 import Notice from "./pages/admin/Notice";
+import ApplySeller from "./pages/member/ApplySeller";
+import ApplyDetail from "./pages/member/ApplyDetail";
+import ApplyRegist from "./pages/member/ApplyRegist";
+import {ToastContainer} from "react-toastify";
+import OrderList from "./pages/order/OrderList";
+import OrderDetails from "./pages/order/OrderDetails";
 import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
+
 
 function App() {
     return (
         <>
             <BrowserRouter>
+                <ToastContainer hideProgressBar={true}
+                                position="top-center"
+                                autoClose={3000} // 3초 후 자동 닫힘
+                                closeOnClick
+                                pauseOnHover
+                                draggable/>
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
@@ -66,8 +79,15 @@ function App() {
                                 <Route index element={<Navigate to="/members/mypage/main" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
                                 <Route path="profile" element={<MemberProfile/>}/>
+                                <Route path="orders" element={<OrderList/>}/>
+                                <Route path="orders/:orderCode" element={<OrderDetails/>}/>
                                 <Route path="report" element={<ReportPage/>}/>
 
+                                <Route path="apply">
+                                    <Route index element={<ApplySeller/>}/>
+                                    <Route path="regist" element={<ApplyRegist/>}/>
+                                    <Route path="detail/:sellerCode" element={<ApplyDetail/>}/>
+                                </Route>
 
                                 <Route path="inquiry" >
                                     <Route index element={<InquiryMain/>}/>
@@ -104,7 +124,7 @@ function App() {
                         </Route>
 
                         <Route path="/order">
-                            <Route index element={<OrderPage/>}/>
+                            <Route index element={<Order/>}/>
                         </Route>
 
                         <Route path="/payment">

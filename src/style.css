@@ -368,6 +368,25 @@
     color: white;
 }
 
+.square-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.light-green-bg {
+    background-color: #e8f5e9; /* 훨씬 더 흰색에 가까운 초록색 */
+    padding: 10px; /* 내부 여백 */
+    border-top-left-radius: 5px; /* 왼쪽 위 모서리 라운드 */
+    border-top-right-radius: 5px; /* 오른쪽 위 모서리 라운드 */
+}
+
+.shipping-info-title {
+    font-size: 1.2rem;
+}
+
 /* styles.css */
 
 .table.text-center th,
@@ -492,14 +511,3 @@
     padding: 0.5rem;
     margin-bottom: 1rem;
 }
-
-
-
-
-
-
-
-
-
-
-
