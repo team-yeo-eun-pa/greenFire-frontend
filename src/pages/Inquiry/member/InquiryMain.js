@@ -1,4 +1,4 @@
-import UserPageNavBar from "../../../components/common/UserPageNavBar";
+
 import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Col, Row} from "react-bootstrap";
@@ -10,7 +10,8 @@ import Button from "react-bootstrap/Button";
 import {useNavigate} from "react-router-dom";
 
 
-function InquiryMain() {
+
+function InquiryMain({data}) {
 
     const dispatch = useDispatch();
     // const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +27,7 @@ function InquiryMain() {
 
 
     useEffect(() => {
-        dispatch(callInquiryListAPI);
+        dispatch(callInquiryListAPI({getInquiryListRequest}));
     }, );
 
     return (
@@ -57,7 +58,7 @@ function InquiryMain() {
 
                     <>
 
-                    { inquiry &&
+                    { data &&
                         <>
                             <InquiryList data={inquiry.data}/>
                             {/*<PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>*/}
