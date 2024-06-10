@@ -28,7 +28,7 @@ function InquiryListView({data}) {
     }, [getInquiry])
 
     const onClickInquiryRegistHandler = () => {
-        dispatch(callInquiryListAPI({getInquiryListRequest}));
+        dispatch(callInquiryListAPI({currentPage}));
     }
 
 
