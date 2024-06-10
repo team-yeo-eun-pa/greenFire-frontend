@@ -3,6 +3,7 @@ import {useState} from "react";
 import Image from 'react-bootstrap/Image';
 import {NavLink} from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
+import { Link } from 'react-router-dom';
 
 function UserPageNavBar({ profileInfo }) {
 
@@ -48,11 +49,11 @@ function UserPageNavBar({ profileInfo }) {
                 <Nav.Link eventKey="myCertifications" className="nav-link-custom">나의 인증</Nav.Link>
                 <br/>
                 <Nav.Link className="nav-link-custom-title">반딧불이 스토어</Nav.Link>
-                <Nav.Link eventKey="orders" className="nav-link-custom">주문∙배송</Nav.Link>
+                <NavLink eventKey="orders" className="nav-link-custom" to="/members/mypage/orders">주문∙배송</NavLink>
                 <Nav.Link eventKey="coupons" className="nav-link-custom">쿠폰</Nav.Link>
                 <Nav.Link eventKey="wishlist" className="nav-link-custom">찜한 상품</Nav.Link>
                 <Nav.Link eventKey="reviews" className="nav-link-custom">내가 쓴 리뷰</Nav.Link>
-                <Nav.Link eventKey="applyStore" className="nav-link-custom">입점 신청하기</Nav.Link>
+                <Nav.Link as={Link} to="/members/mypage/apply" className="nav-link-custom">입점 신청하기</Nav.Link>
                 <br/>
                 <Nav.Link className="nav-link-custom-title">설정 및 기타내역</Nav.Link>
                 <Nav.Link eventKey="notifications" className="nav-link-custom">알림 설정</Nav.Link>
