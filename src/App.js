@@ -43,6 +43,8 @@ import OrderList from "./pages/order/OrderList";
 import OrderDetails from "./pages/order/OrderDetails";
 import AdminNotice from "./pages/admin/AdminNotice";
 import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
+import ApplyList from "./pages/admin/AdminApplyList";
+import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
 
 
 function App() {
@@ -51,7 +53,7 @@ function App() {
             <BrowserRouter>
                 <ToastContainer hideProgressBar={true}
                                 position="top-center"
-                                autoClose={3000} // 3초 후 자동 닫힘
+                                autoClose={3000}
                                 closeOnClick
                                 pauseOnHover
                                 draggable/>
@@ -117,14 +119,20 @@ function App() {
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
+                                <Route path="main" element={<AdminMain/>}/>
                                 <Route path="notices" element={<AdminNotices/>}/>
                                 <Route path="notice" element={<AdminNotice/>}/>
                                 <Route path="notice-create" element={<AdminCreateNotice/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
-                                <Route path="main" element={<AdminMain/>}/>
                                 <Route path="category" element={<AdminCategory/>}/>
                                 <Route path="reports" element={<AdminReport/>}/>
+
+                                <Route path="applies">
+                                    <Route index element={<ApplyList/>}/>
+                                    <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
+                                </Route>
                             </Route>
+
                         </Route>
 
                         <Route path="/order">
