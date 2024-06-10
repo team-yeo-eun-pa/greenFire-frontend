@@ -4,38 +4,22 @@ import ListGroup from "react-bootstrap/ListGroup";
 import PagingBar from "../../components/common/PagingBar";
 import MystoreProductItem from "../../components/items/MystoreProductItem";
 import {useEffect, useState} from "react";
-import {callProductListAPI, callSellerProductListAPI} from "../../apis/ProductAPI";
+import {callProductListAPI, callStoreProductListAPI} from "../../apis/ProductAPI";
 import {useDispatch, useSelector} from "react-redux";
+import {Col, Row} from "react-bootstrap";
+import ProductItem from "../../components/items/ProductItem";
 
 function ProductManagement() {
 
+    const {products} = useSelector(state => state.productReducer);
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
-    const {products} = useSelector(state => state.productReducer);
-
-    console.log(products);
 
     useEffect(() => {
-        dispatch(callSellerProductListAPI({currentPage}));
+        dispatch(callStoreProductListAPI({currentPage}));
     }, [currentPage]);
 
-    // const productName = [
-    //     "상품명긴상품명10자이상상품명",
-    //     "상품명긴상품명10자이상상품명2",
-    //     "상품명3"
-    // ];
-    //
-    // const productPrice = [
-    //     10000,
-    //     12000,
-    //     8000
-    // ];
-    //
-    // const productImg = [
-    //     "p1.png",
-    //     "p2.png",
-    //     "p3.png"
-    // ];
+    console.log(products);
 
 
     return (
@@ -47,31 +31,17 @@ function ProductManagement() {
             </button>
 
             <div className="mystore-product-list">
-                {/*{productName.map((productName, index) => (*/}
-                {/*    <ListGroup key={productName}>*/}
-                {/*        <ListGroup.Item>*/}
-                {/*            <MystoreProductItem*/}
-                {/*                productName={productName}*/}
-                {/*                // productImg={productImg[index]}*/}
-                {/*                price={productPrice[index]}*/}
-                {/*            />*/}
-                {/*        </ListGroup.Item>*/}
-                {/*    </ListGroup>*/}
-                {/*))}*/}
-
-
-
-                {/*{products.data.map((productName, index) => (*/}
-                {/*    <ListGroup key={productName}>*/}
-                {/*        <ListGroup.Item>*/}
-                {/*            <MystoreProductItem*/}
-                {/*                productName={products.productName}*/}
-                {/*                // productImg={productImg[index]}*/}
-                {/*                price={products.price[index]}*/}
-                {/*            />*/}
-                {/*        </ListGroup.Item>*/}
-                {/*    </ListGroup>*/}
-                {/*))}*/}
+                {productName.map((productName, index) => (
+                    <ListGroup key={productName}>
+                        <ListGroup.Item>
+                                {products.data.map(product => (
+                                    <Col key={product.id} style={{marginTop: '5px', marginBottom: '10px'}}>
+                                        <MystoreProductItem product={product}/>
+                                    </Col>
+                                ))}
+                        </ListGroup.Item>
+                    </ListGroup>
+                ))}
             </div>
 
             <PagingBar/>

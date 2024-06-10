@@ -70,3 +70,19 @@ export const callSellerProductRegistAPI = ({ formData  }) => {
 };
 
 
+
+
+export const callStoreProductListAPI = () => {
+    return async (dispatch, getState) => {
+        try {
+            const result = await authRequest.get(`/seller/mystore/product`);
+            if (result.status === 201) {
+                dispatch(success());
+            } else {
+                console.error('오류:', result.status);
+            }
+        } catch (error) {
+            console.error('마이스토어 상품 조회 오류:', error);
+        }
+    }
+}

@@ -91,17 +91,7 @@ function App() {
                                 </Route>
                             </Route>
 
-                        <Route path="/seller">
-                            <Route path="mystore" element={<SellerPageLayout/>}>
-                                <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
-                                {/*<Route path="main" element={<MyStoreMain/>} />*/}
-                                <Route path="main" element={<MyStoreList/>}/>
-                                <Route path=":storeCode" element={<StoreProfile/>}/>
-                                <Route path="product" element={<ProductManagement/>}/>
-                                <Route path="regist" element={<ProductRegist/>}/>
-                            </Route>
 
-                        </Route>
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
