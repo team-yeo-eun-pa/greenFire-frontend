@@ -1,6 +1,5 @@
 import InquiryList from "../../../components/list/InquiryList";
 import React, {useEffect, useState} from "react";
-import {getInquiry} from "../../../modules/InquiryModules";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "react-bootstrap/Button";
@@ -15,20 +14,24 @@ function InquiryListView({data}) {
 
     const dispatch = useDispatch();
 
-    const [form, setForm] = useState();
-
     const [currentPage, setCurrentPage] = useState(1);
+
 
 
 
     const {getInquiry, inquiry} = useSelector(state => state.inquiryReducer);
 
+
+
     useEffect(() => {
-        if (getInquiry === true) navigate(`/inquiry/view`);
+        if (getInquiry === true) navigate(`/members/mypage/inquiry/view`);
     }, [getInquiry])
 
-    const onClickInquiryRegistHandler = () => {
-        dispatch(callInquiryListAPI({getInquiryListRequest}));
+    const onClickGetInquiryListHandler = () => {
+
+        dispatch(callInquiryListAPI({currentPage}));
+
+
     }
 
 
@@ -46,7 +49,7 @@ function InquiryListView({data}) {
             <div className="inquiry-regist-btn">
                 <Button
                     variant="success"
-                    onClick={onClickInquiryRegistHandler}
+                    onClick={onClickGetInquiryListHandler}
                 >{''}
                     등록하기
                 </Button>

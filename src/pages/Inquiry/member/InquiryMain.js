@@ -14,9 +14,11 @@ import {useNavigate} from "react-router-dom";
 function InquiryMain({data}) {
 
     const dispatch = useDispatch();
-    // const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
     const {inquiry} = useSelector(state => state.inquiryReducer);
     const navigate = useNavigate();
+
+
 
     const onClickInquiryRegisterHandler = () => {
         navigate("/members/mypage/inquiry/regist");
@@ -27,8 +29,8 @@ function InquiryMain({data}) {
 
 
     useEffect(() => {
-        dispatch(callInquiryListAPI({getInquiryListRequest}));
-    }, );
+        dispatch(callInquiryListAPI({currentPage}));
+    }, [currentPage]);
 
     return (
         <>
