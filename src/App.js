@@ -8,7 +8,6 @@ import UserPageLayout from "./layouts/UserPageLayout";
 import MyPageMain from "./pages/member/MyPageMain";
 import Error from "./pages/error/Error";
 import AdminPageLayout from "./layouts/AdminPageLayout";
-import AdminMain from "./pages/admin/AdminMain";
 import SellerPageLayout from "./layouts/SellerPageLayout";
 import MyStoreList from "./pages/seller/MyStoreList";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
@@ -58,7 +57,6 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
-                        <Route path="/notice" element={<MemberNotices/>}/>
                         <Route path="/notice/detail" element={<Notice/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
