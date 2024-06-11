@@ -19,7 +19,6 @@ function ProductManagement() {
         dispatch(callSellerProductListAPI({currentPage}));
     }, [currentPage, dispatch]);
 
-    console.log("products: ", products);
 
     return (
         <div>
@@ -30,13 +29,13 @@ function ProductManagement() {
             </button>
 
             <div className="mystore-product-list">
-                { products && products.length > 0 ? (
+                { products && products.data.length > 0 ? (
                     <ListGroup>
 
                             {products.data.map(product => (
-                                <ListGroup.Item key={product.productCode} style={{marginTop: '5px', marginBottom: '10px'}}>
+                                <Col key={product.productCode} style={{marginTop: '5px', marginBottom: '10px'}}>
                                     <MystoreProductItem product={product}/>
-                                </ListGroup.Item>
+                                </Col>
                             ))}
                     </ListGroup>
                 ):(

@@ -1,11 +1,8 @@
 import Nav from "react-bootstrap/Nav";
 
 
-function MystoreProductItem(props) {
+function MystoreProductItem({product}) {
 
-
-    console.log("props.product: ", props.product);
-    console.log("props: ", props);
 
 
     return (
@@ -16,12 +13,12 @@ function MystoreProductItem(props) {
                     <img className="mystore-product-img" src="p1.png"/>
                 </div>
                 <div className="mystore-product-name">
-                    {props.product.productName}
+                    {product.productName}
                 </div>
             </div>
 
             <div className="mystore-product-price">
-                {props.product.price} 원
+                {product.price} 원
             </div>
 
             <div className="mystore-product-btn-wrapper">

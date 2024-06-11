@@ -27,7 +27,7 @@ export const { product : { getProducts, getProduct, success, addProduct, deleteP
 const productReducer = handleActions({
     [GET_PRODUCTS]: (state, { payload }) => ({
         ...state,
-        product: payload.products
+        products: payload.products
     }),
     [GET_PRODUCT]: (state, { payload }) => ({
         ...state,
