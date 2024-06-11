@@ -4,22 +4,22 @@ import ListGroup from "react-bootstrap/ListGroup";
 import PagingBar from "../../components/common/PagingBar";
 import MystoreProductItem from "../../components/items/MystoreProductItem";
 import {useEffect, useState} from "react";
-import {callProductListAPI, callStoreProductListAPI} from "../../apis/ProductAPI";
+import {callProductListAPI, callSellerProductListAPI, callStoreProductListAPI} from "../../apis/ProductAPI";
 import {useDispatch, useSelector} from "react-redux";
 import {Col, Row} from "react-bootstrap";
 import ProductItem from "../../components/items/ProductItem";
 
 function ProductManagement() {
 
-    const {products} = useSelector(state => state.productReducer);
+    const {sellerProducts} = useSelector(state => state.productReducer);
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        dispatch(callStoreProductListAPI({currentPage}));
-    }, [currentPage]);
+        dispatch(callSellerProductListAPI({currentPage}));
+    }, [currentPage, dispatch]);
 
-    console.log(products);
+    console.log('sellerProducts: ', sellerProducts);
 
 
     return (
@@ -31,17 +31,20 @@ function ProductManagement() {
             </button>
 
             <div className="mystore-product-list">
-                {productName.map((productName, index) => (
-                    <ListGroup key={productName}>
-                        <ListGroup.Item>
-                                {products.data.map(product => (
-                                    <Col key={product.id} style={{marginTop: '5px', marginBottom: '10px'}}>
-                                        <MystoreProductItem product={product}/>
-                                    </Col>
-                                ))}
-                        </ListGroup.Item>
+                { sellerProducts && sellerProducts.length > 0 ? (
+                    <ListGroup key={sellerProducts.productName}>
+
+                            {sellerProducts.map(product => (
+                                <ListGroup.Item key={product.productCode} style={{marginTop: '5px', marginBottom: '10px'}}>
+                                    <MystoreProductItem product={product}/>
+                                </ListGroup.Item>
+                            ))}
                     </ListGroup>
-                ))}
+                ):(
+                    <p>등록된 상품이 없습니다.</p>
+                    )}
+
+
             </div>
 
             <PagingBar/>

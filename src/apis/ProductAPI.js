@@ -3,7 +3,7 @@ import axios from "axios";
 import {authRequest, request} from "./api";
 import {getNotices} from "../modules/NoticeModules";
 import async from "async";
-import {getProducts, registSuccess, success} from "../modules/ProductModules";
+import {getProduct, getProducts, registSuccess, success} from "../modules/ProductModules";
 import {getAdminCategory} from "../modules/AdminCategoryModules";
 import {getOptions} from "../modules/ProductOptionModules";
 
@@ -14,9 +14,24 @@ export const callProductListAPI = ({currentPage = 1}) => {
             'GET',
             `/product?page=${currentPage}`
             );
-        console.log('callProductListAPI result : ',result);
+        console.log('callProductListAPI result: ', result);
+
         if (result && result.status === 200) {
             dispatch(getProducts(result));
+        }
+    }
+};
+
+export const callProductDetailAPI = ({productCode}) => {
+    return async (dispatch, getState) => {
+        const result = await request(
+            'GET',
+            `/product/${productCode}`
+        );
+        console.log('callProductDetailAPI result: ', result);
+
+        if (result.status === 200) {
+            dispatch(getProduct(result));
         }
     }
 };
@@ -39,13 +54,17 @@ export const callProductOptionListAPI = ({productCode}) => {
 export const callSellerProductListAPI = ({currentPage = 1}) => {
 
     return async (dispatch, getState) => {
-        const result = await request(
-            'GET',
-            `/seller/mystore/product?page=${currentPage}`
-        );
+        const result = await authRequest.get(`/seller/mystore/product?page=${currentPage}`
+            // ,{
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // }
+            // }
+            );
         console.log('callSellerProductListAPI result : ',result);
         if (result && result.status === 200) {
             dispatch(getProducts(result));
+            dispatch(success());
         }
     }
 };

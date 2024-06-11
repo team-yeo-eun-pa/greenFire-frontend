@@ -14,12 +14,12 @@ function MystoreProductItem(props) {
                     <img className="mystore-product-img" src="p1.png"/>
                 </div>
                 <div className="mystore-product-name">
-                    {props.products.productName}
+                    {props.product.productName}
                 </div>
             </div>
 
             <div className="mystore-product-price">
-                {props.products.price} 원
+                {props.product.price} 원
             </div>
 
             <div className="mystore-product-btn-wrapper">
