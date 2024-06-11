@@ -36,6 +36,7 @@ import ReportPage from "./pages/admin/ReportPage";
 import MemberNotices from "./pages/admin/MemberNotices";
 import MemberNotice from "./pages/admin/MemberNotice";
 import ProtectedRoute from "./components/route/ProtectedRoute";
+import ProductDetail from "./pages/product/ProductDetail";
 
 function App() {
     return (
@@ -50,13 +51,13 @@ function App() {
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
 
-                        <Route path="/product" element={<ProductMain/>}>
+                        <Route path="/product" element={<ProductMain/>}></Route>
+                        <Route path="/product/:productCode" element={<ProductDetail/>}/>
 
-                        </Route>
-                        <Route path="/wish" element={<Wishlist/>}>
+                        <Route path="/wish" element={<Wishlist/>}/>
 
 
-                        </Route>
+
                         <Route path="/members">
                             <Route path="signup"
                                    element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>

@@ -4,22 +4,25 @@ import React from "react";
 
 import { FaRegHeart } from "react-icons/fa";
 import { FaCartPlus } from "react-icons/fa6";
+import {useNavigate} from "react-router-dom";
 
 
-function ProductItem(props) {
+function ProductItem({product}) {
+
+    const navigate = useNavigate();
 
     return(
         <div>
-            <Card style={{width: '14rem', cursor: 'pointer'}}>
+            <Card style={{width: '14rem', cursor: 'pointer'}} onClick={()=>navigate(`/product/${product.productCode}`)}>
                 <Card.Img variant="top" src="/p1.png"/>
                 <Card.Body>
-                    <Card.Title>{props.product.productName}
+                    <Card.Title>{product.productName}
                     </Card.Title>
                     <Card.Text className="mb-0">
-                        {props.product.storeName}
+                        {product.storeName}
                     </Card.Text>
                     <Card.Text className="fs-6 fw-lighter" style={{letterSpacing: '0.1em'}}>
-                        {props.product.price}
+                        {product.price}
                     </Card.Text>
 
                     <div className="card-btn-wrapper">
