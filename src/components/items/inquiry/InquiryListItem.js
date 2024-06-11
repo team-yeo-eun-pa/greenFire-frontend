@@ -19,6 +19,7 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
                     <thead
                        >
                     <tr>
+                        <th>문의 코드 </th>
                         <th>작성일</th>
                         <th>문의 제목</th>
                         <th>문의 내용</th>
@@ -28,7 +29,7 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
 
                     <tbody>
                     <tr>
-
+                        <td key={inquiryCode} className="text-center">{inquiryCode}</td>
                         <td key={inquiryWriteDate} className="text-center">{inquiryWriteDate}</td>
                         <td key={inquiryTitle} className="text-center">{inquiryTitle}</td>
                         <td key={inquiryDetail} className="text-center">{inquiryDetail}</td>
@@ -39,7 +40,7 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
                 </Table>
 
 
-                   
+
 
 
 
