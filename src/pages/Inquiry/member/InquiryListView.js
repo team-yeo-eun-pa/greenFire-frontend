@@ -42,7 +42,7 @@ function InquiryListView({data}) {
             {data &&
                 <InquiryList data={inquiry.data}/>
             }
-            {/*<PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>*/}
+            <PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>
 
 
 

@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
-function InquiryListItem({inquiry : {inquiryCode, inquiryWriteDate, memberCode, csStatus}}) {
+function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle, inquiryDetail}}) {
 
 
     const navigate = useNavigate();
@@ -9,15 +9,20 @@ function InquiryListItem({inquiry : {inquiryCode, inquiryWriteDate, memberCode, 
     return (
 
         <div>
+           <div
+                onClick={() => navigate(`/inquiry/${inquiryCode}`)}
+            >
 
-            <h5>{inquiryWriteDate}</h5>
-            <h5>{memberCode}</h5>
-            <h5>{csStatus}</h5>
+                <h5>{inquiryWriteDate}</h5>
+                <h5>{inquiryTitle}</h5>
+                <h5>{inquiryDetail}</h5>
+            </div>
+
 
             <Button
-                onclick={()=> navigate(`/inquiry`)}
+                onclick={() => navigate(`/`)}
             >
-                뒤로가기
+                메인으로
             </Button>
 
 
