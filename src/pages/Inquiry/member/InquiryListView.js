@@ -19,17 +19,21 @@ function InquiryListView({data}) {
 
 
 
+
     const {getInquiry, inquiry} = useSelector(state => state.inquiryReducer);
 
 
 
+
     useEffect(() => {
+
         if (getInquiry === true) navigate(`/members/mypage/inquiry/view`);
     }, [getInquiry])
 
     const onClickGetInquiryListHandler = () => {
 
         dispatch(callInquiryListAPI({currentPage}));
+
 
 
     }
