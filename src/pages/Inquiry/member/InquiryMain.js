@@ -16,6 +16,7 @@ function InquiryMain({data}) {
 
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
+
     const {inquiry} = useSelector(state => state.inquiryReducer);
     const navigate = useNavigate();
 
@@ -59,7 +60,7 @@ function InquiryMain({data}) {
                     {/* 등록된 문의가 없을 시, "등록된 문의가 없습니다."라는 문구 보여주기*/}
 
 
-                    <>
+                    <div className="inquiryList">
 
                     { inquiry &&
                         <>
@@ -67,7 +68,7 @@ function InquiryMain({data}) {
                             <PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>
                         </>
                     }
-                    </>
+                    </div>
 
 
                     <Button
