@@ -29,7 +29,6 @@ import Order from "./pages/order/Order";
 import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
-import InquiryUpdate from "./pages/Inquiry/member/InquiryUpdate";
 import ReportPage from "./pages/admin/ReportPage";
 import Notices from "./pages/admin/Notices";
 import Notice from "./pages/admin/Notice";
@@ -40,8 +39,10 @@ import {ToastContainer} from "react-toastify";
 import OrderList from "./pages/order/OrderList";
 import OrderDetails from "./pages/order/OrderDetails";
 import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
+import InquiryListView from "./pages/Inquiry/member/InquiryListView";
 import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
+
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
+
                         <Route path="/notice/detail" element={<Notice/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
@@ -92,7 +94,7 @@ function App() {
                                 <Route path="inquiry" >
                                     <Route index element={<InquiryMain/>}/>
                                     <Route path="regist" element={<InquiryRegist/>}/>
-                                    <Route path="list" element={<InquiryUpdate/>}/>
+                                    <Route path="view" element={<InquiryListView/>}/>
                                 </Route>
 
 
