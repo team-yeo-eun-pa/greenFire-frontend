@@ -1,29 +1,48 @@
 import {useNavigate} from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import {Table} from "react-bootstrap";
+import React from "react";
 
-function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle, inquiryDetail}}) {
+
+function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle, inquiryDetail, inquiryReplyStatus}}) {
 
 
     const navigate = useNavigate();
 
     return (
 
-        <div>
-           <div
+
+            <div
                 onClick={() => navigate(`/inquiry/${inquiryCode}`)}
             >
 
-                <h5>{inquiryWriteDate}</h5>
-                <h5>{inquiryTitle}</h5>
-                <h5>{inquiryDetail}</h5>
-            </div>
+                <Table hover className="table text-center px-5 mt-4">
+                    <thead
+                       >
+                    <tr>
+                        <th>작성일</th>
+                        <th>문의 제목</th>
+                        <th>문의 내용</th>
+                        <th>문의 처리 상태</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+
+                        <td key={inquiryWriteDate} className="text-center">{inquiryWriteDate}</td>
+                        <td key={inquiryTitle} className="text-center">{inquiryTitle}</td>
+                        <td key={inquiryDetail} className="text-center">{inquiryDetail}</td>
+                        <td key={inquiryReplyStatus} className="text-center">{inquiryReplyStatus}</td>
+
+                    </tr>
+                    </tbody>
+                </Table>
 
 
-            <Button
-                onclick={() => navigate(`/`)}
-            >
-                메인으로
-            </Button>
+                   
+
+
+
 
 
         </div>
