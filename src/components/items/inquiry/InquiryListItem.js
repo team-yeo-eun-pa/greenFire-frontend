@@ -16,8 +16,8 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
             >
 
                 <Table hover className="table text-center px-5 mt-4">
-                    <thead
-                       >
+
+                    <thead>
                     <tr>
                         <th>문의 코드 </th>
                         <th>작성일</th>
@@ -26,7 +26,6 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
                         <th>문의 처리 상태</th>
                     </tr>
                     </thead>
-
                     <tbody>
                     <tr>
                         <td key={inquiryCode} className="text-center">{inquiryCode}</td>
@@ -37,6 +36,7 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
 
                     </tr>
                     </tbody>
+
                 </Table>
 
 
