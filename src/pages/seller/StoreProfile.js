@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { callStoreAPI, callUpdateStoreAPI } from '../../apis/SellerAPICalls';
-import { Container, Row, Col, Button, Image, Form } from 'react-bootstrap';
+import {useNavigate, useParams} from 'react-router-dom';
+import { callStoreAPI, callUpdateStoreAPI, callPauseStoreAPI, callModifyNewStoreAPI } from '../../apis/SellerAPICalls';
+import {Container, Row, Col, Button, Image, Form, Modal} from 'react-bootstrap';
 import { PiStorefrontLight } from 'react-icons/pi';
 import { formatDate } from '../../utils/FormatDateUtil';
 import { FcCancel } from 'react-icons/fc';
@@ -11,9 +11,12 @@ import { toast } from 'react-toastify';
 
 function StoreProfile() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { sellerCode } = useParams();
     const { storeInfo } = useSelector(state => state.sellerReducer);
     const [isEditing, setIsEditing] = useState(false);
+    const [showPauseModal, setShowPauseModal] = useState(false);
+    const [suspendedEndDate, setSuspendedEndDate] = useState('');
     const [form, setForm] = useState({
         storeName: '',
         storeInfo: '',
@@ -62,11 +65,28 @@ function StoreProfile() {
                 address: form.address,
                 addressDetail: form.addressDetail,
             };
-            await dispatch(callUpdateStoreAPI({ sellerCode, storeRequest }));
+
+            if (storeInfo.storeStatus === 'PRE_OPEN') {
+                await dispatch(callModifyNewStoreAPI({ sellerCode, storeRequest }));
+            } else {
+                await dispatch(callUpdateStoreAPI({ sellerCode, storeRequest }));
+            }
+
             setIsEditing(false);
         } catch (error) {
             console.error('Error updating store info:', error);
             toast.error("스토어 정보 업데이트 중 오류가 발생했습니다. 다시 시도해주세요.");
+        }
+    };
+
+    const handlePause = async () => {
+        try {
+            await dispatch(callPauseStoreAPI(sellerCode, suspendedEndDate));
+            setShowPauseModal(false);
+            navigate(`/seller/mystore/main`);
+        } catch (error) {
+            console.error('Error pausing store:', error);
+            toast.error("스토어 정지 중 오류가 발생했습니다. 다시 시도해주세요.");
         }
     };
 
@@ -218,7 +238,7 @@ function StoreProfile() {
                                     <Button variant="outline-success" className="me-2 w-100">정지 해제</Button>
                                 ) : (
                                     <>
-                                        <Button variant="outline-secondary" className="me-2 w-50">운영 정지</Button>
+                                        <Button variant="outline-secondary" className="me-2 w-50" onClick={() => setShowPauseModal(true)}>운영 정지</Button>
                                         <Button variant="outline-danger" className="w-50">스토어 삭제</Button>
                                     </>
                                 )}
@@ -226,6 +246,30 @@ function StoreProfile() {
                         )}
                     </Container>
                 </Container>
+                <Modal show={showPauseModal} onHide={() => setShowPauseModal(false)} style={{marginTop: 300}}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>스토어 운영 정지</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form.Group controlId="suspendedEndDate">
+                            <Form.Label className="mb-3">정지 종료 날짜를 선택해 주세요.</Form.Label>
+                            <Form.Control
+                                type="datetime-local"
+                                name="suspendedEndDate"
+                                value={suspendedEndDate}
+                                onChange={(e) => setSuspendedEndDate(e.target.value)}
+                            />
+                        </Form.Group>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="outline-secondary" onClick={() => setShowPauseModal(false)}>
+                            취소
+                        </Button>
+                        <Button variant="outline-info" onClick={handlePause}>
+                            저장
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </>
         )
     );

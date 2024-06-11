@@ -21,7 +21,7 @@ import LoginModal from "./components/items/LoginModal";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminMemberView from "./pages/admin/AdminMemberView";
 import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
-import StoreProfile from "./components/items/StoreProfile";
+import StoreProfile from "./pages/seller/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminReport from "./pages/admin/AdminReport";

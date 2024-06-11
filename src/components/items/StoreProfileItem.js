@@ -15,6 +15,21 @@ function StoreProfileItem({ store }) {
         navigate(`/seller/mystore/${sellerCode}`);
     };
 
+    const getOverlayText = (status) => {
+        switch (status) {
+            case 'PRE_OPEN':
+                return '등록이 필요한 스토어입니다.';
+            case 'CLOSED':
+                return '정지된 스토어입니다.';
+            case 'QUIT':
+                return '삭제된 스토어입니다.';
+            default:
+                return '';
+        }
+    };
+
+    const showOverlay = ['PRE_OPEN', 'CLOSED', 'QUIT'].includes(store.storeStatus);
+
     return (
         <div className="store-position-relative">
             <Card key={store.storeCode} className="mb-4">
@@ -52,9 +67,11 @@ function StoreProfileItem({ store }) {
                             스토어 바로가기
                         </Button>
                     </Card.Body>
-                    {store.storeStatus === 'PRE_OPEN' && (
+                    {showOverlay && (
                         <div className="store-card-overlay">
-                            <div className="store-card-overlay-text">등록이 필요한 스토어입니다.</div>
+                            <div className="store-card-overlay-text">
+                                {getOverlayText(store.storeStatus)}
+                            </div>
                         </div>
                     )}
                 </div>
