@@ -3,10 +3,10 @@ import {authRequest} from "./api";
 import {toast} from "react-toastify";
 import {getInquiry, success} from "../modules/InquiryModules";
 
-export const callInquiryListAPI = ({getInquiryListRequest}) => {
+export const callInquiryListAPI = ({currentPage}) => {
     return async (dispatch, getState) => {
 
-         const result = await authRequest.get( `/inquiry/view`, getInquiryListRequest);
+         const result = await authRequest.get( `/inquiry/view?page=${currentPage}`);
 
         if(result?.status === 200) {
             dispatch(getInquiry(result));
