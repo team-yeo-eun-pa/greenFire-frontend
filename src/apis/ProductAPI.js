@@ -7,7 +7,7 @@ import {getProduct, getProducts, registSuccess, success} from "../modules/Produc
 import {getAdminCategory} from "../modules/AdminCategoryModules";
 import {getOptions} from "../modules/ProductOptionModules";
 
-export const callProductListAPI = ({currentPage = 1}) => {
+export const callProductListAPI = ({currentPage}) => {
 
     return async (dispatch, getState) => {
         const result = await request(

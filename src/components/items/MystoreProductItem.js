@@ -4,6 +4,8 @@ import Nav from "react-bootstrap/Nav";
 function MystoreProductItem(props) {
 
 
+    console.log("props.product: ", props.product);
+    console.log("props: ", props);
 
 
     return (

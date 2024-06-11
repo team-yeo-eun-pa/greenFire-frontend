@@ -11,7 +11,7 @@ import ProductItem from "../../components/items/ProductItem";
 
 function ProductManagement() {
 
-    const {sellerProducts} = useSelector(state => state.productReducer);
+    const {products} = useSelector(state => state.productReducer);
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -19,8 +19,7 @@ function ProductManagement() {
         dispatch(callSellerProductListAPI({currentPage}));
     }, [currentPage, dispatch]);
 
-    console.log('sellerProducts: ', sellerProducts);
-
+    console.log("products: ", products);
 
     return (
         <div>
@@ -31,10 +30,10 @@ function ProductManagement() {
             </button>
 
             <div className="mystore-product-list">
-                { sellerProducts && sellerProducts.length > 0 ? (
-                    <ListGroup key={sellerProducts.productName}>
+                { products && products.length > 0 ? (
+                    <ListGroup>
 
-                            {sellerProducts.map(product => (
+                            {products.data.map(product => (
                                 <ListGroup.Item key={product.productCode} style={{marginTop: '5px', marginBottom: '10px'}}>
                                     <MystoreProductItem product={product}/>
                                 </ListGroup.Item>

@@ -20,7 +20,7 @@ function ProductMain() {
 
     useEffect(() => {
         dispatch(callProductListAPI({currentPage}));
-    }, [currentPage]);
+    }, [currentPage, dispatch]);
 
     return(
         <div className="store-main-page">
@@ -44,7 +44,7 @@ function ProductMain() {
                     <div className="product-list-wrapper" style={{marginTop: '15px'}}>
                         <Row>
                             {products.data.map(product => (
-                                <Col key={product.id} style={{marginTop: '5px', marginBottom: '10px'}}>
+                                <Col key={product.productCode} style={{marginTop: '5px', marginBottom: '10px'}}>
                                     <ProductItem product={product}/>
                                 </Col>
                             ))}
