@@ -5,8 +5,16 @@ import { PiStorefrontLight } from "react-icons/pi";
 import Image from "react-bootstrap/Image";
 import Badge from 'react-bootstrap/Badge';
 import '../../style.css';
+import {useNavigate} from "react-router-dom";
 
 function StoreProfileItem({ store }) {
+
+    const navigate = useNavigate();
+
+    const handleClick = (sellerCode) => {
+        navigate(`/seller/mystore/${sellerCode}`);
+    };
+
     return (
         <div className="store-position-relative">
             <Card key={store.storeCode} className="mb-4">
@@ -38,7 +46,9 @@ function StoreProfileItem({ store }) {
                             대표자: {store.storeRepresentativeName}<br/>
                             상태: {store.storeStatus}
                         </Card.Text>
-                        <Button variant="outline-success">
+                        <Button
+                            variant="outline-success"
+                            onClick={() => handleClick(store.sellerCode)}>
                             스토어 바로가기
                         </Button>
                     </Card.Body>
