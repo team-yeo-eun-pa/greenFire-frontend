@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row, Button } from 'react-bootstrap';
-import { AdminNoticesAPICalls, NoticeDeleteAPICalls } from '../../apis/NoticeAPICalls';
+import {AdminNoticesAPICalls, NoticeAPICalls, NoticeDeleteAPICalls} from '../../apis/NoticeAPICalls';
 import TableEx from '../../components/items/TableEx';
 import { useNavigate } from "react-router-dom";
 import { isAdmin } from "../../utils/TokenUtils";
 import PagingBar from "../../components/common/PagingBar";
+import notice from "./Notice";
 
 function AdminNotices() {
     const dispatch = useDispatch();
@@ -38,20 +39,11 @@ function AdminNotices() {
         });
     }, [dispatch, currentPage]);
 
-    // 공지사항 수정 페이지로 이동하는 함수
-    const handleEditNotice = async (noticeCode) => {
-        try {
-            const response = await fetch(`/admin/notices/${noticeCode}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch notice details');
-            }
-            const data = await response.json();
-            const { noticeTitle, noticeContent } = data;
-            navigate(`/admin/dashboard/notice-create`, { state: { noticeCode, noticeTitle, noticeContent } });
-        } catch (error) {
-            console.error('Error fetching notice details:', error);
-        }
+
+    const handleEditNotice = async (notice) => {
+     navigate('/admin/dashboard/notice-update', {state : notice.noticeCode})
     };
+
 
     // 공지사항 삭제 확인 및 처리 함수
     const handleDeleteConfirm = (noticeCode) => {

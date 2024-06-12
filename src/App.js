@@ -43,6 +43,7 @@ import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
 import InquiryListView from "./pages/Inquiry/member/InquiryListView";
 import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
+import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
 
 
 
@@ -59,8 +60,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
-                        {/*<Route path="/notice" element={<MemberNotices/>}/>*/}
+                        <Route path="/notice" element={<Notices/>}/>
                         <Route path="/notice/detail" element={<Notice/>}/>
+                        <Route path="/notice/edit-notice" element={<AdminUpdateNotice/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
@@ -118,12 +120,12 @@ function App() {
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
-
                                 <Route path="notice-create" element={<AdminCreateNotice/>}/>
+                                <Route path="notice-update" element={<AdminUpdateNotice/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="category" element={<AdminCategory/>}/>
                                 <Route path="reports" element={<AdminReport/>}/>
-
+                                <Route path="main" element={<AdminMain/>}/>
                                 <Route path="applies">
                                     <Route index element={<ApplyList/>}/>
                                     <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
