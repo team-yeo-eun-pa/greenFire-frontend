@@ -8,7 +8,6 @@ import UserPageLayout from "./layouts/UserPageLayout";
 import MyPageMain from "./pages/member/MyPageMain";
 import Error from "./pages/error/Error";
 import AdminPageLayout from "./layouts/AdminPageLayout";
-import AdminMain from "./pages/admin/AdminMain";
 import SellerPageLayout from "./layouts/SellerPageLayout";
 import MyStoreList from "./pages/seller/MyStoreList";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
@@ -22,7 +21,7 @@ import LoginModal from "./components/items/LoginModal";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminMemberView from "./pages/admin/AdminMemberView";
 import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
-import StoreProfile from "./components/items/StoreProfile";
+import StoreProfile from "./pages/seller/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminReport from "./pages/admin/AdminReport";
@@ -60,6 +59,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
+
                         <Route path="/notice" element={<Notices/>}/>
                         <Route path="/notice/detail" element={<Notice/>}/>
                         <Route path="/notice/edit-notice" element={<AdminUpdateNotice/>}/>
@@ -111,7 +111,7 @@ function App() {
                                 <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
                                 {/*<Route path="main" element={<MyStoreMain/>} />*/}
                                 <Route path="main" element={<MyStoreList/>}/>
-                                <Route path=":storeCode" element={<StoreProfile/>}/>
+                                <Route path=":sellerCode" element={<StoreProfile/>}/>
                                 <Route path="product" element={<ProductManagement/>}/>
                                 <Route path="regist" element={<ProductRegist/>}/>
                             </Route>
