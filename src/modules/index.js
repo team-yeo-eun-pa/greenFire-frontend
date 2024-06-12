@@ -11,12 +11,14 @@ import optionReducer from "./ProductOptionModules";
 import sellerReducer from "./SellerModules";
 import orderReducer from "./OrderModules";
 import applyReducer from "./ApplyModules";
+import cartReducer from "./CartModules";
 
 const rootReducer = combineReducers({
     inquiryReducer,
     memberReducer,
     sellerReducer,
     productReducer,
+    cartReducer,
     optionReducer,
     noticeReducer,
     AdminMemberReducer,
