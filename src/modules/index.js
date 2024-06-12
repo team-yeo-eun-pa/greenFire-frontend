@@ -9,6 +9,8 @@ import ReportReducer from "./ReportModules";
 import productReducer from "./ProductModules";
 import optionReducer from "./ProductOptionModules";
 import sellerReducer from "./SellerModules";
+import orderReducer from "./OrderModules";
+import applyReducer from "./ApplyModules";
 
 const rootReducer = combineReducers({
     inquiryReducer,
