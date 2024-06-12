@@ -1,43 +1,49 @@
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {callMemberInquiryRegistAPI, callUpdateInquiryAPI} from "../../apis/InquiryAPI";
-import InquiryForm from "../../components/form/InquiryForm";
+import {callInquiryListAPI, callMemberInquiryRegistAPI} from "../../../apis/InquiryAPI";
+import InquiryForm from "../../../components/form/InquiryForm";
 import {Col, Row} from "react-bootstrap";
-import UserPageNavBar from "../../components/common/UserPageNavBar";
 import Button from "react-bootstrap/Button";
+import InquiryMain from "./InquiryMain";
 
-function InquiryRegist() {
+function InquiryRegist({data}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [form, setForm] = useState({
-        memberId: '',
-        memberEmail: '',
-        inquiryTitle: '',
-        inquiryDetail: ''
+
+    const [form, setForm] = useState( {
+
+        inquiryDetail:'',
+        inquiryTitle:''
     });
 
-    const {getInquiry} = useSelector(state => state.inquiryReducer);
+
+
+
+    const {success} = useSelector(state => state.inquiryReducer);
 
     useEffect(() => {
-        if (getInquiry === true) navigate('/inquiry');
-    }, [getInquiry])
-    const onClickInquiryUpdateHandler = () => {
-        const formData = new FormData();
-        formData.append('inquiryUpdateRequest', new Blob([JSON.stringify(form)], {type: 'application/json'}));
-        dispatch(callUpdateInquiryAPI({inquiryUpdateRequest: formData}));
-    }
+        if(success === true) navigate('members/mypage/inquiry/view')
+    }, [success]);
+
+
+
+
+
+    const onClickInquiryRegistHandler = () => {
+        dispatch( callMemberInquiryRegistAPI({inquiryRegistRequest:form }));
+    };
 
 
     return (
         <>
             <Row>
 
-                <Col xs={3}> <UserPageNavBar/> </Col>
+
 
 
                 <Col>
-                    <Col xs={9}> <InquiryForm inquiry={form} setForm={setForm} modifyMode={true}/> </Col>
+                    <Col xs={9}> <InquiryForm form={form} setForm={setForm} modifyMode={true}/> </Col>
 
 
 
@@ -45,7 +51,7 @@ function InquiryRegist() {
                             <div className="inquiry-regist-btn">
                                 <Button
                                     variant="success"
-                                    onClick={onClickInquiryUpdateHandler}
+                                    onClick={onClickInquiryRegistHandler}
                                 >{''}
                                     등록하기
                                 </Button>

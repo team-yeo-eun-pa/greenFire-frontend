@@ -1,29 +1,33 @@
-import UserPageNavBar from "../../components/common/UserPageNavBar";
+
 import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Col, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {callInquiryListAPI} from "../../apis/InquiryAPI";
-import PagingBar from "../../components/common/PagingBar";
-import InquiryList from "../../components/list/InquiryList";
+import {callInquiryListAPI} from "../../../apis/InquiryAPI";
+import PagingBar from "../../../components/common/PagingBar";
+import InquiryList from "../../../components/list/InquiryList";
 import Button from "react-bootstrap/Button";
-import inquiryReducer from "../../modules/InquiryModules";
 import {useNavigate} from "react-router-dom";
+import inquiryList from "../../../components/list/InquiryList";
 
 
-function InquiryMain() {
+
+function InquiryMain({data}) {
 
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
+
     const {inquiry} = useSelector(state => state.inquiryReducer);
     const navigate = useNavigate();
 
+
+
     const onClickInquiryRegisterHandler = () => {
-        navigate("/members/mypage/main/inquiry/regist");
+        navigate("/members/mypage/inquiry/regist");
     }
 
 
-    ///
+
 
 
     useEffect(() => {
@@ -35,16 +39,13 @@ function InquiryMain() {
             <Row>
 
 
-                {/*<Col xs={3} >
-                <UserPageNavBar/>
-                </Col>*/}
 
                 <Col xs={9}>
                     {['xl'].map((breakpoint) => (
                         <ListGroup key={breakpoint} horizontal={breakpoint} className="my-5 text-center">
                             <ListGroup.Item className="py-5 w-50 bg-body-tertiary fs-5">등록된 나의 문의
                                 <div className="pt-2">
-                                    <span className="fw-bolder fs-1">0</span>건
+                                    <span className="fw-bolder fs-1">100</span>건
                                 </div>
                             </ListGroup.Item>
                             <ListGroup.Item className="py-5 w-50 bg-body-tertiary fs-5">답변 등록된 문의
@@ -59,15 +60,15 @@ function InquiryMain() {
                     {/* 등록된 문의가 없을 시, "등록된 문의가 없습니다."라는 문구 보여주기*/}
 
 
-                    <>
+                    <div className="inquiryList">
 
-                        inquiry &&
+                    { inquiry &&
                         <>
                             <InquiryList data={inquiry.data}/>
                             <PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>
                         </>
-
-                    </>
+                    }
+                    </div>
 
 
                     <Button
