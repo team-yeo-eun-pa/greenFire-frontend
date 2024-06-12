@@ -13,14 +13,14 @@ import MyStoreList from "./pages/seller/MyStoreList";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
 import Wishlist from "./pages/product/Wishlist";
-import InquiryMain from "./pages/Inquiry/member/InquiryMain";
+import InquiryMain from "./pages/Inquiry/InquiryMain";
 import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
 import LoginModal from "./components/items/LoginModal";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminMemberView from "./pages/admin/AdminMemberView";
-import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
+import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import StoreProfile from "./pages/seller/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
@@ -39,10 +39,11 @@ import {ToastContainer} from "react-toastify";
 import OrderList from "./pages/order/OrderList";
 import OrderDetails from "./pages/order/OrderDetails";
 import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
-import InquiryListView from "./pages/Inquiry/member/InquiryListView";
+import InquiryListView from "./pages/Inquiry/InquiryListView";
 import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
 import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
+import AdminMain from "./pages/admin/AdminMain";
 
 
 
@@ -97,7 +98,7 @@ function App() {
                                 <Route path="inquiry" >
                                     <Route index element={<InquiryMain/>}/>
                                     <Route path="regist" element={<InquiryRegist/>}/>
-                                    <Route path="view" element={<InquiryListView/>}/>
+                                    {/*<Route path="view" element={<InquiryListView/>}/>*/}
                                 </Route>
 
 
