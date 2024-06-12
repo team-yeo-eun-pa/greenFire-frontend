@@ -9,7 +9,7 @@ function ProductDetail() {
     const dispatch = useDispatch();
     const { productCode} = useParams();
     const { product } = useSelector(state => state.productReducer);
-    const { option } = useSelector( state => state.optionReducer);
+    // const { option } = useSelector( state => state.optionReducer);
 
     const [selectOption, setSelectOption] = useState({
         optionName : '',
@@ -25,10 +25,10 @@ function ProductDetail() {
     return (
         <>
             {
-                product &&
-                    <div>
-                        <ProductDetailItem product={product} option={option} selectOption={selectOption} setSelectOption={setSelectOption}/>
-                    </div>
+                // product &&
+                //     <div>
+                //         <ProductDetailItem product={product.productInfo} option={product.productOptions} selectOption={selectOption} setSelectOption={setSelectOption}/>
+                //     </div>
             }
         </>
     );

@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 import {Form} from "react-bootstrap";
 
-function ProductDetailItem({product, option, selectOption, setSelectOption}) {
+function ProductDetailItem(props) {
 
     const navigate = useNavigate();
     const [amount, setAmount] = useState(1);
@@ -12,8 +12,8 @@ function ProductDetailItem({product, option, selectOption, setSelectOption}) {
     }
 
     const onChangeHandler = e => {
-        setSelectOption && setSelectOption({
-            ...selectOption,
+        props.setSelectOption && props.setSelectOption({
+            ...props.selectOption,
             [e.target.name] : e.target.value
 
         })
@@ -23,7 +23,7 @@ function ProductDetailItem({product, option, selectOption, setSelectOption}) {
 
         <div>
             <div className="product-img-wrapper">
-                <img src={product.productImg} alt={product.productName}/>
+                <img src={props.product.productImg} alt={props.product.productName}/>
             </div>
 
             <div className="product-info-wrapper">
@@ -31,15 +31,15 @@ function ProductDetailItem({product, option, selectOption, setSelectOption}) {
                     <tbody>
                     <tr>
                         <th>상품명</th>
-                        <td>{product.productName}</td>
+                        <td>{props.product.productName}</td>
                     </tr>
                     <tr>
                         <th>판매자</th>
-                        <td>{product.storeName}</td>
+                        <td>{props.product.storeName}</td>
                     </tr>
                     <tr>
                         <th>분류</th>
-                        <td>{product.categoryTitle}</td>
+                        <td>{props.product.categoryTitle}</td>
                     </tr>
                     <tr>
                         <th>구매 수량</th>
@@ -57,8 +57,8 @@ function ProductDetailItem({product, option, selectOption, setSelectOption}) {
 
                 <Form.Group>
                     <Form.Label>옵션</Form.Label>
-                    <Form.Select name="optionCode" value={option.optionCode} onChange={onChangeHandler}>
-                        {option.map(op => (
+                    <Form.Select name="optionCode" value={props.option.optionCode} onChange={onChangeHandler}>
+                        {props.option.map(op => (
                             <option key={op.optionCode} value={op.optionCode}>
                                 {op.optionName} | 가격: {op.optionPrice}
                             </option>
