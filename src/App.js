@@ -22,7 +22,6 @@ import ProductEdit from "./pages/seller/ProductEdit";
 import LoginModal from "./components/items/LoginModal";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminMemberView from "./pages/admin/AdminMemberView";
-import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import StoreProfile from "./pages/seller/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
@@ -32,9 +31,6 @@ import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
 import ReportPage from "./pages/admin/ReportPage";
-import MemberNotices from "./pages/admin/MemberNotices";
-import MemberNotice from "./pages/admin/MemberNotice";
-import ProtectedRoute from "./components/route/ProtectedRoute";
 import ProductDetail from "./pages/product/ProductDetail";
 import Notices from "./pages/admin/Notices";
 import Notice from "./pages/admin/Notice";
@@ -49,7 +45,10 @@ import InquiryListView from "./pages/Inquiry/member/InquiryListView";
 import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
 import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
+import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
+import AdminMain from "./pages/admin/AdminMain";
 import Cart from "./pages/product/Cart";
+
 
 function App() {
     return (
@@ -112,46 +111,48 @@ function App() {
 
                             </Route>
                         </Route>
-                            <Route path="/seller">
-                                <Route path="mystore" element={<SellerPageLayout/>}>
-                                    <Route index element={<Navigate to="/seller/mystore/main" replace/>} />
-                                    {/*<Route path="main" element={<MyStoreMain/>} />*/}
-                                    <Route path="main" element={<MyStoreList/>} />
-                                    <Route path=":storeCode" element={<StoreProfile/>} />
-                                    <Route path="product" element={<ProductManagement/>} />
-                                    <Route path="regist" element={<ProductRegist/>} />
-                                    <Route path="edit" element={<ProductEdit/>}/>
+                        <Route path="/seller">
+                            <Route path="mystore" element={<SellerPageLayout/>}>
+                                <Route index element={<Navigate to="/seller/mystore/main" replace/>} />
+                                {/*<Route path="main" element={<MyStoreMain/>} />*/}
+                                <Route path="main" element={<MyStoreList/>} />
+                                <Route path=":storeCode" element={<StoreProfile/>} />
+                                <Route path="product" element={<ProductManagement/>} />
+                                <Route path="regist" element={<ProductRegist/>} />
+                                <Route path="edit" element={<ProductEdit/>}/>
+                            </Route>
+                        </Route>
+
+                            <Route path="/admin">
+                                <Route path="dashboard" element={<AdminPageLayout/>}>
+                                    <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
+                                    <Route path="notice-create" element={<AdminCreateNotice/>}/>
+                                    <Route path="notice-update" element={<AdminUpdateNotice/>}/>
+                                    <Route path="members" element={<AdminMemberView/>}/>
+                                    <Route path="category" element={<AdminCategory/>}/>
+                                    <Route path="reports" element={<AdminReport/>}/>
+                                    <Route path="main" element={<AdminMain/>}/>
+                                    <Route path="applies">
+                                        <Route index element={<ApplyList/>}/>
+                                        <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
+                                    </Route>
                                 </Route>
 
-                        <Route path="/admin">
-                            <Route path="dashboard" element={<AdminPageLayout/>}>
-                                <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
-                                <Route path="notice-create" element={<AdminCreateNotice/>}/>
-                                <Route path="notice-update" element={<AdminUpdateNotice/>}/>
-                                <Route path="members" element={<AdminMemberView/>}/>
-                                <Route path="category" element={<AdminCategory/>}/>
-                                <Route path="reports" element={<AdminReport/>}/>
-                                <Route path="main" element={<AdminMain/>}/>
-                                <Route path="applies">
-                                    <Route index element={<ApplyList/>}/>
-                                    <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
-                                </Route>
                             </Route>
 
-                        </Route>
+                            <Route path="/order">
+                                <Route index element={<Order/>}/>
+                            </Route>
 
-                        <Route path="/order">
-                            <Route index element={<Order/>}/>
-                        </Route>
+                            <Route path="/payment">
+                                <Route index element={<CheckoutPage/>}/>
+                                <Route path="fail" element={<FailPage/>}/>
+                                <Route path="success" element={<SuccessPage/>}/>
+                            </Route>
 
-                        <Route path="/payment">
-                            <Route index element={<CheckoutPage/>}/>
-                            <Route path="fail" element={<FailPage/>}/>
-                            <Route path="success" element={<SuccessPage/>}/>
-                        </Route>
+                        </Route> {/* Layout end*/}
+                        <Route path="*" element={<Error/>}/>
 
-                    </Route> {/* Layout end*/}
-                    <Route path="*" element={<Error/>}/>
                 </Routes>
             </BrowserRouter>
         </>
