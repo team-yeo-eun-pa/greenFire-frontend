@@ -15,9 +15,10 @@ function Cart() {
     const cartList = [];
     const defaultCheckedList = [];
 
-
     const dispatch = useDispatch();
     const {cart} = useSelector(state => state.cartReducer);
+
+    const [cartQuantity, setCartQuantity] = useState();
 
     const [checkedList, setCheckedList] = useState(defaultCheckedList);
     // const checkAll = lecartList.length === checkedList.length;
@@ -49,7 +50,7 @@ function Cart() {
 
                             {cart.map(cart => (
                                 <Col key={cart.cartCode} style={{marginTop: '5px', marginBottom: '10px'}}>
-                                    <MyStoreCartItem cart={cart}/>
+                                    <MyStoreCartItem cart={cart} cartQuantity={cartQuantity} setCartQuantity={setCartQuantity}/>
                                 </Col>
                             ))}
                         </ListGroup>
