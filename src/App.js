@@ -12,17 +12,17 @@ import SellerPageLayout from "./layouts/SellerPageLayout";
 import MyStoreList from "./pages/seller/MyStoreList";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
+import SignupForm from "./components/form/SignupForm";
 import Wishlist from "./pages/product/Wishlist";
 import InquiryMain from "./pages/Inquiry/member/InquiryMain";
 import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
+import ProductEdit from "./pages/seller/ProductEdit";
 import LoginModal from "./components/items/LoginModal";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminMemberView from "./pages/admin/AdminMemberView";
-import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
 import StoreProfile from "./pages/seller/StoreProfile";
-import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminReport from "./pages/admin/AdminReport";
 import Order from "./pages/order/Order";
@@ -30,6 +30,8 @@ import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
 import ReportPage from "./pages/admin/ReportPage";
+import ProtectedRoute from "./components/route/ProtectedRoute";
+import ProductDetail from "./pages/product/ProductDetail";
 import Notices from "./pages/admin/Notices";
 import Notice from "./pages/admin/Notice";
 import ApplySeller from "./pages/member/ApplySeller";
@@ -43,7 +45,6 @@ import InquiryListView from "./pages/Inquiry/member/InquiryListView";
 import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
 import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
-
 
 
 function App() {
@@ -67,13 +68,13 @@ function App() {
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
 
-                        <Route path="/product" element={<ProductMain/>}>
+                        <Route path="/product" element={<ProductMain/>}></Route>
+                        <Route path="/product/:productCode" element={<ProductDetail/>}/>
 
-                        </Route>
-                        <Route path="/wish" element={<Wishlist/>}>
+                        <Route path="/wish" element={<Wishlist/>}/>
 
 
-                        </Route>
+
                         <Route path="/members">
                             <Route path="signup"
                                    element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
@@ -96,7 +97,6 @@ function App() {
 
                                 <Route path="inquiry" >
                                     <Route index element={<InquiryMain/>}/>
-                                    <Route path="regist" element={<InquiryRegist/>}/>
                                     <Route path="view" element={<InquiryListView/>}/>
                                 </Route>
 
@@ -105,18 +105,18 @@ function App() {
 
                             </Route>
                         </Route>
-
-                        <Route path="/seller">
-                            <Route path="mystore" element={<SellerPageLayout/>}>
-                                <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
-                                {/*<Route path="main" element={<MyStoreMain/>} />*/}
-                                <Route path="main" element={<MyStoreList/>}/>
-                                <Route path=":sellerCode" element={<StoreProfile/>}/>
-                                <Route path="product" element={<ProductManagement/>}/>
-                                <Route path="regist" element={<ProductRegist/>}/>
+                            <Route path="/seller">
+                                <Route path="mystore" element={<SellerPageLayout/>}>
+                                    <Route index element={<Navigate to="/seller/mystore/main" replace/>} />
+                                    {/*<Route path="main" element={<MyStoreMain/>} />*/}
+                                    <Route path="main" element={<MyStoreList/>} />
+                                    <Route path=":storeCode" element={<StoreProfile/>} />
+                                    <Route path="product" element={<ProductManagement/>} />
+                                    <Route path="regist" element={<ProductRegist/>} />
+                                    <Route path="edit" element={<ProductEdit/>}/>
+                                </Route>
                             </Route>
 
-                        </Route>
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
@@ -125,7 +125,6 @@ function App() {
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="category" element={<AdminCategory/>}/>
                                 <Route path="reports" element={<AdminReport/>}/>
-                                <Route path="main" element={<AdminMain/>}/>
                                 <Route path="applies">
                                     <Route index element={<ApplyList/>}/>
                                     <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
