@@ -31,7 +31,7 @@ function InquiryRegist({data}) {
 
 
     const onClickInquiryRegistHandler = () => {
-        dispatch( callMemberInquiryRegistAPI({inquiryRegistRequest:form}));
+        dispatch( callMemberInquiryRegistAPI({inquiryRegistRequest:form }));
     };
 
 
