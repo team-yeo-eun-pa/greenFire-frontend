@@ -68,6 +68,8 @@ function App() {
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
 
+
+
                         <Route path="/product" element={<ProductMain/>}>
 
                         </Route>
@@ -102,7 +104,7 @@ function App() {
                                 </Route>
 
 
-                                {/*<Route path="regist/update" element={<InquiryUpdate/>}/>*/}
+
 
                             </Route>
                         </Route>

@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {Table} from "react-bootstrap";
-import React from "react";
+import React, {useEffect} from "react";
 
 
 function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle, inquiryDetail, inquiryReplyStatus}}) {
@@ -8,12 +8,14 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        navigate(`/inquiry/${inquiryCode}`)
+    })
+
     return (
 
 
-            <div
-                onClick={() => navigate(`/inquiry/${inquiryCode}`)}
-            >
+
 
                 <Table hover className="table text-center px-5 mt-4">
 
@@ -46,7 +48,6 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
 
 
 
-        </div>
 
     );
 }
