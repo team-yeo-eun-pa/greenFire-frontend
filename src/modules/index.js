@@ -8,6 +8,7 @@ import AdminReportReducer from "./AdminReportModules";
 import ReportReducer from "./ReportModules";
 import applyReducer from "./ApplyModules";
 import orderReducer from "./OrderModules";
+import ReviewReducer from "./ReviewModules";
 
 const rootReducer = combineReducers({
     inquiryReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     orderReducer,
     AdminReportReducer,
     ReportReducer,
-    applyReducer
+    applyReducer,
+    ReviewReducer
 });
 
 export default rootReducer;

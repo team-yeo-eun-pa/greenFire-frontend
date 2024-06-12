@@ -44,6 +44,7 @@ import InquiryListView from "./pages/Inquiry/member/InquiryListView";
 import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
 import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
+import Reviews from "./pages/Reviews";
 
 
 
@@ -65,6 +66,7 @@ function App() {
                         <Route path="/notice/edit-notice" element={<AdminUpdateNotice/>}/>
                         <Route path="/ex" element={<CustomComponents/>}/>
                         <Route path="/challenge" element={<ChallengeMain/>}/>
+                        <Route path="/reviews" element={<Reviews/>}/>
 
 
                         <Route path="/product" element={<ProductMain/>}>
