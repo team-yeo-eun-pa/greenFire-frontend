@@ -21,14 +21,14 @@ function ProductDetail() {
     }, []);
 
 
-
+    console.log('product', product);
     return (
         <>
             {
-                // product &&
-                //     <div>
-                //         <ProductDetailItem product={product.productInfo} option={product.productOptions} selectOption={selectOption} setSelectOption={setSelectOption}/>
-                //     </div>
+                product &&
+                    <div>
+                        <ProductDetailItem product={product.productInfo} option={product.productOptions} selectOption={selectOption} setSelectOption={setSelectOption}/>
+                    </div>
             }
         </>
     );

@@ -2,7 +2,7 @@ import {createActions, handleActions} from "redux-actions";
 
 
 const initialState = {
-    product: [],
+    // product: [],
     success: false,
     loading : false,
     error : null
