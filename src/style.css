@@ -193,12 +193,44 @@
 }
 
 
-
-.option-regist-forms {
-
+.mystore-product-list {
+    margin: 20px 0 5px 0;
 }
 
+.mystore-product-item {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.mystore-product-wrapper {
+    display: flex;
+    width: 20vw;
+    position: relative;
+}
+
+.mystore-product-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.mystore-product-name {
+    padding: 5px;
+    margin-left: 15px;
+    height: 60px;
+    overflow: hidden;
+    align-content: center;
+}
+
+.mystore-product-price {
+    padding: 15px;
+}
+
+.mystore-product-btn-wrapper {
+    padding: 15px;
+}
 
 
 /* side bar --------------------------- */
