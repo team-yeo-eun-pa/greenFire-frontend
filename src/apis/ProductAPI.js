@@ -88,6 +88,19 @@ export const callSellerProductRegistAPI = ({ formData  }) => {
     }
 };
 
+export const callSellerProductDeleteAPI = ({productCode}) => {
+
+    return async (dispaych, getState) => {
+
+        const result = await authRequest.get(`/product/${productCode}`);
+        console.log('callSellerProductDeleteAPI result : ', result);
+
+        if (result.status === 200) {
+            dispaych(getProduct(result));
+        }
+    }
+};
+
 
 
 

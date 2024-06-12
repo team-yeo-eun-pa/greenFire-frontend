@@ -1,7 +1,7 @@
 import Nav from "react-bootstrap/Nav";
 
 
-function MystoreProductItem({product}) {
+function MystoreProductItem({product, deleteBtn}) {
 
 
 
@@ -27,7 +27,7 @@ function MystoreProductItem({product}) {
                         수정
                     </Nav.Link>
                 </button>
-                <button className="option-btn">삭제</button>
+                <button className="option-btn" onClick={deleteBtn(product.productCode)}>삭제</button>
             </div>
         </div>
     )

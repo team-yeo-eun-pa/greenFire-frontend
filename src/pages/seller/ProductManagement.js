@@ -4,20 +4,39 @@ import ListGroup from "react-bootstrap/ListGroup";
 import PagingBar from "../../components/common/PagingBar";
 import MystoreProductItem from "../../components/items/MystoreProductItem";
 import {useEffect, useState} from "react";
-import {callProductListAPI, callSellerProductListAPI, callStoreProductListAPI} from "../../apis/ProductAPI";
+import {
+    callProductListAPI,
+    callSellerProductDeleteAPI,
+    callSellerProductListAPI,
+    callStoreProductListAPI
+} from "../../apis/ProductAPI";
 import {useDispatch, useSelector} from "react-redux";
 import {Col, Row} from "react-bootstrap";
 import ProductItem from "../../components/items/ProductItem";
+import {callStoreListAPI} from "../../apis/SellerAPICalls";
+import {success} from "../../modules/ProductModules";
+import {useNavigate} from "react-router-dom";
 
 function ProductManagement() {
 
     const {products} = useSelector(state => state.productReducer);
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(callSellerProductListAPI({currentPage}));
     }, [currentPage, dispatch]);
+
+    useEffect(() => {
+        if(success === true) navigate('');
+    }, [success])
+
+    const onClickDeleteBtnHandler = () => {
+        dispatch(callSellerProductDeleteAPI({productCode}))
+    }
+
+
 
 
     return (
@@ -34,7 +53,7 @@ function ProductManagement() {
 
                             {products.data.map(product => (
                                 <Col key={product.productCode} style={{marginTop: '5px', marginBottom: '10px'}}>
-                                    <MystoreProductItem product={product}/>
+                                    <MystoreProductItem product={product} deleteBtn={onClickDeleteBtnHandler}/>
                                 </Col>
                             ))}
                     </ListGroup>
