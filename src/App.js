@@ -49,7 +49,7 @@ import InquiryListView from "./pages/Inquiry/member/InquiryListView";
 import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
 import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
-
+import Cart from "./pages/product/Cart";
 
 function App() {
     return (
@@ -76,6 +76,8 @@ function App() {
                         <Route path="/product/:productCode" element={<ProductDetail/>}/>
 
                         <Route path="/wish" element={<Wishlist/>}/>
+
+                        <Route path="/cart" element={<Cart/>}/>
 
 
 

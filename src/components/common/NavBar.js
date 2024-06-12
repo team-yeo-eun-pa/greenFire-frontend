@@ -171,8 +171,12 @@ function NavBar() {
                     </Form>
 
                     {/*아이콘 테스트*/}
+
+                    {/*카트 이동 추가*/}
                     <button className="iconbtn" style={{color: "white", marginLeft: "5px"}}>
-                        <FaShoppingCart/>
+                        <Nav.Link href="/cart">
+                            <FaShoppingCart/>
+                        </Nav.Link>
                     </button>
 
                     <button className="iconbtn" style={{color: "white"}}>
