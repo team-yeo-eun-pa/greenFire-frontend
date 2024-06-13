@@ -1,5 +1,4 @@
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -17,7 +16,7 @@ import {reset} from "../../modules/MemberModules";
 import {isAdmin, isLogin, isSeller} from "../../utils/TokenUtils";
 import {callLogoutAPI} from "../../apis/MemberAPICalls";
 
-function NavBar() {
+function NavBar({ profileInfo }) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -85,34 +84,41 @@ function NavBar() {
                         width: "30px",
                         fontSize: "28px"
                     }}>
-                    <CgProfile/>
+                    {profileInfo?.profilePicture ? (
+                        <Image
+                            src={profileInfo.profilePicture}
+                            roundedCircle
+                            style={{width: "30px", height: "30px"}}
+                        />
+                    ) : (
+                        <CgProfile />
+                    )}
                 </Col>
 
                 <Col>
-                    <NavDropdown title="여은파님" id="navbarScrollingDropdown"
-                                 className="mx-0 col-9 ">
-                        {isAdmin() &&
-                            <NavDropdown.Item
-                                onClick={() => navigate(`/admin/dashboard/main`)}>
+                    <NavDropdown title={profileInfo?.memberName || "User"} id="navbarScrollingDropdown" className="mx-0 col-9">
+                        {isAdmin() && (
+                            <NavDropdown.Item onClick={() => navigate(`/admin/dashboard/main`)}>
                                 관리자페이지
                             </NavDropdown.Item>
-                        }
-                        {isSeller() &&
-                            <NavDropdown.Item
-                                onClick={() => navigate(`/seller/mystore/main`)}>
-                                마이스토어
-                            </NavDropdown.Item>
-                        }
-                        {(!isAdmin() && !isSeller()) &&
-                            <NavDropdown.Item
-                                onClick={() => navigate(`/members/mypage`)}>
+                        )}
+                        {isSeller() && (
+                            <>
+                                <NavDropdown.Item onClick={() => navigate(`/seller/mystore/main`)}>
+                                    마이스토어
+                                </NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => navigate(`/members/mypage`)}>
+                                    마이페이지
+                                </NavDropdown.Item>
+                            </>
+                        )}
+                        {(!isAdmin() && !isSeller()) && (
+                            <NavDropdown.Item onClick={() => navigate(`/members/mypage`)}>
                                 마이페이지
                             </NavDropdown.Item>
-                        }
+                        )}
                         <NavDropdown.Divider />
-                        <NavDropdown.Item
-                            type="button"
-                            onClick={() => dispatch(callLogoutAPI())}>
+                        <NavDropdown.Item type="button" onClick={() => dispatch(callLogoutAPI())}>
                             로그아웃
                         </NavDropdown.Item>
                     </NavDropdown>
@@ -157,18 +163,18 @@ function NavBar() {
                             <NavDropdown.Item href="">신고센터</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Form className="d-flex">
-                        <Form.Control
-                            type=""
-                            placeholder="Search"
-                            className="me-2 bg-light"
-                            aria-label="Search"
-                            src="logo192.png"
-                        />
-                        <button style={{background: "none", color: "white", border: "none", marginRight: "10px"}}>
-                            <FaSearch/>
-                        </button>
-                    </Form>
+                    {/*<Form className="d-flex">*/}
+                    {/*    <Form.Control*/}
+                    {/*        type=""*/}
+                    {/*        placeholder="Search"*/}
+                    {/*        className="me-2 bg-light"*/}
+                    {/*        aria-label="Search"*/}
+                    {/*        src="logo192.png"*/}
+                    {/*    />*/}
+                    {/*    <button style={{background: "none", color: "white", border: "none", marginRight: "10px"}}>*/}
+                    {/*        <FaSearch/>*/}
+                    {/*    </button>*/}
+                    {/*</Form>*/}
 
                     {/*아이콘 테스트*/}
                     <button className="iconbtn" style={{color: "white", marginLeft: "5px"}}>
