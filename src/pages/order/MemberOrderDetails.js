@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { callOrderDetailAPI } from '../../apis/OrderAPICalls';
+import {callOrderDetailAPI, callOrdersAPI} from '../../apis/OrderAPICalls';
 import { Container, Row, Col, Card, Image, Button } from 'react-bootstrap';
 import Order from "../../components/items/Order";
 
-const OrderDetails = () => {
+const MemberOrderDetails = () => {
     const { orderCode } = useParams();
     const orders = useSelector(state => state.orderReducer.orders) || [];
-        // const orderDetail = useSelector(state => state.orderReducer.orderDetail) || [];
+    // const orderDetail = useSelector(state => state.orderReducer.orderDetail) || [];
 
-    const order = orders.data.find(order => order.orderCode == orderCode);
+    const order = orders.data.find(order => order.orderCode === orderCode);
     // const order = orderDetail.data.find(order => order.orderCode === orderCode);
 
     console.log("orderCode" , orderCode);
@@ -25,10 +25,10 @@ const OrderDetails = () => {
     return (
         order &&
         <>
-            <Container className="mt-4">
-                <h1>주문 ∙ 배송 > 주문 상세</h1>
-                <hr/>
-                <h3 className="mb-4 shipping-info-title">{order.orderDate} 주문 | (주문번호 {order.orderCode})</h3>
+            <Container>
+                <div className="mt-4 fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">주문∙배송 > 주문 상세</div>
+
+                <h3 className="mt-4 mb-4 shipping-info-title">{order.orderDate} 주문 | (주문번호 {order.orderCode})</h3>
 
                 <h3 className="mt-4 shipping-info-title">배송지 정보</h3>
                 <Card className="mt-2 mb-4">
@@ -47,12 +47,7 @@ const OrderDetails = () => {
                 </Card>
 
                 <h3 className="mt-4 shipping-info-title">주문 상품</h3>
-                <Card className="mt-2 mb-4">
-                    <Card.Body>
-                        <Order storeOrders={order.storeOrders}/>
-
-                    </Card.Body>
-                </Card>
+                <Order storeOrders={order.storeOrders} buttonName={"문의"}/>
 
                 <Row>
                     <Col md={6}>
@@ -74,7 +69,7 @@ const OrderDetails = () => {
                                 </Col>
                                 <Col md={5}>
                                     <p><strong>주문 금액</strong></p>
-                                    <p><strong>카드라고 하려면 결제 테이블도 조인을 해야함</strong></p>
+                                    <p><strong>{order.paymentWay}</strong></p>
                                 </Col>
                                 <Col className="text-right">
                                     <p>{order.totalRealPayment}원</p>
@@ -93,4 +88,4 @@ const OrderDetails = () => {
     );
 };
 
-export default OrderDetails;
+export default MemberOrderDetails;

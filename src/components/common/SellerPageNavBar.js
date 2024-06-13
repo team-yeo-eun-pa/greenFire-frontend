@@ -1,11 +1,14 @@
 import Nav from "react-bootstrap/Nav";
 import Image from 'react-bootstrap/Image';
-import {useState} from "react";
+import React, {useState} from "react";
 import {CgProfile} from "react-icons/cg";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink, useParams} from "react-router-dom";
 
 function SellerPageNavBar({ profileInfo }) {
     const [key, setKey] = useState('home');
+
+    const { storeCode } = useParams();
+
     return (
         <>
 
@@ -42,9 +45,9 @@ function SellerPageNavBar({ profileInfo }) {
                 <Nav.Link eventKey="" className="nav-link-custom">재고 관리</Nav.Link>
                 <br/>
                 <Nav.Link className="nav-link-custom-title">주문 관리</Nav.Link>
-                <Nav.Link eventKey="" className="nav-link-custom">주문∙결제 내역</Nav.Link>
-                <Nav.Link eventKey="" className="nav-link-custom">신규 주문 내역</Nav.Link>
-                <Nav.Link eventKey="" className="nav-link-custom">배송 관리</Nav.Link>
+                <Nav.Link as={Link} to={`/seller/mystore/${storeCode}/order-list`} className="nav-link-custom">주문∙결제 내역</Nav.Link>
+                <Nav.Link as={Link} to={`/seller/mystore/${storeCode}/order-approval-handler`} className="nav-link-custom">신규 주문 내역</Nav.Link>
+                <Nav.Link as={Link} to={`/seller/mystore/${storeCode}/order-shipping-handler`} className="nav-link-custom">배송 관리</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">반품∙교환</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">정산 관리</Nav.Link>
                 <br/>
