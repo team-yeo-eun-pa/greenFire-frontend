@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-function ProductOptionForm(prop) {
+function ProductOptionEditForm(prop) {
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [mode, setMode] = useState(null);
@@ -106,4 +106,4 @@ function ProductOptionForm(prop) {
         </div>
     )
 }
-export default ProductOptionForm;
+export default ProductOptionEditForm;

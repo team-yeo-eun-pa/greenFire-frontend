@@ -7,8 +7,7 @@ import {useEffect, useState} from "react";
 import {
     callProductListAPI,
     callSellerProductDeleteAPI,
-    callSellerProductListAPI,
-    callStoreProductListAPI
+    callSellerProductListAPI
 } from "../../apis/ProductAPI";
 import {useDispatch, useSelector} from "react-redux";
 import {Col, Row} from "react-bootstrap";

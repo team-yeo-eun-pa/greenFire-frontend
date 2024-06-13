@@ -2,7 +2,7 @@ import ReactQuill, {Quill} from 'react-quill';
 import TextEditor from "../../components/items/TextEditor";
 import React, {useEffect, useRef, useState} from 'react';
 import {Form} from "react-bootstrap";
-import ProductOptionForm from "../../components/form/ProductOptionForm";
+import ProductOptionEditForm from "../../components/form/ProductOptionEditForm";
 import Button from "react-bootstrap/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
@@ -29,10 +29,10 @@ function ProductRegist() {
     // db 수정 후 상품 설명 추가 필요
     const [productForm, setProductForm] = useState({
         productName : '',
-        sellableStatus: '',
-        categoryCode: '',
+        sellableStatus: 'Y',
+        categoryCode: 1,
         productDescription: '',
-        // productImageUrl: ''
+        productImageUrl: ''
     });
 
     const [options, setOptions] = useState([]);
@@ -58,6 +58,15 @@ function ProductRegist() {
 
     const sellableStatus = ["Y", "N"]
 
+
+    const onChangeHandler = e => {
+        setProductForm && setProductForm({
+            ...productForm,
+            [e.target.name] : e.target.value
+
+        })
+    }
+
     const submitProductRegistHandler = () => {
         const formData = new FormData();
 
@@ -65,11 +74,11 @@ function ProductRegist() {
             formData.append('productImg', imageInput.current.files[0]);
         }
 
-        console.log('productForm: ', productForm);
-        console.log('options: ', options);
+        console.log('regist-productForm: ', productForm);
+        console.log('regist-options: ', options);
         formData.append('productCreateRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
         formData.append('productOptionCreateRequest', new Blob([JSON.stringify(options)], { type : 'application/json'}));
-        dispatch(callSellerProductRegistAPI({ formData }));
+        dispatch(callSellerProductRegistAPI({ registRequest : formData }));
     }
 
     console.log('options: ', options);
@@ -78,7 +87,9 @@ function ProductRegist() {
         <div className="product-regist-page">
 
             <div>
-                <ProductForm sellableStatus={sellableStatus} category={adminCategory} imageInput={imageInput} productForm={productForm} setProductForm={setProductForm}/>
+                <ProductForm sellableStatus={sellableStatus} category={adminCategory}
+                             imageInput={imageInput} productForm={productForm}
+                             setProductForm={setProductForm} onChangeHandler={onChangeHandler}/>
             </div>
 
             <div>
@@ -88,12 +99,18 @@ function ProductRegist() {
 
 
             <label style={{marginBottom: "8px"}}>상세 설명</label>
-            <TextEditor
-                ref={quillRef}
-                defaultValue={new Delta()
-                    .insert('상품 상세설명')
-                    .insert('\n')}
-                onTextChange={setLastChange}
+            {/*<TextEditor*/}
+            {/*    ref={quillRef}*/}
+            {/*    defaultValue={new Delta()*/}
+            {/*        .insert('상품 상세설명')*/}
+            {/*        .insert('\n')}*/}
+            {/*    onTextChange={setLastChange}*/}
+            {/*/>*/}
+            <Form
+                type="text"
+                defaultValue={'상품 상세설명'}
+                onChange={setLastChange}
+                value={productForm.productDescription}
             />
 
             <div className="submit-btn-wrapper">

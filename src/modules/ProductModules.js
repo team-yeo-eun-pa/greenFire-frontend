@@ -18,7 +18,7 @@ export const { product : { getProducts, getProduct, success, addProduct }} = cre
     [GET_PRODUCTS] : result => ({products : result.data }),
     [GET_PRODUCT] : result => ({product : result.data }),
     [SUCCESS] : () => ({ success : true }),
-    [ADD_PRODUCT] : product => product,
+    [ADD_PRODUCT] : product => product
 })
 
 
@@ -37,7 +37,8 @@ const productReducer = handleActions({
     }),
     [ADD_PRODUCT]: (state, { payload }) => ({
         ...state,
-        product: [...state.product, payload]
+        product: [...state.product, payload],
+        saveSuccess: true
     })
 }, initialState);
 

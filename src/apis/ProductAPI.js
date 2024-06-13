@@ -37,6 +37,7 @@ export const callProductDetailAPI = ({productCode}) => {
 };
 
 
+
 export const callProductOptionListAPI = ({productCode}) => {
 
     return async (dispatch, getState) => {
@@ -64,14 +65,30 @@ export const callSellerProductListAPI = ({currentPage = 1}) => {
     }
 };
 
-export const callSellerProductRegistAPI = ({ formData  }) => {
+// export const callStoreProductListAPI = () => {
+//     return async (dispatch, getState) => {
+//         try {
+//             const result = await authRequest.get(`/seller/mystore/product`);
+//             if (result.status === 201) {
+//                 dispatch(success());
+//             } else {
+//                 console.error('오류:', result.status);
+//             }
+//         } catch (error) {
+//             console.error('마이스토어 상품 조회 오류:', error);
+//         }
+//     }
+// }
+
+export const callSellerProductRegistAPI = ({ registRequest }) => {
     return async (dispatch, getState) => {
         try {
-            const result = await authRequest.post(`/seller/mystore/regist`, formData, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            // const result = await authRequest.post(`/seller/mystore/regist`, registRequest, {
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     }
+            // });
+            const result = await authRequest.post(`/seller/mystore/regist`, registRequest);
             if (result.status === 201) {
                 dispatch(success());
             } else {
@@ -99,17 +116,3 @@ export const callSellerProductDeleteAPI = ({productCode, sellablestatus}) => {
 
 
 
-export const callStoreProductListAPI = () => {
-    return async (dispatch, getState) => {
-        try {
-            const result = await authRequest.get(`/seller/mystore/product`);
-            if (result.status === 201) {
-                dispatch(success());
-            } else {
-                console.error('오류:', result.status);
-            }
-        } catch (error) {
-            console.error('마이스토어 상품 조회 오류:', error);
-        }
-    }
-}

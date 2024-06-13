@@ -2,7 +2,7 @@ import ReactQuill, {Quill} from 'react-quill';
 import TextEditor from "../../components/items/TextEditor";
 import React, {useEffect, useRef, useState} from 'react';
 import {Form} from "react-bootstrap";
-import ProductOptionForm from "../../components/form/ProductOptionForm";
+import ProductOptionEditForm from "../../components/form/ProductOptionEditForm";
 import Button from "react-bootstrap/Button";
 import {success} from "../../modules/ProductModules";
 import {useNavigate} from "react-router-dom";
@@ -82,7 +82,7 @@ function ProductEdit() {
 
             <div>
                 <label style={{marginBottom: "8px"}}>옵션</label>
-                <ProductOptionForm optionInfo={productOption}/>
+                <ProductOptionEditForm optionInfo={productOption}/>
             </div>
 
 

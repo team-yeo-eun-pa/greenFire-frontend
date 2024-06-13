@@ -7,13 +7,7 @@ function ProductForm(props) {
 
     const [imageUrl, setImageUrl] = useState(props.productForm.productImageUrl);
 
-    const onChangeHandler = e => {
-        props.setProductForm && props.setProductForm({
-            ...props.productForm,
-            [e.target.name] : e.target.value
 
-        })
-    }
 
     const onClickImageUpload = () => {
         props.imageInput.current.click();
@@ -38,14 +32,14 @@ return (
                 <Form.Control
                     type="text"
                     name="productName"
-                    onChange={onChangeHandler}
+                    onChange={props.onChangeHandler}
                     value={props.productForm.productName}
                 />
             </Form.Group>
 
             <Form.Group className="product-info-form" controlId="productStatus">
                 <Form.Label>판매 상태</Form.Label>
-                <Form.Select name="sellableStatus" value={props.productForm.sellableStatus} onChange={onChangeHandler}>
+                <Form.Select name="sellableStatus" value={props.productForm.sellableStatus} onChange={props.onChangeHandler}>
                     <option value="Y">판매중</option>
                     <option value="N">구매불가</option>
                 </Form.Select>
@@ -53,7 +47,7 @@ return (
 
             <Form.Group className="product-info-form" controlId="productCategory">
                 <Form.Label>카테고리</Form.Label>
-                <Form.Select name="categoryCode" value={props.productForm.categoryCode} onChange={onChangeHandler}>
+                <Form.Select name="categoryCode" value={props.productForm.categoryCode} onChange={props.onChangeHandler}>
                     {props.category.map(ct => (
                         <option key={ct.categoryCode} value={ct.categoryCode}>
                             {ct.categoryTitle}
