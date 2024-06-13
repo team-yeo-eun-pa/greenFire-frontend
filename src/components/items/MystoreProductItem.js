@@ -1,16 +1,29 @@
 import Nav from "react-bootstrap/Nav";
+import {callSellerProductDeleteAPI} from "../../apis/ProductAPI";
+import {useDispatch} from "react-redux";
+import {useEffect} from "react";
+import {success} from "../../modules/ProductModules";
+import {useNavigate} from "react-router-dom";
 
 
-function MystoreProductItem({product, deleteBtn}) {
+function MystoreProductItem({product}) {
 
+    const dispatch = useDispatch();
+    const productCode = product.productCode;
+    const navigate = useNavigate();
+    const onClickDeleteBtnHandler = () => {
+        dispatch(callSellerProductDeleteAPI({productCode, sellablestatus : "D"}));
+    }
 
+    useEffect(() => {
+        if(success === true) navigate('/seller/mystore/product');
+    }, [success])
 
     return (
         <div className="mystore-product-item">
             <div className="mystore-product-wrapper">
                 <div className="mystore-product-img-wrapper">
-                    {/*<img className="mystore-product-img" src={props.product.productImg}/>*/}
-                    <img className="mystore-product-img" src="p1.png"/>
+                    <img className="mystore-product-img" src={product.productImg}/>
                 </div>
                 <div className="mystore-product-name">
                     {product.productName}
@@ -27,7 +40,9 @@ function MystoreProductItem({product, deleteBtn}) {
                         수정
                     </Nav.Link>
                 </button>
-                <button className="option-btn" onClick={deleteBtn(product.productCode)}>삭제</button>
+                <button className="option-btn" onClick={onClickDeleteBtnHandler}>
+                        삭제
+                </button>
             </div>
         </div>
     )

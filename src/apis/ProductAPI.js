@@ -55,11 +55,6 @@ export const callSellerProductListAPI = ({currentPage = 1}) => {
 
     return async (dispatch, getState) => {
         const result = await authRequest.get(`/seller/mystore/product?page=${currentPage}`
-            // ,{
-            // headers: {
-            //     'Content-Type': 'application/json'
-            // }
-            // }
             );
         console.log('callSellerProductListAPI result : ',result);
         if (result && result.status === 200) {
@@ -88,15 +83,15 @@ export const callSellerProductRegistAPI = ({ formData  }) => {
     }
 };
 
-export const callSellerProductDeleteAPI = ({productCode}) => {
+export const callSellerProductDeleteAPI = ({productCode, sellablestatus}) => {
 
-    return async (dispaych, getState) => {
+    return async (dispatch, getState) => {
 
-        const result = await authRequest.get(`/product/${productCode}`);
+        const result = await authRequest.put(`seller/mystore/product/${productCode}`, {sellablestatus});
         console.log('callSellerProductDeleteAPI result : ', result);
 
-        if (result.status === 200) {
-            dispaych(getProduct(result));
+        if (result.status === 201) {
+            dispatch(success());
         }
     }
 };

@@ -1,9 +1,11 @@
 import ReactQuill, {Quill} from 'react-quill';
 import TextEditor from "../../components/items/TextEditor";
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Form} from "react-bootstrap";
 import ProductOptionForm from "../../components/form/ProductOptionForm";
 import Button from "react-bootstrap/Button";
+import {success} from "../../modules/ProductModules";
+import {useNavigate} from "react-router-dom";
 
 const Delta = Quill.import('delta');
 
@@ -28,6 +30,12 @@ function ProductEdit() {
         { id: 3, name: '옵션명3', price: 16000, stock: 2 },
         { id: 3, name: '마지막', price: 16000, stock: 2 },
     ];
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(success === true) navigate('');
+    }, [success])
 
     /* 옵션 불러오기 */
 

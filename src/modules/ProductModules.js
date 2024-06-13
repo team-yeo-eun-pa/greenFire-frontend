@@ -12,15 +12,13 @@ const GET_PRODUCTS = 'product/GET_PRODUCTS';
 const GET_PRODUCT = 'product/GET_PRODUCT';
 const SUCCESS = 'product/SUCCESS';
 const ADD_PRODUCT = 'product/ADD_PRODUCT';
-const DELETE_PRODUCT = 'product/DELETE_PRODUCT';
 
 
-export const { product : { getProducts, getProduct, success, addProduct, deleteProduct }} = createActions({
+export const { product : { getProducts, getProduct, success, addProduct }} = createActions({
     [GET_PRODUCTS] : result => ({products : result.data }),
     [GET_PRODUCT] : result => ({product : result.data }),
     [SUCCESS] : () => ({ success : true }),
     [ADD_PRODUCT] : product => product,
-    [DELETE_PRODUCT] : product => product
 })
 
 
@@ -40,10 +38,6 @@ const productReducer = handleActions({
     [ADD_PRODUCT]: (state, { payload }) => ({
         ...state,
         product: [...state.product, payload]
-    }),
-    [DELETE_PRODUCT]: (state, { payload }) => ({
-        ...state,
-        product: state.product.filter(product => product !== payload)
     })
 }, initialState);
 
