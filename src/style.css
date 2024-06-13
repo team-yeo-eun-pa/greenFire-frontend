@@ -588,10 +588,6 @@
     margin-top: 20px;
 }
 
-.button-container {
-    margin-bottom: 10px;
-}
-
 .table thead th {
     background-color: #f5f5f5;
     font-weight: bold;
@@ -728,4 +724,77 @@
 .review-text {
     margin-top: 10px;
 }
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+.back-to-list {
+    margin: 20px 0;
+}
+
+.back-to-list a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.header .id {
+    font-size: 24px;
+}
+
+.header .title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header .author-date {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.header .author {
+    font-size: 14px;
+}
+
+.header .date {
+    font-size: 14px;
+}
+
+.content {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.seller-comment {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.seller-comment .seller {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.seller-comment .comment-box {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
 
