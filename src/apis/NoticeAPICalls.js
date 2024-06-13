@@ -1,4 +1,3 @@
-
 import {authRequest, request} from "./api";
 import {getNotice, getNotices} from "../modules/NoticeModules";
 import {success} from "../modules/AdminCategoryModules";

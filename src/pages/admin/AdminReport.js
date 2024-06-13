@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Modal, Row, Table } from 'react-bootstrap';
+import {Col, Container, Modal, Row, Table} from 'react-bootstrap';
 import { AdminReportAPICalls, AdminReportSuspendEndAPICalls, AdminReportDetailAPICalls } from "../../apis/AdminReportAPICalls";
 import Button from "react-bootstrap/Button";
 import { success } from "../../modules/AdminReportModules";
@@ -57,12 +57,12 @@ const AdminReports = React.memo(() => {
 
     return (
         <Row>
-            <Col xs lg="9" className="mt-5">
+            <Col xs lg="12" className="mt-5">
                 <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">신고센터</div>
-                <div className="button-container">
-                    <Button variant="primary" className="me-2" onClick={handleSellerButtonClick}>판매자 보기</Button>
-                    <Button variant="primary" onClick={handleMemberButtonClick}>회원 보기</Button>
-                </div>
+                <Container className="py-3 mt-4">
+                    <Button variant="info" className="pe-3 w-50 text-light" onClick={handleSellerButtonClick}>판매자 보기</Button>
+                    <Button variant="info" className="w-50 text-light" onClick={handleMemberButtonClick}>회원 보기</Button>
+                </Container>
                 <Table hover className="table table-container px-5 mt-4">
                     <thead className="border-2 border-bottom border-top border-secondary-subtle border-start-0 border-end-0">
                     <tr>
