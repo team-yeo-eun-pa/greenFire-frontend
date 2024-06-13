@@ -33,12 +33,12 @@ const productReducer = handleActions({
     }),
     [SUCCESS]: (state) => ({
         ...state,
-        success: true
+        success: true,
+        saveSuccess: true
     }),
     [ADD_PRODUCT]: (state, { payload }) => ({
         ...state,
         product: [...state.product, payload],
-        saveSuccess: true
     })
 }, initialState);
 

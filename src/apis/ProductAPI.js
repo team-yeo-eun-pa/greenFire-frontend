@@ -65,29 +65,23 @@ export const callSellerProductListAPI = ({currentPage = 1}) => {
     }
 };
 
-// export const callStoreProductListAPI = () => {
-//     return async (dispatch, getState) => {
-//         try {
-//             const result = await authRequest.get(`/seller/mystore/product`);
-//             if (result.status === 201) {
-//                 dispatch(success());
-//             } else {
-//                 console.error('오류:', result.status);
-//             }
-//         } catch (error) {
-//             console.error('마이스토어 상품 조회 오류:', error);
-//         }
-//     }
-// }
+export const callSellerProductDetailAPI = ({productCode}) => {
+
+    return async (dispatch, getState) => {
+        const result = await authRequest.get(`/seller/mystore/product/${productCode}`
+        );
+        console.log('callSellerProductListAPI result : ',result);
+        if (result && result.status === 200) {
+            dispatch(getProduct(result));
+            dispatch(success());
+        }
+    }
+};
+
 
 export const callSellerProductRegistAPI = ({ registRequest }) => {
     return async (dispatch, getState) => {
         try {
-            // const result = await authRequest.post(`/seller/mystore/regist`, registRequest, {
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     }
-            // });
             const result = await authRequest.post(`/seller/mystore/regist`, registRequest);
             if (result.status === 201) {
                 dispatch(success());
@@ -96,6 +90,19 @@ export const callSellerProductRegistAPI = ({ registRequest }) => {
             }
         } catch (error) {
             console.error('상품 등록 오류:', error);
+        }
+    }
+};
+
+export const callSellerProductModifyAPI = ({ productCode, modifyRequest }) => {
+
+    return async (dispatch, getState) => {
+
+        const result = await authRequest.put(`/seller/mystore/product/${productCode}`, modifyRequest);
+        console.log('callSellerProductModifyAPI result : ',result);
+
+        if (result.status === 201) {
+            dispatch(success());
         }
     }
 };

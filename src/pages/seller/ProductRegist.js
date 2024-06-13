@@ -14,10 +14,8 @@ import ProductOptionAddForm from "../../components/form/ProductOptionAddForm";
 import {registSuccess} from "../../modules/ProductModules";
 
 
-const Delta = Quill.import('delta');
+// const Delta = Quill.import('delta');
 
-
-// 값 제대로 넘겨줘야함 sellablestatus 다시 넣어주고 카테고리 선택되면 setcategory 해줄 수 있는 함수 작성
 
 function ProductRegist() {
 
@@ -32,14 +30,11 @@ function ProductRegist() {
         sellableStatus: 'Y',
         categoryCode: 1,
         productDescription: '',
-        productImageUrl: ''
+        productImage: ''
     });
 
     const [options, setOptions] = useState([]);
     const imageInput = useRef();
-    /* 텍스트 에디터 */
-    const [lastChange, setLastChange] = useState();
-    const quillRef = useRef();
 
 
     useEffect(() => {
@@ -99,17 +94,9 @@ function ProductRegist() {
 
 
             <label style={{marginBottom: "8px"}}>상세 설명</label>
-            {/*<TextEditor*/}
-            {/*    ref={quillRef}*/}
-            {/*    defaultValue={new Delta()*/}
-            {/*        .insert('상품 상세설명')*/}
-            {/*        .insert('\n')}*/}
-            {/*    onTextChange={setLastChange}*/}
-            {/*/>*/}
             <Form
                 type="text"
                 defaultValue={'상품 상세설명'}
-                onChange={setLastChange}
                 value={productForm.productDescription}
             />
 
