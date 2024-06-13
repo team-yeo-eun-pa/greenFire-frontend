@@ -3,26 +3,21 @@ import {toast} from "react-toastify";
 import {getMemberId, removeToken, saveToken} from "../utils/TokenUtils";
 import {getProfile, setMemberCode, success} from "../modules/MemberModules";
 
-export const callSignupAPI = ({signupRequest, navigate}) => {
-
+export const callSignupAPI = ({ signupRequest }) => {
     return async (dispatch, getState) => {
         const result = await request(
             'POST',
             '/members/signup',
-            {'Content-Type': 'application/json'},
+            { 'Content-Type': 'application/json' },
             JSON.stringify(signupRequest)
         );
 
         console.log('callSignupAPI result : ', result);
 
         if (result?.status === 201) {
-            const memberCode = result.data;
-            dispatch(setMemberCode(memberCode));
             dispatch(success());
-            toast.success("이메일 인증 코드를 확인해주세요.");
-            navigate('/members/signup-success');
         } else {
-            toast.warning("회원가입에 실패했습니다. 다시 시도해주세요.")
+            toast.warning("회원가입에 실패했습니다. 다시 시도해주세요.");
         }
     }
 }
