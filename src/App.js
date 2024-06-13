@@ -45,7 +45,7 @@ import InquiryListView from "./pages/Inquiry/member/InquiryListView";
 import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
 import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
-import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
+import VerifySuccess from "./pages/verification/VerifySuccess";
 import AdminMain from "./pages/admin/AdminMain";
 import Reviews from "./pages/Reviews";
 import ReviewDetail from "./pages/ReviewDetail";
@@ -82,6 +82,7 @@ function App() {
 
                         <Route path="/wish" element={<Wishlist/>}/>
 
+                        <Route path="/verify-email/:result" element={<VerifySuccess/>}/>
 
 
                         <Route path="/members">
