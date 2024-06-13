@@ -44,7 +44,7 @@ import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
 import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
 import AdminMain from "./pages/admin/AdminMain";
-import SignupSuccess from "./pages/member/SignupSuccess";
+import VerifySuccess from "./pages/verification/VerifySuccess";
 
 
 function App() {
@@ -73,13 +73,13 @@ function App() {
                         </Route>
                         <Route path="/wish" element={<Wishlist/>}>
 
-
                         </Route>
+
+                        <Route path="/verify-email/:result" element={<VerifySuccess/>}/>
+
                         <Route path="/members">
                             <Route path="signup"
                                    element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
-                            <Route path="signup-success"
-                                   element={<ProtectedRoute loginCheck={false}><SignupSuccess/></ProtectedRoute>}/>
                             <Route path="login"
                                    element={<ProtectedRoute loginCheck={false}><LoginModal/></ProtectedRoute>}/>
                             <Route path="mypage"
