@@ -12,7 +12,6 @@ import SellerPageLayout from "./layouts/SellerPageLayout";
 import MyStoreList from "./pages/seller/MyStoreList";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
-import SignupForm from "./components/form/SignupForm";
 import Wishlist from "./pages/product/Wishlist";
 import InquiryMain from "./pages/Inquiry/member/InquiryMain";
 import Signup from "./pages/member/Signup";
@@ -49,6 +48,7 @@ import VerifySuccess from "./pages/verification/VerifySuccess";
 import AdminMain from "./pages/admin/AdminMain";
 import Reviews from "./pages/Reviews";
 import ReviewDetail from "./pages/ReviewDetail";
+import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
 
 
 function App() {
@@ -65,24 +65,45 @@ function App() {
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
 
+                        {/*<Route path="/ex" element={<CustomComponents/>}/>*/}
+
+                        {/* 공지사항 ------------------------------------------------ */}
                         <Route path="/notice" element={<Notices/>}/>
                         <Route path="/notice/detail" element={<Notice/>}/>
                         <Route path="/notice/edit-notice" element={<AdminUpdateNotice/>}/>
-                        <Route path="/ex" element={<CustomComponents/>}/>
+
+
+                        {/* 챌린지 -------------------------------------------------- */}
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
+
+                        {/* 초록불 스토어 --------------------------------------------- */}
                         <Route path="/reviews" element={<Reviews/>}/>
                         <Route path="/review-detail" element={<ReviewDetail/>}/>
-
 
                         <Route path="/product" element={<ProductMain/>}></Route>
                         <Route path="/product/:productCode" element={<ProductDetail/>}/>
 
                         <Route path="/wish" element={<Wishlist/>}/>
 
+
+                        {/* 주문 및 결제 --------------------------------------------- */}
+                        <Route path="/order">
+                            <Route index element={<Order/>}/>
+                        </Route>
+
+                        <Route path="/payment">
+                            <Route index element={<CheckoutPage/>}/>
+                            <Route path="fail" element={<FailPage/>}/>
+                            <Route path="success" element={<SuccessPage/>}/>
+                        </Route>
+
+
+                        {/* 인증확인 ------------------------------------------------- */}
                         <Route path="/verify-email/:result" element={<VerifySuccess/>}/>
 
 
+                        {/* 회원 ------------------------------------------------- */}
                         <Route path="/members">
                             <Route path="signup"
                                    element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
@@ -90,7 +111,7 @@ function App() {
                                    element={<ProtectedRoute loginCheck={false}><LoginModal/></ProtectedRoute>}/>
                             <Route path="mypage"
                                    element={<ProtectedRoute loginCheck={true}> <UserPageLayout/> </ProtectedRoute>}>
-                                <Route index element={<Navigate to="/members/mypage/main" replace/>}/>
+                                <Route index element={<Navigate to="/members/mypage/profile" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
                                 <Route path="profile" element={<MemberProfile/>}/>
                                 <Route path="orders" element={<OrderList/>}/>
@@ -103,58 +124,50 @@ function App() {
                                     <Route path="detail/:sellerCode" element={<ApplyDetail/>}/>
                                 </Route>
 
-                                <Route path="inquiry" >
+                                <Route path="inquiry">
                                     <Route index element={<InquiryMain/>}/>
                                     <Route path="regist" element={<InquiryRegist/>}/>
                                     <Route path="view" element={<InquiryListView/>}/>
                                 </Route>
-
-
                                 {/*<Route path="regist/update" element={<InquiryUpdate/>}/>*/}
-
                             </Route>
-                        </Route>
+                        </Route> {/* member end*/}
+
+
+                        {/* 판매자 ------------------------------------------------- */}
                         <Route path="/seller">
                             <Route path="mystore" element={<SellerPageLayout/>}>
-                                <Route index element={<Navigate to="/seller/mystore/main" replace/>} />
+                                <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
                                 {/*<Route path="main" element={<MyStoreMain/>} />*/}
-                                <Route path="main" element={<MyStoreList/>} />
-                                <Route path=":storeCode" element={<StoreProfile/>} />
-                                <Route path="product" element={<ProductManagement/>} />
-                                <Route path="regist" element={<ProductRegist/>} />
+                                <Route path="main" element={<MyStoreList/>}/>
+                                <Route path=":storeCode" element={<StoreProfile/>}/>
+                                <Route path="product" element={<ProductManagement/>}/>
+                                <Route path="regist" element={<ProductRegist/>}/>
                                 <Route path="edit" element={<ProductEdit/>}/>
                             </Route>
-                        </Route>
+                        </Route> {/* seller end*/}
 
-                            <Route path="/admin">
-                                <Route path="dashboard" element={<AdminPageLayout/>}>
-                                    <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
-                                    <Route path="notice-create" element={<AdminCreateNotice/>}/>
-                                    <Route path="notice-update" element={<AdminUpdateNotice/>}/>
-                                    <Route path="members" element={<AdminMemberView/>}/>
-                                    <Route path="category" element={<AdminCategory/>}/>
-                                    <Route path="reports" element={<AdminReport/>}/>
-                                    <Route path="main" element={<AdminMain/>}/>
-                                    <Route path="applies">
-                                        <Route index element={<ApplyList/>}/>
-                                        <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
-                                    </Route>
+
+                        {/* 관리자 ------------------------------------------------- */}
+                        <Route path="/admin">
+                            <Route path="dashboard" element={<AdminPageLayout/>}>
+                                <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
+                                <Route path="notice-create" element={<AdminCreateNotice/>}/>
+                                <Route path="notice-update" element={<AdminUpdateNotice/>}/>
+                                <Route path="members" element={<AdminMemberView/>}/>
+                                <Route path="category" element={<AdminCategory/>}/>
+                                <Route path="reports" element={<AdminReport/>}/>
+                                <Route path="main" element={<AdminMain/>}/>
+                                <Route path="applies">
+                                    <Route index element={<ApplyList/>}/>
+                                    <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
                                 </Route>
-
                             </Route>
+                        </Route> {/* admin end*/}
 
-                            <Route path="/order">
-                                <Route index element={<Order/>}/>
-                            </Route>
 
-                            <Route path="/payment">
-                                <Route index element={<CheckoutPage/>}/>
-                                <Route path="fail" element={<FailPage/>}/>
-                                <Route path="success" element={<SuccessPage/>}/>
-                            </Route>
-
-                        </Route> {/* Layout end*/}
-                        <Route path="*" element={<Error/>}/>
+                    </Route> {/* Layout end*/}
+                    <Route path="*" element={<Error/>}/>
 
                 </Routes>
             </BrowserRouter>
