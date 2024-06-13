@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import { FaShoppingCart, FaHeart, FaBell, FaSearch } from "react-icons/fa";
+import { FaShoppingCart, FaHeart, FaBell } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import {Badge, Row, Col} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
@@ -15,6 +15,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {reset} from "../../modules/MemberModules";
 import {isAdmin, isLogin, isSeller} from "../../utils/TokenUtils";
 import {callLogoutAPI} from "../../apis/MemberAPICalls";
+import {PiAcornDuotone} from "react-icons/pi";
 
 function NavBar({ profileInfo }) {
 
@@ -96,7 +97,23 @@ function NavBar({ profileInfo }) {
                 </Col>
 
                 <Col>
-                    <NavDropdown title={profileInfo?.memberName || "User"} id="navbarScrollingDropdown" className="mx-0 col-9">
+                    <NavDropdown title={profileInfo?.memberName || "User"} id="navbarScrollingDropdown" className="mx-1 col-12" align="end">
+                        <div className="text-center mb-3">
+                            {profileInfo?.profilePicture ? (
+                                <Image
+                                    src={profileInfo.profilePicture}
+                                    roundedCircle
+                                    className="mx-auto d-block mb-3 p-4"
+                                    style={{width: "90px", height: "90px"}}
+                                />
+                            ) : (
+                                <PiAcornDuotone className="my-3" style={{width: "90px", height: "90px", color: "#6a914f"}} />
+                            )}
+                            <br/>
+                            <div className="fw-bold fs-6">{profileInfo?.memberName}님</div>
+                            <div style={{fontSize: 12}} className="fw-lighter">{profileInfo?.memberEmail}</div>
+                        </div>
+                        <NavDropdown.Divider />
                         {isAdmin() && (
                             <NavDropdown.Item onClick={() => navigate(`/admin/dashboard/main`)}>
                                 관리자페이지
