@@ -22,23 +22,34 @@ function NavBar({ profileInfo }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const {success} = useSelector(state => state.memberReducer);
+    const { success } = useSelector(state => state.memberReducer);
 
     useEffect(() => {
-        if(success === true) {
+        if (success === true) {
+            setShowLoginModal(false); // 모달 창 닫기
             navigate('/');
             dispatch(reset());
-            handleLoginModalClose();
         }
-    }, [success]);
+    }, [success, navigate, dispatch]);
 
     const handleLoginModalClose = () => setShowLoginModal(false);
     const handleLoginModalShow = () => setShowLoginModal(true);
 
-    function BeforeLogin() {
+    // 기본값 설정
+    const defaultProfileInfo = {
+        memberName: "초록불",
+        memberEmail: "당신은 멋진 지구지킴이!",
+        profilePicture: null,
+    };
 
+    const displayProfileInfo = {
+        ...defaultProfileInfo,
+        ...profileInfo
+    };
+
+    function BeforeLogin() {
         return (
-            <div>
+            <>
                 <Badge
                     bg="light"
                     text="dark"
@@ -57,21 +68,11 @@ function NavBar({ profileInfo }) {
                 >
                     회원가입
                 </Badge>
-            </div>
+            </>
         );
     }
 
     function AfterLogin() {
-
-        const { success } = useSelector(state => state.memberReducer);
-
-        useEffect(() => {
-            if(success === true) {
-                navigate('/');
-                dispatch(reset());
-            }
-        }, [success]);
-
         return (
             <Row className="d-flex align-items-center justify-content-end">
                 <Col
@@ -85,9 +86,9 @@ function NavBar({ profileInfo }) {
                         width: "30px",
                         fontSize: "28px"
                     }}>
-                    {profileInfo?.profilePicture ? (
+                    {displayProfileInfo.profilePicture ? (
                         <Image
-                            src={profileInfo.profilePicture}
+                            src={displayProfileInfo.profilePicture}
                             roundedCircle
                             style={{width: "30px", height: "30px"}}
                         />
@@ -97,11 +98,11 @@ function NavBar({ profileInfo }) {
                 </Col>
 
                 <Col>
-                    <NavDropdown title={profileInfo?.memberName || "User"} id="navbarScrollingDropdown" className="mx-1 col-12" align="end">
+                    <NavDropdown title={displayProfileInfo.memberName || "User"} id="navbarScrollingDropdown" className="mx-1 col-12" align="end">
                         <div className="text-center mb-3">
-                            {profileInfo?.profilePicture ? (
+                            {displayProfileInfo.profilePicture ? (
                                 <Image
-                                    src={profileInfo.profilePicture}
+                                    src={displayProfileInfo.profilePicture}
                                     roundedCircle
                                     className="mx-auto d-block mb-3 p-4"
                                     style={{width: "90px", height: "90px"}}
@@ -110,8 +111,8 @@ function NavBar({ profileInfo }) {
                                 <PiAcornDuotone className="my-3" style={{width: "90px", height: "90px", color: "#6a914f"}} />
                             )}
                             <br/>
-                            <div className="fw-bold fs-6">{profileInfo?.memberName}님</div>
-                            <div style={{fontSize: 12}} className="fw-lighter">{profileInfo?.memberEmail}</div>
+                            <div className="fw-bold fs-6">{displayProfileInfo.memberName}님</div>
+                            <div style={{fontSize: 12}} className="fw-lighter">{displayProfileInfo.memberEmail}</div>
                         </div>
                         <NavDropdown.Divider />
                         {isAdmin() && (
@@ -141,11 +142,11 @@ function NavBar({ profileInfo }) {
                     </NavDropdown>
                 </Col>
             </Row>
-        )
+        );
     }
 
     return (
-        <Navbar expand="lg" className="bg-success p-5">
+        <Navbar expand="lg" className="bg-success p-5" style={{height: 162}}>
             <Container fluid>
                 <Image src="/greenFire_logo-nav.png" width={30} height={30}/>
                 <Navbar.Brand href="/" className="text-white mx-3">GREEN FIRE</Navbar.Brand>
@@ -193,26 +194,21 @@ function NavBar({ profileInfo }) {
                     {/*    </button>*/}
                     {/*</Form>*/}
 
-                    {/*아이콘 테스트*/}
                     <button className="iconbtn" style={{color: "white", marginLeft: "5px"}}>
                         <FaShoppingCart/>
                     </button>
-
                     <button className="iconbtn" style={{color: "white"}}>
                         <Nav.Link href="/wish">
                             <FaHeart/>
                         </Nav.Link>
                     </button>
-
                     <button className="iconbtn" style={{color: "white", marginRight: "1rem"}}>
                         <FaBell/>
                     </button>
-
                     { isLogin() ? <AfterLogin/> : <BeforeLogin/> }
-
+                    <LoginModal show={showLoginModal} handleClose={handleLoginModalClose} />
                 </Navbar.Collapse>
             </Container>
-            <LoginModal show={showLoginModal} handleClose={handleLoginModalClose} />
         </Navbar>
     );
 }
