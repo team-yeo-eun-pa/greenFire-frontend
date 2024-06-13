@@ -12,3 +12,15 @@ export const ReviewsAPICalls = ({productCode}) => {
         }
     }
 }
+
+export const ReviewCreateAPICalls = ({productCode, reviewCreateRequest}) => {
+    return async (dispatch, getState) => {
+        const result = await authRequest.post(`/member/reviews/${productCode}`, reviewCreateRequest);
+        console.log('ReviewCreateAPICalls result : ' , result);
+
+        if(result.status === 201) {
+            dispatch(getReviews(result));
+        }
+    }
+
+}

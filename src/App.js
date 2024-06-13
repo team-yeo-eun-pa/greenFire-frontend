@@ -49,6 +49,7 @@ import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
 import AdminMain from "./pages/admin/AdminMain";
 import Reviews from "./pages/Reviews";
 import ReviewDetail from "./pages/ReviewDetail";
+import ReviewCreate from "./pages/ReviewCreate";
 
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
 
                         <Route path="/reviews" element={<Reviews/>}/>
                         <Route path="/review-detail" element={<ReviewDetail/>}/>
+                        <Route path="/review-create" element={<ReviewCreate/>}/>
 
 
                         <Route path="/product" element={<ProductMain/>}></Route>

@@ -1,5 +1,5 @@
 import Image from 'react-bootstrap/Image';
-import {Col, Row} from "react-bootstrap";
+import {Col, Modal, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import React from "react";
@@ -13,9 +13,38 @@ import {useNavigate} from "react-router-dom";
 function MainItem() {
 
     const navigate = useNavigate();
+    const [showAlert, setShowAlert] = React.useState(false);
+    const [isAdmin, setIsAdmin] = React.useState(false); // 관리자 여부를 체크할 상태 변수
+
+
+    // 챌린지 버튼 클릭 시 처리 함수
+    const handleChallengeClick = () => {
+        if (isAdmin) {
+            // 관리자인 경우 챌린지 페이지로 이동
+            navigate('/challenge');
+        } else {
+            // 관리자가 아닌 경우 알림창을 보여줌
+            setShowAlert(true);
+        }
+    };
+
+    const handleCloseAlert = () => setShowAlert(false);
+
 
     return (
         <>
+            <Modal show={showAlert} onHide={handleCloseAlert} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>준비중인 서비스입니다</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>챌린지 서비스는 준비중에 있습니다.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseAlert}>
+                        닫기
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
             <Container style={{marginBottom: "100px"}}>
                 <Row>
                     <Col className="d-flex align-items-center justify-content-center">
@@ -93,10 +122,9 @@ function MainItem() {
                             <Card.Text>
                                 친환경 제품을 판매하는<br/> 초록불의 스토어입니다.
                             </Card.Text>
-                            <Button
-                                variant="outline-success"
-                                onClick={() => navigate('/challenge')}
-                            >스토어 바로가기</Button>
+                            <Button variant="outline-success" onClick={handleChallengeClick}>
+                                챌린지 바로가기
+                            </Button>
                         </Card.Body>
                     </Col>
                     <Col>
@@ -128,7 +156,7 @@ function MainItem() {
                             <Button
                                 variant="outline-success"
                                 onClick={() => navigate('/members/mypage')}
-                            >스토어 바로가기</Button>
+                            >스토어입점 바로가기</Button>
                         </Card.Body>
                     </Col>
 
