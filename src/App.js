@@ -93,7 +93,7 @@ function App() {
 
                         {/* 주문 및 결제 --------------------------------------------- */}
                         <Route path="/order">
-                            <Route index element={<Order/>}/>
+                            <Route index element={<OrderRegistration/>}/>
                         </Route>
 
                         <Route path="/payment">
@@ -172,17 +172,6 @@ function App() {
                                 </Route>
                             </Route>
                         </Route> {/* admin end*/}
-
-                        <Route path="/order">
-                            <Route index element={<OrderRegistration/>}/>
-                        </Route>
-
-                        <Route path="/payment">
-                            <Route index element={<CheckoutPage/>}/>
-                            <Route path="fail" element={<FailPage/>}/>
-                            <Route path="success" element={<SuccessPage/>}/>
-                        </Route>
-
 
                     </Route> {/* Layout end*/}
                     <Route path="*" element={<Error/>}/>
