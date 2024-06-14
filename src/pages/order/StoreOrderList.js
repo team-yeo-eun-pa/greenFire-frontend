@@ -5,10 +5,10 @@ import {callOrdersAPI, callStoreOrdersAPI} from "../../apis/OrderAPICalls";
 import Order from "../../components/items/Order";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import Summary from "../../components/items/Summary";
+import StatusTracker from "../../components/items/StatusTracker";
 
 function StoreOrderList() {
 
-    const { storeName } = useParams();
     const { storeCode } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -26,34 +26,27 @@ function StoreOrderList() {
 
     const orderData = orders.data
 
-    // 주문 요약 정보를 위한 데이터 준비
-    const summaryData = [
+    const statuses = [
         {
-            title: "주문 접수",
-            count: 0
-
+            name: '신규주문',
+            count: orderData ? orderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "주문 접수").length : 0), 0) : 0
         },
         {
-            title: "상품 준비",
-            count: 0
+            name: '상품준비',
+            count: orderData ? orderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "상품 준비").length : 0), 0) : 0
         },
         {
-            title: "배송 중",
-            count: 0
+            name: '배송중',
+            count: orderData ? orderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "배송 중").length : 0), 0) : 0
         },
         {
-            title: "주문 완료",
-            count: 0
+            name: '배송완료',
+            count: orderData ? orderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "배송 완료").length : 0), 0) : 0
         },
         {
-            title: "주문 확정",
-            count: 0
+            name: '구매확정',
+            count: orderData ? orderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "주문 확정").length : 0), 0) : 0
         }
-    ];
-
-    // 설명 텍스트 준비
-    const description = [
-        " "
     ];
 
     return(
@@ -61,8 +54,9 @@ function StoreOrderList() {
         <>
             <Container>
                 <div className="mt-4 fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">주문∙결제 내역</div>
-
-                <Summary summaryData={summaryData} description={description} />
+                <div className="mt-5 mb-5">
+                    <StatusTracker statuses={statuses}/>
+                </div>
 
                 {orderData && orderData.map((order) => (
                     <div key={order.orderCode} className="mb-4 mt-5">

@@ -4,15 +4,21 @@ import { useParams } from 'react-router-dom';
 import {callOrderDetailAPI, callOrdersAPI} from '../../apis/OrderAPICalls';
 import { Container, Row, Col, Card, Image, Button } from 'react-bootstrap';
 import Order from "../../components/items/Order";
+import StatusButton from "../../components/common/StatusButton";
 
-const MemberOrderDetails = () => {
-    const { orderCode } = useParams();
+const StoreOrderDetails = () => {
+
+    const { orderCode,storeCode } = useParams();
     const dispatch = useDispatch();
 
     const orders = useSelector(state => state.orderReducer.orders) || [];
 
     const order = orders.data.find(order => order.orderCode === parseInt(orderCode));
+    // const storeOrder = orders.data.find(order => order.orderCode === parseInt(orderCode) && order.storeOrder.storeCode === 8);
+    // const storeOrder = order.find(storeOrder => storeOrder.storeCode === 8);
+    // const storeOrder = order.find(storeOrder => storeOrder.storeCode === parseInt(storeCode));
 
+    console.log("storeCode",storeCode);
     // 주문 상태 수정 함수 추가
     const handleButtonClick = (orderCode, storeOrderCode, buttonName) => {
         let status = "주문 접수"; // 기본 상태
@@ -24,6 +30,8 @@ const MemberOrderDetails = () => {
             status = "상품 준비";
         }
     }
+
+
 
     return (
         <>
@@ -93,7 +101,6 @@ const MemberOrderDetails = () => {
                                 <Button variant="success" style={{width: '80%'}}>취소 신청</Button>
                             </Col>
                         </Row>
-
                     </Container> :
                     <>
                         <div>주문을 찾을 수 없습니다.</div>;
@@ -104,4 +111,4 @@ const MemberOrderDetails = () => {
     );
 };
 
-export default MemberOrderDetails;
+export default StoreOrderDetails;

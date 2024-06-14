@@ -9,6 +9,7 @@ import ReportReducer from "./ReportModules";
 import applyReducer from "./ApplyModules";
 import orderReducer from "./OrderModules";
 import sellerReducer from "./SellerModules";
+import addressReducer from "./AddressModules";
 
 const rootReducer = combineReducers({
     inquiryReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     AdminMemberReducer,
     category: AdminCategoryReducer,
     orderReducer,
+    addressReducer,
     AdminReportReducer,
     ReportReducer,
     applyReducer

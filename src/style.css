@@ -601,3 +601,28 @@
 .inquiryList {
     background-color: yellow;
 }
+
+/*------------*/
+.status-tracker-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.status-tracker-container .text-center {
+    font-size: 18px;
+    color: #666;
+}
+
+.status-tracker-container .status-count {
+    color: #004B29;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.status-tracker-container .arrow {
+    font-size: 28px;
+    line-height: 24px;
+    color: #bbb;
+}

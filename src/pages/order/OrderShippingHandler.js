@@ -19,7 +19,8 @@ function OrderShippingHandler() {
     const [selectedOrderCode, setSelectedOrderCode] = useState(null);
 
     const { storeCode } = useParams();
-    const orderStatus = ["상품 준비", "배송 중", "배송 완료"];
+    // const orderStatus = ["상품 준비", "배송 중", "배송 완료"];
+    const orderStatus = ["상품 준비"];
 
     useEffect(() => {
         dispatch(callStoreOrderByOrderStatusAPI({ currentPage, storeCode: 8, orderStatus }));
@@ -42,13 +43,12 @@ function OrderShippingHandler() {
     const summaryData = [
         {
             title: "상품 준비(미발송)",
-            count: 0
+            count: orderData ? orderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "상품 준비").length : 0), 0) : 0
         },
         {
             title: "발송완료",
-            count: 0
-        },
-        // 필요시 추가 요약 정보를 여기에 추가할 수 있습니다.
+            count: orderData ? orderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "배송 완료").length : 0), 0) : 0
+        }
     ];
 
     // 설명 텍스트 준비
@@ -71,9 +71,7 @@ function OrderShippingHandler() {
         orders && (
             <Container>
                 <div className="mt-4 fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">배송 관리</div>
-
-                <Summary summaryData={summaryData} description={description} />
-
+                    <Summary summaryData={summaryData} description={description} />
                 {orderData && orderData
                     .map((order, index) => (
                         <div key={order.orderCode} className="mb-4 mt-5">
@@ -84,15 +82,6 @@ function OrderShippingHandler() {
                                             <Col>
                                                 {order.orderDate} 주문 (주문번호 : {order.orderCode}) | {order.orderName}
                                             </Col>
-                                            {/*<Col className="d-flex justify-content-end">*/}
-                                            {/*    <StatusButton*/}
-                                            {/*        key={index}*/}
-                                            {/*        buttonName="발송 처리"*/}
-                                            {/*        buttonVariant="outline-success"*/}
-                                            {/*        showButton={order.storeOrders.some(storeOrder => storeOrder.orderStatus === "상품 준비")}*/}
-                                            {/*        onClick={() => handleButtonClick(order.orderCode, order.storeOrders[0].storeOrderCode, "발송 처리")} // 함수 전달*/}
-                                            {/*    />*/}
-                                            {/*</Col>*/}
                                         </div>
                                     </Col>
                                 </Row>

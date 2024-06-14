@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 
 const Summary = ({ summaryData, description }) => {
     return (
-        <Container className="my-4">
+        <Container className="mt-5 my-4">
             <Row>
                 {summaryData.map((data, index) => (
                     <Col md={12/index.length} className="text-center" key={index}>
@@ -17,8 +17,8 @@ const Summary = ({ summaryData, description }) => {
                 ))}
             </Row>
             {description && (
-                <Row className="mt-3">
-                    <Col className="text-center text-success">
+                <Row className="mt-5">
+                    <Col className=" text-success">
                         {description.map((text, index) => (
                             <p key={index}>{text}</p>
                         ))}
