@@ -9,13 +9,14 @@ const initialState = {};
 
 const GET_INQUIRY = `inquiry/GET_INQUIRY`;
 const SUCCESS = `inquiry/SUCCESS`;
-
+const GET_DETAIL = 'inquiry/GET_DETAIL';
 
 /*액션함수*/
-export const {inquiry : {getInquiry, success}} = createActions({
+export const {inquiry : {getInquiry, success, getDetail}} = createActions({
 
     [GET_INQUIRY] : result => ({inquiry : result.data}),
-    [SUCCESS] : () => ({success : true})
+    [SUCCESS] : () => ({success : true}),
+    [GET_DETAIL] : result =>({detail: result.data})
 })
 
 /*리듀서함수*/
@@ -23,7 +24,8 @@ export const {inquiry : {getInquiry, success}} = createActions({
 const inquiryReducer = handleActions({
 
     [GET_INQUIRY] : (state, {payload}) => payload,
-    [SUCCESS] : (state, {payload}) => payload
+    [SUCCESS] : (state, {payload}) => payload,
+    [GET_DETAIL] : (state, {payload}) => payload
 }, initialState);
 
 export default inquiryReducer;

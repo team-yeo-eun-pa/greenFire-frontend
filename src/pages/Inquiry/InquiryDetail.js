@@ -1,12 +1,20 @@
 
 import {FloatingLabel, Table} from "react-bootstrap";
 import React, {useEffect} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {callInquiryDetailViewAPI} from "../../apis/InquiryAPI";
+import Button from "react-bootstrap/Button";
+import {useNavigate, useParams} from "react-router-dom";
 
-function InquiryDetail ({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle, inquiryDetail, inquiryReplyStatus}}) {
+function InquiryDetail () {
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+
+    const {inquiryCode} = useParams();
+
+    const {detail} = useSelector(state => state.inquiryReducer);
 
     useEffect(() => {
         dispatch(callInquiryDetailViewAPI({inquiryCode}))
@@ -14,24 +22,20 @@ function InquiryDetail ({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle, 
 
     return (
         <>
-            <Table hover className="table text-center px-5 mt-4">
 
-                <thead>
-                <tr>
-                    <th>문의 코드 </th>
-                    <th>작성일</th>
-                    <th>문의 제목</th>
-                    <th>문의 내용</th>
-                    <th>문의 처리 상태</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td key={inquiryCode} className="text-center">{inquiryCode}</td>
-                    <td key={inquiryWriteDate} className="text-center">{inquiryWriteDate}</td>
-                    <td key={inquiryTitle} className="text-center">{inquiryTitle}</td>
-                    <td key={inquiryDetail} className="text-center">{inquiryDetail}</td>
-                    <td key={inquiryReplyStatus} className="text-center">{inquiryReplyStatus}</td>
+            {detail &&
+            <>
+                <div  className="text-center">문의 코드 : {inquiryCode}</div>
+            <div className="text-center">작성일 : {detail.inquiryWriteDate} </div>
+            <div className="text-center"> 문의 제목 : {detail.inquiryTitle} </div>
+            <div className="text-center">문의 내용 : {detail.inquiryDetail} </div>
+            <div className="text-center">문의 처리 상태 : {detail.inquiryReplyStatus} </div>
+            </>
+            }
+
+
+
+
 
 
 
@@ -60,11 +64,11 @@ function InquiryDetail ({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle, 
                         {/*    <Form.Control type="inquiryStatus" placeholder='{inquiryReplyStatus}' />*/}
                         {/*</FloatingLabel>*/}
 
-
-                </tr>
-                </tbody>
-
-            </Table>
+            <Button
+                variant="outline-success"
+                onClick={() => navigate(-1)}
+            >{''}
+                뒤로가기</Button>
 
         </>
     );

@@ -83,7 +83,37 @@ function App() {
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
 
+                        {/* 회원 ------------------------------------------------- */}
+                        <Route path="/members">
+                            <Route path="signup"
+                                   element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
+                            <Route path="login"
+                                   element={<ProtectedRoute loginCheck={false}><LoginModal/></ProtectedRoute>}/>
+                            <Route path="mypage"
+                                   element={<ProtectedRoute loginCheck={true}> <UserPageLayout/> </ProtectedRoute>}>
+                                <Route index element={<Navigate to="/members/mypage/profile" replace/>}/>
+                                <Route path="main" element={<MyPageMain/>}/>
+                                <Route path="profile" element={<MemberProfile/>}/>
+                                <Route path="order-list" element={<MemberOrderList/>}/>
+                                <Route path="order-list/:orderCode" element={<MemberOrderDetails/>}/>
+                                <Route path="report" element={<ReportPage/>}/>
 
+                                <Route path="apply">
+                                    <Route index element={<ApplySeller/>}/>
+                                    <Route path="regist" element={<ApplyRegist/>}/>
+                                    <Route path="detail/:sellerCode" element={<ApplyDetail/>}/>
+                                </Route>
+
+                                <Route path="inquiry">
+                                    <Route index element={<InquiryMain/>}/>
+                                    <Route path="regist" element={<InquiryRegist/>}/>
+                                    <Route path="detail/:inquiryCode" element={<InquiryDetail/>}/>
+
+                                </Route>
+
+                            </Route>
+
+                        </Route> {/* member end*/}
 
 
                         <Route path="/product" element={<ProductMain/>}>
@@ -114,37 +144,7 @@ function App() {
                             <Route path="verify-email/:result" element={<VerifySuccess/>}/>
 
 
-                            {/* 회원 ------------------------------------------------- */}
-                            <Route path="members">
-                                <Route path="signup"
-                                       element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
-                                <Route path="login"
-                                       element={<ProtectedRoute loginCheck={false}><LoginModal/></ProtectedRoute>}/>
-                                <Route path="mypage"
-                                       element={<ProtectedRoute loginCheck={true}> <UserPageLayout/> </ProtectedRoute>}>
-                                    <Route index element={<Navigate to="/members/mypage/profile" replace/>}/>
-                                    <Route path="main" element={<MyPageMain/>}/>
-                                    <Route path="profile" element={<MemberProfile/>}/>
-                                    <Route path="order-list" element={<MemberOrderList/>}/>
-                                    <Route path="order-list/:orderCode" element={<MemberOrderDetails/>}/>
-                                    <Route path="report" element={<ReportPage/>}/>
 
-                                    <Route path="apply">
-                                        <Route index element={<ApplySeller/>}/>
-                                        <Route path="regist" element={<ApplyRegist/>}/>
-                                        <Route path="detail/:sellerCode" element={<ApplyDetail/>}/>
-                                    </Route>
-
-                                    <Route path="inquiry">
-                                        <Route index element={<InquiryMain/>}/>
-                                        <Route path="regist" element={<InquiryRegist/>}/>
-                                        <Route path="detail" element={<InquiryDetail/>}/>
-
-                                    </Route>
-
-                                </Route>
-
-                            </Route> {/* member end*/}
 
 
                             {/* 판매자 ------------------------------------------------- */}
