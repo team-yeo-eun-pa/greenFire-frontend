@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {useNavigate, useParams} from 'react-router-dom';
-import { callStoreAPI, callUpdateStoreAPI, callPauseStoreAPI, callModifyNewStoreAPI } from '../../apis/SellerAPICalls';
-import {Container, Row, Col, Button, Image, Form, Modal} from 'react-bootstrap';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+    callStoreAPI,
+    callUpdateStoreAPI,
+    callPauseStoreAPI,
+    callModifyNewStoreAPI,
+    callReopenStoreAPI
+} from '../../apis/SellerAPICalls';
+import { Container, Row, Col, Button, Image, Form, Modal } from 'react-bootstrap';
 import { PiStorefrontLight } from 'react-icons/pi';
 import { formatDate } from '../../utils/FormatDateUtil';
 import { FcCancel } from 'react-icons/fc';
@@ -87,6 +93,20 @@ function StoreProfile() {
         } catch (error) {
             console.error('Error pausing store:', error);
             toast.error("스토어 정지 중 오류가 발생했습니다. 다시 시도해주세요.");
+        }
+    };
+
+    const handleReopen = async () => {
+        try {
+            await dispatch(callReopenStoreAPI(sellerCode));
+            navigate(`/seller/mystore/main`);
+        } catch (error) {
+            console.error('Error reopening store:', error);
+            if (error.response && error.response.data) {
+                toast.error(error.response.data.message);
+            } else {
+                toast.error("스토어 재개 중 오류가 발생했습니다. 다시 시도해주세요.");
+            }
         }
     };
 
@@ -235,7 +255,7 @@ function StoreProfile() {
                         {storeInfo.storeStatus !== 'QUIT' && (
                             <div className="d-flex justify-content-between mt-5">
                                 {storeInfo.storeStatus === 'CLOSED' ? (
-                                    <Button variant="outline-success" className="me-2 w-100">정지 해제</Button>
+                                    <Button variant="outline-success" className="me-2 w-100" onClick={handleReopen}>정지 해제</Button>
                                 ) : (
                                     <>
                                         <Button variant="outline-secondary" className="me-2 w-50" onClick={() => setShowPauseModal(true)}>운영 정지</Button>
