@@ -20,11 +20,11 @@ function InquiryRegist({data}) {
 
 
 
-    const {success} = useSelector(state => state.inquiryReducer);
+    // const {success} = useSelector(state => state.inquiryReducer);
 
-    useEffect(() => {
-        if(success === true) navigate('members/mypage/inquiry/view')
-    }, [success]);
+    // useEffect(() => {
+    //     if(success === true) navigate('members/mypage/inquiry/view')
+    // }, [success]);
 
 
 
