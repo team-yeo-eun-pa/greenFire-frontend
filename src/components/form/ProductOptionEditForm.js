@@ -1,5 +1,5 @@
 import {Form} from "react-bootstrap";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
@@ -39,6 +39,18 @@ function ProductOptionEditForm(props) {
         }
     };
 
+    console.log(props.product);
+
+    useEffect(() => {
+        if (props.product) {
+            setSelectedOption({
+                optionName: props.product.productOptions.optionName,
+                optionPrice: props.product.productOptions.optionPrice,
+                optionStock: props.product.productOptions.optionStock
+            });
+        }
+    }, [props.product]);
+
     return (
         <div className="product-option-form">
 
@@ -50,20 +62,22 @@ function ProductOptionEditForm(props) {
                     <Button className="option-btn" onClick={handleClickDelete}>삭제</Button>
                 </div>
 
-                <div className="product-option-list">
-                    {props.productOptions.map((opt, index) => (
-                        <ListGroup.Item key={index}>
-                            <Form.Check
-                                type="radio"
-                                label={opt.name}
-                                name="selectOption"
-                                onChange={() => handleChangeOption(opt)}
-                                checked={selectedOption === opt}
-                            />
-                        </ListGroup.Item>
-                    ))
-                    }
-                </div>
+                {props.product && (
+                    <div className="product-option-list">
+                        {props.product.productOptions.map((opt, index) => (
+                            <ListGroup.Item key={index}>
+                                <Form.Check
+                                    type="radio"
+                                    label={opt.optionName}
+                                    name="selectOption"
+                                    onChange={() => handleChangeOption(opt)}
+                                    checked={selectedOption === opt}
+                                />
+                            </ListGroup.Item>
+                        ))
+                        }
+                    </div>
+                )}
 
 
             </ListGroup>
@@ -75,8 +89,8 @@ function ProductOptionEditForm(props) {
                             <Form.Label>옵션명</Form.Label>
                             <Form.Control
                                 type="text"
-                                value={selectedOption ? selectedOption.name : ''}
-                                onChange={(e) => setSelectedOption({ ...selectedOption, name: e.target.value})}
+                                value={selectedOption ? selectedOption.optionName : ''}
+                                onChange={(e) => setSelectedOption({ ...selectedOption, optionName: e.target.value})}
                             />
                         </Form.Group>
 
@@ -84,8 +98,9 @@ function ProductOptionEditForm(props) {
                             <Form.Label>옵션가격</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={selectedOption ? selectedOption.price : ''}
-                                onChange={(e) => setSelectedOption({ ...selectedOption, price: e.target.value})}
+                                value={selectedOption ? selectedOption.optionPrice : ''}
+                                defaultValue={props.product.productOptions.optionPrice}
+                                onChange={(e) => setSelectedOption({ ...selectedOption, optionPrice: e.target.value})}
                             />
                         </Form.Group>
 
@@ -93,8 +108,9 @@ function ProductOptionEditForm(props) {
                             <Form.Label>재고</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={selectedOption ? selectedOption.stock : ''}
-                                onChange={(e) => setSelectedOption({ ...selectedOption, stock: e.target.value})}
+                                value={selectedOption ? selectedOption.optionStock : ''}
+                                defaultValue={props.product.productOptions.optionStock}
+                                onChange={(e) => setSelectedOption({ ...selectedOption, optionStock: e.target.value})}
                             />
                         </Form.Group>
 

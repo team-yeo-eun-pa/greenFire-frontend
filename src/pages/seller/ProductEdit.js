@@ -14,6 +14,7 @@ import {
     callSellerProductDetailAPI,
     callSellerProductModifyAPI,
 } from "../../apis/ProductAPI";
+import ProductDescriptionForm from "../../components/form/ProductDescriptionForm";
 
 const Delta = Quill.import('delta');
 
@@ -23,14 +24,14 @@ function ProductEdit() {
     const navigate = useNavigate();
     const { productCode} = useParams();
     let { adminCategory, success, loading, error } = useSelector(state => state.category);
-    const { saveSuccess } = useSelector(state => state.productReducer);
+    const { success: saveSuccess } = useSelector(state => state.productReducer);
     const { product } = useSelector(state => state.productReducer);
     const [lastChange, setLastChange] = useState();
 
-    const [selectOption, setSelectOption] = useState({
-        optionName : '',
-        optionPrice: ''
-    });
+    // const [selectOption, setSelectOption] = useState({
+    //     optionName : '',
+    //     optionPrice: ''
+    // });
     const imageInput = useRef();
 
     /* 카테고리 불러오기 */
@@ -43,26 +44,26 @@ function ProductEdit() {
         dispatch(callSellerProductDetailAPI({productCode}));
     }, []);
 
-    console.log('product: ', product);
-
-    const [productForm, setproductForm] = useState({
-        productName : product.productName,
-        sellableStatus: product.sellableStatus,
-        categoryCode: product.categoryCode,
-        productDescription: product.productDescription,
-        productImage: product.productImage
+    const [productForm, setProductForm] = useState({
+        productName : '',
+        sellableStatus: 'Y',
+        categoryCode: 1,
+        productDescription: '',
+        productImage: ''
     });
 
-    /* 성공 시 페이지 이동*/
-    useEffect(() => {
-        if (saveSuccess === true) navigate('/seller/mystore/product');
-    }, [saveSuccess]);
+
+
+    // /* 성공 시 페이지 이동*/
+    // useEffect(() => {
+    //     if (saveSuccess === true) navigate('/seller/mystore/product');
+    // }, [saveSuccess]);
 
     const sellableStatus = ["Y", "N"]
 
 
     const onChangeHandler = e => {
-        setproductForm && setproductForm({
+        setProductForm && setProductForm({
             ...productForm,
             [e.target.name]: e.target.value
 
@@ -73,7 +74,7 @@ function ProductEdit() {
     const onClickProductEditHandler = () => {
         const formData = new FormData();
         formData.append('productImage', imageInput.current.files[0]);
-        formData.append('productRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
+        formData.append('productUpdateRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
         dispatch(callSellerProductModifyAPI({ productCode, modifyRequest : formData }));
     }
 
@@ -81,26 +82,30 @@ function ProductEdit() {
 
 
     return (
+
         <div className="product-edit-page">
 
             <div>
                 <ProductForm sellableStatus={sellableStatus} category={adminCategory}
                              imageInput={imageInput} productForm={productForm}
-                             setproductForm={setproductForm} onChangeHandler={onChangeHandler}
+                             setProductForm={setProductForm} onChangeHandler={onChangeHandler}
                              product={product}/>
             </div>
 
             <div>
                 <label style={{marginBottom: "8px"}}>옵션</label>
-                <ProductOptionEditForm productOptions={product.productOptions} selectOption={selectOption} setSelectOption={setSelectOption}/>
+                {/*<ProductOptionEditForm product={product} selectOption={selectOption} setSelectOption={setSelectOption}/>*/}
+                <ProductOptionEditForm product={product}/>
             </div>
 
 
             <label style={{marginBottom: "8px"}}>상세 설명</label>
-            <Form
-                type="text"
-                defaultValue={'상품 상세설명'}
-                value={productForm.productDescription}
+            <ProductDescriptionForm
+                product={product}
+                delaultvalue={productForm.productDescription}
+                productForm={productForm}
+                setProductForm={setProductForm}
+                onChangeHandler={onChangeHandler}
             />
 
             <div className="submit-btn-wrapper">

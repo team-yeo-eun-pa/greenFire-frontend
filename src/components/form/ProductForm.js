@@ -24,7 +24,22 @@ function ProductForm(props) {
     }
 
 
+
+    useEffect(() => {
+        if (props.product) {
+            props.setProductForm({
+                productName: props.product.productInfo.productName,
+                sellableStatus: props.product.productInfo.sellableStatus,
+                categoryCode: props.product.productInfo.categoryCode,
+                productDescription: props.product.productInfo.productDescription,
+                productImage: props.product.productInfo.productImage
+            });
+            setImageUrl(props.product.productInfo.productImage);
+        }
+    }, [props.product]);
+
 return (
+
     <div>
         <Form className="product-regist-forms">
             <Form.Group className="product-info-form" controlId="productName">

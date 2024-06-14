@@ -21,7 +21,6 @@ function ProductDetail() {
     }, []);
 
 
-    console.log('product', product);
     return (
         <>
             {

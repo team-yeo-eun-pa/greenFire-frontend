@@ -2,8 +2,6 @@ import {Form} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 function ProductDescriptionForm(props) {
 
-    const [imageUrl, setImageUrl] = useState(props.productForm.productImageUrl);
-
 
     return (
         <div>

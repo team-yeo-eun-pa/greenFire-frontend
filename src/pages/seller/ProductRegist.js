@@ -12,7 +12,7 @@ import {callSellerProductRegistAPI} from "../../apis/ProductAPI";
 import {success} from "../../modules/AdminCategoryModules";
 import ProductOptionAddForm from "../../components/form/ProductOptionAddForm";
 import {registSuccess} from "../../modules/ProductModules";
-import ProductDescriptionForm from "../../components/form/productDescriptionForm";
+import ProductDescriptionForm from "../../components/form/ProductDescriptionForm";
 
 
 // const Delta = Quill.import('delta');
@@ -23,7 +23,7 @@ function ProductRegist() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     let { adminCategory, success, loading, error } = useSelector(state => state.category);
-    const { saveSuccess } = useSelector(state => state.productReducer);
+    const { success : saveSuccess } = useSelector(state => state.productReducer);
 
     const [productForm, setProductForm] = useState({
         productName : '',
