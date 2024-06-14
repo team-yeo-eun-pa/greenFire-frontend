@@ -54,6 +54,7 @@ import VerifySuccess from "./pages/verification/VerifySuccess";
 import Reviews from "./pages/Reviews";
 import ReviewDetail from "./pages/ReviewDetail";
 import InquiryDetail from "./pages/Inquiry/InquiryDetail";
+import Order from "./components/items/Order";
 
 
 
@@ -83,6 +84,32 @@ function App() {
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
 
+                        {/* 초록불 스토어 --------------------------------------------- */}
+                        <Route path="/reviews" element={<Reviews/>}/>
+                        <Route path="/review-detail" element={<ReviewDetail/>}/>
+
+                        <Route path="/product" element={<ProductMain/>}></Route>
+                        <Route path="/product/:productCode" element={<ProductDetail/>}/>
+
+                        <Route path="/wish" element={<Wishlist/>}/>
+
+
+                        {/* 주문 및 결제 --------------------------------------------- */}
+                        <Route path="/order">
+                            <Route index element={<Order/>}/>
+                        </Route>
+
+                        <Route path="/payment">
+                            <Route index element={<CheckoutPage/>}/>
+                            <Route path="fail" element={<FailPage/>}/>
+                            <Route path="success" element={<SuccessPage/>}/>
+                        </Route>
+
+
+                        {/* 인증확인 ------------------------------------------------- */}
+                        <Route path="/verify-email/:result" element={<VerifySuccess/>}/>
+
+
                         {/* 회원 ------------------------------------------------- */}
                         <Route path="/members">
                             <Route path="signup"
@@ -108,61 +135,27 @@ function App() {
                                     <Route index element={<InquiryMain/>}/>
                                     <Route path="regist" element={<InquiryRegist/>}/>
                                     <Route path="detail/:inquiryCode" element={<InquiryDetail/>}/>
-
                                 </Route>
-
                             </Route>
-
                         </Route> {/* member end*/}
 
 
-                        <Route path="/product" element={<ProductMain/>}>
-                            {/* 초록불 스토어 --------------------------------------------- */}
-                            <Route path="reviews" element={<Reviews/>}/>
-                            <Route path="review-detail" element={<ReviewDetail/>}/>
-
-
-                            <Route path="product" element={<ProductMain/>}></Route>
-                            <Route path="product/:productCode" element={<ProductDetail/>}/>
-
-                            <Route path="wish" element={<Wishlist/>}/>
-
-
-                            {/* 주문 및 결제 --------------------------------------------- */}
-                            <Route path="order">
-                                <Route index element={<OrderRegistration/>}/>
+                        {/* 판매자 ------------------------------------------------- */}
+                        <Route path="/seller">
+                            <Route path="mystore" element={<SellerPageLayout/>}>
+                                <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
+                                {/*<Route path="main" element={<MyStoreMain/>} />*/}
+                                <Route path="main" element={<MyStoreList/>}/>
+                                <Route path=":sellerCode" element={<StoreProfile/>}/>
+                                <Route path="product" element={<ProductManagement/>}/>
+                                <Route path="regist" element={<ProductRegist/>}/>
+                                <Route path=":storeCode/order-list" element={<StoreOrderList/>}/>
+                                <Route path=":storeCode/order-list/:orderCode" element={<StoreOrderDetails/>}/>
+                                <Route path=":storeCode/order-approval-handler" element={<OrderApprovalHandler/>}/>
+                                <Route path=":storeCode/order-shipping-handler" element={<OrderShippingHandler/>}/>
+                                <Route path="edit" element={<ProductEdit/>}/>
                             </Route>
-
-                            <Route path="payment">
-                                <Route index element={<CheckoutPage/>}/>
-                                <Route path="fail" element={<FailPage/>}/>
-                                <Route path="success" element={<SuccessPage/>}/>
-                            </Route>
-
-
-                            {/* 인증확인 ------------------------------------------------- */}
-                            <Route path="verify-email/:result" element={<VerifySuccess/>}/>
-
-
-
-
-
-                            {/* 판매자 ------------------------------------------------- */}
-                            <Route path="seller">
-                                <Route path="mystore" element={<SellerPageLayout/>}>
-                                    <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
-                                    {/*<Route path="main" element={<MyStoreMain/>} />*/}
-                                    <Route path="main" element={<MyStoreList/>}/>
-                                    <Route path=":sellerCode" element={<StoreProfile/>}/>
-                                    <Route path="product" element={<ProductManagement/>}/>
-                                    <Route path="regist" element={<ProductRegist/>}/>
-                                    <Route path=":storeCode/order-list" element={<StoreOrderList/>}/>
-                                    <Route path=":storeCode/order-list/:orderCode" element={<StoreOrderDetails/>}/>
-                                    <Route path=":storeCode/order-approval-handler" element={<OrderApprovalHandler/>}/>
-                                    <Route path=":storeCode/order-shipping-handler" element={<OrderShippingHandler/>}/>
-                                    <Route path="edit" element={<ProductEdit/>}/>
-                                </Route>
-                            </Route> {/* seller end*/}
+                        </Route> {/* seller end*/}
 
 
                             {/* 관리자 ------------------------------------------------- */}
@@ -182,13 +175,14 @@ function App() {
                                 </Route>
                             </Route> {/* admin end*/}
 
-                        </Route> {/* Layout end*/}
-                        <Route path="*" element={<Error/>}/>
-                    </Route>
+
+                    </Route> {/* Layout end*/}
+                    <Route path="*" element={<Error/>}/>
+
                 </Routes>
             </BrowserRouter>
         </>
-);
+    );
 }
 
 export default App;
