@@ -6,21 +6,31 @@ import AdminMemberReducer from "./AdminMemberModules";
 import AdminCategoryReducer from "./AdminCategoryModules";
 import AdminReportReducer from "./AdminReportModules";
 import ReportReducer from "./ReportModules";
-import applyReducer from "./ApplyModules";
-import orderReducer from "./OrderModules";
+import productReducer from "./ProductModules";
+import optionReducer from "./ProductOptionModules";
 import sellerReducer from "./SellerModules";
+import orderReducer from "./OrderModules";
+import addressReducer from "./AddressModules";
+import applyReducer from "./ApplyModules";
+import ReviewReducer from "./ReviewModules";
 
 const rootReducer = combineReducers({
     inquiryReducer,
     memberReducer,
     sellerReducer,
+
+    productReducer,
+    optionReducer,
+ 
     noticeReducer,
     AdminMemberReducer,
     category: AdminCategoryReducer,
     orderReducer,
+    addressReducer,
     AdminReportReducer,
     ReportReducer,
-    applyReducer
+    applyReducer,
+    ReviewReducer
 });
 
 export default rootReducer;

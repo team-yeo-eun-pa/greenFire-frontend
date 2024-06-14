@@ -1,13 +1,25 @@
 
-import MainItem from "../components/items/MainItem";
+import MainItem from "./MainItem";
 import NavBar from "../components/common/NavBar";
 import Footer from "../components/common/Footer";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {callProfileAPI} from "../apis/MemberAPICalls";
 
 function Main() {
 
+    const dispatch = useDispatch();
+    const {profileInfo} = useSelector(state => state.memberReducer);
+
+    useEffect(() => {
+        if (!profileInfo) {
+            dispatch(callProfileAPI());
+        }
+    }, [dispatch, profileInfo]);
+
     return (
         <>
-            <NavBar/>
+            <NavBar profileInfo={profileInfo}/>
                 <MainItem/>
             <Footer/>
         </>
