@@ -173,8 +173,6 @@ function App() {
                             </Route>
                         </Route> {/* admin end*/}
 
-                        </Route>
-
                         <Route path="/order">
                             <Route index element={<OrderRegistration/>}/>
                         </Route>
