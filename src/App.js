@@ -25,7 +25,6 @@ import StoreProfile from "./pages/seller/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminReport from "./pages/admin/AdminReport";
-import Order from "./pages/order/Order";
 import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
@@ -37,12 +36,17 @@ import ApplySeller from "./pages/member/ApplySeller";
 import ApplyDetail from "./pages/member/ApplyDetail";
 import ApplyRegist from "./pages/member/ApplyRegist";
 import {ToastContainer} from "react-toastify";
-import OrderList from "./pages/order/OrderList";
-import OrderDetails from "./pages/order/OrderDetails";
+import MemberOrderList from "./pages/order/MemberOrderList";
+import MemberOrderDetails from "./pages/order/MemberOrderDetails";
 import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
 import InquiryListView from "./pages/Inquiry/member/InquiryListView";
 import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
+import OrderApprovalHandler from "./pages/order/OrderApprovalHandler";
+import StoreOrderList from "./pages/order/StoreOrderList";
+import OrderShippingHandler from "./pages/order/OrderShippingHandler";
+import OrderRegistration from "./pages/order/OrderRegistration";
+import StoreOrderDetails from "./pages/order/StoreOrderDetails";
 import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
 import VerifySuccess from "./pages/verification/VerifySuccess";
 import AdminMain from "./pages/admin/AdminMain";
@@ -114,8 +118,8 @@ function App() {
                                 <Route index element={<Navigate to="/members/mypage/profile" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
                                 <Route path="profile" element={<MemberProfile/>}/>
-                                <Route path="orders" element={<OrderList/>}/>
-                                <Route path="orders/:orderCode" element={<OrderDetails/>}/>
+                                <Route path="order-list" element={<MemberOrderList/>}/>
+                                <Route path="order-list/:orderCode" element={<MemberOrderDetails/>}/>
                                 <Route path="report" element={<ReportPage/>}/>
 
                                 <Route path="apply">
@@ -143,6 +147,10 @@ function App() {
                                 <Route path=":storeCode" element={<StoreProfile/>}/>
                                 <Route path="product" element={<ProductManagement/>}/>
                                 <Route path="regist" element={<ProductRegist/>}/>
+                                <Route path=":storeCode/order-list" element={<StoreOrderList/>}/>
+                                <Route path=":storeCode/order-list/:orderCode" element={<StoreOrderDetails/>}/>
+                                <Route path=":storeCode/order-approval-handler" element={<OrderApprovalHandler/>}/>
+                                <Route path=":storeCode/order-shipping-handler" element={<OrderShippingHandler/>}/>
                                 <Route path="edit" element={<ProductEdit/>}/>
                             </Route>
                         </Route> {/* seller end*/}
@@ -164,6 +172,18 @@ function App() {
                                 </Route>
                             </Route>
                         </Route> {/* admin end*/}
+
+                        </Route>
+
+                        <Route path="/order">
+                            <Route index element={<OrderRegistration/>}/>
+                        </Route>
+
+                        <Route path="/payment">
+                            <Route index element={<CheckoutPage/>}/>
+                            <Route path="fail" element={<FailPage/>}/>
+                            <Route path="success" element={<SuccessPage/>}/>
+                        </Route>
 
 
                     </Route> {/* Layout end*/}
