@@ -4,12 +4,11 @@ import {getOrderDetails, getOrders, success} from "../modules/OrderModules";
 import {getMemberId} from "../utils/TokenUtils";
 
 // 주문 등록
-export const callOrderRegistAPI = ({registForm}) => {
+export const callOrderRegistAPI = ({orderRequest}) => {
     return async (dispatch, getState) => {
         const result = await authRequest.post(
             `/orders`,
-            JSON.stringify(registForm),
-            { headers : { 'Content-Type' : 'application/json' }}
+            orderRequest
         ).catch(e => {
             if(e.response.status === 409) {
                 toast.error('재고 부족으로 상품 구매가 불가합니다.');
@@ -41,7 +40,7 @@ export const callModifyOrderStatusAPI = ({ orderCode, storeOrderCode, status }) 
         console.log('callModifyOrderStatusAPI result : ', result);
 
         if (result?.status === 201) {
-            dispatch(success());  // 성공 시 필요에 따라 상태를 업데이트합니다.
+            dispatch(success());
         }
     }
 }
@@ -85,6 +84,22 @@ export const callOrdersAPI = ({currentPage}) => {
 }
 
 // orderCode 기준 조회
+
+// export const callOrderAPI = ({orderCode}) => {
+//
+//     return async (dispatch, getState) => {
+//         const result = await authRequest.get(
+//             `/orders/${orderCode}`
+//         );
+//
+//         console.log('배열인가요? : ',Array.isArray(result));
+//         console.log('callOrdersAPI result : ', result);
+//
+//         if (result?.status === 200) {
+//             dispatch(getOrders(result));
+//         }
+//     }
+// }
 
 // storeCode 기준 조회
 

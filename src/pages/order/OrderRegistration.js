@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import DeliveryInfo from './DeliveryInfo';
-import OrdererInfo from './OrdererInfo';
-import OrderItems from './OrderItems';
-import OrderSummary from './OrderSummary';
-import PaymentMethod from './PaymentMethod';
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
+import DeliveryAddressModal from '../../components/items/DeliveryAddressModal';
+import DeliveryInfo from '../../components/items/DeliveryInfo';
+import OrderSummary from '../../components/items/OrderSummary';
+import OrderItems from '../../components/items/OrderItems';
+import CouponSelector from '../../components/items/CouponSelector';
+import {CheckoutPage} from "../payment/CheckoutPage";
+import StatusButton from "../../components/common/StatusButton";
 
-const OrderRegistration = () => {
+function OrderRegistration() {
     const [form, setForm] = useState({
         deliveryRequest: '',
-        ordererName: '',
-        ordererEmail: '',
-        emailDomain: 'naver.com',
-        phoneFirstPart: '010',
-        phoneMiddlePart: '',
-        phoneLastPart: '',
-        coupon: '',
-        paymentMethod: ''
+        receiverName: '김초록',
+        contactNumber: '010-1234-5678',
+        address: '서울특별시 종로구 인사동길 12',
+        addressDetail: '',
     });
 
-    const items = [
-        { name: '민들레로 만든 양말', color: '화이트', price: '30,000', imageUrl: '/images/socks_white.jpg' },
-        { name: '종이로 만든 양말', color: '레인보우', price: '30,000', imageUrl: '/images/socks_rainbow.jpg' }
-    ];
+    const [showModal, setShowModal] = useState(false);
+
+    const handleShow = () => setShowModal(true);
+    const handleClose = () => setShowModal(false);
 
     const onChangeHandler = (e) => {
         setForm({
@@ -31,34 +29,28 @@ const OrderRegistration = () => {
         });
     };
 
-    const totalAmount = items.reduce((acc, item) => acc + parseInt(item.price.replace(/,/g, '')), 0);
-    const deliveryFee = 6000;
-    const finalAmount = totalAmount + deliveryFee;
-
     return (
         <Container>
-            <h2 className="my-4">주문/결제</h2>
-            <Row>
-                <Col lg={8}>
-                    <DeliveryInfo form={form} onChangeHandler={onChangeHandler} />
-                    <OrdererInfo form={form} onChangeHandler={onChangeHandler} />
-                    <OrderItems items={items} />
-                    <Form.Group className="mb-3">
-                        <Form.Label>쿠폰</Form.Label>
-                        <Form.Control as="select" name="coupon" onChange={onChangeHandler}>
-                            <option value="">사용하실 쿠폰을 선택해주세요.</option>
-                            <option value="discount10">10% 할인 쿠폰</option>
-                            <option value="freeship">무료 배송 쿠폰</option>
-                        </Form.Control>
-                    </Form.Group>
+            <h4>주문/결제</h4>
+            <Row className="mt-4">
+                <Col md={8}>
+                    <DeliveryInfo form={form} onChangeHandler={onChangeHandler}/>
+                    {/*<div className="fw-semibold border-bottom border-2 border-dark-subtle p-2"></div>*/}
+                    {/*<div className="d-flex justify-content-end m-3">*/}
+                    {/*    <Button variant="outline-success" className="btn-md mx-1" onClick={handleShow}>*/}
+                    {/*        배송지 변경*/}
+                    {/*    </Button>*/}
+                    {/*</div>*/}
+                    <DeliveryAddressModal show={showModal} handleClose={handleClose}/>
+                    <OrderItems/>
+                    <CouponSelector/>
                 </Col>
-                <Col lg={4}>
-                    <OrderSummary totalAmount={totalAmount} deliveryFee={deliveryFee} finalAmount={finalAmount} />
-                    <PaymentMethod onChangeHandler={onChangeHandler} />
+                <Col md={4}>
+                    <OrderSummary totalAmount={60000} deliveryFee={6000} finalAmount={66000}/>
                 </Col>
             </Row>
         </Container>
     );
-};
+}
 
 export default OrderRegistration;
