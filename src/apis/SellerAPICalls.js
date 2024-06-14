@@ -89,7 +89,7 @@ export const callPauseStoreAPI = (sellerCode, suspendedEndDate) => {
             }
         } catch (error) {
             console.error('Error pausing store:', error);
-            toast.error("스토어 운영 정지 중 오류가 발생했습니다. 다시 시도해주세요.");
+            toast.error(error.response.data.message);
         }
     };
 };
