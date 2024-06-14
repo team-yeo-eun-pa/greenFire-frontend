@@ -38,19 +38,19 @@ export const callProductDetailAPI = ({productCode}) => {
 
 
 
-export const callProductOptionListAPI = ({productCode}) => {
-
-    return async (dispatch, getState) => {
-        const result = await request(
-            'GET',
-            `/product/${productCode}`
-        );
-        console.log('callProductOptionListAPI result : ',result);
-        if (result && result.status === 200) {
-            dispatch(getOptions(result));
-        }
-    }
-};
+// export const callProductOptionListAPI = ({productCode}) => {
+//
+//     return async (dispatch, getState) => {
+//         const result = await request(
+//             'GET',
+//             `/product/${productCode}`
+//         );
+//         console.log('callProductOptionListAPI result : ',result);
+//         if (result && result.status === 200) {
+//             dispatch(getOptions(result));
+//         }
+//     }
+// };
 
 export const callSellerProductListAPI = ({currentPage = 1}) => {
 

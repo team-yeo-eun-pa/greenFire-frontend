@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-function ProductOptionEditForm(prop) {
+function ProductOptionEditForm(props) {
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [mode, setMode] = useState(null);
@@ -51,7 +51,7 @@ function ProductOptionEditForm(prop) {
                 </div>
 
                 <div className="product-option-list">
-                    {prop.optionInfo.map((opt, index) => (
+                    {props.productOptions.map((opt, index) => (
                         <ListGroup.Item key={index}>
                             <Form.Check
                                 type="radio"

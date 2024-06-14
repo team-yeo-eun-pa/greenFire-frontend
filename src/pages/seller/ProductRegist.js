@@ -8,10 +8,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import ProductForm from "../../components/form/ProductForm";
 import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
-import {callProductOptionListAPI, callSellerProductRegistAPI} from "../../apis/ProductAPI";
+import {callSellerProductRegistAPI} from "../../apis/ProductAPI";
 import {success} from "../../modules/AdminCategoryModules";
 import ProductOptionAddForm from "../../components/form/ProductOptionAddForm";
 import {registSuccess} from "../../modules/ProductModules";
+import ProductDescriptionForm from "../../components/form/productDescriptionForm";
 
 
 // const Delta = Quill.import('delta');
@@ -24,7 +25,6 @@ function ProductRegist() {
     let { adminCategory, success, loading, error } = useSelector(state => state.category);
     const { saveSuccess } = useSelector(state => state.productReducer);
 
-    // db 수정 후 상품 설명 추가 필요
     const [productForm, setProductForm] = useState({
         productName : '',
         sellableStatus: 'Y',
@@ -94,14 +94,10 @@ function ProductRegist() {
 
 
             <label style={{marginBottom: "8px"}}>상세 설명</label>
-            <Form
-                type="text"
-                defaultValue={'상품 상세설명'}
-                value={productForm.productDescription}
-            >
-
-            </Form>
-
+            <ProductDescriptionForm productForm={productForm}
+                                    setProductForm={setProductForm}
+                                    onChangeHandler={onChangeHandler}
+            />
             <div className="submit-btn-wrapper">
                 <button className="submit-btn" onClick={submitProductRegistHandler}>상품 등록</button>
             </div>

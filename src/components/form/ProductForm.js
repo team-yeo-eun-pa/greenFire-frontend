@@ -5,7 +5,7 @@ import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
 
 function ProductForm(props) {
 
-    const [imageUrl, setImageUrl] = useState(props.productForm.productImageUrl);
+    const [imageUrl, setImageUrl] = useState(props.productForm.productImage);
 
 
 

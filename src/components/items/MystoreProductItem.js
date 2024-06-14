@@ -35,10 +35,8 @@ function MystoreProductItem({product}) {
             </div>
 
             <div className="mystore-product-btn-wrapper">
-                <button className="option-btn">
-                    <Nav.Link href="/seller/mystore/edit">
+                <button className="option-btn" onClick={()=>navigate(`/seller/mystore/edit/${product.productCode}`)}>
                         수정
-                    </Nav.Link>
                 </button>
                 <button className="option-btn" onClick={onClickDeleteBtnHandler}>
                         삭제
