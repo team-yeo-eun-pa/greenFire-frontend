@@ -144,7 +144,7 @@ function App() {
                                 <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
                                 {/*<Route path="main" element={<MyStoreMain/>} />*/}
                                 <Route path="main" element={<MyStoreList/>}/>
-                                <Route path=":storeCode" element={<StoreProfile/>}/>
+                                <Route path=":sellerCode" element={<StoreProfile/>}/>
                                 <Route path="product" element={<ProductManagement/>}/>
                                 <Route path="regist" element={<ProductRegist/>}/>
                                 <Route path=":storeCode/order-list" element={<StoreOrderList/>}/>
