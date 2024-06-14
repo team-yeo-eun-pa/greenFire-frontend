@@ -41,7 +41,6 @@ function ProductManagement() {
 
                             {products.data.map(product => (
                                 <Col key={product.productCode} style={{marginTop: '5px', marginBottom: '10px'}}>
-                                    {/*<MystoreProductItem product={product} deleteBtn={onClickDeleteBtnHandler}/>*/}
                                     <MystoreProductItem product={product}/>
                                 </Col>
                             ))}

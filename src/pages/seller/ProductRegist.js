@@ -98,7 +98,9 @@ function ProductRegist() {
                 type="text"
                 defaultValue={'상품 상세설명'}
                 value={productForm.productDescription}
-            />
+            >
+
+            </Form>
 
             <div className="submit-btn-wrapper">
                 <button className="submit-btn" onClick={submitProductRegistHandler}>상품 등록</button>

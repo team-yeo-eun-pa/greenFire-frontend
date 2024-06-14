@@ -94,15 +94,19 @@ export const callSellerProductRegistAPI = ({ registRequest }) => {
     }
 };
 
+
+
 export const callSellerProductModifyAPI = ({ productCode, modifyRequest }) => {
-
     return async (dispatch, getState) => {
-
-        const result = await authRequest.put(`/seller/mystore/product/${productCode}`, modifyRequest);
-        console.log('callSellerProductModifyAPI result : ',result);
-
-        if (result.status === 201) {
-            dispatch(success());
+        try {
+            const result = await authRequest.put(`/seller/mystore/edit/${productCode}`, {modifyRequest});
+            if (result.status === 201) {
+                dispatch(success());
+            } else {
+                console.error('오류:', result.status);
+            }
+        } catch (error) {
+            console.error('상품 수정 오류:', error);
         }
     }
 };

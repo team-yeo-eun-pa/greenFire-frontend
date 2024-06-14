@@ -113,7 +113,7 @@ function App() {
                                     <Route path=":storeCode" element={<StoreProfile/>} />
                                     <Route path="product" element={<ProductManagement/>} />
                                     <Route path="regist" element={<ProductRegist/>} />
-                                    <Route path="edit" element={<ProductEdit/>}/>
+                                    <Route path="edit/:productCode" element={<ProductEdit/>}/>
                                 </Route>
                             </Route>
 
