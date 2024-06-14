@@ -66,7 +66,7 @@ function InquiryMain({data}) {
 
                     <div className="inquiryList">
 
-                    { data &&
+                    { inquiry &&
                         <>
                             <InquiryList data={inquiry.data}/>
                             <PagingBar pageInfo={inquiry.pageInfo} setCurrentPage={setCurrentPage}/>

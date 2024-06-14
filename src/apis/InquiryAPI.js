@@ -32,6 +32,19 @@ export const callMemberInquiryRegistAPI = ({inquiryRegistRequest}) => {
 
 }
 
+export const callInquiryDetailViewAPI = ({inquiryCode}) => {
+
+    return async (dispatch, getState) => {
+        const result = await authRequest.get(`/inquiry/${inquiryCode}`);
+
+        if (result?.status === 200) {
+
+        } else {
+            toast.warning("문의 상세내역을 불러오지 못했습니다")
+        }
+    }
+}
+
 
 
 
