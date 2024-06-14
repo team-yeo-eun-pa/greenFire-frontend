@@ -1,10 +1,12 @@
 
-import {FloatingLabel, Table} from "react-bootstrap";
+import {Col, FloatingLabel, InputGroup, Row, Table} from "react-bootstrap";
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {callInquiryDetailViewAPI} from "../../apis/InquiryAPI";
 import Button from "react-bootstrap/Button";
 import {useNavigate, useParams} from "react-router-dom";
+import Form from "react-bootstrap/Form";
+
 
 function InquiryDetail () {
 
@@ -25,11 +27,33 @@ function InquiryDetail () {
 
             {detail &&
             <>
+
+
+                {/*<Form.Group as={Row} className="mb-3" controlId="inquiryCode">*/}
+                {/*    <Form.Label column sm="2">*/}
+                {/*        문의 코드*/}
+                {/*    </Form.Label>*/}
+                {/*    <Col sm="10">*/}
+                {/*        <InputGroup className="mb-3">*/}
+                {/*            <Form.Control*/}
+                {/*                type="textarea"*/}
+                {/*                placeholder={inquiryCode}*/}
+                {/*                name="inquiryCode"*/}
+                {/*                value={detail.inquiryCode}*/}
+                {/*                onChange={onChangeHandler}*/}
+                {/*            />*/}
+                {/*        </InputGroup>*/}
+                {/*    </Col>*/}
+                {/*</Form.Group>*/}
+
+
                 <div  className="text-center">문의 코드 : {inquiryCode}</div>
-            <div className="text-center">작성일 : {detail.inquiryWriteDate} </div>
-            <div className="text-center"> 문의 제목 : {detail.inquiryTitle} </div>
-            <div className="text-center">문의 내용 : {detail.inquiryDetail} </div>
-            <div className="text-center">문의 처리 상태 : {detail.inquiryReplyStatus} </div>
+                <div className="text-center">작성일 : {detail.inquiryWriteDate} </div>
+                <div className="text-center">문의 제목 : {detail.inquiryTitle} </div>
+                <div className="text-center">문의 내용 : {detail.inquiryDetail} </div>
+                <div clssName="test-center">문의 답변 내용 : {detail.inquiryReply} </div>
+                <div className="text-center">문의 처리 상태 : {detail.inquiryReplyStatus} </div>
+
             </>
             }
 
