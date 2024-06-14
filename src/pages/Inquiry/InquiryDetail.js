@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import {useNavigate, useParams} from "react-router-dom";
 import Form from "react-bootstrap/Form";
 
+
 function InquiryDetail () {
 
     const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function InquiryDetail () {
 
             {detail &&
             <>
+
 
                 {/*<Form.Group as={Row} className="mb-3" controlId="inquiryCode">*/}
                 {/*    <Form.Label column sm="2">*/}
@@ -51,6 +53,7 @@ function InquiryDetail () {
                 <div className="text-center">문의 내용 : {detail.inquiryDetail} </div>
                 <div clssName="test-center">문의 답변 내용 : {detail.inquiryReply} </div>
                 <div className="text-center">문의 처리 상태 : {detail.inquiryReplyStatus} </div>
+
             </>
             }
 
