@@ -109,7 +109,7 @@ function ProductEdit() {
             />
 
             <div className="submit-btn-wrapper">
-                <button className="submit-btn" onClick={onClickProductEditHandler}>상품 수정 완료</button>
+                <button className="submit-btn" onClick={onClickProductEditHandler}>완료</button>
             </div>
 
         </div>
