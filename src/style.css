@@ -282,7 +282,7 @@
     width: 70px;
     height: 30px;
     padding: 0 0 2px 0;
-    align-items: center; // flexbox의 경우만 해당됨
+    align-items: center;
 
 &:hover,
 &.active,
@@ -320,7 +320,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; // 뷰포트 높이의 100%
+    min-height: 100vh;
 
 .modal-content {
     margin: auto;
@@ -523,7 +523,6 @@
 }
 
 /* AdminCategory.css */
-
 .category-title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -663,7 +662,6 @@
     text-align: center;
 }
 
-/*------------*/
 .status-tracker-container {
     border: 1px solid #ddd;
     border-radius: 8px;
