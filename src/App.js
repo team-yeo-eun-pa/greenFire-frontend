@@ -107,7 +107,7 @@ function App() {
                                 <Route path="inquiry">
                                     <Route index element={<InquiryMain/>}/>
                                     <Route path="regist" element={<InquiryRegist/>}/>
-                                    <Route path="detail" element={<InquiryDetail/>}/>
+                                    <Route path="detail/:inquiryCode" element={<InquiryDetail/>}/>
 
                                 </Route>
 

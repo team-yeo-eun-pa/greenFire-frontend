@@ -11,12 +11,15 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
     const navigate = useNavigate();
 
 
+
+
     return (
 
 
 
                     <tr
-                        onClick={() => navigate(`/members/mypage/inquiry/${inquiryCode}`)}>
+                        onClick={() => navigate(`/members/mypage/inquiry/detail/${inquiryCode}`)}>
+
                         <td key={inquiryCode} className="text-center">{inquiryCode}</td>
                         <td key={inquiryWriteDate} className="text-center">{inquiryWriteDate}</td>
                         <td key={inquiryTitle} className="text-center">{inquiryTitle}</td>

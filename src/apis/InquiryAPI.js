@@ -1,7 +1,7 @@
 
 import {authRequest} from "./api";
 import {toast} from "react-toastify";
-import {getInquiry, success} from "../modules/InquiryModules";
+import {getDetail, getInquiry, success} from "../modules/InquiryModules";
 
 export const callInquiryListAPI = ({currentPage}) => {
     return async (dispatch, getState) => {
@@ -37,8 +37,9 @@ export const callInquiryDetailViewAPI = ({inquiryCode}) => {
 
     return async (dispatch, getState) => {
         const result = await authRequest.get(`/inquiry/${inquiryCode}`);
-
+        console.log(result);
         if (result?.status === 200) {
+        dispatch(getDetail(result))
 
         } else {
             toast.warning("문의 상세내역을 불러오지 못했습니다")
