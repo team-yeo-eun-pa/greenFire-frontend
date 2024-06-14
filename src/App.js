@@ -13,7 +13,7 @@ import MyStoreList from "./pages/seller/MyStoreList";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
 import ProductMain from "./pages/product/ProductMain";
 import Wishlist from "./pages/product/Wishlist";
-import InquiryMain from "./pages/Inquiry/member/InquiryMain";
+import InquiryMain from "./pages/Inquiry/InquiryMain";
 import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
@@ -21,6 +21,7 @@ import ProductEdit from "./pages/seller/ProductEdit";
 import LoginModal from "./components/items/LoginModal";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminMemberView from "./pages/admin/AdminMemberView";
+import InquiryRegist from "./pages/Inquiry/InquiryRegist";
 import StoreProfile from "./pages/seller/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
@@ -39,7 +40,7 @@ import {ToastContainer} from "react-toastify";
 import MemberOrderList from "./pages/order/MemberOrderList";
 import MemberOrderDetails from "./pages/order/MemberOrderDetails";
 import AdminCreateNotice from "./pages/admin/AdminCreateNotice";
-import InquiryListView from "./pages/Inquiry/member/InquiryListView";
+import InquiryListView from "./pages/Inquiry/InquiryListView";
 import ApplyList from "./pages/admin/AdminApplyList";
 import AdminApplyDetail from "./pages/admin/AdminApplyDetail";
 import OrderApprovalHandler from "./pages/order/OrderApprovalHandler";
@@ -48,6 +49,7 @@ import OrderShippingHandler from "./pages/order/OrderShippingHandler";
 import OrderRegistration from "./pages/order/OrderRegistration";
 import StoreOrderDetails from "./pages/order/StoreOrderDetails";
 import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
+import AdminMain from "./pages/admin/AdminMain";
 import VerifySuccess from "./pages/verification/VerifySuccess";
 import AdminMain from "./pages/admin/AdminMain";
 import Reviews from "./pages/Reviews";
@@ -81,9 +83,14 @@ function App() {
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
 
+
+
+
+                        <Route path="/product" element={<ProductMain/>}>
                         {/* 초록불 스토어 --------------------------------------------- */}
                         <Route path="/reviews" element={<Reviews/>}/>
                         <Route path="/review-detail" element={<ReviewDetail/>}/>
+
 
                         <Route path="/product" element={<ProductMain/>}></Route>
                         <Route path="/product/:productCode" element={<ProductDetail/>}/>
@@ -131,10 +138,11 @@ function App() {
                                 <Route path="inquiry">
                                     <Route index element={<InquiryMain/>}/>
                                     <Route path="regist" element={<InquiryRegist/>}/>
-                                    <Route path="view" element={<InquiryListView/>}/>
+                                    {/*<Route path="view" element={<InquiryListView/>}/>*/}
                                 </Route>
                                 {/*<Route path="regist/update" element={<InquiryUpdate/>}/>*/}
                             </Route>
+
                         </Route> {/* member end*/}
 
 
