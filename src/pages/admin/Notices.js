@@ -1,5 +1,3 @@
-// AdminNotices.jsx
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row, Button } from 'react-bootstrap';
@@ -13,11 +11,8 @@ function AdminNotices() {
     const dispatch = useDispatch();
     const { notices } = useSelector(state => state.noticeReducer);
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
-    const [totalPages, setTotalPages] = useState(1); // 총 페이지 수
     const navigate = useNavigate();
     const [isAdminUser, setIsAdminUser] = useState(false);
-    const [modifyMode, setModifyMode] = useState(false);
-    const [form, setForm] = useState({});
 
     useEffect(() => {
         const checkAdminStatus = async () => {
@@ -33,24 +28,26 @@ function AdminNotices() {
         dispatch(AdminNoticesAPICalls({ currentPage })).then(response => {
             if (response && response.success) {
                 // 총 페이지 수 설정
-                setTotalPages(response.totalPages);
+                const { startPage, endPage, maxPage } = response.pageInfo;
+                setPageInfo({
+                    currentPage,
+                    startPage,
+                    endPage,
+                    maxPage
+                });
             }
         });
     }, [dispatch, currentPage]);
 
-    // 공지사항 수정 페이지로 이동하는 함수
-    const handleEditNotice = async (noticeCode) => {
-        try {
-            const response = await fetch(`/admin/notices/${noticeCode}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch notice details');
-            }
-            const data = await response.json();
-            const { noticeTitle, noticeContent } = data;
-            navigate(`/admin/dashboard/notice-create`, { state: { noticeCode, noticeTitle, noticeContent } });
-        } catch (error) {
-            console.error('Error fetching notice details:', error);
-        }
+    const [pageInfo, setPageInfo] = useState({
+        currentPage: 1,
+        startPage: 1,
+        endPage: 1,
+        maxPage: 1
+    });
+
+    const handleEditNotice = async (notice) => {
+        navigate('/admin/dashboard/notice-update', { state: notice.noticeCode });
     };
 
     // 공지사항 삭제 확인 및 처리 함수
@@ -91,14 +88,9 @@ function AdminNotices() {
         ])
         : [];
 
-    // 페이지 변경 이벤트 핸들러
-    const handlePageChange = (page) => {
-        setCurrentPage(page); // 페이지 변경 시 현재 페이지 업데이트
-    };
-
     return (
         <Row>
-            <Col xs lg="9" className="mt-5">
+            <Col xs lg="12" className="mt-5">
                 <div className="fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">공지사항</div>
                 <TableEx headers={headers} rows={rows} onRowClick={handleRowClick} />
                 {isAdminUser && (
@@ -106,7 +98,7 @@ function AdminNotices() {
                         <Button onClick={() => navigate('/admin/dashboard/notice-create')} variant="success">작성하기</Button>
                     </div>
                 )}
-                <PagingBar currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} /> {/* PagingBar에 currentPage, totalPages, onPageChange 전달 */}
+                <PagingBar pageInfo={notices.pageInfo} setCurrentPage={setCurrentPage}/>
             </Col>
         </Row>
     );

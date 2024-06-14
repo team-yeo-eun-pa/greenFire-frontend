@@ -6,45 +6,40 @@ import { NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { Link } from 'react-router-dom';
 
-function UserPageNavBar({ profileInfo }) {
+function UserPageNavBar() {
     const [key, setKey] = useState('home');
-
-    // 프로필 정보가 존재하는지 확인하고
-    if (!profileInfo) {
-        return null; // 프로필 정보가 없을 경우 렌더링 안함 근데 시온이가 이걸 원한게 맞을까
-    }
-
-    // 프로필 정보에서 필요한 부분만 추출하여 전달
-    const { profilePicture, memberName, memberEmail } = profileInfo;
 
     return (
         <>
             <Nav defaultActiveKey="/home" className="flex-column rounded mt-5 p-4"
                  style={{backgroundColor: "#F0F3EE"}}>
                 {/* User Info */}
-                <div className="text-center mb-3">
-                    {profilePicture ? (
-                        <Image
-                            src={profilePicture}
-                            roundedCircle
-                            className="mx-auto d-block mb-3"
-                            style={{width: "130px", height: "130px"}}
-                        />
-                    ) : (
-                        <CgProfile style={{width: "130px", height: "130px"}} />
-                    )}
-                    <br/>
-                    <div className="fw-bold fs-6">
-                        {memberName}
-                    </div>
-                    <div className="text-muted">{memberEmail}</div>
-                    <NavLink to="/members/mypage/profile">
-                        <button className="btn btn-secondary btn-sm mt-2">내 프로필</button>
-                    </NavLink>
-                </div>
-                <hr/>
+                {/*<div className="text-center mb-3">*/}
+                {/*    {profilePicture ? (*/}
+                {/*        <Image*/}
+                {/*            src={profilePicture}*/}
+                {/*            roundedCircle*/}
+                {/*            className="mx-auto d-block mb-3"*/}
+                {/*            style={{width: "130px", height: "130px"}}*/}
+                {/*        />*/}
+                {/*    ) : (*/}
+                {/*        <CgProfile style={{width: "130px", height: "130px"}} />*/}
+                {/*    )}*/}
+                {/*    <br/>*/}
+                {/*    <div className="fw-bold fs-6">*/}
+                {/*        {memberName}*/}
+                {/*    </div>*/}
+                {/*    <div className="text-muted">{memberEmail}</div>*/}
+                {/*    <NavLink to="/members/mypage/profile">*/}
+                {/*        <button className="btn btn-secondary btn-sm mt-2">내 프로필</button>*/}
+                {/*    </NavLink>*/}
+                {/*</div>*/}
+                {/*<hr/>*/}
 
                 {/* Navigation Links */}
+                <Nav.Link className="nav-link-custom-title mt-2">마이페이지</Nav.Link>
+                <Nav.Link as={Link} to="/members/mypage/profile" className="nav-link-custom">프로필 관리</Nav.Link>
+                <br/>
                 <Nav.Link className="nav-link-custom-title">초록불 챌린지</Nav.Link>
                 <Nav.Link eventKey="myChallenges" className="nav-link-custom">나의 챌린지</Nav.Link>
                 <Nav.Link eventKey="myCertifications" className="nav-link-custom">나의 인증</Nav.Link>

@@ -8,7 +8,6 @@ import UserPageLayout from "./layouts/UserPageLayout";
 import MyPageMain from "./pages/member/MyPageMain";
 import Error from "./pages/error/Error";
 import AdminPageLayout from "./layouts/AdminPageLayout";
-import AdminMain from "./pages/admin/AdminMain";
 import SellerPageLayout from "./layouts/SellerPageLayout";
 import MyStoreList from "./pages/seller/MyStoreList";
 import ChallengeMain from "./pages/challenge/ChallengeMain";
@@ -18,11 +17,11 @@ import InquiryMain from "./pages/Inquiry/member/InquiryMain";
 import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
+import ProductEdit from "./pages/seller/ProductEdit";
 import LoginModal from "./components/items/LoginModal";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminMemberView from "./pages/admin/AdminMemberView";
-import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
-import StoreProfile from "./components/items/StoreProfile";
+import StoreProfile from "./pages/seller/StoreProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminReport from "./pages/admin/AdminReport";
@@ -30,6 +29,7 @@ import {CheckoutPage} from "./pages/payment/CheckoutPage";
 import {FailPage} from "./pages/payment/FailPage";
 import {SuccessPage} from "./pages/payment/SuccessPage";
 import ReportPage from "./pages/admin/ReportPage";
+import ProductDetail from "./pages/product/ProductDetail";
 import Notices from "./pages/admin/Notices";
 import Notice from "./pages/admin/Notice";
 import ApplySeller from "./pages/member/ApplySeller";
@@ -47,7 +47,12 @@ import StoreOrderList from "./pages/order/StoreOrderList";
 import OrderShippingHandler from "./pages/order/OrderShippingHandler";
 import OrderRegistration from "./pages/order/OrderRegistration";
 import StoreOrderDetails from "./pages/order/StoreOrderDetails";
-
+import AdminUpdateNotice from "./pages/admin/AdminUpdateNotice";
+import VerifySuccess from "./pages/verification/VerifySuccess";
+import AdminMain from "./pages/admin/AdminMain";
+import Reviews from "./pages/Reviews";
+import ReviewDetail from "./pages/ReviewDetail";
+import InquiryRegist from "./pages/Inquiry/member/InquiryRegist";
 
 
 function App() {
@@ -63,19 +68,46 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main/>}/>
                     <Route path="/" element={<Layout/>}>
-                        {/*<Route path="/notice" element={<MemberNotices/>}/>*/}
+
+                        {/*<Route path="/ex" element={<CustomComponents/>}/>*/}
+
+                        {/* 공지사항 ------------------------------------------------ */}
+                        <Route path="/notice" element={<Notices/>}/>
                         <Route path="/notice/detail" element={<Notice/>}/>
-                        <Route path="/ex" element={<CustomComponents/>}/>
+                        <Route path="/notice/edit-notice" element={<AdminUpdateNotice/>}/>
+
+
+                        {/* 챌린지 -------------------------------------------------- */}
                         <Route path="/challenge" element={<ChallengeMain/>}/>
 
 
-                        <Route path="/product" element={<ProductMain/>}>
+                        {/* 초록불 스토어 --------------------------------------------- */}
+                        <Route path="/reviews" element={<Reviews/>}/>
+                        <Route path="/review-detail" element={<ReviewDetail/>}/>
 
+                        <Route path="/product" element={<ProductMain/>}></Route>
+                        <Route path="/product/:productCode" element={<ProductDetail/>}/>
+
+                        <Route path="/wish" element={<Wishlist/>}/>
+
+
+                        {/* 주문 및 결제 --------------------------------------------- */}
+                        <Route path="/order">
+                            <Route index element={<Order/>}/>
                         </Route>
-                        <Route path="/wish" element={<Wishlist/>}>
 
-
+                        <Route path="/payment">
+                            <Route index element={<CheckoutPage/>}/>
+                            <Route path="fail" element={<FailPage/>}/>
+                            <Route path="success" element={<SuccessPage/>}/>
                         </Route>
+
+
+                        {/* 인증확인 ------------------------------------------------- */}
+                        <Route path="/verify-email/:result" element={<VerifySuccess/>}/>
+
+
+                        {/* 회원 ------------------------------------------------- */}
                         <Route path="/members">
                             <Route path="signup"
                                    element={<ProtectedRoute loginCheck={false}><Signup/></ProtectedRoute>}/>
@@ -83,7 +115,7 @@ function App() {
                                    element={<ProtectedRoute loginCheck={false}><LoginModal/></ProtectedRoute>}/>
                             <Route path="mypage"
                                    element={<ProtectedRoute loginCheck={true}> <UserPageLayout/> </ProtectedRoute>}>
-                                <Route index element={<Navigate to="/members/mypage/main" replace/>}/>
+                                <Route index element={<Navigate to="/members/mypage/profile" replace/>}/>
                                 <Route path="main" element={<MyPageMain/>}/>
                                 <Route path="profile" element={<MemberProfile/>}/>
                                 <Route path="order-list" element={<MemberOrderList/>}/>
@@ -96,18 +128,17 @@ function App() {
                                     <Route path="detail/:sellerCode" element={<ApplyDetail/>}/>
                                 </Route>
 
-                                <Route path="inquiry" >
+                                <Route path="inquiry">
                                     <Route index element={<InquiryMain/>}/>
                                     <Route path="regist" element={<InquiryRegist/>}/>
                                     <Route path="view" element={<InquiryListView/>}/>
                                 </Route>
-
-
                                 {/*<Route path="regist/update" element={<InquiryUpdate/>}/>*/}
-
                             </Route>
-                        </Route>
+                        </Route> {/* member end*/}
 
+
+                        {/* 판매자 ------------------------------------------------- */}
                         <Route path="/seller">
                             <Route path="mystore" element={<SellerPageLayout/>}>
                                 <Route index element={<Navigate to="/seller/mystore/main" replace/>}/>
@@ -120,25 +151,27 @@ function App() {
                                 <Route path=":storeCode/order-list/:orderCode" element={<StoreOrderDetails/>}/>
                                 <Route path=":storeCode/order-approval-handler" element={<OrderApprovalHandler/>}/>
                                 <Route path=":storeCode/order-shipping-handler" element={<OrderShippingHandler/>}/>
-                                {/*<Route path="orders/:orderCode" element={<StoreOrderList/>}/>*/}
-
+                                <Route path="edit" element={<ProductEdit/>}/>
                             </Route>
-                        </Route>
+                        </Route> {/* seller end*/}
 
+
+                        {/* 관리자 ------------------------------------------------- */}
                         <Route path="/admin">
                             <Route path="dashboard" element={<AdminPageLayout/>}>
                                 <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
-
                                 <Route path="notice-create" element={<AdminCreateNotice/>}/>
+                                <Route path="notice-update" element={<AdminUpdateNotice/>}/>
                                 <Route path="members" element={<AdminMemberView/>}/>
                                 <Route path="category" element={<AdminCategory/>}/>
                                 <Route path="reports" element={<AdminReport/>}/>
-
+                                <Route path="main" element={<AdminMain/>}/>
                                 <Route path="applies">
                                     <Route index element={<ApplyList/>}/>
                                     <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
                                 </Route>
                             </Route>
+                        </Route> {/* admin end*/}
 
                         </Route>
 
@@ -152,8 +185,10 @@ function App() {
                             <Route path="success" element={<SuccessPage/>}/>
                         </Route>
 
+
                     </Route> {/* Layout end*/}
                     <Route path="*" element={<Error/>}/>
+
                 </Routes>
             </BrowserRouter>
         </>

@@ -3,22 +3,21 @@ import React, {useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-function ProductOptionForm(prop) {
+function ProductOptionAddForm(props) {
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [mode, setMode] = useState(null);
 
+    const [optionName, setOptionName] = useState("");
+    const [optionPrice, setOptionPrice] = useState("");
+    const [optionStock, setOptionStock] = useState("");
+
     const handleClickRegist = () => {
         setMode("regist");
         setSelectedOption(null);
-    };
-
-    const handleClickEdit = () => {
-        if (selectedOption === null) {
-            alert("수정할 옵션을 선택하세요");
-        } else {
-            setMode("edit");
-        }
+        setOptionName("");
+        setOptionPrice("");
+        setOptionStock("");
     };
 
     const handleClickDelete = () => {
@@ -26,18 +25,35 @@ function ProductOptionForm(prop) {
         if (selectedOption === null) {
             alert("삭제할 옵션을 선택하세요");
         } else {
-            //선택된 옵션 제거 작성 prop.setOptionInfo(prop.optionInfo.filter(opt => opt !== selectedOption));
+            props.removeOption(selectedOption);
             setSelectedOption(null);
             setMode(null);
         }
     };
 
-    const handleChangeOption = (opt) => {
+    const handleChangeOptionList = (opt) => {
         setSelectedOption(opt);
-        if (mode === "edit") {
-            setMode("edit");
+        setOptionName(opt.optionName);
+        setOptionPrice(opt.optionPrice);
+        setOptionStock(opt.optionStock);
+    }
+
+    const handleSubmit = () => {
+        if (mode === "regist") {
+            props.setOptions([...props.options, {
+                optionName: optionName,
+                optionPrice: optionPrice,
+                optionStock: optionStock
+            }]);
         }
-    };
+        setOptionName("");
+        setOptionPrice("");
+        setOptionStock("");
+        setMode(null);
+        setSelectedOption(null);
+    }
+
+    console.log('props.options', props.options)
 
     return (
         <div className="product-option-form">
@@ -46,37 +62,30 @@ function ProductOptionForm(prop) {
 
                 <div className="option-btn-wrapper">
                     <Button className="option-btn" onClick={handleClickRegist}>추가</Button>
-                    <Button className="option-btn" onClick={handleClickEdit}>수정</Button>
                     <Button className="option-btn" onClick={handleClickDelete}>삭제</Button>
                 </div>
 
-                <div className="product-option-list">
-                    {prop.optionInfo.map((opt, index) => (
-                        <ListGroup.Item key={index}>
-                            <Form.Check
-                                type="radio"
-                                label={opt.name}
-                                name="selectOption"
-                                onChange={() => handleChangeOption(opt)}
-                                checked={selectedOption === opt}
-                            />
-                        </ListGroup.Item>
-                    ))
-                    }
-                </div>
 
+
+                <div className="product-option-list">
+                    {props.options.map((opt, index) => (
+                        <ListGroup key={index} onClick={()=>handleChangeOptionList(opt)}>
+                            {opt.optionName}
+                        </ListGroup>
+                    ))}
+                </div>
 
             </ListGroup>
 
             <div>
-                {(mode === "regist" || mode === "edit") && (
+                {(mode === "regist") && (
                     <Form className="option-regist-forms">
                         <Form.Group className="option-info-form" controlId="optionName">
                             <Form.Label>옵션명</Form.Label>
                             <Form.Control
                                 type="text"
-                                value={selectedOption ? selectedOption.name : ''}
-                                onChange={(e) => setSelectedOption({ ...selectedOption, name: e.target.value})}
+                                value={optionName}
+                                onChange={(e) => setOptionName(e.target.value)}
                             />
                         </Form.Group>
 
@@ -84,8 +93,8 @@ function ProductOptionForm(prop) {
                             <Form.Label>옵션가격</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={selectedOption ? selectedOption.price : ''}
-                                onChange={(e) => setSelectedOption({ ...selectedOption, price: e.target.value})}
+                                value={optionPrice}
+                                onChange={(e) => setOptionPrice(e.target.value)}
                             />
                         </Form.Group>
 
@@ -93,12 +102,12 @@ function ProductOptionForm(prop) {
                             <Form.Label>재고</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={selectedOption ? selectedOption.stock : ''}
-                                onChange={(e) => setSelectedOption({ ...selectedOption, stock: e.target.value})}
+                                value={optionStock}
+                                onChange={(e) => setOptionStock(e.target.value)}
                             />
                         </Form.Group>
 
-                        <Button className="option-btn">완료</Button>
+                        <Button className="option-btn" onClick={handleSubmit}>완료</Button>
                     </Form>
                 )}
             </div>
@@ -106,4 +115,4 @@ function ProductOptionForm(prop) {
         </div>
     )
 }
-export default ProductOptionForm;
+export default ProductOptionAddForm;

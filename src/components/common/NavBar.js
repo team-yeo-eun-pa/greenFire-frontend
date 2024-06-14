@@ -1,12 +1,11 @@
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import { FaShoppingCart, FaHeart, FaBell, FaSearch } from "react-icons/fa";
+import { FaShoppingCart, FaHeart, FaBell } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import {Badge, Row, Col} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
@@ -16,29 +15,41 @@ import {useDispatch, useSelector} from "react-redux";
 import {reset} from "../../modules/MemberModules";
 import {isAdmin, isLogin, isSeller} from "../../utils/TokenUtils";
 import {callLogoutAPI} from "../../apis/MemberAPICalls";
+import {PiAcornDuotone} from "react-icons/pi";
 
-function NavBar() {
+function NavBar({ profileInfo }) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const {success} = useSelector(state => state.memberReducer);
+    const { success } = useSelector(state => state.memberReducer);
 
     useEffect(() => {
-        if(success === true) {
+        if (success === true) {
+            setShowLoginModal(false); // 모달 창 닫기
             navigate('/');
             dispatch(reset());
-            handleLoginModalClose();
         }
-    }, [success]);
+    }, [success, navigate, dispatch]);
 
     const handleLoginModalClose = () => setShowLoginModal(false);
     const handleLoginModalShow = () => setShowLoginModal(true);
 
-    function BeforeLogin() {
+    // 기본값 설정
+    const defaultProfileInfo = {
+        memberName: "초록불",
+        memberEmail: "당신은 멋진 지구지킴이!",
+        profilePicture: null,
+    };
 
+    const displayProfileInfo = {
+        ...defaultProfileInfo,
+        ...profileInfo
+    };
+
+    function BeforeLogin() {
         return (
-            <div>
+            <>
                 <Badge
                     bg="light"
                     text="dark"
@@ -57,21 +68,11 @@ function NavBar() {
                 >
                     회원가입
                 </Badge>
-            </div>
+            </>
         );
     }
 
     function AfterLogin() {
-
-        const { success } = useSelector(state => state.memberReducer);
-
-        useEffect(() => {
-            if(success === true) {
-                navigate('/');
-                dispatch(reset());
-            }
-        }, [success]);
-
         return (
             <Row className="d-flex align-items-center justify-content-end">
                 <Col
@@ -85,44 +86,67 @@ function NavBar() {
                         width: "30px",
                         fontSize: "28px"
                     }}>
-                    <CgProfile/>
+                    {displayProfileInfo.profilePicture ? (
+                        <Image
+                            src={displayProfileInfo.profilePicture}
+                            roundedCircle
+                            style={{width: "30px", height: "30px"}}
+                        />
+                    ) : (
+                        <CgProfile />
+                    )}
                 </Col>
 
                 <Col>
-                <NavDropdown title="여은파님" id="navbarScrollingDropdown"
-                             className="mx-0 col-9 ">
-                    {isAdmin() &&
-                        <NavDropdown.Item
-                            onClick={() => navigate(`/admin/dashboard/main`)}>
-                            관리자페이지
+                    <NavDropdown title={displayProfileInfo.memberName || "User"} id="navbarScrollingDropdown" className="mx-1 col-12" align="end">
+                        <div className="text-center mb-3">
+                            {displayProfileInfo.profilePicture ? (
+                                <Image
+                                    src={displayProfileInfo.profilePicture}
+                                    roundedCircle
+                                    className="mx-auto d-block mb-3 p-4"
+                                    style={{width: "90px", height: "90px"}}
+                                />
+                            ) : (
+                                <PiAcornDuotone className="my-3" style={{width: "90px", height: "90px", color: "#6a914f"}} />
+                            )}
+                            <br/>
+                            <div className="fw-bold fs-6">{displayProfileInfo.memberName}님</div>
+                            <div style={{fontSize: 12}} className="fw-lighter">{displayProfileInfo.memberEmail}</div>
+                        </div>
+                        <NavDropdown.Divider />
+                        {isAdmin() && (
+                            <NavDropdown.Item onClick={() => navigate(`/admin/dashboard/main`)}>
+                                관리자페이지
+                            </NavDropdown.Item>
+                        )}
+                        {isSeller() && (
+                            <>
+                                <NavDropdown.Item onClick={() => navigate(`/seller/mystore/main`)}>
+                                    마이스토어
+                                </NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => navigate(`/members/mypage`)}>
+                                    마이페이지
+                                </NavDropdown.Item>
+                            </>
+                        )}
+                        {(!isAdmin() && !isSeller()) && (
+                            <NavDropdown.Item onClick={() => navigate(`/members/mypage`)}>
+                                마이페이지
+                            </NavDropdown.Item>
+                        )}
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item type="button" onClick={() => dispatch(callLogoutAPI())}>
+                            로그아웃
                         </NavDropdown.Item>
-                    }
-                    {isSeller() &&
-                        <NavDropdown.Item
-                            onClick={() => navigate(`/seller/mystore/main`)}>
-                            마이스토어
-                        </NavDropdown.Item>
-                    }
-                    {(!isAdmin() && !isSeller()) &&
-                        <NavDropdown.Item
-                            onClick={() => navigate(`/members/mypage`)}>
-                            마이페이지
-                        </NavDropdown.Item>
-                    }
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item
-                        type="button"
-                        onClick={() => dispatch(callLogoutAPI())}>
-                        로그아웃
-                    </NavDropdown.Item>
-                </NavDropdown>
+                    </NavDropdown>
                 </Col>
             </Row>
-        )
+        );
     }
 
     return (
-        <Navbar expand="lg" className="bg-success p-5">
+        <Navbar expand="lg" className="bg-success p-5" style={{height: 162}}>
             <Container fluid>
                 <Image src="/greenFire_logo-nav.png" width={30} height={30}/>
                 <Navbar.Brand href="/" className="text-white mx-3">GREEN FIRE</Navbar.Brand>
@@ -157,39 +181,34 @@ function NavBar() {
                             <NavDropdown.Item href="">신고센터</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Form className="d-flex">
-                        <Form.Control
-                            type=""
-                            placeholder="Search"
-                            className="me-2 bg-light"
-                            aria-label="Search"
-                            src="logo192.png"
-                        />
-                        <button style={{background: "none", color: "white", border: "none", marginRight: "10px"}}>
-                            <FaSearch/>
-                        </button>
-                    </Form>
+                    {/*<Form className="d-flex">*/}
+                    {/*    <Form.Control*/}
+                    {/*        type=""*/}
+                    {/*        placeholder="Search"*/}
+                    {/*        className="me-2 bg-light"*/}
+                    {/*        aria-label="Search"*/}
+                    {/*        src="logo192.png"*/}
+                    {/*    />*/}
+                    {/*    <button style={{background: "none", color: "white", border: "none", marginRight: "10px"}}>*/}
+                    {/*        <FaSearch/>*/}
+                    {/*    </button>*/}
+                    {/*</Form>*/}
 
-                    {/*아이콘 테스트*/}
                     <button className="iconbtn" style={{color: "white", marginLeft: "5px"}}>
                         <FaShoppingCart/>
                     </button>
-
                     <button className="iconbtn" style={{color: "white"}}>
                         <Nav.Link href="/wish">
                             <FaHeart/>
                         </Nav.Link>
                     </button>
-
                     <button className="iconbtn" style={{color: "white", marginRight: "1rem"}}>
                         <FaBell/>
                     </button>
-
                     { isLogin() ? <AfterLogin/> : <BeforeLogin/> }
-
+                    <LoginModal show={showLoginModal} handleClose={handleLoginModalClose} />
                 </Navbar.Collapse>
             </Container>
-            <LoginModal show={showLoginModal} handleClose={handleLoginModalClose} />
         </Navbar>
     );
 }
