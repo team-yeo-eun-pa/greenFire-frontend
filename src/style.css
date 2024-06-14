@@ -6,7 +6,7 @@
     color: white;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');*/
 
 * {
     font-family: "Noto Sans KR", sans-serif;
@@ -687,7 +687,7 @@
     line-height: 24px;
     color: #bbb;
 }
-=======
+
 /**/
 .reviews-page {
     font-family: Arial, sans-serif;
