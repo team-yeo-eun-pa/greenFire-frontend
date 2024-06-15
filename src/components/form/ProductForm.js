@@ -9,9 +9,6 @@ function ProductForm(props) {
 
 
 
-    const onClickImageUpload = () => {
-        props.imageInput.current.click();
-    }
 
     const onChangeImageUpload = () => {
         const fileReader = new FileReader();
@@ -78,9 +75,6 @@ return (
                               ref={ props.imageInput }
                               onChange={ onChangeImageUpload }
                               type="file"/>
-                <button onClick={ onClickImageUpload } type="button">
-                    이미지 업로드
-                </button>
             </Form.Group>
         </Form>
     </div>

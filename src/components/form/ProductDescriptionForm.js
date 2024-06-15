@@ -4,15 +4,17 @@ function ProductDescriptionForm(props) {
 
 
     return (
-        <div>
-            <Form className="product-regist-forms">
+        <div className="product-description-form-wrapper">
+
+            <Form className="product-description-form">
                 <Form.Control
-                    type="text"
+                    as="textarea"
                     name="productDescription"
                     onChange={props.onChangeHandler}
                     value={props.productForm.productDescription}
                 />
             </Form>
+
         </div>
 
     );

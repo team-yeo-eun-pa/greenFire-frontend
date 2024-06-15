@@ -32,7 +32,7 @@
 
 .store-banner-wrapper {
     position: relative;
-    width: 63vw;
+    width: 66vw;
     margin-bottom: 20px;
 }
 
@@ -62,6 +62,58 @@
     display: flex;
     justify-content: flex-end;
 }
+/*=======================================================================*/
+.product-detail-info-wrapper {
+    display: flex;
+    margin: 10vh 0 10vh 0;
+}
+
+.product-img-wrapper {
+    width: 25vw;
+    height: 50vh;
+    margin: 0 8vw 0 8vw;
+}
+
+.product-detail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info-wrapper {
+    margin-top: 5vh;
+    width: 30em;
+}
+
+.product-info-wrapper table{
+    width: 50%;
+    height: 40%;
+}
+
+.product-info-table {
+    width: 100%;
+    height: 100%;
+}
+
+.product-detail-btn-wrapper {
+    margin-top: 30px;
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-description-form-wrapper {
+    width: 500px;
+    height: 300px;
+}
+
+.product-description-form {
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+/*===========================================================================*/
 
 .wish-item {
     height: 80px;

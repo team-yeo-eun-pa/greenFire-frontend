@@ -7,16 +7,16 @@ function StoreBanner() {
         <>
             <Carousel>
                 <Carousel.Item>
-                    <Image className="banner-img" src={"p1.png"} />
+                    <Image className="banner-img" src={"bannerimg1.jpg"} />
                     <Carousel.Caption>
-                        <p>텍스트 삽입 가능</p>
+                        <p></p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
-                    <Image className="banner-img" src={"p2.png"} />
+                    <Image className="banner-img" src={"logo_horizontal.png"} />
                 </Carousel.Item>
                 <Carousel.Item>
-                    <Image className="banner-img" src={"p3.png"} />
+                    <Image className="banner-img" src={"bannerimg2.png"} />
                 </Carousel.Item>
             </Carousel>
         </>
