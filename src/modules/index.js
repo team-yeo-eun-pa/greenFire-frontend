@@ -13,6 +13,7 @@ import orderReducer from "./OrderModules";
 import addressReducer from "./AddressModules";
 import applyReducer from "./ApplyModules";
 import ReviewReducer from "./ReviewModules";
+import cartReducer from "./CartModules";
 
 const rootReducer = combineReducers({
     inquiryReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
 
     productReducer,
     optionReducer,
+    cartReducer,
 
     noticeReducer,
     AdminMemberReducer,

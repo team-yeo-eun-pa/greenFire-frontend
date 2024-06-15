@@ -1,17 +1,13 @@
 import {useNavigate} from "react-router-dom";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Form, Tab, Tabs} from "react-bootstrap";
 import Reviews from "../../pages/Reviews";
 
 function ProductDetailItem(props) {
 
     const navigate = useNavigate();
-    const [amount, setAmount] = useState(1);
     const imageUrl = props.product.productImg ? props.product.productImg : '/defaultimg.png';
 
-    const onClickOrderBtnHandler = () => {
-        // 주문 기능 작성
-    }
 
     const onChangeHandler = e => {
         props.setSelectOption && props.setSelectOption({
@@ -21,7 +17,12 @@ function ProductDetailItem(props) {
         })
     }
 
-    const [activeTab, setActiveTab] = useState('description'); // 초기값으로 description 탭을 활성화
+    useEffect(() => {
+        if (props.option.length > 0 && !props.selectOption) {
+            props.setSelectOption(props.option[0].optionCode);
+        }
+    }, [props.option, props.selectOption, props.setSelectOption]);
+
 
 
     return (
@@ -56,8 +57,8 @@ function ProductDetailItem(props) {
                                 <input
                                     type="number"
                                     min="1"
-                                    value={amount}
-                                    onChange={e => setAmount(e.target.value)}
+                                    value={props.amount}
+                                    onChange={e => props.setAmount(e.target.value)}
                                     style={{width: '90px'}}
                                 />
                             </td>
@@ -80,8 +81,8 @@ function ProductDetailItem(props) {
 
 
                     <div className="product-detail-btn-wrapper">
-                        <button className="submit-btn" onClick={onClickOrderBtnHandler}>구매하기</button>
-                        <button className="submit-btn" onClick={onClickOrderBtnHandler}>장바구니</button>
+                        <button className="submit-btn">구매하기</button>
+                        <button className="submit-btn" onClick={props.cartBtn}>장바구니</button>
                     </div>
 
                 </div>

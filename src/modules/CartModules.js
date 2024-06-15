@@ -1,6 +1,7 @@
 import {createActions, handleActions} from "redux-actions";
 
 const initialState = {
+    // cart : [],
     success: false,
     loading : false,
     error : null
