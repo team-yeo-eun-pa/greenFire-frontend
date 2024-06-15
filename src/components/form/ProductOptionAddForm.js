@@ -25,11 +25,15 @@ function ProductOptionAddForm(props) {
         if (selectedOption === null) {
             alert("삭제할 옵션을 선택하세요");
         } else {
-            props.removeOption(selectedOption);
-            setSelectedOption(null);
-            setMode(null);
+            const selectedIndex = props.options.findIndex(opt => opt === selectedOption);
+            if (selectedIndex !== -1) {
+                props.removeOption(selectedIndex);
+                setSelectedOption(null);
+                setMode(null);
+            }
         }
     };
+
 
     const handleChangeOptionList = (opt) => {
         setSelectedOption(opt);
@@ -69,8 +73,15 @@ function ProductOptionAddForm(props) {
 
                 <div className="product-option-list">
                     {props.options.map((opt, index) => (
-                        <ListGroup key={index} onClick={()=>handleChangeOptionList(opt)}>
-                            {opt.optionName}
+                        <ListGroup key={index}>
+                            <Form.Check
+                                type="checkbox"
+                                label={opt.optionName}
+                                name="selectOption"
+                                onChange={() => handleChangeOptionList(opt)}
+                                checked={selectedOption === opt}
+                            />
+
                         </ListGroup>
                     ))}
                 </div>

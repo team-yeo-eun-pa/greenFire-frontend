@@ -14,6 +14,7 @@ function MystoreProductItem({product}) {
     const onClickDeleteBtnHandler = () => {
         dispatch(callSellerProductDeleteAPI({productCode, sellablestatus : "D"}));
     }
+    const imageUrl = product.productImg ? product.productImg : '/defaultimg.png';
 
 
     useEffect(() => {
@@ -24,7 +25,7 @@ function MystoreProductItem({product}) {
         <div className="mystore-product-item">
             <div className="mystore-product-wrapper">
                 <div className="mystore-product-img-wrapper">
-                    <img className="mystore-product-img" src={product.productImg}/>
+                    <img className="mystore-product-img" src={imageUrl}/>
                 </div>
                 <div className="mystore-product-name">
                     {product.productName}
