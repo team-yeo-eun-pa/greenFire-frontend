@@ -4,20 +4,27 @@ import ListGroup from "react-bootstrap/ListGroup";
 import PagingBar from "../../components/common/PagingBar";
 import MystoreProductItem from "../../components/items/MystoreProductItem";
 import {useEffect, useState} from "react";
-import {callProductListAPI, callSellerProductListAPI, callStoreProductListAPI} from "../../apis/ProductAPI";
+import {
+    callProductListAPI,
+    callSellerProductDeleteAPI,
+    callSellerProductListAPI
+} from "../../apis/ProductAPI";
 import {useDispatch, useSelector} from "react-redux";
 import {Col, Row} from "react-bootstrap";
-import ProductItem from "../../components/items/ProductItem";
+import {useNavigate} from "react-router-dom";
 
 function ProductManagement() {
 
     const {products} = useSelector(state => state.productReducer);
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(callSellerProductListAPI({currentPage}));
     }, [currentPage, dispatch]);
+
+
 
 
     return (

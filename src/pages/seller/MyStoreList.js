@@ -15,9 +15,14 @@ function MyStoreList() {
         dispatch(callStoreListAPI());
     }, []);
 
+
+
+
     const handleClick = (sellerCode) => {
         navigate(`/seller/mystore/${sellerCode}`);
     };
+
+
 
     return (
         <>
