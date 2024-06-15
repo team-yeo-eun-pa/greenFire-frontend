@@ -36,7 +36,7 @@ function MystoreProductItem({product}) {
             </div>
 
             <div className="mystore-product-btn-wrapper">
-                <button className="option-btn" onClick={()=>navigate(`/seller/mystore/edit/${product.productCode}`)}>
+                <button className="option-btn" onClick={() => navigate(`/seller/mystore/edit/${product.productCode}`)}>
                     수정
                 </button>
                 <button className="option-btn" onClick={onClickDeleteBtnHandler}>
