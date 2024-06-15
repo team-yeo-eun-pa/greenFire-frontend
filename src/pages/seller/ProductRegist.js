@@ -83,7 +83,7 @@ function ProductRegist() {
 
             <div>
                 <ProductForm sellableStatus={sellableStatus} category={adminCategory}
-                             imageInput={imageInput} productForm={productForm}
+                             imageInput={imageInput} productForm={productForm} removeOption={removeOption}
                              setProductForm={setProductForm} onChangeHandler={onChangeHandler}/>
             </div>
 
