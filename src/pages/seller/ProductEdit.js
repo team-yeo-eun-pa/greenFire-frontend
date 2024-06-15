@@ -81,6 +81,14 @@ function ProductEdit() {
 
 
 
+    /* 옵션 불러오기 */
+
+    // const { productOption } = useSelector(state => state.option);
+    //
+    // useEffect(() => {
+    //     dispatch(callProductOptionListAPI({productCode}));
+    // }, [productCode]);
+
     return (
 
         <div className="product-edit-page">

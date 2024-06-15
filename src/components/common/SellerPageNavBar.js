@@ -1,50 +1,56 @@
 import Nav from "react-bootstrap/Nav";
 import Image from 'react-bootstrap/Image';
-import {useState} from "react";
+import React, {useState} from "react";
 import {CgProfile} from "react-icons/cg";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink, useParams} from "react-router-dom";
 
-function SellerPageNavBar({ profileInfo }) {
+function SellerPageNavBar() {
     const [key, setKey] = useState('home');
+
+    const { storeCode } = useParams();
+
     return (
         <>
 
             <Nav defaultActiveKey="/home" className="flex-column rounded mt-5 p-4"
                  style={{backgroundColor: "#F0F3EE"}}>
                 {/* User Info */}
-                <div className="text-center mb-3">
-                    {profileInfo.profilePicture ? (
-                        <Image
-                            src={profileInfo.profilePicture}
-                            roundedCircle
-                            className="mx-auto d-block mb-3"
-                            style={{width: "130px", height: "130px"}}
-                        />
-                    ) : (
-                        <CgProfile style={{width: "130px", height: "130px"}} />
-                    )}
-                    <br/>
-                    <div className="fw-bold fs-6">
-                        {profileInfo.memberName}
-                    </div>
-                    <div className="text-muted">
-                        {profileInfo.memberEmail}
-                    </div>
-                    <NavLink to="/members/mypage/profile">
-                        <button className="btn btn-secondary btn-sm mt-2">내 프로필</button>
-                    </NavLink>
-                </div>
-                <hr/>
+                {/*<div className="text-center mb-3">*/}
+                {/*    {profileInfo.profilePicture ? (*/}
+                {/*        <Image*/}
+                {/*            src={profileInfo.profilePicture}*/}
+                {/*            roundedCircle*/}
+                {/*            className="mx-auto d-block mb-3"*/}
+                {/*            style={{width: "130px", height: "130px"}}*/}
+                {/*        />*/}
+                {/*    ) : (*/}
+                {/*        <CgProfile style={{width: "130px", height: "130px"}} />*/}
+                {/*    )}*/}
+                {/*    <br/>*/}
+                {/*    <div className="fw-bold fs-6">*/}
+                {/*        {profileInfo.memberName}*/}
+                {/*    </div>*/}
+                {/*    <div className="text-muted">*/}
+                {/*        {profileInfo.memberEmail}*/}
+                {/*    </div>*/}
+                {/*    <NavLink to="/members/mypage/profile">*/}
+                {/*        <button className="btn btn-secondary btn-sm mt-2">내 프로필</button>*/}
+                {/*    </NavLink>*/}
+                {/*</div>*/}
+                {/*<hr/>*/}
 
                 {/* Navigation Links */}
-                <Nav.Link className="nav-link-custom-title mt-5">상품 관리</Nav.Link>
+                <Nav.Link className="nav-link-custom-title mt-2">마이스토어</Nav.Link>
+                <Nav.Link as={Link} to="/members/mypage/profile" className="nav-link-custom">스토어 프로필 관리</Nav.Link>
+                <br/>
+                <Nav.Link className="nav-link-custom-title">상품 관리</Nav.Link>
                 <Nav.Link href="/seller/mystore/product" eventKey="" className="nav-link-custom">스토어 상품 관리</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">재고 관리</Nav.Link>
                 <br/>
                 <Nav.Link className="nav-link-custom-title">주문 관리</Nav.Link>
-                <Nav.Link eventKey="" className="nav-link-custom">주문∙결제 내역</Nav.Link>
-                <Nav.Link eventKey="" className="nav-link-custom">신규 주문 내역</Nav.Link>
-                <Nav.Link eventKey="" className="nav-link-custom">배송 관리</Nav.Link>
+                <Nav.Link as={Link} to={`/seller/mystore/${storeCode}/order-list`} className="nav-link-custom">주문∙결제 내역</Nav.Link>
+                <Nav.Link as={Link} to={`/seller/mystore/${storeCode}/order-approval-handler`} className="nav-link-custom">신규 주문 내역</Nav.Link>
+                <Nav.Link as={Link} to={`/seller/mystore/${storeCode}/order-shipping-handler`} className="nav-link-custom">배송 관리</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">반품∙교환</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">정산 관리</Nav.Link>
                 <br/>

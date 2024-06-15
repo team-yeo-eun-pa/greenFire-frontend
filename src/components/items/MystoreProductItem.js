@@ -15,6 +15,7 @@ function MystoreProductItem({product}) {
         dispatch(callSellerProductDeleteAPI({productCode, sellablestatus : "D"}));
     }
 
+
     useEffect(() => {
         if(success === true) navigate('/seller/mystore/product');
     }, [success])
@@ -36,10 +37,10 @@ function MystoreProductItem({product}) {
 
             <div className="mystore-product-btn-wrapper">
                 <button className="option-btn" onClick={()=>navigate(`/seller/mystore/edit/${product.productCode}`)}>
-                        수정
+                    수정
                 </button>
                 <button className="option-btn" onClick={onClickDeleteBtnHandler}>
-                        삭제
+                    삭제
                 </button>
             </div>
         </div>

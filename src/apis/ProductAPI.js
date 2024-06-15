@@ -13,7 +13,7 @@ export const callProductListAPI = ({currentPage}) => {
         const result = await request(
             'GET',
             `/product?page=${currentPage}`
-            );
+        );
         console.log('callProductListAPI result: ', result);
 
         if (result && result.status === 200) {
@@ -56,7 +56,7 @@ export const callSellerProductListAPI = ({currentPage = 1}) => {
 
     return async (dispatch, getState) => {
         const result = await authRequest.get(`/seller/mystore/product?page=${currentPage}`
-            );
+        );
         console.log('callSellerProductListAPI result : ',result);
         if (result && result.status === 200) {
             dispatch(getProducts(result));
