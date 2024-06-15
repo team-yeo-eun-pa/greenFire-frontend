@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import {RiMedalLine} from "react-icons/ri";
 import {GiGreenhouse} from "react-icons/gi";
 import {PiStorefrontLight} from "react-icons/pi";
-import StoreCategoryButtons from "./StoreCategoryButtons";
+import StoreCategoryButtons from "../components/items/StoreCategoryButtons";
 import {useNavigate} from "react-router-dom";
 
 function MainItem() {

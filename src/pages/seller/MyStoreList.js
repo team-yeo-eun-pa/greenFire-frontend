@@ -9,16 +9,20 @@ import {Col, Row} from "react-bootstrap";
 function MyStoreList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {
-        sellerInfo } = useSelector(state => state.sellerReducer);
+    const { sellerInfo } = useSelector(state => state.sellerReducer);
 
     useEffect(() => {
         dispatch(callStoreListAPI());
     }, []);
 
+
+
+
     const handleClick = (sellerCode) => {
         navigate(`/seller/mystore/${sellerCode}`);
     };
+
+
 
     return (
         <>

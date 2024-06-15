@@ -1,9 +1,9 @@
-// Import Bootstrap's SCSS files
+/* Import Bootstrap's SCSS files */
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
-// Override the success color
+/* Override the success color */
 $theme-colors: (
         "success": #004B29,
         "info": #6A8921,
@@ -11,7 +11,7 @@ $theme-colors: (
         "danger" : #7e0505
 );
 
-// Import the rest of Bootstrap
+/* Import the rest of Bootstrap */
 @import "~bootstrap/scss/bootstrap";
 
 /* font */
@@ -46,13 +46,13 @@ $theme-colors: (
   }
 
   &.active {
-    color: #009F57; // 클릭(활성화) 시 텍스트 색상 테스트 필요
-    background-color: #a1a1a1; // 클릭(활성화) 시 배경 색상 테스트 필요
+    color: #009F57; /* 클릭(활성화) 시 텍스트 색상 테스트 필요 */
+    background-color: #a1a1a1; /* 클릭(활성화) 시 배경 색상 테스트 필요 */
   }
 }
 
 
-// 특정 상태에서의 링크 스타일
+/* 특정 상태에서의 링크 스타일 */
 .flex-column.rounded.mt-5.p-4 {
   background-color: #F0F3EE;
 
@@ -72,7 +72,7 @@ $theme-colors: (
   width: 70px;
   height: 30px;
   padding: 0 0 2px 0;
-  align-items: center; // flexbox의 경우만 해당됨
+  align-items: center; /* flexbox의 경우만 해당됨 */
 
   &:hover,
   &.active,
@@ -83,34 +83,34 @@ $theme-colors: (
 }
 
 /* tab ------------------------------- */
-  .nav-tabs .nav-link {
-    color: #000;
-    background-color: #E8EAE4;
-    border: 1px solid #dee2e6;
-    margin-bottom: -1px;
-    border-radius: 0;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    margin-right: 0.3rem;
+.nav-tabs .nav-link {
+  color: #000;
+  background-color: #E8EAE4;
+  border: 1px solid #dee2e6;
+  margin-bottom: -1px;
+  border-radius: 0;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-right: 0.3rem;
 
-    &:hover {
-      color: #386641;
-      background-color: #ffffff;
-      border-color: #dee2e6 #dee2e6 #fff;
-    }
-
-    &.active {
-      color: #ffffff;
-      background-color: #386641;
-      border-color: #dee2e6 #dee2e6 #fff;
-    }
+  &:hover {
+    color: #386641;
+    background-color: #ffffff;
+    border-color: #dee2e6 #dee2e6 #fff;
   }
+
+  &.active {
+    color: #ffffff;
+    background-color: #386641;
+    border-color: #dee2e6 #dee2e6 #fff;
+  }
+}
 
 .modal-dialog-centered {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; // 뷰포트 높이의 100%
+  min-height: 100vh; /* 뷰포트 높이의 100% */
 
   .modal-content {
     margin: auto;
@@ -125,28 +125,3 @@ $theme-colors: (
     color: inherit !important;
   }
 }
-
-//.custom-modal {
-//  .modal-header,
-//  .modal-title,
-//  .modal-body,
-//  .modal-footer {
-//    text-align: center;
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//  }
-//
-//  .modal-title {
-//    width: 100%; /* 제목이 중앙에 위치하도록 너비를 100%로 설정 */
-//  }
-//
-//  .modal-body {
-//    text-align: center;
-//  }
-//
-//  .modal-footer {
-//    display: flex;
-//    justify-content: center;
-//  }
-//}

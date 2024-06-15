@@ -3,12 +3,12 @@ import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import {Col, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {callInquiryListAPI} from "../../../apis/InquiryAPI";
-import PagingBar from "../../../components/common/PagingBar";
-import InquiryList from "../../../components/list/InquiryList";
+import {callInquiryListAPI} from "../../apis/InquiryAPI";
+import PagingBar from "../../components/common/PagingBar";
+import InquiryList from "../../components/list/InquiryList";
 import Button from "react-bootstrap/Button";
 import {useNavigate} from "react-router-dom";
-import inquiryList from "../../../components/list/InquiryList";
+import inquiryList from "../../components/list/InquiryList";
 
 
 
@@ -24,6 +24,10 @@ function InquiryMain({data}) {
 
     const onClickInquiryRegisterHandler = () => {
         navigate("/members/mypage/inquiry/regist");
+    }
+
+    const oncLickMainHandler =() => {
+        navigate("/")
     }
 
 
@@ -60,7 +64,7 @@ function InquiryMain({data}) {
                     {/* 등록된 문의가 없을 시, "등록된 문의가 없습니다."라는 문구 보여주기*/}
 
 
-                    <div className="inquiryList">
+                  <div className="inquiryList">
 
                     { inquiry &&
                         <>
@@ -78,7 +82,7 @@ function InquiryMain({data}) {
 
                     <Button
                         variant="outline-success"
-                        path="/"
+                        onClick={oncLickMainHandler}
                     >{''}
                         메인으로</Button>
 

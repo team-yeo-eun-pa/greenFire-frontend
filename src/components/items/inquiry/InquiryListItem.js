@@ -1,6 +1,8 @@
 import {useNavigate} from "react-router-dom";
 import {Table} from "react-bootstrap";
-import React from "react";
+import React, {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {callInquiryDetailViewAPI} from "../../../apis/InquiryAPI";
 
 
 function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle, inquiryDetail, inquiryReplyStatus}}) {
@@ -8,26 +10,16 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
 
     const navigate = useNavigate();
 
+
+
+
     return (
 
 
-            <div
-                onClick={() => navigate(`/inquiry/${inquiryCode}`)}
-            >
 
-                <Table hover className="table text-center px-5 mt-4">
+                    <tr
+                        onClick={() => navigate(`/members/mypage/inquiry/detail/${inquiryCode}`)}>
 
-                    <thead>
-                    <tr>
-                        <th>문의 코드 </th>
-                        <th>작성일</th>
-                        <th>문의 제목</th>
-                        <th>문의 내용</th>
-                        <th>문의 처리 상태</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
                         <td key={inquiryCode} className="text-center">{inquiryCode}</td>
                         <td key={inquiryWriteDate} className="text-center">{inquiryWriteDate}</td>
                         <td key={inquiryTitle} className="text-center">{inquiryTitle}</td>
@@ -35,19 +27,6 @@ function InquiryListItem({inquiry: {inquiryCode, inquiryWriteDate, inquiryTitle,
                         <td key={inquiryReplyStatus} className="text-center">{inquiryReplyStatus}</td>
 
                     </tr>
-                    </tbody>
-
-                </Table>
-
-
-
-
-
-
-
-
-        </div>
-
     );
 }
 
