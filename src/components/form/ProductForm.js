@@ -5,7 +5,7 @@ import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
 
 function ProductForm(props) {
 
-    const [imageUrl, setImageUrl] = useState(props.productForm.productImage);
+    const [imageUrl, setImageUrl] = useState(props.productForm.productImg);
 
 
 
@@ -32,9 +32,9 @@ function ProductForm(props) {
                 sellableStatus: props.product.productInfo.sellableStatus,
                 categoryCode: props.product.productInfo.categoryCode,
                 productDescription: props.product.productInfo.productDescription,
-                productImage: props.product.productInfo.productImage
+                productImg: props.product.productInfo.productImg
             });
-            setImageUrl(props.product.productInfo.productImage);
+            setImageUrl(props.product.productInfo.productImg);
         }
     }, [props.product]);
 

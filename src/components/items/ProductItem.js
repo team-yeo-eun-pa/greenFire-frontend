@@ -14,7 +14,7 @@ function ProductItem({product}) {
     return(
         <div>
             <Card style={{width: '14rem', cursor: 'pointer'}} onClick={()=>navigate(`/product/${product.productCode}`)}>
-                <Card.Img variant="top" src={product.productImage}/>
+                <Card.Img variant="top" src={product.productImg}/>
                 <Card.Body>
                     <Card.Title>{product.productName}
                     </Card.Title>

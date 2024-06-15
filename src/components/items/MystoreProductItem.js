@@ -23,7 +23,7 @@ function MystoreProductItem({product}) {
         <div className="mystore-product-item">
             <div className="mystore-product-wrapper">
                 <div className="mystore-product-img-wrapper">
-                    <img className="mystore-product-img" src={product.productImage}/>
+                    <img className="mystore-product-img" src={product.productImg}/>
                 </div>
                 <div className="mystore-product-name">
                     {product.productName}

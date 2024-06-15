@@ -23,7 +23,7 @@ function ProductDetailItem(props) {
 
         <div>
             <div className="product-img-wrapper">
-                <img src={props.product.productImage} alt={props.product.productName}/>
+                <img src={props.product.productImg} alt={props.product.productName}/>
             </div>
 
             <div className="product-info-wrapper">

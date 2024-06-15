@@ -30,7 +30,7 @@ function ProductRegist() {
         sellableStatus: 'Y',
         categoryCode: 1,
         productDescription: '',
-        productImage: ''
+        productImg: ''
     });
 
     const [options, setOptions] = useState([]);

@@ -49,7 +49,7 @@ function ProductEdit() {
         sellableStatus: 'Y',
         categoryCode: 1,
         productDescription: '',
-        productImage: ''
+        productImg: ''
     });
 
 
@@ -73,7 +73,7 @@ function ProductEdit() {
     /* 내용 저장 */
     const onClickProductEditHandler = () => {
         const formData = new FormData();
-        formData.append('productImage', imageInput.current.files[0]);
+        formData.append('productImg', imageInput.current.files[0]);
         formData.append('productUpdateRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
         dispatch(callSellerProductModifyAPI({ productCode, modifyRequest : formData }));
     }
