@@ -44,11 +44,11 @@ function OrderShippingHandler() {
         {
             title: "상품 준비(미발송)",
             count: orderData ? orderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "상품 준비").length : 0), 0) : 0
-        },
-        {
-            title: "발송완료",
-            count: orderData ? orderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "배송 완료").length : 0), 0) : 0
         }
+        // {
+        //     title: "발송완료",
+        //     count: orderData ? orderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "배송 완료").length : 0), 0) : 0
+        // }
     ];
 
     // 설명 텍스트 준비

@@ -3,7 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { callDeliveryAddressRegistAPI } from '../../apis/AddressAPICalls';
 
-function DeliveryAddressModal({ show, handleClose }) {
+function DeliveryAddressModal({ show, handleClose, handleAddressRegist }) {
     const dispatch = useDispatch();
     const [form, setForm] = useState({
         deliveryAddressName: '',
@@ -35,6 +35,7 @@ function DeliveryAddressModal({ show, handleClose }) {
         dispatch(callDeliveryAddressRegistAPI({ deliveryAddressRequest: form }))
             .then(response => {
                 console.log("Delivery address registered:", response);
+                // handleAddressRegist(response); // handleAddressRegist 호출
                 handleClose();
             })
             .catch(error => {

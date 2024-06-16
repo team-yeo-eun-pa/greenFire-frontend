@@ -55,9 +55,9 @@ const MemberOrderDetails = () => {
                         <Order
                             orderCode={order.orderCode} // orderCode 전달
                             storeOrders={order.storeOrders}
-                            topButtonNames={["승인", "거절"]}
-                            bottomButtonNames={[""]}
-                            buttonOrderStatus={"주문 접수"}
+                            topButtonNames={[""]}
+                            bottomButtonNames={["문의"]}
+                            buttonOrderStatus={""}
                             buttonOnClickEvent={handleButtonClick} // 함수 전달
                         />
                         <Row>

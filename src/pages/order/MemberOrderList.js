@@ -11,7 +11,12 @@ function MemberOrderList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [currentPage,setCurrentPage] = useState(1);
+    const [sortedOrders, setSortedOrders] = useState([]); // 정렬된 주문을 저장할 상태 추가
     const orders = useSelector(state => state.orderReducer.orders) || [];
+
+    // 필터링된 주문 데이터
+    const filteredOrderData = sortedOrders.filter(order => !order.isOrderCancel);
+    const filteredCancelOrderData = sortedOrders.filter(order => order.isOrderCancel);
 
     const onClickOrderDetailsHandler = (order) => {
         console.log(order);
@@ -21,6 +26,14 @@ function MemberOrderList() {
     useEffect(() => {
         dispatch(callOrdersAPI({currentPage}));
     }, [currentPage]);
+
+    useEffect(() => {
+        if (orders.data) {
+            // orders.data가 변경될 때마다 정렬
+            const sortedData = orders.data.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+            setSortedOrders(sortedData);
+        }
+    }, [orders.data]); // orders.data가 변경될 때마다 정렬
 
     const orderData = orders.data
 
@@ -37,11 +50,27 @@ function MemberOrderList() {
     }
 
     const statuses = [
-        { name: '주문접수', count: 0 },
-        { name: '상품준비', count: 0 },
-        { name: '배송중', count: 0 },
-        { name: '배송완료', count: 0 },
-        { name: '구매확정', count: 0 }
+        {
+            name: '주문접수',
+            // count: 0
+            count: filteredOrderData ? filteredOrderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "주문 접수").length : 0), 0) : 0
+        },
+        {
+            name: '상품준비',
+            count: filteredOrderData ? filteredOrderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "상품 준비").length : 0), 0) : 0
+        },
+        {
+            name: '배송중',
+            count: filteredOrderData ? filteredOrderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "배송 중").length : 0), 0) : 0
+        },
+        {
+            name: '배송완료',
+            count: filteredOrderData ? filteredOrderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "배송 완료").length : 0), 0) : 0
+        },
+        {
+            name: '구매확정',
+            count: filteredOrderData ? filteredOrderData.reduce((acc, order) => acc + (order.storeOrders ? order.storeOrders.filter(storeOrder => storeOrder.orderStatus === "주문 확정").length : 0), 0) : 0
+        }
     ];
 
     return(
@@ -76,7 +105,7 @@ function MemberOrderList() {
                                 storeOrders={order.storeOrders}
                                 topButtonNames={["승인", "거절"]}
                                 bottomButtonNames={[""]}
-                                buttonOrderStatus={"주문 접수"}
+                                buttonOrderStatus={""}
                                 buttonOnClickEvent={handleButtonClick} // 함수 전달
                             />
                         </Card.Body>
