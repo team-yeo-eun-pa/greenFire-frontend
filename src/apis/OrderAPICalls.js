@@ -19,17 +19,18 @@ export const callOrderRegistAPI = ({orderRequest}) => {
 
         if(result?.status === 201) {
             dispatch(success());
+            return result.data;
         }
 
     }
 }
 
 // 주문 상태 수정 - 주문 승인, 거절
-export const callModifyOrderStatusAPI = ({ orderCode, storeOrderCode, status }) => {
+export const callModifyOrderStatusAPI = ({ orderCode, storeOrderCode, status, rejectionReason }) => {
     return async (dispatch, getState) => {
         const result = await authRequest.put(
             `/orders/${orderCode}/modify`,
-            JSON.stringify({ orderCode, storeOrderCode, orderStatus:status }),  // 수정할 상태와 storeOrderCode를 JSON으로 전달
+            JSON.stringify({ orderCode, storeOrderCode, orderStatus:status, rejectionReason }),  // 수정할 상태와 storeOrderCode를 JSON으로 전달
             { headers: { 'Content-Type': 'application/json' } }
         ).catch(e => {
             if (e.response && e.response.status === 409) {
@@ -44,6 +45,27 @@ export const callModifyOrderStatusAPI = ({ orderCode, storeOrderCode, status }) 
         }
     }
 }
+
+// // 주문 상태 수정 - 주문 승인, 거절
+// export const callModifyOrderStatusAPI = ({ orderCode, storeOrderCode, status }) => {
+//     return async (dispatch, getState) => {
+//         const result = await authRequest.put(
+//             `/orders/${orderCode}/modify`,
+//             JSON.stringify({ orderCode, storeOrderCode, orderStatus:status }),  // 수정할 상태와 storeOrderCode를 JSON으로 전달
+//             { headers: { 'Content-Type': 'application/json' } }
+//         ).catch(e => {
+//             if (e.response && e.response.status === 409) {
+//                 toast.error('상태 변경에 문제가 발생했습니다.');
+//             }
+//         });
+//
+//         console.log('callModifyOrderStatusAPI result : ', result);
+//
+//         if (result?.status === 201) {
+//             dispatch(success());
+//         }
+//     }
+// }
 
 // 주문 상태 수정 - 배송처리
 export const callModifyOrderStatusAndDeliveryRegistAPI = ({ orderCode, storeOrderCode, deliveryCompany, transportNumber, deliveryType }) => {

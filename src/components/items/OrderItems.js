@@ -1,76 +1,57 @@
-import React from 'react';
-import { Card, Row, Col, Image } from 'react-bootstrap';
-import StatusButton from "../common/StatusButton";
+import React, {useEffect} from 'react';
+import { Row, Col, Image, Card } from 'react-bootstrap';
+import {useDispatch, useSelector} from "react-redux";
+import {callProductOptionListAPI} from "../../apis/ProductAPI";
+import {getOptions} from "../../modules/ProductOptionModules";
 
-function OrderItems() {
+const OrderItems = ({ optionCodes, amount }) => {
+    const dispatch = useDispatch();
+    const productData = useSelector(state => state.productReducer.product);
 
-
-    const items = [
-        {
-            optionCode:1,
-            productCode: 1,
-            name: '민들레로 만든 양말',
-            option: '색상: 하얀색',
-            price: 30000,
-            imgSrc: '/path/to/image1.jpg'
-        },
-        {
-            optionCode:1,
-            productCode: 2,
-            name: '종이로 만든 양말',
-            option: '색상: 하얀색',
-            price: 30000,
-            imgSrc: '/path/to/image2.jpg'
+    useEffect(() => {
+        if (optionCodes && optionCodes.length > 0) {
+            optionCodes.forEach(optionCode => {
+                dispatch(callProductOptionListAPI({ optionCode }));
+            });
         }
-    ];
+    }, [dispatch, optionCodes]);
+
+    const filteredOptions = productData?.productOptions?.filter(option => optionCodes.includes(option.optionCode)) || [];
+
+    console.log("filteredOptions", filteredOptions);
+    console.log("optionCodes", optionCodes);
 
     return (
-        <Card className=" border-0">
-            <div className="mt-4 fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">주문상품 {items.length}건</div>
-            <Card.Body>
-                {items.map(item  => (
-                    <Card>
-                    <div key={item.optionCode}>
-                        <Row className="align-items-center" key={item.productCode}>
+        <div>
+            <h5>주문 상품</h5>
+            {filteredOptions.length > 0 ? (
+                filteredOptions.map((option, index) => (
+                    <Card key={index} className="mb-3">
+                        <Row className="align-items-center">
                             <Col md={2} className="text-center m-3">
-                                <Image className="square-img"
-                                       src={item.productImg} fluid
-                                       alt={item.name} />
+                                <Image
+                                    className="square-img"
+                                    src={productData.productInfo.productImg || '/default-image.png'}
+                                    fluid
+                                    alt={productData.productInfo.productName}
+                                />
                             </Col>
                             <Col md={5}>
                                 <div>
-                                    <Card.Title>{item.name}</Card.Title>
-                                    <Card.Text>{item.option}</Card.Text>
-                                    <Card.Text>{item.price}원</Card.Text>
+                                    <Card.Title>{productData.productInfo.productName}</Card.Title>
+                                    <Card.Text>옵션 : {option.optionName}</Card.Text>
+                                    <Card.Text>가격 : {option.optionPrice}</Card.Text>
+                                    <Card.Text>구매 수량 : {amount}</Card.Text>
                                 </div>
                             </Col>
                         </Row>
-                    </div>
                     </Card>
-                ))}
-            </Card.Body>
-        </Card>
+                ))
+            ) : (
+                <p>선택한 옵션이 없습니다.</p>
+            )}
+        </div>
     );
-}
+};
 
 export default OrderItems;
-
-// {storeOrder.orderDetails.map((orderDetail, index) => (
-//     <div key={orderDetail.orderDetailCode}>
-//         <Row className="align-items-center" key={orderDetail.productCode}>
-//             <Col md={2} className="text-center m-3">
-//                 <Image className="square-img"
-//                        src={orderDetail.productImg} fluid
-//                        alt={orderDetail.productName} />
-//             </Col>
-//             <Col md={5}>
-//                 <div>
-//                     <Card.Title>{orderDetail.productName}</Card.Title>
-//                     <Card.Text>{orderDetail.optionName}</Card.Text>
-//                     <Card.Text>가격 {orderDetail.optionPrice} ·
-//                         수량 {orderDetail.orderQuantity}</Card.Text>
-//                 </div>
-//             </Col>
-//         </Row>
-//     </div>
-// ))}

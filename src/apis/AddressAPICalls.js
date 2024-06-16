@@ -32,6 +32,7 @@ export function callDeliveryAddressRegistAPI({ deliveryAddressRequest }) {
 
         if (result?.status === 201) {
             dispatch(success());
+            return result.data;
         }
     }
 }

@@ -3,13 +3,9 @@ import { Card, Form, Button } from 'react-bootstrap';
 import {CheckoutPage} from "../../pages/payment/CheckoutPage";
 import {useNavigate} from "react-router-dom";
 
-function OrderSummary({ totalAmount, deliveryFee, finalAmount }) {
+function OrderSummary({ totalAmount, deliveryFee }) {
 
     const navigate = useNavigate();
-
-    const handleCheckout = () => {
-        navigate('/payment'); // '/payment' 경로로 이동
-    };
 
     return (
         <Card className="mb-4">
@@ -23,14 +19,14 @@ function OrderSummary({ totalAmount, deliveryFee, finalAmount }) {
                     <p>배송비</p>
                     <p>{deliveryFee.toLocaleString()}원</p>
                 </div>
-                <div className="d-flex justify-content-between">
-                    <p>쿠폰 사용</p>
-                    <p>0원</p>
-                </div>
+                {/*<div className="d-flex justify-content-between">*/}
+                {/*    <p>쿠폰 사용</p>*/}
+                {/*    <p>0원</p>*/}
+                {/*</div>*/}
                 <hr/>
                 <div className="d-flex justify-content-between mb-4">
                     <h5>최종 결제 금액</h5>
-                    <h5 className="text-success">{finalAmount.toLocaleString()}원</h5>
+                    <h5 className="text-success">{(totalAmount+deliveryFee).toLocaleString()}원</h5>
                 </div>
                 <Form.Group className="mb-3">
                     <Form.Check type="checkbox" label="아래 내용에 모두 동의합니다. (필수)"/>
@@ -43,9 +39,6 @@ function OrderSummary({ totalAmount, deliveryFee, finalAmount }) {
                     상품은 판매자로서 책임을 부담합니다.)
                 </p>
             </Card.Body>
-            <Button variant="success" className="w-100" onClick={handleCheckout}>
-                {finalAmount.toLocaleString()}원 결제하기
-            </Button>
         </Card>
     );
 }
