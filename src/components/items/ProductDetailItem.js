@@ -6,23 +6,17 @@ function ProductDetailItem(props) {
 
     const navigate = useNavigate();
     const [amount, setAmount] = useState(1);
-    const imageUrl = props.product.productImg ? props.product.productImg : '/defaultimg.png';
-
-    const [selectOption, setSelectOption] = useState(props.option[0].optionCode);
 
     const onClickOrderBtnHandler = () => {
-        const productData = {
-            // product: props.product.option.find(op => op.optionCode === selectOption),
-            product: props.product,
-            option: props.option.find(op => op.optionCode === selectOption),
-            amount
-        };
-
-        navigate('/order', { state: { productData } });
+        // 주문 기능 작성
     }
 
     const onChangeHandler = e => {
-        setSelectOption(e.target.value);
+        props.setSelectOption && props.setSelectOption({
+            ...props.selectOption,
+            [e.target.name] : e.target.value
+
+        })
     }
 
     return (
@@ -63,9 +57,7 @@ function ProductDetailItem(props) {
 
                 <Form.Group>
                     <Form.Label>옵션</Form.Label>
-                    //1sol
-                    <Form.Select name="optionCode" onChange={onChangeHandler}>
-                        //end
+                    <Form.Select name="optionCode" value={props.option.optionCode} onChange={onChangeHandler}>
                         {props.option.map(op => (
                             <option key={op.optionCode} value={op.optionCode}>
                                 {op.optionName} | 가격: {op.optionPrice}
@@ -74,7 +66,6 @@ function ProductDetailItem(props) {
                         }
                     </Form.Select>
                 </Form.Group>
-
 
                 <button onClick={onClickOrderBtnHandler}>구매</button>
             </div>
