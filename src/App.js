@@ -58,6 +58,7 @@ import Order from "./components/items/Order";
 import ResetPassword from "./pages/member/ResetPassword";
 import VerifyPasswordReset from "./pages/member/VerifyPasswordReset";
 import RequestPasswordReset from "./pages/member/RequestPasswordReset";
+import FindMemberId from "./pages/member/FindMemberId";
 
 
 
@@ -111,6 +112,7 @@ function App() {
 
                         {/* 인증확인 ------------------------------------------------- */}
                         <Route path="/verify-email/:result" element={<VerifySuccess/>}/>
+                        <Route path="/find-member-id" element={<FindMemberId />} />
                         <Route path="/reset-password" element={<ResetPassword />} />
                         <Route path="/request-password-reset" element={<RequestPasswordReset />} />
                         <Route path="/verify-password-reset/:result" element={<VerifyPasswordReset />} />
