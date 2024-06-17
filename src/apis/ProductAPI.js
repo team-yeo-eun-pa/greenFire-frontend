@@ -132,5 +132,60 @@ export const callProductOptionListAPI = ({productCode}) => {
     }
 };
 
+/* 옵션 관리 */
+
+export const callSellerOptionRegistAPI = ({ productCode, registRequest }) => {
+    return async (dispatch, getState) => {
+        try {
+            const result = await authRequest.post(`/seller/mystore/editOption/${productCode}`, registRequest);
+            if (result.status === 201) {
+                dispatch(success());
+                toast.success("옵션 추가를 완료했습니다.");
+            } else {
+                console.error('오류:', result.status);
+                toast.warning("옵션 추가에 실패했습니다. 다시 시도해주세요.");
+            }
+        } catch (error) {
+            console.error('상품 등록 오류:', error);
+            toast.warning("옵션 추가에 실패했습니다. 다시 시도해주세요.");
+        }
+    }
+};
+
+
+
+export const callSellerOptionModifyAPI = ({ productCode, optionCode, modifyRequest }) => {
+    return async (dispatch, getState) => {
+        try {
+            const result = await authRequest.put(`/seller/mystore/editOption/${productCode}`, {modifyRequest});
+            if (result.status === 201) {
+                dispatch(success());
+                toast.success("옵션 수정을 완료했습니다.");
+            } else {
+                console.error('오류:', result.status);
+                toast.warning("옵션 수정에 실패했습니다. 다시 시도해주세요.");
+            }
+        } catch (error) {
+            console.error('상품 수정 오류:', error);
+            toast.warning("옵션 수정에 실패했습니다. 다시 시도해주세요.");
+        }
+    }
+};
+
+export const callSellerOptionDeleteAPI = ({ productCode, optionCode, optionAppearActivate }) => {
+
+    return async (dispatch, getState) => {
+
+        const result = await authRequest.put(`/seller/mystore/editOption/${productCode}`, {optionAppearActivate});
+        console.log('callSellerOptionDeleteAPI result : ', result);
+
+        if (result.status === 201) {
+            dispatch(success());
+            toast.success("옵션 삭제를 완료했습니다.");
+        }
+    }
+};
+
+
 
 

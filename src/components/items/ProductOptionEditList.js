@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-function ProductOptionEditForm(props) {
+function ProductOptionEditList(props) {
 
     const [selectedOption, setSelectedOption] = useState(null);
     const [mode, setMode] = useState(null);
@@ -57,22 +57,23 @@ function ProductOptionEditForm(props) {
             <ListGroup className="product-option-wrapper">
 
                 <div className="option-btn-wrapper">
-                    <Button className="option-btn" onClick={handleClickRegist}>추가</Button>
+                    {/*<Button className="option-btn" onClick={handleClickRegist}>추가</Button>*/}
                     <Button className="option-btn" onClick={handleClickEdit}>수정</Button>
-                    <Button className="option-btn" onClick={handleClickDelete}>삭제</Button>
+                    {/*<Button className="option-btn" onClick={handleClickDelete}>삭제</Button>*/}
                 </div>
 
                 {props.product && (
                     <div className="product-option-list">
                         {props.product.productOptions.map((opt, index) => (
                             <ListGroup.Item key={index}>
-                                <Form.Check
-                                    type="radio"
-                                    label={opt.optionName}
-                                    name="selectOption"
-                                    onChange={() => handleChangeOption(opt)}
-                                    checked={selectedOption === opt}
-                                />
+                                {/*<Form.Check*/}
+                                {/*    type="radio"*/}
+                                {/*    label={opt.optionName}*/}
+                                {/*    name="selectOption"*/}
+                                {/*    onChange={() => handleChangeOption(opt)}*/}
+                                {/*    checked={selectedOption === opt}*/}
+                                {/*/>*/}
+                                {opt.optionName}
                             </ListGroup.Item>
                         ))
                         }
@@ -123,4 +124,4 @@ function ProductOptionEditForm(props) {
         </div>
     )
 }
-export default ProductOptionEditForm;
+export default ProductOptionEditList;
