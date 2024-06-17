@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {callProfileAPI} from "../../apis/MemberAPICalls";
+import {isLogin} from "../../utils/TokenUtils";
 
 function Layout() {
 
@@ -13,7 +14,7 @@ function Layout() {
     const {profileInfo} = useSelector(state => state.memberReducer);
 
     useEffect(() => {
-        if (!profileInfo) {
+        if (isLogin() && !profileInfo) {
             dispatch(callProfileAPI());
         }
     }, [dispatch, profileInfo]);
