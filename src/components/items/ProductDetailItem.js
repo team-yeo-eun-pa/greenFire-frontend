@@ -93,7 +93,9 @@ function ProductDetailItem(props) {
 
             <Tabs className="product-detail-tabs" defaultActiveKey="description">
                 <Tab title="상품 설명" eventKey="description">
-                    {props.product.productDescription}
+                    <div className="product-description-text">
+                        {props.product.productDescription}
+                    </div>
                 </Tab>
                 <Tab title="상품 리뷰" eventKey="review">
                     <Reviews productCode={props.product.productCode} />
