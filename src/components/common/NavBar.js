@@ -7,17 +7,17 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import { FaShoppingCart, FaHeart, FaBell } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
-import {Badge, Row, Col} from "react-bootstrap";
-import {useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import { Badge, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import LoginModal from "../items/LoginModal";
-import {useDispatch, useSelector} from "react-redux";
-import {reset} from "../../modules/MemberModules";
-import {isAdmin, isLogin, isSeller} from "../../utils/TokenUtils";
-import {callLogoutAPI} from "../../apis/MemberAPICalls";
-import {PiAcornDuotone} from "react-icons/pi";
+import { useDispatch, useSelector } from "react-redux";
+import { reset } from "../../modules/MemberModules";
+import { isAdmin, isLogin, isSeller } from "../../utils/TokenUtils";
+import { callLogoutAPI } from "../../apis/MemberAPICalls";
+import { PiAcornDuotone } from "react-icons/pi";
 
-function NavBar({ profileInfo }) {
+function NavBar({ profileInfo = {} }) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -55,7 +55,7 @@ function NavBar({ profileInfo }) {
                     text="dark"
                     className="mx-2"
                     onClick={handleLoginModalShow}
-                    style={{cursor: 'pointer'}}
+                    style={{ cursor: 'pointer' }}
                 >
                     로그인
                 </Badge>
@@ -64,7 +64,7 @@ function NavBar({ profileInfo }) {
                     text="dark"
                     className=""
                     onClick={() => navigate('members/signup')}
-                    style={{cursor: 'pointer'}}
+                    style={{ cursor: 'pointer' }}
                 >
                     회원가입
                 </Badge>
@@ -90,7 +90,7 @@ function NavBar({ profileInfo }) {
                         <Image
                             src={displayProfileInfo.profilePicture}
                             roundedCircle
-                            style={{width: "30px", height: "30px"}}
+                            style={{ width: "30px", height: "30px" }}
                         />
                     ) : (
                         <CgProfile />
@@ -105,14 +105,14 @@ function NavBar({ profileInfo }) {
                                     src={displayProfileInfo.profilePicture}
                                     roundedCircle
                                     className="mx-auto d-block mb-3 p-4"
-                                    style={{width: "90px", height: "90px"}}
+                                    style={{ width: "90px", height: "90px" }}
                                 />
                             ) : (
-                                <PiAcornDuotone className="my-3" style={{width: "90px", height: "90px", color: "#6a914f"}} />
+                                <PiAcornDuotone className="my-3" style={{ width: "90px", height: "90px", color: "#6a914f" }} />
                             )}
-                            <br/>
+                            <br />
                             <div className="fw-bold fs-6">{displayProfileInfo.memberName}님</div>
-                            <div style={{fontSize: 12}} className="fw-lighter">{displayProfileInfo.memberEmail}</div>
+                            <div style={{ fontSize: 12 }} className="fw-lighter">{displayProfileInfo.memberEmail}</div>
                         </div>
                         <NavDropdown.Divider />
                         {isAdmin() && (
@@ -146,15 +146,15 @@ function NavBar({ profileInfo }) {
     }
 
     return (
-        <Navbar expand="lg" className="bg-success p-5" style={{height: 162}}>
+        <Navbar expand="lg" className="bg-success p-5" style={{ height: 162 }}>
             <Container fluid>
-                <Image src="/greenFire_logo-nav.png" width={30} height={30}/>
+                <Image src="/greenFire_logo-nav.png" width={30} height={30} />
                 <Navbar.Brand href="/" className="text-white mx-3">GREEN FIRE</Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarScroll" style={{backgroundColor: "#ffffff"}}/>
+                <Navbar.Toggle aria-controls="navbarScroll" style={{ backgroundColor: "#ffffff" }} />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
                         className="me-auto my-2 my-lg-0"
-                        style={{maxHeight: '100px'}}
+                        style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
                         <Nav.Link href="#action1" className="text-white">초록불 소개</Nav.Link>
@@ -162,7 +162,7 @@ function NavBar({ profileInfo }) {
                             <NavDropdown.Item href="/product">
                                 전체보기
                             </NavDropdown.Item>
-                            <NavDropdown.Divider/>
+                            <NavDropdown.Divider />
                             <NavDropdown.Item href="#action2">식품</NavDropdown.Item>
                             <NavDropdown.Item href="#action3">주방용품</NavDropdown.Item>
                             <NavDropdown.Item href="#action4">생활용품</NavDropdown.Item>
@@ -172,7 +172,7 @@ function NavBar({ profileInfo }) {
                             <NavDropdown.Item href="/">챌린지 소개</NavDropdown.Item>
                             <NavDropdown.Item href="">챌린지 참여</NavDropdown.Item>
                             <NavDropdown.Item href="">챌린지 인증</NavDropdown.Item>
-                            <NavDropdown.Divider/>
+                            <NavDropdown.Divider />
                             <NavDropdown.Item href="#action5">초록불 찾기</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="커뮤니티" id="navbarScrollingDropdown" className="custom-dropdown">
@@ -194,18 +194,18 @@ function NavBar({ profileInfo }) {
                     {/*    </button>*/}
                     {/*</Form>*/}
 
-                    <button className="iconbtn" style={{color: "white", marginLeft: "5px"}}>
-                        <FaShoppingCart/>
+                    <button className="iconbtn" style={{ color: "white", marginLeft: "5px" }}>
+                        <FaShoppingCart />
                     </button>
-                    <button className="iconbtn" style={{color: "white"}}>
+                    <button className="iconbtn" style={{ color: "white" }}>
                         <Nav.Link href="/wish">
-                            <FaHeart/>
+                            <FaHeart />
                         </Nav.Link>
                     </button>
-                    <button className="iconbtn" style={{color: "white", marginRight: "1rem"}}>
-                        <FaBell/>
+                    <button className="iconbtn" style={{ color: "white", marginRight: "1rem" }}>
+                        <FaBell />
                     </button>
-                    { isLogin() ? <AfterLogin/> : <BeforeLogin/> }
+                    {isLogin() ? <AfterLogin /> : <BeforeLogin />}
                     <LoginModal show={showLoginModal} handleClose={handleLoginModalClose} />
                 </Navbar.Collapse>
             </Container>
