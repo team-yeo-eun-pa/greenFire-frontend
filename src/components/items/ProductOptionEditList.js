@@ -2,6 +2,7 @@ import {Form} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
+import ProductOptionEditListItem from "./ProductOptionEditListItem";
 
 function ProductOptionEditList(props) {
 
@@ -13,31 +14,6 @@ function ProductOptionEditList(props) {
         setSelectedOption(null);
     };
 
-    const handleClickEdit = () => {
-        if (selectedOption === null) {
-            alert("수정할 옵션을 선택하세요");
-        } else {
-            setMode("edit");
-        }
-    };
-
-    const handleClickDelete = () => {
-        setMode("delete");
-        if (selectedOption === null) {
-            alert("삭제할 옵션을 선택하세요");
-        } else {
-            //선택된 옵션 제거 작성 prop.setOptionInfo(prop.optionInfo.filter(opt => opt !== selectedOption));
-            setSelectedOption(null);
-            setMode(null);
-        }
-    };
-
-    const handleChangeOption = (opt) => {
-        setSelectedOption(opt);
-        if (mode === "edit") {
-            setMode("edit");
-        }
-    };
 
     console.log(props.product);
 
@@ -57,8 +33,8 @@ function ProductOptionEditList(props) {
             <ListGroup className="product-option-wrapper">
 
                 <div className="option-btn-wrapper">
-                    {/*<Button className="option-btn" onClick={handleClickRegist}>추가</Button>*/}
-                    <Button className="option-btn" onClick={handleClickEdit}>수정</Button>
+                    <button className="option-btn" onClick={handleClickRegist}>추가</button>
+                    {/*<Button className="option-btn" onClick={handleClickEdit}>수정</Button>*/}
                     {/*<Button className="option-btn" onClick={handleClickDelete}>삭제</Button>*/}
                 </div>
 
@@ -66,14 +42,11 @@ function ProductOptionEditList(props) {
                     <div className="product-option-list">
                         {props.product.productOptions.map((opt, index) => (
                             <ListGroup.Item key={index}>
-                                {/*<Form.Check*/}
-                                {/*    type="radio"*/}
-                                {/*    label={opt.optionName}*/}
-                                {/*    name="selectOption"*/}
-                                {/*    onChange={() => handleChangeOption(opt)}*/}
-                                {/*    checked={selectedOption === opt}*/}
-                                {/*/>*/}
-                                {opt.optionName}
+                                <ProductOptionEditListItem
+                                    option={opt}
+                                    optionForm={props.optionForm}
+                                    setOptionForm={props.setOptionForm}
+                                />
                             </ListGroup.Item>
                         ))
                         }
@@ -85,7 +58,7 @@ function ProductOptionEditList(props) {
             </ListGroup>
 
             <div>
-                {(mode === "regist" || mode === "edit") && (
+                {(mode === "regist") && (
                     <Form className="option-regist-forms">
                         <Form.Group className="option-info-form" controlId="optionName">
                             <Form.Label>옵션명</Form.Label>
@@ -116,7 +89,7 @@ function ProductOptionEditList(props) {
                             />
                         </Form.Group>
 
-                        <Button className="option-btn">완료</Button>
+                        <button className="option-btn" onClick={props.submitAddOptionHandler}>완료</button>
                     </Form>
                 )}
             </div>

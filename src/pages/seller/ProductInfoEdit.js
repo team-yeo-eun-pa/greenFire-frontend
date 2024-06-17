@@ -81,12 +81,6 @@ function ProductInfoEdit() {
                              product={product}/>
             </div>
 
-            <div>
-                <label style={{marginBottom: "8px"}}>옵션</label>
-                <ProductOptionEditList product={product}/>
-            </div>
-
-
             <label style={{marginBottom: "8px"}}>상세 설명</label>
             <ProductDescriptionForm
                 product={product}

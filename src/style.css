@@ -196,14 +196,15 @@
 
 .product-option-form {
     display: flex;
-    width: 30vw;
+    width: 40vw;
     height: 260px;
     justify-content: space-between;
     margin-bottom: 25px;
 }
 
+
 .product-option-wrapper {
-    width: 14vw;
+    width: 90%;
     max-height: 100%;
     margin-right: 30px;
 }
@@ -229,6 +230,18 @@
 
 .option-info-form {
     margin: 5px 0 10px 0;
+}
+
+.option-edit-item {
+    display: flex;
+    justify-content: space-between;
+    text-overflow: fade;
+    height: 40px;
+}
+
+.option-edit-name {
+    text-overflow: fade;
+    align-self: center;
 }
 
 
