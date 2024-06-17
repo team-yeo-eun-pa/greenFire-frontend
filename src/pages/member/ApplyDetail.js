@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Form, Button, Col, Row } from 'react-bootstrap';
+import { Form, Button, Col, Row, Image } from 'react-bootstrap';
 import { FaEdit } from 'react-icons/fa';
 import { FcCancel } from "react-icons/fc";
 import ApplyForm from "../../components/form/ApplyForm";
@@ -33,7 +33,8 @@ const ApplyDetail = () => {
                 businessNumber: applyDetail.businessNumber,
                 mosNumber: applyDetail.mosNumber,
                 storeType: applyDetail.storeType,
-                applyContent: applyDetail.applyContent
+                applyContent: applyDetail.applyContent,
+                businessImg: applyDetail.businessImg
             });
         }
     }, [applyDetail]);
@@ -117,6 +118,12 @@ const ApplyDetail = () => {
                                         <Form.Control plaintext readOnly defaultValue={applyDetail.storeRepresentativeName} />
                                     </Col>
                                 </Form.Group>
+                                <Form.Group as={Row} className="mb-3" controlId="formBusinessImg">
+                                    <Form.Label column sm="3">사업자등록증</Form.Label>
+                                    <Col sm="9">
+                                        <Image src={applyDetail.businessImg} alt="사업자등록증" fluid className="img-thumbnail" />
+                                    </Col>
+                                </Form.Group>
                                 <Form.Group as={Row} className="mb-3" controlId="formBusinessNumber">
                                     <Form.Label column sm="3">사업자등록번호</Form.Label>
                                     <Col sm="9">
@@ -141,6 +148,14 @@ const ApplyDetail = () => {
                                         <Form.Control plaintext readOnly defaultValue={applyDetail.applyContent} />
                                     </Col>
                                 </Form.Group>
+                                {applyDetail.applyStatus === 'REJECT' && (
+                                    <Form.Group as={Row} className="mb-3" controlId="formRejectReason">
+                                        <Form.Label column sm="3">반려 사유</Form.Label>
+                                        <Col sm="9">
+                                            <Form.Control plaintext readOnly defaultValue={applyDetail.rejectReason} />
+                                        </Col>
+                                    </Form.Group>
+                                )}
                                 <Form.Group as={Row} className="mb-3" controlId="formApplyDatetime">
                                     <Form.Label column sm="3">신청일</Form.Label>
                                     <Col sm="9">
