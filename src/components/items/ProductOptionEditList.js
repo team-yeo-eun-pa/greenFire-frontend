@@ -50,7 +50,7 @@ function ProductOptionEditList(props) {
     // };
 
 
-    const submitAddOptionHandler = (e) => {
+    const submitAddOptionHandler = async (e) => {
 
         e.preventDefault();
 
@@ -59,16 +59,17 @@ function ProductOptionEditList(props) {
 
         formData.append('productOptionCreateRequest', new Blob([JSON.stringify(props.optionForm)], { type: 'application/json' }));
 
-        console.log("formData: ", formData);
+
 
         dispatch(
-            callSellerProductModifyAPI({
-                productCode: props.product.productCode, modifyRequest: formData
+            callSellerOptionRegistAPI({
+                productCode: props.product.productInfo.productCode, registRequest: formData
             })
 
         );
 
         setMode(null);
+        console.log(props.product);
     }
 
 
@@ -131,7 +132,7 @@ function ProductOptionEditList(props) {
                             />
                         </Form.Group>
 
-                        <button className="option-btn" type="submit">완료</button>
+                        <button className="submit-btn" type="submit">완료</button>
                     </Form>
                 )}
             </div>
