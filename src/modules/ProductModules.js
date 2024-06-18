@@ -2,7 +2,7 @@ import {createActions, handleActions} from "redux-actions";
 
 
 const initialState = {
-    // product: [],
+    // product: [], 기본값 지정하지 않아야 함
     success: false,
     loading : false,
     error : null

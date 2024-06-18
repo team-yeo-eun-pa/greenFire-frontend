@@ -65,8 +65,8 @@ function ProductOptionAddForm(props) {
             <ListGroup className="product-option-wrapper">
 
                 <div className="option-btn-wrapper">
-                    <Button className="option-btn" onClick={handleClickRegist}>추가</Button>
-                    <Button className="option-btn" onClick={handleClickDelete}>삭제</Button>
+                    <button className="option-btn" onClick={handleClickRegist}>추가</button>
+                    <button className="option-btn" onClick={handleClickDelete}>삭제</button>
                 </div>
 
 
@@ -118,7 +118,7 @@ function ProductOptionAddForm(props) {
                             />
                         </Form.Group>
 
-                        <Button className="option-btn" onClick={handleSubmit}>완료</Button>
+                        <button className="submit-btn" onClick={handleSubmit}>완료</button>
                     </Form>
                 )}
             </div>

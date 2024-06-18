@@ -75,7 +75,7 @@ export const callSellerProductRegistAPI = ({ registRequest }) => {
                 toast.success("상품 등록을 완료했습니다.");
             } else {
                 console.error('오류:', result.status);
-                toast.warning("상품 등록에 실패했습니다. 다시 시도해주세요.");
+                toast.warning("모든 항목을 입력해주세요.");
             }
         } catch (error) {
             console.error('상품 등록 오류:', error);
