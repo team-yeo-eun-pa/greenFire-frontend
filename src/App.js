@@ -56,6 +56,7 @@ import InquiryDetail from "./pages/Inquiry/InquiryDetail";
 import Order from "./components/items/Order";
 import ProductOptionEdit from "./pages/seller/ProductOptionEdit";
 import ProductInfoEdit from "./pages/seller/ProductInfoEdit";
+import Cart from "./pages/product/Cart";
 
 
 
@@ -93,7 +94,7 @@ function App() {
                         <Route path="/product/:productCode" element={<ProductDetail/>}/>
 
                         <Route path="/wish" element={<Wishlist/>}/>
-                        {/*<Route path="/cart" element={<Cart/>}/>*/}
+                        <Route path="/cart" element={<Cart/>}/>
 
 
                         {/* 주문 및 결제 --------------------------------------------- */}

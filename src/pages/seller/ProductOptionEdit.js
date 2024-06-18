@@ -40,28 +40,7 @@ function ProductOptionEdit() {
         })
     }
 
-    const optionCode = 1;
 
-
-    /* 내용 저장 */
-
-    const submitAddOptionHandler = () => {
-        const formData = new FormData();
-        formData.append('productUpdateRequest', new Blob([JSON.stringify(optionForm)], { type : 'application/json'}));
-        dispatch(callSellerOptionRegistAPI({ productCode, registRequest : formData }));
-    }
-
-    const submitModifyOptionHandler = () => {
-        const formData = new FormData();
-        formData.append('productUpdateRequest', new Blob([JSON.stringify(optionForm)], { type : 'application/json'}));
-        dispatch(callSellerOptionModifyAPI({ productCode, optionCode, modifyRequest : formData }));
-    }
-
-    const submitRemoveOptionHandler = () => {
-        const formData = new FormData();
-        formData.append('productUpdateRequest', new Blob([JSON.stringify(optionForm)], { type : 'application/json'}));
-        dispatch(callSellerOptionDeleteAPI({ productCode, optionCode, modifyRequest : formData }));
-    }
 
 
     return (
@@ -71,9 +50,6 @@ function ProductOptionEdit() {
             <div>
                 <label style={{marginBottom: "8px"}}>옵션</label>
                 <ProductOptionEditList product={product} optionForm={optionForm} setOptionForm={setOptionForm}
-                                       submitAddOptionHandler={submitAddOptionHandler}
-                                       submitModifyOptionHandler={submitModifyOptionHandler}
-                                       submitRemoveOptionHandler={submitRemoveOptionHandler}
                 />
             </div>
 

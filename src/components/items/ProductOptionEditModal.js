@@ -1,49 +1,56 @@
 import {Form, Modal} from "react-bootstrap";
 import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
-import {callSellerOptionModifyAPI} from "../../apis/ProductAPI";
+import {callSellerOptionModifyAPI, callSellerProductModifyAPI} from "../../apis/ProductAPI";
 
-function ProductOptionEditModal(props) {
+function ProductOptionEditModal({option, open, close, optionForm, setOptionForm}) {
 
     const dispatch = useDispatch();
 
     const onChangeHandler = e => {
-        props.setOptionForm && props.setOptionForm({
-            ...props.optionForm,
+        setOptionForm && setOptionForm({
+            ...optionForm,
             [e.target.name]: e.target.value
 
         })
     }
 
+    /* 내용 저장 */
+
+    const submitModifyOptionHandler = () => {
+        const formData = new FormData();
+        formData.append('productOptionUpdateRequest', new Blob([JSON.stringify(optionForm)], { type : 'application/json'}));
+        dispatch(callSellerOptionModifyAPI({ optionCode: option.optionCode, modifyRequest : formData }));
+    }
+
 
     useEffect(() => {
-        if (props.option) {
-            props.setOptionForm({
-                optionName: props.option.optionName,
-                optionPrice: props.option.optionPrice,
-                optionStock: props.option.optionStock
+        if (option) {
+            setOptionForm({
+                optionName: option.optionName,
+                optionPrice: option.optionPrice,
+                optionStock: option.optionStock
             });
         }
-    }, [props.option]);
+    }, [option]);
 
     const handleEditOption = async () => {
         const modifyRequest = new FormData();
-        modifyRequest.append('ProductOptionUpdateRequest', modifyRequest);
+        modifyRequest.append('ProductOptionUpdateRequest', new Blob([JSON.stringify(optionForm)], { type: 'application/json' }));
 
         try {
             await dispatch(callSellerOptionModifyAPI({
-                productCode: props.option.productCode,
-                optionCode: props.option.optionCode,
-                modifyRequest
+                optionCode: option.optionCode,
+                modifyRequest: optionForm
             }));
-            props.handleClose();
+            close();
         } catch (error) {
 
         }
     };
 
     return (
-        <Modal className="wish-cart-modal" show={props.open} onHide={props.handleClose}>
+        <Modal className="wish-cart-modal" show={open} onHide={close}>
             <Modal.Header closeButton>
                 <Modal.Title>옵션 수정</Modal.Title>
             </Modal.Header>
@@ -52,8 +59,8 @@ function ProductOptionEditModal(props) {
                     <Form.Label>옵션명</Form.Label>
                     <Form.Control
                         type="text"
-                        value={props.optionForm ? props.setOptionForm.optionName : ''}
-                        onChange={(e) => props.setOptionForm({ ...props.optionForm, optionName: e.target.value})}
+                        value={optionForm ? setOptionForm.optionName : ''}
+                        onChange={(e) => setOptionForm({ ...optionForm, optionName: e.target.value})}
                     />
                 </Form.Group>
 
@@ -61,8 +68,8 @@ function ProductOptionEditModal(props) {
                     <Form.Label>옵션가격</Form.Label>
                     <Form.Control
                         type="number"
-                        value={props.optionForm ? props.setOptionForm.optionPrice : ''}
-                        onChange={(e) => props.setOptionForm({ ...props.optionForm, optionPrice: e.target.value})}
+                        value={optionForm ? setOptionForm.optionPrice : ''}
+                        onChange={(e) => setOptionForm({ ...optionForm, optionPrice: e.target.value})}
                     />
                 </Form.Group>
 
@@ -70,16 +77,16 @@ function ProductOptionEditModal(props) {
                     <Form.Label>재고</Form.Label>
                     <Form.Control
                         type="number"
-                        value={props.optionForm ? props.setOptionForm.optionStock : ''}
-                        onChange={(e) => props.setOptionForm({ ...props.optionForm, optionStock: e.target.value})}
+                        value={optionForm ? setOptionForm.optionStock : ''}
+                        onChange={(e) => setOptionForm({ ...optionForm, optionStock: e.target.value})}
                     />
                 </Form.Group>
             </Modal.Body>
 
             <Modal.Footer>
                 <button className="modal-submit-btn" onClick={()=>{
-                    props.handleClose();
-                    props.submitAddOptionHandler();
+                    close();
+                    handleEditOption();
                 }}>
                     확인
                 </button>

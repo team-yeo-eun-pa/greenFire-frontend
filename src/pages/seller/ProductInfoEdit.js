@@ -63,10 +63,16 @@ function ProductInfoEdit() {
     /* 내용 저장 */
     const onClickProductEditHandler = () => {
         const formData = new FormData();
-        formData.append('productImg', imageInput.current.files[0]);
-        formData.append('productUpdateRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
-        dispatch(callSellerProductModifyAPI({ productCode, modifyRequest : formData }));
+
+        if (imageInput.current.files.length > 0) {
+            formData.append('productImg', imageInput.current.files[0]);
+        }
+
+        formData.append('productUpdateRequest', new Blob([JSON.stringify(productForm)], { type: 'application/json' }));
+
+        dispatch(callSellerProductModifyAPI({ productCode, modifyRequest: formData }));
     }
+
 
 
 

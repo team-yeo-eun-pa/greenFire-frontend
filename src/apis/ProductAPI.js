@@ -89,7 +89,7 @@ export const callSellerProductRegistAPI = ({ registRequest }) => {
 export const callSellerProductModifyAPI = ({ productCode, modifyRequest }) => {
     return async (dispatch, getState) => {
         try {
-            const result = await authRequest.put(`/seller/mystore/edit/${productCode}`, {modifyRequest});
+            const result = await authRequest.put(`/seller/mystore/edit/${productCode}`, modifyRequest);
             if (result.status === 201) {
                 dispatch(success());
                 toast.success("상품 수정을 완료했습니다.");
@@ -154,10 +154,10 @@ export const callSellerOptionRegistAPI = ({ productCode, registRequest }) => {
 
 
 
-export const callSellerOptionModifyAPI = ({ productCode, optionCode, modifyRequest }) => {
+export const callSellerOptionModifyAPI = ({ optionCode, modifyRequest }) => {
     return async (dispatch, getState) => {
         try {
-            const result = await authRequest.put(`/seller/mystore/editOption/${productCode}/${optionCode}`, {modifyRequest});
+            const result = await authRequest.put(`/seller/mystore/editOption/${optionCode}`, modifyRequest);
             if (result.status === 201) {
                 dispatch(success());
                 toast.success("옵션 수정을 완료했습니다.");
@@ -172,11 +172,11 @@ export const callSellerOptionModifyAPI = ({ productCode, optionCode, modifyReque
     }
 };
 
-export const callSellerOptionDeleteAPI = ({ productCode, optionCode, optionAppearActivate }) => {
+export const callSellerOptionDeleteAPI = ({ optionCode, optionAppearActivate }) => {
 
     return async (dispatch, getState) => {
 
-        const result = await authRequest.put(`/seller/mystore/editOption/${productCode}/${optionCode}`, {optionAppearActivate});
+        const result = await authRequest.put(`/seller/mystore/editOption/${optionCode}`, {optionAppearActivate});
         console.log('callSellerOptionDeleteAPI result : ', result);
 
         if (result.status === 201) {

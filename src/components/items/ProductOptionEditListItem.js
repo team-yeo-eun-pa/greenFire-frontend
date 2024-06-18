@@ -18,6 +18,13 @@ function ProductOptionEditListItem({option, optionForm, setOptionForm}) {
     const handleOpenModal = () => setOpenModal(true);
     const handleCloseModal = () => setOpenModal(false);
 
+    const submitRemoveOptionHandler = () => {
+        const formData = new FormData();
+        formData.append('productOptionDeleteRequest', new Blob([JSON.stringify(optionForm)], { type : 'application/json'}));
+        dispatch(callSellerOptionDeleteAPI({ optionCode: option.optionCode, optionAppearActivate : "D" }));
+    }
+
+
     const onClickDeleteBtnHandler = () => {
         dispatch(callSellerOptionDeleteAPI({
             productCode: option.productCode,
@@ -25,6 +32,7 @@ function ProductOptionEditListItem({option, optionForm, setOptionForm}) {
             optionAppearActivate : "D"
         }));
     }
+
 
 
     const handleClickEditBtn = () => {
@@ -52,7 +60,7 @@ function ProductOptionEditListItem({option, optionForm, setOptionForm}) {
             <ProductOptionEditModal
                 option={option}
                 open={openModal}
-                handleClose={handleCloseModal}
+                close={handleCloseModal}
                 optionForm={optionForm}
                 setOptionForm={setOptionForm}
             />
