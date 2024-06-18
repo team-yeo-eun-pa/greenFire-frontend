@@ -176,7 +176,7 @@ export const callSellerOptionDeleteAPI = ({ optionCode, optionAppearActivate }) 
 
     return async (dispatch, getState) => {
 
-        const result = await authRequest.put(`/seller/mystore/editOption/${optionCode}`, {optionAppearActivate});
+        const result = await authRequest.put(`/seller/mystore/editOption/${optionCode}/delete`, {optionAppearActivate});
         console.log('callSellerOptionDeleteAPI result : ', result);
 
         if (result.status === 201) {

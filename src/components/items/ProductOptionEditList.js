@@ -23,33 +23,6 @@ function ProductOptionEditList(props) {
 
 
 
-
-    // const submitAddOptionHandler = (e) => {
-    //
-    //     e.preventDefault();
-    //
-    //     console.log("product", props.product);
-    //
-    //     const formData = new FormData();
-    //     formData.append('productOptionCreateRequest', new Blob([JSON.stringify({
-    //         optionName: props.product.productOptions.optionName,
-    //         optionPrice: props.product.productOptions.optionPrice,
-    //         optionStock: props.product.productOptions.optionStock
-    //     })], { type : 'application/json'}));
-    //
-    //     console.log("formData: ", formData);
-    //
-    //     dispatch(
-    //         callSellerOptionRegistAPI({
-    //             productCode: props.product.productCode,
-    //             registRequest: formData
-    //         })
-    //     );
-    //
-    //     setMode(null);
-    // };
-
-
     const submitAddOptionHandler = async (e) => {
 
         e.preventDefault();

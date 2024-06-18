@@ -15,13 +15,7 @@ function ProductOptionEditModal({option, open, close, optionForm, setOptionForm}
         })
     }
 
-    /* 내용 저장 */
 
-    const submitModifyOptionHandler = () => {
-        const formData = new FormData();
-        formData.append('productOptionUpdateRequest', new Blob([JSON.stringify(optionForm)], { type : 'application/json'}));
-        dispatch(callSellerOptionModifyAPI({ optionCode: option.optionCode, modifyRequest : formData }));
-    }
 
 
     useEffect(() => {
@@ -34,19 +28,24 @@ function ProductOptionEditModal({option, open, close, optionForm, setOptionForm}
         }
     }, [option]);
 
-    const handleEditOption = async () => {
-        const modifyRequest = new FormData();
-        modifyRequest.append('ProductOptionUpdateRequest', new Blob([JSON.stringify(optionForm)], { type: 'application/json' }));
 
-        try {
-            await dispatch(callSellerOptionModifyAPI({
-                optionCode: option.optionCode,
-                modifyRequest: optionForm
-            }));
-            close();
-        } catch (error) {
+    /* 내용 저장 */
 
-        }
+    // const submitModifyOptionHandler = () => {
+    //     const formData = new FormData();
+    //     formData.append('productOptionUpdateRequest', new Blob([JSON.stringify(optionForm)], { type : 'application/json'}));
+    //     dispatch(callSellerOptionModifyAPI({ optionCode: option.optionCode, modifyRequest : formData }));
+    // }
+
+    const submitModifyOptionHandler = () => {
+        const formData = new FormData();
+        formData.append('productOptionUpdateRequest', new Blob([JSON.stringify(optionForm)], { type: 'application/json' }));
+
+        dispatch(callSellerOptionModifyAPI({
+            optionCode: option.optionCode,
+            modifyRequest: formData
+        }));
+        close();
     };
 
     return (
@@ -86,7 +85,7 @@ function ProductOptionEditModal({option, open, close, optionForm, setOptionForm}
             <Modal.Footer>
                 <button className="modal-submit-btn" onClick={()=>{
                     close();
-                    handleEditOption();
+                    submitModifyOptionHandler();
                 }}>
                     확인
                 </button>

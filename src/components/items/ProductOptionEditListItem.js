@@ -15,31 +15,29 @@ function ProductOptionEditListItem({option, optionForm, setOptionForm}) {
     const [showModal, setShowModal] = useState(false);
 
     const [openModal, setOpenModal] = useState(false);
-    const handleOpenModal = () => setOpenModal(true);
     const handleCloseModal = () => setOpenModal(false);
 
     const submitRemoveOptionHandler = () => {
-        const formData = new FormData();
-        formData.append('productOptionDeleteRequest', new Blob([JSON.stringify(optionForm)], { type : 'application/json'}));
         dispatch(callSellerOptionDeleteAPI({ optionCode: option.optionCode, optionAppearActivate : "D" }));
     }
 
 
-    const onClickDeleteBtnHandler = () => {
-        dispatch(callSellerOptionDeleteAPI({
-            productCode: option.productCode,
-            optionCode: option.optionCode,
-            optionAppearActivate : "D"
-        }));
-    }
+    // const onClickDeleteBtnHandler = () => {
+    //     dispatch(callSellerOptionDeleteAPI({
+    //         productCode: option.productCode,
+    //         optionCode: option.optionCode,
+    //         optionAppearActivate : "D"
+    //     }));
+    // }
 
 
 
     const handleClickEditBtn = () => {
-        setShowModal(true);
+        setOpenModal(true);
+
+        console.log(option);
     };
 
-    const handleClose = () => setShowModal(false);
 
 
     return (
@@ -52,7 +50,7 @@ function ProductOptionEditListItem({option, optionForm, setOptionForm}) {
                 <button className="option-btn" onClick={handleClickEditBtn}>
                     수정
                 </button>
-                <button className="option-btn" onClick={onClickDeleteBtnHandler}>
+                <button className="option-btn" onClick={submitRemoveOptionHandler}>
                     삭제
                 </button>
             </div>
