@@ -3,22 +3,18 @@ import React, {useEffect, useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import ProductOptionEditListItem from "./ProductOptionEditListItem";
-import {callSellerOptionRegistAPI} from "../../apis/ProductAPI";
+import {callSellerOptionRegistAPI, callSellerProductModifyAPI} from "../../apis/ProductAPI";
 import {useDispatch} from "react-redux";
 
 function ProductOptionEditList(props) {
 
     const dispatch = useDispatch();
-    const [selectedOption, setSelectedOption] = useState({
-        optionName: "",
-        optionPrice: 0,
-        optionStock: 0
-    });
+
     const [mode, setMode] = useState(null);
 
     const handleClickRegist = () => {
         setMode("regist");
-        setSelectedOption({
+        props.setOptionForm({
             optionName: "",
             optionPrice: 0,
             optionStock: 0,
@@ -28,22 +24,52 @@ function ProductOptionEditList(props) {
 
 
 
+    // const submitAddOptionHandler = (e) => {
+    //
+    //     e.preventDefault();
+    //
+    //     console.log("product", props.product);
+    //
+    //     const formData = new FormData();
+    //     formData.append('productOptionCreateRequest', new Blob([JSON.stringify({
+    //         optionName: props.product.productOptions.optionName,
+    //         optionPrice: props.product.productOptions.optionPrice,
+    //         optionStock: props.product.productOptions.optionStock
+    //     })], { type : 'application/json'}));
+    //
+    //     console.log("formData: ", formData);
+    //
+    //     dispatch(
+    //         callSellerOptionRegistAPI({
+    //             productCode: props.product.productCode,
+    //             registRequest: formData
+    //         })
+    //     );
+    //
+    //     setMode(null);
+    // };
+
+
     const submitAddOptionHandler = (e) => {
 
+        e.preventDefault();
+
         const formData = new FormData();
-        formData.append('productOptionCreateRequest', new Blob([JSON.stringify(selectedOption)], { type : 'application/json'}));
 
-        console.log(formData);
 
-        submitAddOptionHandler(formData);
+        formData.append('productOptionCreateRequest', new Blob([JSON.stringify(props.optionForm)], { type: 'application/json' }));
+
+        console.log("formData: ", formData);
+
+        dispatch(
+            callSellerProductModifyAPI({
+                productCode: props.product.productCode, modifyRequest: formData
+            })
+
+        );
+
         setMode(null);
-
-    };
-
-    // const submitAddOptionHandler = (formData) => {
-    //     formData.append('productOptionCreateRequest', new Blob([JSON.stringify(props.optionForm)], { type : 'application/json'}));
-    //     dispatch(callSellerOptionRegistAPI({ productCode : props.product.productCode, registRequest : formData }));
-    // }
+    }
 
 
 
@@ -82,8 +108,8 @@ function ProductOptionEditList(props) {
                             <Form.Label>옵션명</Form.Label>
                             <Form.Control
                                 type="text"
-                                value={selectedOption.optionName}
-                                onChange={(e) => setSelectedOption({ ...selectedOption, optionName: e.target.value})}
+                                value={props.optionForm.optionName}
+                                onChange={(e) => props.setOptionForm({ ...props.optionForm, optionName: e.target.value})}
                             />
                         </Form.Group>
 
@@ -91,8 +117,8 @@ function ProductOptionEditList(props) {
                             <Form.Label>옵션가격</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={selectedOption.optionPrice}
-                                onChange={(e) => setSelectedOption({ ...selectedOption, optionPrice: parseFloat(e.target.value)})}
+                                value={props.optionForm.optionPrice}
+                                onChange={(e) => props.setOptionForm({ ...props.optionForm, optionPrice: parseFloat(e.target.value)})}
                             />
                         </Form.Group>
 
@@ -100,8 +126,8 @@ function ProductOptionEditList(props) {
                             <Form.Label>재고</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={selectedOption.optionStock}
-                                onChange={(e) => setSelectedOption({ ...selectedOption, optionStock: parseFloat(e.target.value)})}
+                                value={props.optionForm.optionStock}
+                                onChange={(e) => props.setOptionForm({ ...props.optionForm, optionStock: parseFloat(e.target.value)})}
                             />
                         </Form.Group>
 
