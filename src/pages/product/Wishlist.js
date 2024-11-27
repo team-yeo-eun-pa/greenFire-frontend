@@ -1,7 +1,7 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import WishItem from "../../components/items/WishItem";
 import {useRef, useState} from "react";
-import WishToCartModal from "../../components/items/WishToCartModal";
+import ToCartModal from "../../components/items/ToCartModal";
 
 function Wishlist() {
 
@@ -41,7 +41,7 @@ function Wishlist() {
                     </ListGroup.Item>
                 </ListGroup>
             ))}
-            <WishToCartModal open={openModal} handleClose={handleCloseModal}/>
+            <ToCartModal open={openModal} handleClose={handleCloseModal}/>
 
         </div>
     )

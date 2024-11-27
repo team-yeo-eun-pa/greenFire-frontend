@@ -1,7 +1,7 @@
 import { FaCartPlus } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
 import {useRef, useState} from "react";
-import WishToCartModal from "./WishToCartModal";
+import ToCartModal from "./ToCartModal";
 
 function WishItem(props) {
 
