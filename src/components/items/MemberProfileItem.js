@@ -1,93 +1,143 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Image, Button, Form } from 'react-bootstrap';
 import { CgProfile } from 'react-icons/cg';
+import { FaEdit } from 'react-icons/fa';
 
 function MemberProfileItem({ profileInfo }) {
-    return(
-        <>
-            {/*<div className="profile-item-div">*/}
-            {/*    <h1>내 정보</h1>*/}
-            {/*    <input*/}
-            {/*        type="text"*/}
-            {/*        readOnly={true}*/}
-            {/*        value={profileInfo.memberId}*/}
-            {/*    />*/}
-            {/*    <input*/}
-            {/*        type="text"*/}
-            {/*        readOnly={true}*/}
-            {/*        value={profileInfo.memberName}*/}
-            {/*    />*/}
-            {/*    <input*/}
-            {/*        type="text"*/}
-            {/*        readOnly={true}*/}
-            {/*        value={profileInfo.memberEmail}*/}
-            {/*    />*/}
-            {/*    <input*/}
-            {/*        type="text"*/}
-            {/*        readOnly={true}*/}
-            {/*        value={profileInfo.memberNickname ? profileInfo.memberNickname : '미입력'}*/}
-            {/*    />*/}
-            {/*    <input*/}
-            {/*        type="text"*/}
-            {/*        readOnly={true}*/}
-            {/*        value={profileInfo.memberPhone}*/}
-            {/*    />*/}
+    const [isEditing, setIsEditing] = useState(false);
+    const [form, setForm] = useState({
+        memberNickname: profileInfo.memberNickname || "닉네임을 등록해보세요 :)",
+        memberEmail: profileInfo.memberEmail,
+        memberPhone: profileInfo.memberPhone
+    });
 
-                <Container className="mt-5 p-4">
-                    <Row>
-                        <Col className="text-center">
-                            {profileInfo.profilePicture ? (
-                                <Image
-                                    src={profileInfo.profilePicture}
-                                    roundedCircle
-                                    className="mx-auto d-block mb-3"
-                                    style={{ width: "130px", height: "130px" }}
-                                />
-                            ) : (
-                                <CgProfile style={{ width: "130px", height: "130px" }} />
-                            )}
-                            <h5 className="fw-bold py-3">{profileInfo.memberName}</h5>
-                            <div className="fw-bold py-3 border-bottom border-1 border-dark-subtle mb-5"/>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={9}>
-                            <Form>
-                                <Form.Group as={Row} className="mb-3">
-                                    <Form.Label column sm={2}>이름</Form.Label>
-                                    <Col sm={10}>
-                                        <Form.Control plaintext readOnly defaultValue={profileInfo.memberName} />
-                                    </Col>
-                                </Form.Group>
+    const handleEdit = () => {
+        setIsEditing(true);
+    };
 
-                                <Form.Group as={Row} className="mb-3">
-                                    <Form.Label column sm={2}>아이디</Form.Label>
-                                    <Col sm={10}>
-                                        <Form.Control plaintext readOnly defaultValue={profileInfo.memberId} />
-                                    </Col>
-                                </Form.Group>
+    const handleSave = () => {
+        setIsEditing(false);
+    };
 
-                                <Form.Group as={Row} className="mb-3">
-                                    <Form.Label column sm={2}>이메일</Form.Label>
-                                    <Col sm={10}>
-                                        <Form.Control plaintext readOnly defaultValue={profileInfo.memberEmail} />
-                                    </Col>
-                                </Form.Group>
+    const handleCancel = () => {
+        setForm({
+            memberNickname: profileInfo.memberNickname || "닉네임을 등록해보세요 :)",
+            memberEmail: profileInfo.memberEmail,
+            memberPhone: profileInfo.memberPhone
+        });
+        setIsEditing(false);
+    };
 
-                                <Form.Group as={Row} className="mb-3">
-                                    <Form.Label column sm={2}>연락처</Form.Label>
-                                    <Col sm={10}>
-                                        <Form.Control plaintext readOnly defaultValue={profileInfo.memberPhone} />
-                                    </Col>
-                                </Form.Group>
+    const onChangeHandler = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    };
 
-                            </Form>
-                            <Button variant="outline-primary" className="me-2">편집</Button>
-                            <Button variant="outline-secondary">저장</Button>
-                        </Col>
-                    </Row>
-                </Container>
-        </>
+    return (
+        <Container className="mt-5 p-4">
+            <Row className="justify-content-center">
+                <Col className="text-center">
+                    {profileInfo.profilePicture ? (
+                        <Image
+                            src={profileInfo.profilePicture}
+                            roundedCircle
+                            className="mx-auto d-block mb-3"
+                            style={{ width: "130px", height: "130px" }}
+                        />
+                    ) : (
+                        <CgProfile style={{ width: "130px", height: "130px" }} />
+                    )}
+                    <h5 className="fw-bold py-3">{profileInfo.memberName}</h5>
+                    <div className="fw-bold py-3 border-bottom border-1 border-dark-subtle mb-5" />
+                </Col>
+            </Row>
+            <Row className="justify-content-center">
+                <Col md={7}>
+                    <Form>
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm={3}>이름</Form.Label>
+                            <Col sm={9}>
+                                <Form.Control plaintext readOnly defaultValue={profileInfo.memberName} />
+                            </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm={3}>닉네임</Form.Label>
+                            <Col sm={9}>
+                                {isEditing ? (
+                                    <Form.Control
+                                        type="text"
+                                        name="memberNickname"
+                                        value={form.memberNickname}
+                                        onChange={onChangeHandler}
+                                    />
+                                ) : (
+                                    <Form.Control plaintext readOnly defaultValue={profileInfo.memberNickname || "닉네임을 등록해보세요 :)"} />
+                                )}
+                            </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm={3}>아이디</Form.Label>
+                            <Col sm={9}>
+                                <Form.Control plaintext readOnly defaultValue={profileInfo.memberId} />
+                            </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm={3}>이메일</Form.Label>
+                            <Col sm={9}>
+                                {isEditing ? (
+                                    <Form.Control
+                                        type="email"
+                                        name="memberEmail"
+                                        value={form.memberEmail}
+                                        onChange={onChangeHandler}
+                                    />
+                                ) : (
+                                    <Form.Control plaintext readOnly defaultValue={profileInfo.memberEmail} />
+                                )}
+                            </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column sm={3}>연락처</Form.Label>
+                            <Col sm={9}>
+                                {isEditing ? (
+                                    <Form.Control
+                                        type="text"
+                                        name="memberPhone"
+                                        value={form.memberPhone}
+                                        onChange={onChangeHandler}
+                                    />
+                                ) : (
+                                    <Form.Control plaintext readOnly defaultValue={profileInfo.memberPhone} />
+                                )}
+                            </Col>
+                        </Form.Group>
+                    </Form>
+
+                    <div className="d-flex justify-content-end mt-3">
+                        {isEditing ? (
+                            <>
+                                <Button variant="outline-secondary" className="mx-2" onClick={handleCancel}>
+                                    취소
+                                </Button>
+                                <Button variant="success" className="mx-2" onClick={handleSave}>
+                                    저장
+                                </Button>
+                            </>
+                        ) : (
+                            <Button variant="outline-success" className="mx-2" onClick={handleEdit}>
+                                <FaEdit /> 편집
+                            </Button>
+                        )}
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

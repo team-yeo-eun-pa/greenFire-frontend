@@ -69,3 +69,15 @@ export const callProfileAPI = () => {
         }
     }
 }
+
+export const callCheckMemberIdAPI = (memberId) => {
+    return async () => {
+        try {
+            const result = await authRequest.post('/members/check-id', { memberId });
+            return result.data;
+        } catch (error) {
+            console.error('Error checking member ID:', error);
+            throw error;
+        }
+    };
+};

@@ -34,5 +34,5 @@ export const isSeller = () => {
 }
 
 export const getMemberId = () => {
-    return getDecodeAccessToken().memberId;
+    return isLogin() && getDecodeAccessToken().memberId;
 }

@@ -27,7 +27,11 @@ function StoreProfile() {
         storeName: '',
         storeInfo: '',
         address: '',
-        addressDetail: ''
+        addressDetail: '',
+        // addressZonecode: '',
+        // addressType: "도로명 주소",
+        // deliveryAmount: 0,
+        // "freeDeliveryCondition": 50000
     });
 
     useEffect(() => {
@@ -236,12 +240,12 @@ function StoreProfile() {
                                         </Col>
                                     </Form.Group>
 
-                                    <Form.Group as={Row} className="mb-3">
-                                        <Form.Label column sm={5}>고객센터</Form.Label>
-                                        <Col sm={7}>
-                                            <Form.Control plaintext readOnly defaultValue={storeInfo.contactNumber} />
-                                        </Col>
-                                    </Form.Group>
+                                    {/*<Form.Group as={Row} className="mb-3">*/}
+                                    {/*    <Form.Label column sm={5}>고객센터</Form.Label>*/}
+                                    {/*    <Col sm={7}>*/}
+                                    {/*        <Form.Control plaintext readOnly defaultValue={storeInfo.contactNumber} />*/}
+                                    {/*    </Col>*/}
+                                    {/*</Form.Group>*/}
 
                                     <Form.Group as={Row} className="mb-3">
                                         <Form.Label column sm={5}>주 카테고리</Form.Label>
@@ -253,13 +257,13 @@ function StoreProfile() {
                             </Col>
                         </Row>
                         {storeInfo.storeStatus !== 'QUIT' && (
-                            <div className="d-flex justify-content-between mt-5">
+                            <div className="d-flex justify-content-center mt-5">
                                 {storeInfo.storeStatus === 'CLOSED' ? (
                                     <Button variant="outline-success" className="me-2 w-100" onClick={handleReopen}>정지 해제</Button>
                                 ) : (
                                     <>
-                                        <Button variant="outline-secondary" className="me-2 w-50" onClick={() => setShowPauseModal(true)}>운영 정지</Button>
-                                        <Button variant="outline-danger" className="w-50">스토어 삭제</Button>
+                                        <Button variant="outline-secondary" className="me-2 w-25" onClick={() => setShowPauseModal(true)}>운영 정지</Button>
+                                        {/*<Button variant="outline-danger" className="w-50">스토어 삭제</Button>*/}
                                     </>
                                 )}
                             </div>

@@ -56,9 +56,11 @@ import InquiryDetail from "./pages/Inquiry/InquiryDetail";
 import Order from "./components/items/Order";
 import ProductOptionEdit from "./pages/seller/ProductOptionEdit";
 import ProductInfoEdit from "./pages/seller/ProductInfoEdit";
+import ResetPassword from "./pages/member/ResetPassword";
+import VerifyPasswordReset from "./pages/member/VerifyPasswordReset";
+import RequestPasswordReset from "./pages/member/RequestPasswordReset";
+import FindMemberId from "./pages/member/FindMemberId";
 import Cart from "./pages/product/Cart";
-
-
 
 function App() {
     return (
@@ -111,6 +113,10 @@ function App() {
 
                         {/* 인증확인 ------------------------------------------------- */}
                         <Route path="/verify-email/:result" element={<VerifySuccess/>}/>
+                        <Route path="/find-member-id" element={<FindMemberId />} />
+                        <Route path="/reset-password" element={<ResetPassword />} />
+                        <Route path="/request-password-reset" element={<RequestPasswordReset />} />
+                        <Route path="/verify-password-reset/:result" element={<VerifyPasswordReset />} />
 
 
                         {/* 회원 ------------------------------------------------- */}
