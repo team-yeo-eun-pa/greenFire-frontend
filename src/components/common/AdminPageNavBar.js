@@ -9,9 +9,9 @@ function AdminPageNavBar() {
             <Nav defaultActiveKey="/home" className="flex-column rounded mt-5 p-4"
                  style={{backgroundColor: "#F0F3EE"}}>
                 <Nav.Link className="nav-link-custom-title">스토어 관리</Nav.Link>
-                <Nav.Link eventKey="" className="nav-link-custom">신규 입점 신청</Nav.Link>
+                <Nav.Link as={Link} to="/admin/dashboard/applies" className="nav-link-custom">신규 입점 신청</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">스토어 현황</Nav.Link>
-                <Nav.Link  as={Link} to="/admin/dashboard/category" className="nav-link-custom">카테고리 관리</Nav.Link>
+                <Nav.Link as={Link} to="/admin/dashboard/category" className="nav-link-custom">카테고리 관리</Nav.Link>
                 <br/>
                 <Nav.Link className="nav-link-custom-title">스토어 정산</Nav.Link>
                 <Nav.Link eventKey="" className="nav-link-custom">주문 내역</Nav.Link>

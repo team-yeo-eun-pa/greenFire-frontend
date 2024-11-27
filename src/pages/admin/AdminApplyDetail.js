@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Form, Button, Col, Row, Modal } from 'react-bootstrap';
+import {Form, Button, Col, Row, Modal, Image} from 'react-bootstrap';
 import {
     callAdminApplyAcceptAPI,
     callAdminApplyRejectAPI,
@@ -30,6 +30,7 @@ const AdminApplyDetail = () => {
                 mosNumber: adminApplyDetail.mosNumber,
                 storeType: adminApplyDetail.storeType,
                 applyContent: adminApplyDetail.applyContent,
+                businessImg: adminApplyDetail.businessImg,
                 applyStatus: 'APPLY'
             };
 
@@ -51,6 +52,7 @@ const AdminApplyDetail = () => {
                 mosNumber: adminApplyDetail.mosNumber,
                 storeType: adminApplyDetail.storeType,
                 applyContent: adminApplyDetail.applyContent,
+                businessImg: adminApplyDetail.businessImg,
                 rejectReason: rejectReason
             };
 
@@ -75,6 +77,11 @@ const AdminApplyDetail = () => {
                     <div className="w-100 mb-5 fs-4 fw-semibold border-bottom border-2 border-dark-subtle p-2">반딧불이 스토어 신청 상세</div>
                     {adminApplyDetail && (
                         <div>
+                            <Form.Group as={Row} className="mb-5 justify-content-md-center" controlId="formBusinessImg">
+                                <Col sm="9">
+                                    <Image src={adminApplyDetail.businessImg} alt="사업자등록증" fluid className="img-thumbnail" />
+                                </Col>
+                            </Form.Group>
                             <Form.Group as={Row} className="mb-3" controlId="formStoreName">
                                 <Form.Label column sm="3">상호명</Form.Label>
                                 <Col sm="9">
