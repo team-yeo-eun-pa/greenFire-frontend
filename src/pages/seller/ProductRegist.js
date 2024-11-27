@@ -2,7 +2,7 @@ import ReactQuill, {Quill} from 'react-quill';
 import TextEditor from "../../components/items/TextEditor";
 import React, {useEffect, useRef, useState} from 'react';
 import {Form} from "react-bootstrap";
-import ProductOptionEditForm from "../../components/form/ProductOptionEditForm";
+import ProductOptionEditList from "../../components/items/ProductOptionEditList";
 import Button from "react-bootstrap/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";

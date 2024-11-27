@@ -17,7 +17,6 @@ import InquiryMain from "./pages/Inquiry/InquiryMain";
 import Signup from "./pages/member/Signup";
 import ProductRegist from "./pages/seller/ProductRegist";
 import ProductManagement from "./pages/seller/ProductManagement";
-import ProductEdit from "./pages/seller/ProductEdit";
 import LoginModal from "./components/items/LoginModal";
 import MemberProfile from "./pages/member/MemberProfile";
 import AdminMemberView from "./pages/admin/AdminMemberView";
@@ -55,6 +54,8 @@ import Reviews from "./pages/Reviews";
 import ReviewDetail from "./pages/ReviewDetail";
 import InquiryDetail from "./pages/Inquiry/InquiryDetail";
 import Order from "./components/items/Order";
+import ProductOptionEdit from "./pages/seller/ProductOptionEdit";
+import ProductInfoEdit from "./pages/seller/ProductInfoEdit";
 import ResetPassword from "./pages/member/ResetPassword";
 import VerifyPasswordReset from "./pages/member/VerifyPasswordReset";
 import RequestPasswordReset from "./pages/member/RequestPasswordReset";
@@ -161,7 +162,8 @@ function App() {
                                 <Route path=":storeCode/order-list/:orderCode" element={<StoreOrderDetails/>}/>
                                 <Route path=":storeCode/order-approval-handler" element={<OrderApprovalHandler/>}/>
                                 <Route path=":storeCode/order-shipping-handler" element={<OrderShippingHandler/>}/>
-                                <Route path="edit/:productCode" element={<ProductEdit/>}/>
+                                <Route path="edit/:productCode" element={<ProductInfoEdit/>}/>
+                                <Route path="editOption/:productCode" element={<ProductOptionEdit/>}/>
                             </Route>
                         </Route> {/* seller end*/}
 

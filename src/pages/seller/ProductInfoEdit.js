@@ -2,7 +2,7 @@ import ReactQuill, {Quill} from 'react-quill';
 import TextEditor from "../../components/items/TextEditor";
 import React, {useEffect, useRef, useState} from 'react';
 import {Form} from "react-bootstrap";
-import ProductOptionEditForm from "../../components/form/ProductOptionEditForm";
+import ProductOptionEditList from "../../components/items/ProductOptionEditList";
 import Button from "react-bootstrap/Button";
 import {success} from "../../modules/ProductModules";
 import {useNavigate, useParams} from "react-router-dom";
@@ -18,7 +18,7 @@ import ProductDescriptionForm from "../../components/form/ProductDescriptionForm
 
 const Delta = Quill.import('delta');
 
-function ProductEdit() {
+function ProductInfoEdit() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -28,10 +28,7 @@ function ProductEdit() {
     const { product } = useSelector(state => state.productReducer);
     const [lastChange, setLastChange] = useState();
 
-    // const [selectOption, setSelectOption] = useState({
-    //     optionName : '',
-    //     optionPrice: ''
-    // });
+
     const imageInput = useRef();
 
     /* 카테고리 불러오기 */
@@ -52,13 +49,6 @@ function ProductEdit() {
         productImg: ''
     });
 
-
-
-    // /* 성공 시 페이지 이동*/
-    // useEffect(() => {
-    //     if (saveSuccess === true) navigate('/seller/mystore/product');
-    // }, [saveSuccess]);
-
     const sellableStatus = ["Y", "N"]
 
 
@@ -73,21 +63,18 @@ function ProductEdit() {
     /* 내용 저장 */
     const onClickProductEditHandler = () => {
         const formData = new FormData();
-        formData.append('productImg', imageInput.current.files[0]);
-        formData.append('productUpdateRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
-        dispatch(callSellerProductModifyAPI({ productCode, modifyRequest : formData }));
+
+        if (imageInput.current.files.length > 0) {
+            formData.append('productImg', imageInput.current.files[0]);
+        }
+
+        formData.append('productUpdateRequest', new Blob([JSON.stringify(productForm)], { type: 'application/json' }));
+
+        dispatch(callSellerProductModifyAPI({ productCode, modifyRequest: formData }));
     }
 
 
 
-
-    /* 옵션 불러오기 */
-
-    // const { productOption } = useSelector(state => state.option);
-    //
-    // useEffect(() => {
-    //     dispatch(callProductOptionListAPI({productCode}));
-    // }, [productCode]);
 
     return (
 
@@ -99,13 +86,6 @@ function ProductEdit() {
                              setProductForm={setProductForm} onChangeHandler={onChangeHandler}
                              product={product}/>
             </div>
-
-            <div>
-                <label style={{marginBottom: "8px"}}>옵션</label>
-                {/*<ProductOptionEditForm product={product} selectOption={selectOption} setSelectOption={setSelectOption}/>*/}
-                <ProductOptionEditForm product={product}/>
-            </div>
-
 
             <label style={{marginBottom: "8px"}}>상세 설명</label>
             <ProductDescriptionForm
@@ -125,4 +105,4 @@ function ProductEdit() {
 
 }
 
-export default ProductEdit;
+export default ProductInfoEdit;
