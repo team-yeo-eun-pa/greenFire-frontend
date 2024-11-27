@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { loadPaymentWidget } from "@tosspayments/payment-widget-sdk";
 import { nanoid } from "nanoid";
-import {useNavigate} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // useLocation 추가
 import {authRequest} from "../../apis/api";
 
 // 구매자의 고유 아이디를 불러와서 customerKey로 설정하세요.
@@ -12,10 +12,12 @@ const customerKey = "eXn2LJyp1hUFwJswlGNPQ";
 
 export function CheckoutPage() {
     const navigate = useNavigate();
+    const location = useLocation(); // useLocation 추가
+    const { orderData } = location.state; // 전달된 결제 금액
     const [paymentWidget, setPaymentWidget] = useState(null);
     const paymentMethodsWidgetRef = useRef(null);
-    const [orderName, setOrderName] = useState("짱구티셔츠 외 1");
-    const [paymentAmount, setPaymentAmount] = useState(1_000);
+    const [orderName, setOrderName] = useState(orderData.orderName);
+    const [paymentAmount, setPaymentAmount] = useState(orderData.totalRealPayment); // 초기값을 totalAmount로 설정
 
     useEffect(() => {
         const fetchPaymentWidget = async () => {
@@ -101,16 +103,16 @@ export function CheckoutPage() {
     return (
         <div>
             {/* 할인 쿠폰 */}
-            <label htmlFor="coupon-box">
-                <input
-                    id="coupon-box"
-                    type="checkbox"
-                    onChange={(event) => {
-                        setPaymentAmount(event.target.checked ? paymentAmount - 5_000 : paymentAmount + 5_000);
-                    }}
-                />
-                <span>5,000원 쿠폰 적용</span>
-            </label>
+            {/*<label htmlFor="coupon-box">*/}
+            {/*    <input*/}
+            {/*        id="coupon-box"*/}
+            {/*        type="checkbox"*/}
+            {/*        onChange={(event) => {*/}
+            {/*            setPaymentAmount(event.target.checked ? paymentAmount - 5_000 : paymentAmount + 5_000);*/}
+            {/*        }}*/}
+            {/*    />*/}
+            {/*    <span>5,000원 쿠폰 적용</span>*/}
+            {/*</label>*/}
             {/* 결제 UI, 이용약관 UI 영역 */}
             <div id="payment-widget" />
             <div id="agreement" />

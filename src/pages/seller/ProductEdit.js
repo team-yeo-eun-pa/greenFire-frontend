@@ -1,33 +1,85 @@
 import ReactQuill, {Quill} from 'react-quill';
 import TextEditor from "../../components/items/TextEditor";
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Form} from "react-bootstrap";
-import ProductOptionForm from "../../components/form/ProductOptionForm";
+import ProductOptionEditForm from "../../components/form/ProductOptionEditForm";
 import Button from "react-bootstrap/Button";
+import {success} from "../../modules/ProductModules";
+import {useNavigate, useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {AdminCategoryAPICalls} from "../../apis/AdminCategoryAPICalls";
+import ProductForm from "../../components/form/ProductForm";
+import ProductOptionAddForm from "../../components/form/ProductOptionAddForm";
+import {
+    callSellerProductDetailAPI,
+    callSellerProductModifyAPI,
+} from "../../apis/ProductAPI";
+import ProductDescriptionForm from "../../components/form/ProductDescriptionForm";
 
 const Delta = Quill.import('delta');
 
 function ProductEdit() {
 
-    // const [range, setRange] = useState();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { productCode} = useParams();
+    let { adminCategory, success, loading, error } = useSelector(state => state.category);
+    const { success: saveSuccess } = useSelector(state => state.productReducer);
+    const { product } = useSelector(state => state.productReducer);
     const [lastChange, setLastChange] = useState();
 
-    const quillRef = useRef();
+    // const [selectOption, setSelectOption] = useState({
+    //     optionName : '',
+    //     optionPrice: ''
+    // });
+    const imageInput = useRef();
 
-    const productCategory = [
-        { id: 1, name: '카테고리1' },
-        { id: 2, name: '카테고리2' },
-    ];
+    /* 카테고리 불러오기 */
+    useEffect(() => {
+        dispatch(AdminCategoryAPICalls());
+    }, [dispatch]);
 
-    const productOption = [
-        { id: 1, name: '옵션명1', price: 12000, stock: 5 },
-        { id: 2, name: '옵션명2', price: 9000, stock: 3 },
-        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
-        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
-        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
-        { id: 3, name: '옵션명3', price: 16000, stock: 2 },
-        { id: 3, name: '마지막', price: 16000, stock: 2 },
-    ];
+    /* 상품 정보 불러오기 */
+    useEffect(() => {
+        dispatch(callSellerProductDetailAPI({productCode}));
+    }, []);
+
+    const [productForm, setProductForm] = useState({
+        productName : '',
+        sellableStatus: 'Y',
+        categoryCode: 1,
+        productDescription: '',
+        productImg: ''
+    });
+
+
+
+    // /* 성공 시 페이지 이동*/
+    // useEffect(() => {
+    //     if (saveSuccess === true) navigate('/seller/mystore/product');
+    // }, [saveSuccess]);
+
+    const sellableStatus = ["Y", "N"]
+
+
+    const onChangeHandler = e => {
+        setProductForm && setProductForm({
+            ...productForm,
+            [e.target.name]: e.target.value
+
+        })
+    }
+
+    /* 내용 저장 */
+    const onClickProductEditHandler = () => {
+        const formData = new FormData();
+        formData.append('productImg', imageInput.current.files[0]);
+        formData.append('productUpdateRequest', new Blob([JSON.stringify(productForm)], { type : 'application/json'}));
+        dispatch(callSellerProductModifyAPI({ productCode, modifyRequest : formData }));
+    }
+
+
+
 
     /* 옵션 불러오기 */
 
@@ -38,67 +90,39 @@ function ProductEdit() {
     // }, [productCode]);
 
     return (
-        <div className="product-regist-page">
 
-            <Form className="product-regist-forms">
-                <Form.Group className="product-info-form" controlId="productName">
-                    <Form.Label>상품명</Form.Label>
-                    <Form.Control type="text"/>
-                </Form.Group>
+        <div className="product-edit-page">
 
-                <Form.Group className="product-info-form" controlId="productStatus">
-                    <Form.Label>판매 상태</Form.Label>
-                    <Form.Select>
-                        <option value="true">판매중</option>
-                        <option value="false">구매불가</option>
-                    </Form.Select>
-                </Form.Group>
-
-                <Form.Group className="product-info-form" controlId="productCategory">
-                    <Form.Label>카테고리</Form.Label>
-                    <Form.Select>
-                        {productCategory.map(category => (
-                            <option key={category.id} value={category.id}>
-                                {category.name}
-                            </option>
-                        ))
-                        }
-                    </Form.Select>
-                </Form.Group>
-
-                <Form.Group controlId="productThumbnail">
-                    <Form.Label>대표 사진</Form.Label>
-                    <Form.Control type="file"/>
-                </Form.Group>
-            </Form>
+            <div>
+                <ProductForm sellableStatus={sellableStatus} category={adminCategory}
+                             imageInput={imageInput} productForm={productForm}
+                             setProductForm={setProductForm} onChangeHandler={onChangeHandler}
+                             product={product}/>
+            </div>
 
             <div>
                 <label style={{marginBottom: "8px"}}>옵션</label>
-                <ProductOptionForm optionInfo={productOption}/>
+                {/*<ProductOptionEditForm product={product} selectOption={selectOption} setSelectOption={setSelectOption}/>*/}
+                <ProductOptionEditForm product={product}/>
             </div>
 
 
             <label style={{marginBottom: "8px"}}>상세 설명</label>
-            <TextEditor
-                ref={quillRef}
-                defaultValue={new Delta()
-                    .insert('상품 상세설명')
-                    // .insert('\n', {header: 1})
-                    // .insert('Some ')
-                    // .insert('initial', {bold: true})
-                    // .insert(' ')
-                    // .insert('content', {underline: true})
-                    .insert('\n')}
-                // onSelectionChange={setRange}
-                onTextChange={setLastChange}
+            <ProductDescriptionForm
+                product={product}
+                delaultvalue={productForm.productDescription}
+                productForm={productForm}
+                setProductForm={setProductForm}
+                onChangeHandler={onChangeHandler}
             />
 
             <div className="submit-btn-wrapper">
-                <button className="submit-btn">상품 등록</button>
+                <button className="submit-btn" onClick={onClickProductEditHandler}>완료</button>
             </div>
 
         </div>
     )
+
 }
 
 export default ProductEdit;

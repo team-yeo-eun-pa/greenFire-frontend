@@ -59,8 +59,7 @@ import ResetPassword from "./pages/member/ResetPassword";
 import VerifyPasswordReset from "./pages/member/VerifyPasswordReset";
 import RequestPasswordReset from "./pages/member/RequestPasswordReset";
 import FindMemberId from "./pages/member/FindMemberId";
-
-
+import Cart from "./pages/product/Cart";
 
 function App() {
     return (
@@ -96,6 +95,7 @@ function App() {
                         <Route path="/product/:productCode" element={<ProductDetail/>}/>
 
                         <Route path="/wish" element={<Wishlist/>}/>
+                        <Route path="/cart" element={<Cart/>}/>
 
 
                         {/* 주문 및 결제 --------------------------------------------- */}
@@ -161,27 +161,27 @@ function App() {
                                 <Route path=":storeCode/order-list/:orderCode" element={<StoreOrderDetails/>}/>
                                 <Route path=":storeCode/order-approval-handler" element={<OrderApprovalHandler/>}/>
                                 <Route path=":storeCode/order-shipping-handler" element={<OrderShippingHandler/>}/>
-                                <Route path="edit" element={<ProductEdit/>}/>
+                                <Route path="edit/:productCode" element={<ProductEdit/>}/>
                             </Route>
                         </Route> {/* seller end*/}
 
 
-                            {/* 관리자 ------------------------------------------------- */}
-                            <Route path="admin">
-                                <Route path="dashboard" element={<AdminPageLayout/>}>
-                                    <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
-                                    <Route path="notice-create" element={<AdminCreateNotice/>}/>
-                                    <Route path="notice-update" element={<AdminUpdateNotice/>}/>
-                                    <Route path="members" element={<AdminMemberView/>}/>
-                                    <Route path="category" element={<AdminCategory/>}/>
-                                    <Route path="reports" element={<AdminReport/>}/>
-                                    <Route path="main" element={<AdminMain/>}/>
-                                    <Route path="applies">
-                                        <Route index element={<ApplyList/>}/>
-                                        <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
-                                    </Route>
+                        {/* 관리자 ------------------------------------------------- */}
+                        <Route path="admin">
+                            <Route path="dashboard" element={<AdminPageLayout/>}>
+                                <Route index element={<Navigate to="/admin/dashboard/main" replace/>}/>
+                                <Route path="notice-create" element={<AdminCreateNotice/>}/>
+                                <Route path="notice-update" element={<AdminUpdateNotice/>}/>
+                                <Route path="members" element={<AdminMemberView/>}/>
+                                <Route path="category" element={<AdminCategory/>}/>
+                                <Route path="reports" element={<AdminReport/>}/>
+                                <Route path="main" element={<AdminMain/>}/>
+                                <Route path="applies">
+                                    <Route index element={<ApplyList/>}/>
+                                    <Route path=":sellerCode" element={<AdminApplyDetail/>}/>
                                 </Route>
-                            </Route> {/* admin end*/}
+                            </Route>
+                        </Route> {/* admin end*/}
 
 
                     </Route> {/* Layout end*/}

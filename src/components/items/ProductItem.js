@@ -10,11 +10,13 @@ import {useNavigate} from "react-router-dom";
 function ProductItem({product}) {
 
     const navigate = useNavigate();
+    const imageUrl = product.productImg ? product.productImg : '/defaultimg.png';
 
     return(
         <div>
-            <Card style={{width: '14rem', cursor: 'pointer'}} onClick={()=>navigate(`/product/${product.productCode}`)}>
-                <Card.Img variant="top" src="/p1.png"/>
+            <Card style={{width: '14rem', height: '20rem', cursor: 'pointer'}}
+                  onClick={() => navigate(`/product/${product.productCode}`)}>
+                <Card.Img variant="top" src={imageUrl} style={{objectFit: 'cover', height: '10rem'}}/>
                 <Card.Body>
                     <Card.Title>{product.productName}
                     </Card.Title>

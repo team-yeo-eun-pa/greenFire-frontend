@@ -32,7 +32,7 @@
 
 .store-banner-wrapper {
     position: relative;
-    width: 63vw;
+    width: 66vw;
     margin-bottom: 20px;
 }
 
@@ -56,6 +56,56 @@
 
 .arrange-wrapper {
     margin-right: 4.3vw;
+}
+
+.product-detail-info-wrapper {
+    display: flex;
+    margin: 10vh 0 10vh 0;
+}
+
+.product-img-wrapper {
+    width: 25vw;
+    height: 50vh;
+    margin: 0 8vw 0 8vw;
+}
+
+.product-detail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info-wrapper {
+    margin-top: 5vh;
+    width: 30em;
+}
+
+.product-info-wrapper table{
+    width: 50%;
+    height: 40%;
+}
+
+.product-info-table {
+    width: 100%;
+    height: 100%;
+}
+
+.product-detail-btn-wrapper {
+    margin-top: 30px;
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-description-form-wrapper {
+    width: 500px;
+    height: 300px;
+}
+
+.product-description-form {
+    width: 100%;
+    height: 100%;
+    resize: none;
 }
 
 .card-btn-wrapper {
@@ -102,10 +152,43 @@
     align-content: center;
 }
 
+.mystore-cart-list {
+    width: 70vw;
+
+}
+
+.cart-header {
+    margin-left: 10em;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mystore-cart-list {
+
+}
+
+.mystore-product-item {
+    width: 100%;
+    margin-left: 100px;
+}
+
 .cart-form {
     width: 120px;
     padding: 5px;
 }
+
+.cart-quantity {
+    display: flex;
+    width: 80px;
+}
+
+.cart-quantity-form {
+    height: 30px;
+
+}
+
+
 
 .modal-submit-btn {
     width: 60px;
@@ -129,6 +212,8 @@
 .product-info-form {
     margin: 5px 0 25px 0;
 }
+
+
 
 .submit-btn-wrapper {
     display: flex;
@@ -217,6 +302,17 @@
 
 .mystore-product-btn-wrapper {
     padding: 15px;
+}
+
+.cart-list-wrapper {
+    /* 수직 배치 해야 함 */
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+}
+
+.cart-checkbox {
+    display: block;
 }
 
 .nav-link-custom {
@@ -508,6 +604,7 @@
     position: relative;
 }
 
+
 .store-card-overlay {
     position: absolute;
     top: 0;
@@ -541,6 +638,10 @@
 .store-card-overlay-text {
     text-align: center;
     font-size: 1.25rem;
+}
+
+.product-description-text {
+    margin-top: 5rem;
 }
 
 .table-container {

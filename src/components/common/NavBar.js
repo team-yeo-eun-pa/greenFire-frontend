@@ -194,8 +194,12 @@ function NavBar({ profileInfo = {} }) {
                     {/*    </button>*/}
                     {/*</Form>*/}
 
-                    <button className="iconbtn" style={{ color: "white", marginLeft: "5px" }}>
-                        <FaShoppingCart />
+
+                    <button className="iconbtn" style={{color: "white", marginLeft: "5px"}}>
+                        <Nav.Link href="/cart">
+                            <FaShoppingCart/>
+                        </Nav.Link>
+
                     </button>
                     <button className="iconbtn" style={{ color: "white" }}>
                         <Nav.Link href="/wish">

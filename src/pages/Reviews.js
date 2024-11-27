@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ReviewsAPICalls } from "../apis/ReviewAPICalls";
 import ReportButton from "../components/items/ReportButton";
 
-function Reviews() {
+function Reviews(props) {
     const { productCode } = useParams();
     const dispatch = useDispatch();
     const { reviews } = useSelector(state => state.ReviewReducer);
@@ -13,7 +13,7 @@ function Reviews() {
 
 
     useEffect(() => {
-        dispatch(ReviewsAPICalls({ productCode: 1 }));
+        dispatch(ReviewsAPICalls({ productCode : props.productCode }));
     }, [dispatch, productCode]);
 
     const handleRowClick = (review) => {

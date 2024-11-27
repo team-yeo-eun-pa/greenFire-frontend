@@ -25,11 +25,15 @@ function ProductOptionAddForm(props) {
         if (selectedOption === null) {
             alert("삭제할 옵션을 선택하세요");
         } else {
-            props.removeOption(selectedOption);
-            setSelectedOption(null);
-            setMode(null);
+            const selectedIndex = props.options.findIndex(opt => opt === selectedOption);
+            if (selectedIndex !== -1) {
+                props.removeOption(selectedIndex);
+                setSelectedOption(null);
+                setMode(null);
+            }
         }
     };
+
 
     const handleChangeOptionList = (opt) => {
         setSelectedOption(opt);
@@ -61,16 +65,23 @@ function ProductOptionAddForm(props) {
             <ListGroup className="product-option-wrapper">
 
                 <div className="option-btn-wrapper">
-                    <Button className="option-btn" onClick={handleClickRegist}>추가</Button>
-                    <Button className="option-btn" onClick={handleClickDelete}>삭제</Button>
+                    <button className="option-btn" onClick={handleClickRegist}>추가</button>
+                    <button className="option-btn" onClick={handleClickDelete}>삭제</button>
                 </div>
 
 
 
                 <div className="product-option-list">
                     {props.options.map((opt, index) => (
-                        <ListGroup key={index} onClick={()=>handleChangeOptionList(opt)}>
-                            {opt.optionName}
+                        <ListGroup key={index}>
+                            <Form.Check
+                                type="checkbox"
+                                label={opt.optionName}
+                                name="selectOption"
+                                onChange={() => handleChangeOptionList(opt)}
+                                checked={selectedOption === opt}
+                            />
+
                         </ListGroup>
                     ))}
                 </div>
@@ -107,7 +118,7 @@ function ProductOptionAddForm(props) {
                             />
                         </Form.Group>
 
-                        <Button className="option-btn" onClick={handleSubmit}>완료</Button>
+                        <button className="submit-btn" onClick={handleSubmit}>완료</button>
                     </Form>
                 )}
             </div>
